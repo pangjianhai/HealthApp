@@ -109,7 +109,6 @@ public class AppRegActivity extends BaseActivity {
 				j.put("email", str_reg_password_email);
 				String url = SystemConst.server_url
 						+ SystemConst.FunctionUrl.addUser;
-				System.out.println("url:" + url);
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("para", j.toString());
 				new RegisterAccountTask(AppRegActivity.this).execute(j

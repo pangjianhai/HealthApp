@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import cn.com.health.pro.config.HealthApplication;
+import cn.com.health.pro.persist.SharedPreInto;
 import cn.com.health.pro.util.ActivityCollector;
 
 /**
@@ -23,6 +25,10 @@ public class BaseActivity extends Activity {
 	@Override
 	public void onCreate(Bundle b) {
 		super.onCreate(b);
+		/**
+		 * 获取用户ID
+		 */
+		userId = HealthApplication.getUserId();
 		/**
 		 * activity放入收集器
 		 */
