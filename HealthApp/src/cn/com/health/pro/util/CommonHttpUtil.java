@@ -5,6 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
+
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxParams;
 
 /**
  * 
@@ -99,6 +104,25 @@ public class CommonHttpUtil {
 			}
 		}
 		return null;
+
+	}
+
+	public static String sendHttpRequest(String address,
+			Map<String, String> param) {
+
+		AjaxParams params = new AjaxParams();
+		if (param != null && !param.isEmpty()) {
+			Iterator<String> keys = param.keySet().iterator();
+			while (keys.hasNext()) {
+				String key = (String) keys.next();
+				String value = param.get(key);
+				params.put(key, value);
+			}
+		}
+
+		FinalHttp fh = new FinalHttp();
+		Object value = fh.postSync(address, params);
+		return value != null ? value.toString() : "";
 
 	}
 }

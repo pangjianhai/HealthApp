@@ -1,12 +1,14 @@
 package cn.com.health.pro.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONObject;
 
-import cn.com.health.pro.SystemConst;
-import cn.com.health.pro.config.HealthApplication;
-import cn.com.health.pro.util.CommonHttpUtil;
 import android.app.IntentService;
 import android.content.Intent;
+import cn.com.health.pro.SystemConst;
+import cn.com.health.pro.util.CommonHttpUtil;
 
 /**
  * 
@@ -35,10 +37,11 @@ public class ShareCommentService extends IntentService {
 			j.put("sentenceId", sentenceId);
 			j.put("content", content);
 			String url = SystemConst.server_url
-					+ SystemConst.FunctionUrl.comment_share + "?para="
-					+ j.toString();
-			System.out.println("url:" + url);
-			String data = CommonHttpUtil.sendHttpRequest(url);
+					+ SystemConst.FunctionUrl.comment_share;
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("para", j.toString());
+			String data = CommonHttpUtil.sendHttpRequest(url, map);
+			System.out.println("data:" + data);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
