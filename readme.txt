@@ -4,4 +4,4 @@ hahh  a new line!
 gagagag!
 this is a new day
 this is hahahhh
-Git tracks changes.
+Git tracks changes of files.
