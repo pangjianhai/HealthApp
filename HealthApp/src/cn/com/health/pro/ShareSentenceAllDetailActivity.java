@@ -1,17 +1,16 @@
 package cn.com.health.pro;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -24,6 +23,7 @@ import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
 import cn.com.health.pro.task.ShareSentenceSingleAsyncTask;
+import cn.com.health.pro.util.PicUtil;
 
 /**
  * 
@@ -68,6 +68,14 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 		et_pop = (EditText) findViewById(R.id.tv_pop);
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 * @user:pang
+	 * @data:2015年6月1日
+	 * @todo:渲染健康信息的文字和图片
+	 * @return:void
+	 */
 	public void renderText(ShareSentenceEntity entity) {
 		if (entity != null) {
 			String type = entity.getType();
@@ -78,13 +86,19 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 				content = material + "\n" + function + "\n" + content;
 			}
 			share_all_detail_content.setText(content);
-
-			ShareSinglePicAdapter adapter = new ShareSinglePicAdapter(
-					ShareSentenceAllDetailActivity.this, entity.getImgsIds());
-			for (int i = 0; i < entity.getImgsIds().size(); i++) {
-				System.out.println(entity.getImgsIds().get(i));
+			/**
+			 * 图片适配器
+			 */
+			List<String> imgs = entity.getImgsIds();
+			imgs = PicUtil.pureImgList(imgs);
+			if (imgs != null && !imgs.isEmpty()) {
+				ShareSinglePicAdapter adapter = new ShareSinglePicAdapter(
+						ShareSentenceAllDetailActivity.this,
+						entity.getImgsIds());
+				share_detail_imgs_gridview.setAdapter(adapter);
+			} else {
+				share_detail_imgs_gridview.setVisibility(View.GONE);
 			}
-			share_detail_imgs_gridview.setAdapter(adapter);
 		}
 	}
 

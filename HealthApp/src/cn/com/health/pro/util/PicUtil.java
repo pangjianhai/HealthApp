@@ -1,5 +1,8 @@
 package cn.com.health.pro.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +14,11 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import cn.com.health.pro.R;
 
+/**
+ * 
+ * @author pang
+ *
+ */
 public class PicUtil {
 
 	public void showPopWin(Activity v, View anchor) {
@@ -38,5 +46,27 @@ public class PicUtil {
 
 			}
 		});
+	}
+
+	/**
+	 * 
+	 * @param lst
+	 * @user:pang
+	 * @data:2015年6月1日
+	 * @todo:处理某一健康分享图片的ID list
+	 * @return:List<String>
+	 */
+	public static List<String> pureImgList(List<String> lst) {
+		List<String> imgs = new ArrayList<String>();
+		if (lst != null && !lst.isEmpty()) {
+			for (String id : lst) {
+				if (id == null || "".equals(id.trim())) {
+					break;
+				} else {
+					imgs.add(id);
+				}
+			}
+		}
+		return imgs;
 	}
 }
