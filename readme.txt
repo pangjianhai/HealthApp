@@ -1,8 +1,3 @@
-open source,come on!
-open this file now!!!
-hahh  a new line!
-gagagag!
-this is a new day
-this is hahahhh
-Git tracks changes of files.
-look again!
+这是我们团队关于健康平台的APP
+后续会提供测试服务器和账号！
+加油！！
