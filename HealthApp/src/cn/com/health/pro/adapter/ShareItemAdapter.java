@@ -247,7 +247,7 @@ public class ShareItemAdapter extends BaseAdapter {
 		if (userId != null && !"".equals(userId)) {
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getHeadImgByUserId
-					+ "?para={id:'" + userId + "'}";
+					+ "?para={userId:'" + userId + "'}";
 			ImageLoader.getInstance().displayImage(pic_url, holder.share_photo,
 					HealthApplication.getDisplayImageOption());
 		} else {

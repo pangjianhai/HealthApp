@@ -20,12 +20,6 @@ import cn.com.health.pro.entity.InfoEntity;
 import cn.com.health.pro.model.UserItem;
 import cn.com.health.pro.task.SearchUsersAsyncTask;
 
-/**
- * 
- * @author pang
- * @todo 用户搜索结果
- *
- */
 public class FriendSearchResultActivity extends BaseActivity {
 
 	private ListView search_friends_listview;
@@ -45,6 +39,9 @@ public class FriendSearchResultActivity extends BaseActivity {
 	 */
 	private int pageSize = 10;
 
+	/**
+	 * 底部
+	 */
 	View footer;
 	/**
 	 * 加载更多按钮

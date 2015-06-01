@@ -94,9 +94,8 @@ public class UserItemAdapter extends BaseAdapter {
 				if (context instanceof MainPageLayoutMeMyFocusActivity) {
 					((MainPageLayoutMeMyFocusActivity) context)
 							.checkSomeOne(uuid);
-				} else if (context instanceof MainPageLayoutMeMyFocusActivity) {
-					((MainPageLayoutMeMyFocusActivity) context)
-							.checkSomeOne(uuid);
+				} else if (context instanceof FriendSearchResultActivity) {
+					((FriendSearchResultActivity) context).checkSomeOne(uuid);
 				} else if (context instanceof MainPageLayoutMeFocusMeActivity) {
 					((MainPageLayoutMeFocusMeActivity) context)
 							.checkSomeOne(uuid);

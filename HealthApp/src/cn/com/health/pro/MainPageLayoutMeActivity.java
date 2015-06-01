@@ -67,7 +67,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getHeadImgByUserId
-					+ "?para={id:'" + userId + "'}";
+					+ "?para={userId:'" + userId + "'}";
 			ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo,
 					HealthApplication.getDisplayImageOption());
 		} catch (Exception e) {

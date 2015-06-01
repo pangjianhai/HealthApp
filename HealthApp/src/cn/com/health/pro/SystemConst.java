@@ -79,12 +79,12 @@ public class SystemConst {
 		/**
 		 * 根据图片ID获取分享图片
 		 */
-		public static final String getHeadImgById = "appSourceController/getUserHeadIngById.do";
+		public static final String getHeadImgById = "appSourceController/getHeadImgByImgId.do";
 
 		/**
 		 * 根据用ID获取分享图片
 		 */
-		public static final String getHeadImgByUserId = "appSourceController/getHeadImgByUserId.do";
+		public static final String getHeadImgByUserId = "appSourceController/getUserHeadImgByUserId.do";
 
 		/**
 		 * 根据用户UUID获取用户信息
