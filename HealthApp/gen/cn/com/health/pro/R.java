@@ -550,6 +550,7 @@ public final class R {
         public static final int xlistview_header_hint_ready=0x7f07001a;
         public static final int xlistview_header_hint_reply=0x7f070017;
         public static final int xlistview_header_last_time=0x7f07001c;
+        public static final int xxxxxxxxxxxxxxx=0x7f07002a;
     }
     public static final class style {
         /** 
