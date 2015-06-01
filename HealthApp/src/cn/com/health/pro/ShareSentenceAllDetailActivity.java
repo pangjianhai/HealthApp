@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.health.pro.adapter.ShareSinglePicAdapter;
 import cn.com.health.pro.model.ShareSentenceEntity;
+import cn.com.health.pro.service.CollectionForInfoService;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
 import cn.com.health.pro.task.ShareSentenceSingleAsyncTask;
@@ -150,8 +151,17 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void share_ops_bar(View v) {
+		// 点击收藏
 		if (v.getId() == R.id.single_share_bottom_ops_sc) {
-
+			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
+					CollectionForInfoService.class);
+			intent.putExtra("userId", userId);
+			intent.putExtra("sentenceordocId", share_sentence_id);
+			intent.putExtra("type",
+					CollectionForInfoService.VIEW_ITEM_TYPE_SHARE);
+			startService(intent);
+			Toast.makeText(ShareSentenceAllDetailActivity.this, "收藏成功",
+					Toast.LENGTH_SHORT).show();
 		} else if (v.getId() == R.id.single_share_bottom_ops_comment) {
 			showInput();
 		} else if (v.getId() == R.id.single_share_bottom_ops_tags) {

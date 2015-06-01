@@ -145,6 +145,11 @@ public class SystemConst {
 		 * 获取关注我的好友分页
 		 */
 		public static final String getFocusMeUser = "appSourceController/getUserAttention.do";
+
+		/**
+		 * 收藏文章或者信息
+		 */
+		public static final String collect_info_or_sentence = "appSourceController/collectSentenceInfo.do";
 	}
 
 	/**
