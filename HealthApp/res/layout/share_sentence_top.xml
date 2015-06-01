@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_space_title_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/space_title_bar"
+    android:gravity="center_vertical" >
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/common_title_bar_color"
+        android:onClick="backShare"
+        android:src="@drawable/close_page" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="分享"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/share_sen_mm_title_btn_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_margin="5dip"
+        android:layout_marginRight="5dp"
+        android:background="@color/common_title_bar_color"
+        android:drawableLeft="@drawable/save4"
+        android:onClick="saveShare"
+        android:text="保存"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</RelativeLayout>

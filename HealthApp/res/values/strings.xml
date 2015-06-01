@@ -1,0 +1,50 @@
+<resources>
+
+    <string name="app_name">健康在线</string>
+    <string name="search">搜搜</string>
+    <string name="can_input_search_key">可以输入关键词搜索</string>
+    <string name="load_more_data">加载更多数据</string>
+    <string name="action_settings">操作设置</string>
+    <string name="info_ops_comment">评论</string>
+    <string name="info_ops_good">点赞</string>
+    <string name="info_ops_bad">无用</string>
+    <string name="share_prepare_top_hint">分享，更健康</string>
+    <string name="share_prepare_eat">食物</string>
+    <string name="share_prepare_go">运动</string>
+    <string name="share_prepare_info">信息</string>
+    <string name="share_prepare_back">返回</string>
+    <string name="share_prepare_bottom_back">返回</string>
+    <string name="share_mine_detail_good">赞</string>
+    <string name="share_mine_detail_comment">评论</string>
+    <string name="share_mine_detail_tag">标签</string>
+    <string name="share_mine_detail_edit">编辑</string>
+    <string name="share_mine_detail_back">返回</string>
+    <string name="share_health_input">请输入内容</string>
+    <string name="share_health_addpic">添加图片</string>
+    <string name="share_health_addtag">添加标签</string>
+    <!-- 关于分页 -->
+    <string name="xlistview_header_hint_name">名字</string>
+    <string name="xlistview_header_hint_reply">回复</string>
+    <string name="xlistview_header_hint_onehourago">1小时以前</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+
+    <!-- 关于注册登陆 -->
+    <string name="login_reg_logininput_account">请输入账号</string>
+    <string name="login_reg_logininput_password">请输入密码</string>
+    <string name="login_reg_logininput_password_again">请再次输入密码</string>
+    <string name="login_reg_logininput_email">请再次输入邮箱</string>
+    <string name="login_reg_logininput_login">登陆</string>
+    <string name="login_reg_logininput_reg">注册</string>
+    <string name="login_reg_logininput_forget">忘记密码？</string>
+
+    <!-- 关于好友 -->
+    <string name="friends_add_search">搜索</string>
+    <string name="friends_add_click_search">点击搜索：</string>
+    <string name="friends_add_search_firends">搜索好友</string>
+    <string name="friends_add_search_firends_results">搜索结果</string>
+</resources>

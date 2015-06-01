@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 我的分享空间底部bottom的操作 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/main_page_layout_home_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/shouye"
+            android:onClick="share_btn"
+            android:text="首页"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/main_page_layout_info_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/xinxi"
+            android:onClick="share_btn"
+            android:text="信息"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/main_page_layout_share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/fenxiang2"
+            android:onClick="share_btn"
+            android:text="分享"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/main_page_layout_order_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/paihang"
+            android:text="排行"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/main_page_layout_me_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/me"
+            android:onClick="share_btn"
+            android:text="我"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

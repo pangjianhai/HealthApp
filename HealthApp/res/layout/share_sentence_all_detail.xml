@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightgray" >
+
+    <RelativeLayout
+        android:id="@+id/layout_space_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/space_title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/common_title_bar_color"
+            android:onClick="backoff"
+            android:src="@drawable/close_page" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="健康信息详情"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/share_sen_mm_title_btn_menu"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@color/common_title_bar_color"
+            android:onClick="showPopWin"
+            android:src="@drawable/mm_title_btn_menu" />
+    </RelativeLayout>
+
+    <!-- ScrollView有规则，内部只允许有一只child，所以需要把所有控件外层包裹一个layout -->
+
+    <RelativeLayout
+        android:id="@+id/share_all_detail_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_space_title_bar"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <TextView
+            android:id="@+id/share_all_detail_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textSize="15sp" />
+
+        <GridView
+            android:id="@+id/share_detail_imgs_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/share_all_detail_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:horizontalSpacing="5dip"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dip" >
+        </GridView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/share_all_detail_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent" >
+
+        <include layout="@layout/single_share_common_bottom" />
+        <!-- 这里写你的子控件 -->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/share_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:onClick="closeInput"
+        android:visibility="gone" >
+
+        <!-- 需要回复的时候才会改变visibility属性为可见 -->
+
+        <include layout="@layout/share_reply_pop" />
+    </LinearLayout>
+
+</RelativeLayout>
