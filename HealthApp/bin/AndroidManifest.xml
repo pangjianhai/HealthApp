@@ -101,6 +101,10 @@
         </service>
         <service android:name="cn.com.health.pro.service.ShareCommentService" >
         </service>
+        <service android:name="cn.com.health.pro.service.CollectionForInfoService" >
+        </service>
+        <service android:name="cn.com.health.pro.service.DocCommentService" >
+        </service>
     </application>
 
 </manifest>

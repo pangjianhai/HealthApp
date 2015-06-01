@@ -9,11 +9,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.health.pro.model.InfoDoc;
+import cn.com.health.pro.service.CollectionForInfoService;
+import cn.com.health.pro.service.DocCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
 import cn.com.health.pro.util.CommonHttpUtil;
 import cn.com.health.pro.util.HttpCallbackListener;
@@ -49,6 +55,12 @@ public class InfoDetailActivity extends BaseActivity {
 	private TextView info_detail_good;
 
 	/**
+	 * 弹出框
+	 */
+	private LinearLayout share_bottom;
+	private EditText et_pop;
+
+	/**
 	 * 是否已经评论过了
 	 */
 	private boolean if_view = false;
@@ -82,6 +94,9 @@ public class InfoDetailActivity extends BaseActivity {
 		info_content = (TextView) findViewById(R.id.info_content);
 		info_detail_title = (TextView) findViewById(R.id.info_detail_title);
 		info_detail_good = (TextView) findViewById(R.id.info_detail_good);
+
+		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
+		et_pop = (EditText) findViewById(R.id.tv_pop);
 		initData(docId);
 	}
 
@@ -150,10 +165,21 @@ public class InfoDetailActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void info_ops_bar(View v) {
+		/**
+		 * 收藏
+		 */
 		if (v.getId() == R.id.info_detail_ops_sc) {
-
+			Intent intent = new Intent(InfoDetailActivity.this,
+					CollectionForInfoService.class);
+			intent.putExtra("userId", userId);
+			intent.putExtra("sentenceordocId", docId);
+			intent.putExtra("type",
+					CollectionForInfoService.VIEW_ITEM_TYPE_INFO);
+			startService(intent);
+			Toast.makeText(InfoDetailActivity.this, "收藏成功", Toast.LENGTH_SHORT)
+					.show();
 		} else if (v.getId() == R.id.info_detail_ops_comment) {
-
+			showInput();
 		} else if (v.getId() == R.id.info_detail_ops_tag) {
 
 		} else if (v.getId() == R.id.info_detail_ops_ok) {// 点击“点赞”
@@ -170,7 +196,7 @@ public class InfoDetailActivity extends BaseActivity {
 				info_detail_good.setText(newNum);
 				info_detail_good.setTextColor(Color.parseColor("#FF9D6F"));
 			}
-			//info_detail_ops_ok.setTextColor(Color.parseColor("#FF9D6F"));
+			// info_detail_ops_ok.setTextColor(Color.parseColor("#FF9D6F"));
 			// 后台任务
 			Intent intent = new Intent(InfoDetailActivity.this,
 					ViewForInfoService.class);
@@ -184,7 +210,7 @@ public class InfoDetailActivity extends BaseActivity {
 				return;
 			}
 			if_view = true;
-			//info_detail_ops_nook.setTextColor(Color.parseColor("#FF9D6F"));
+			// info_detail_ops_nook.setTextColor(Color.parseColor("#FF9D6F"));
 			Intent intent = new Intent(InfoDetailActivity.this,
 					ViewForInfoService.class);
 			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_INFO);
@@ -192,5 +218,63 @@ public class InfoDetailActivity extends BaseActivity {
 			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_NO);
 			startService(intent);
 		}
+	}
+
+	/**
+	 * 
+	 * @tags
+	 * @date 2015年5月26日
+	 * @todo 出现评论展示框
+	 * @author pang
+	 */
+	public void showInput() {
+		share_bottom.setVisibility(View.VISIBLE);
+		et_pop.setFocusable(true);
+		et_pop.requestFocus();
+		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+				.showSoftInput(et_pop, 0);
+	}
+
+	/**
+	 * 
+	 * @tags @param v
+	 * @date 2015年5月26日
+	 * @todo 关闭输入框
+	 * @author pang
+	 */
+	public void closeInput(View v) {
+		et_pop.setText("");
+		int vi = share_bottom.getVisibility();
+		if (vi == View.VISIBLE) {
+			share_bottom.setVisibility(View.GONE);
+			((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+					.hideSoftInputFromWindow(InfoDetailActivity.this
+							.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
+		}
+	}
+
+	/**
+	 * 
+	 * @tags @param v
+	 * @date 2015年5月26日
+	 * @todo 评论
+	 * @author pang
+	 */
+	public void comment_share(View v) {
+		System.out.println("********************comment_share");
+		Intent intent = new Intent(InfoDetailActivity.this,
+				DocCommentService.class);
+		intent.putExtra("userId", userId);
+		intent.putExtra("docId", docId);
+		intent.putExtra("content", et_pop.getText().toString());
+		startService(intent);
+		System.out.println("---------------");
+		et_pop.setText("");
+		share_bottom.setVisibility(View.GONE);
+		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+				.hideSoftInputFromWindow(InfoDetailActivity.this
+						.getCurrentFocus().getWindowToken(),
+						InputMethodManager.HIDE_NOT_ALWAYS);
 	}
 }

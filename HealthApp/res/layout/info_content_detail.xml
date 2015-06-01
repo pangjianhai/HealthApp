@@ -99,4 +99,18 @@
         <include layout="@layout/single_info_common_bottom" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/share_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:onClick="closeInput"
+        android:visibility="gone" >
+
+        <!-- 需要回复的时候才会改变visibility属性为可见 -->
+
+        <include layout="@layout/share_reply_pop" />
+    </LinearLayout>
+
 </LinearLayout>
