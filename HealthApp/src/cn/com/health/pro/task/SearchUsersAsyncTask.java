@@ -1,6 +1,8 @@
 package cn.com.health.pro.task;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -29,9 +31,10 @@ public class SearchUsersAsyncTask extends
 	protected List<UserItem> doInBackground(String... params) {
 		String para = params[0];
 		String url = SystemConst.server_url
-				+ SystemConst.FunctionUrl.searchUserByName + "?para=" + para;
-		String data = CommonHttpUtil.sendHttpRequest(url);
-		// System.out.println("=======data:" + data);
+				+ SystemConst.FunctionUrl.searchUserByName;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("para", para);
+		String data = CommonHttpUtil.sendHttpRequest(url, map);
 		return UserUtils.parseJsonAddToList(data);
 	}
 

@@ -8,15 +8,14 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.AdapterView.OnItemClickListener;
 import cn.com.health.pro.adapter.UserItemAdapter;
-import cn.com.health.pro.entity.InfoEntity;
 import cn.com.health.pro.model.UserItem;
 import cn.com.health.pro.task.SearchUsersAsyncTask;
 
