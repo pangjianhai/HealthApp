@@ -95,7 +95,7 @@ public class InfoDetailActivity extends BaseActivity {
 		info_detail_title = (TextView) findViewById(R.id.info_detail_title);
 		info_detail_good = (TextView) findViewById(R.id.info_detail_good);
 
-		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
+		share_bottom = (LinearLayout) findViewById(R.id.doc_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
 		initData(docId);
 	}

@@ -100,7 +100,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/share_bottom"
+        android:id="@+id/doc_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
