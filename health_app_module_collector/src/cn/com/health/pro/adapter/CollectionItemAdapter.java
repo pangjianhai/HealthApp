@@ -72,9 +72,10 @@ public class CollectionItemAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
+				System.out.println("========>" + context);
 				if (context instanceof MainPageLayoutMeCollectionActivity) {
 					((MainPageLayoutMeCollectionActivity) context)
-							.checkSomeOne("");
+							.checkCollection("");
 				}
 			}
 		});

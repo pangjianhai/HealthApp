@@ -80,18 +80,6 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 			}
 		});
 
-		my_collection_listview
-				.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						System.out.println("------------>>>>");
-						CollectionItem ui = collList.get(position);
-						checkSomeOne("");
-					}
-
-				});
 		loadMoreData();
 	}
 
@@ -127,7 +115,15 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 		this.finish();
 	}
 
-	public void checkSomeOne(String id) {
+	/**
+	 * 
+	 * @param id
+	 * @user:pang
+	 * @data:2015年6月2日
+	 * @todo:查看收藏
+	 * @return:void
+	 */
+	public void checkCollection(String id) {
 		Toast.makeText(MainPageLayoutMeCollectionActivity.this,
 				"xxxxxxxxxxxxxxxxxxx", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(MainPageLayoutMeCollectionActivity.this,
