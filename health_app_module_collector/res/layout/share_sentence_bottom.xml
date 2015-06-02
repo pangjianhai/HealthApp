@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/share_bottom_ops_bar"
+    android:divider="@drawable/divider2"
+    android:orientation="horizontal"
+    android:showDividers="middle" >
+
+    <Button
+        android:id="@+id/infodetail_ops_select_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/common_title_bar_color"
+        android:drawableLeft="@drawable/addpic0"
+        android:onClick="selectPicture"
+        android:text="上图片"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/infodetail_ops_good"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/infodetail_ops_select_pic"
+        android:background="@color/common_title_bar_color"
+        android:drawableLeft="@drawable/addtag0"
+        android:onClick="shareAddTags"
+        android:text="加标签"
+        android:textSize="15sp" />
+
+</LinearLayout>

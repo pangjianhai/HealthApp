@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <!-- 具体健康分析查看时bottom的操作 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/single_share_bottom_ops_sc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/info_share"
+            android:onClick="share_ops_bar"
+            android:text="收藏"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/single_share_bottom_ops_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/info_commont2"
+            android:onClick="share_ops_bar"
+            android:text="评论"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/single_share_bottom_ops_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/info_tags"
+            android:onClick="share_ops_bar"
+            android:text="标签"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/single_share_bottom_ops_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/info_ok2"
+            android:onClick="share_ops_bar"
+            android:text="有用"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/single_share_bottom_ops_nook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/info_nouse"
+            android:onClick="share_ops_bar"
+            android:text="没用"
+            android:textColor="#000000"
+            android:textSize="10sp" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,110 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.com.health.pro"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <application
+        android:name="cn.com.health.pro.config.HealthApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/life0"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".InfoSearchActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".InfoDetailActivity"
+            android:theme="@android:style/Theme.Holo.Light"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <!-- 进入分享信息的入口页面 -->
+        <activity android:name=".SharePrepareActivity" >
+        </activity>
+        <activity android:name=".ShareMineActivity" >
+        </activity>
+        <activity android:name=".ShareHealthActivity" >
+        </activity>
+        <activity android:name=".ShareSportsActivity" >
+        </activity>
+        <activity android:name=".ShareEatActivity" >
+        </activity>
+        <activity android:name=".ShareSelectPicActivity" >
+        </activity>
+        <!-- 关于空间分页 -->
+        <activity android:name=".MineSpaceActivity" >
+        </activity>
+        <activity android:name=".ShareSentenceAllDetailActivity" >
+        </activity>
+        <!-- 关于登陆 -->
+        <activity android:name=".AppStartActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AppLoginStartActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity android:name=".AppLoginLoadingActivity" >
+        </activity>
+        <activity android:name=".AppLoginRegActivity" >
+        </activity>
+        <activity
+            android:name=".AppRegActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <!-- 关于搜索添加好友 -->
+        <activity
+            android:name=".FriendSearchResultActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity android:name=".FriendSeachOpsActivity" >
+        </activity>
+        <activity android:name=".ShowUserInfoDetail" >
+        </activity>
+        <activity android:name=".EditUserInfoDetail" >
+        </activity>
+        <activity android:name=".MainActivity" >
+        </activity>
+
+        <!-- 关于登陆后的主页面 -->
+        <activity android:name=".MainPageLayoutSpaceActivity" >
+        </activity>
+        <activity android:name=".MainPageLayoutMeActivity" >
+        </activity>
+        <activity android:name=".MainPageLayoutInfoActivity" >
+        </activity>
+        <activity android:name=".CommonPicJazzActivity" >
+        </activity>
+        <activity android:name=".MainPageLayoutMeFocusMeActivity" >
+        </activity>
+        <activity android:name=".MainPageLayoutMeMyFocusActivity" >
+        </activity>
+
+        <!-- 测试activity -->
+        <activity android:name=".TestActivity" >
+        </activity>
+
+        <service android:name="cn.com.health.pro.service.ViewForInfoService" >
+        </service>
+        <service android:name="cn.com.health.pro.service.ShareCommentService" >
+        </service>
+        <service android:name="cn.com.health.pro.service.CollectionForInfoService" >
+        </service>
+        <service android:name="cn.com.health.pro.service.DocCommentService" >
+        </service>
+    </application>
+
+</manifest>
