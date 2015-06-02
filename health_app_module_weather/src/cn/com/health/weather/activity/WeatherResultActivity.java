@@ -217,6 +217,8 @@ public class WeatherResultActivity extends Activity {
 		HttpClient client = new DefaultHttpClient();
 		String url = getResources().getString(R.string.base_url) + citycode
 				+ ".html";
+		
+		System.out.println("url:"+url);
 
 		HttpGet request = new HttpGet(url);
 		HttpResponse response = client.execute(request);
@@ -229,6 +231,7 @@ public class WeatherResultActivity extends Activity {
 				builder.append(s);
 			}
 			all_weather_info = builder.toString();
+			System.out.println("all_weather_info:"+all_weather_info);
 			JSONObject jsonObject = new JSONObject(builder.toString())
 					.getJSONObject("weatherinfo");
 			return jsonObject;
