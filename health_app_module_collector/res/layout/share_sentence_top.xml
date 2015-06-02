@@ -32,7 +32,7 @@
         android:layout_margin="5dip"
         android:layout_marginRight="5dp"
         android:background="@color/common_title_bar_color"
-        android:drawableLeft="@drawable/save4"
+        android:drawableLeft="@drawable/addshare"
         android:onClick="saveShare"
         android:text="保存"
         android:textColor="@color/black"
