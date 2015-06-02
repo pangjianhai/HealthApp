@@ -243,7 +243,6 @@ public class ShareItemAdapter extends BaseAdapter {
 		 * 头像部分
 		 */
 		userId = entity.getUserId();
-		System.out.println("**********************userId:" + userId);
 		if (userId != null && !"".equals(userId)) {
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getHeadImgByUserId

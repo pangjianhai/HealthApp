@@ -48,7 +48,6 @@ public class CollectionForInfoService extends IntentService {
 			String url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.collect_info_or_sentence
 					+ "?para=" + j.toString();
-			System.out.println("url:" + url);
 			String data = CommonHttpUtil.sendHttpRequest(url);
 		} catch (Exception e) {
 			e.printStackTrace();

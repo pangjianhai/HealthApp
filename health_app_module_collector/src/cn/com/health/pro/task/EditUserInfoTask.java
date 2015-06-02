@@ -71,12 +71,9 @@ public class EditUserInfoTask extends
 	@SuppressWarnings("unchecked")
 	@Override
 	protected String doInBackground(Map... params) {
-		System.out.println("requestURL:" + requestURL);
 		Map<String, String> textParamMap = (Map<String, String>) params[0]
 				.get(text_param);
 		List<File> files = (List<File>) params[0].get(file_param);
-		System.out.println(textParamMap);
-		System.out.println(files);
 		FormFile[] fs = new FormFile[files.size()];
 		for (int i = 0; i < files.size(); i++) {
 			File f = files.get(i);

@@ -52,7 +52,6 @@ public class ViewForInfoService extends IntentService {
 			String url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.view_for_share_or_healthinfo
 					+ "?para=" + j.toString();
-			// System.out.println("url:"+url);
 			String data = CommonHttpUtil.sendHttpRequest(url);
 		} catch (Exception e) {
 			e.printStackTrace();

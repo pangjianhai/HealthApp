@@ -35,15 +35,12 @@ public class FriendFocusCancelAsyncTask extends
 				+ SystemConst.FunctionUrl.cancel_some_one_focus_another
 				+ "?para=" + para;
 		String data = CommonHttpUtil.sendHttpRequest(url);
-		System.out.println("url:" + url);
-		System.out.println(data);
 		return FocusUtil.commonFocusResult(data);
 	}
 
 	@Override
 	protected void onPostExecute(Boolean b) {
 		super.onPostExecute(b);
-		System.out.println("b:" + b);
 		((ShowUserInfoDetail) context).cancelFocusOver(b);
 	}
 }

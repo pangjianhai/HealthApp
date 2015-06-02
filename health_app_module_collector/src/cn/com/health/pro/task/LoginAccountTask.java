@@ -30,9 +30,7 @@ public class LoginAccountTask extends AsyncTask<String, Void, String> {
 	protected String doInBackground(String... params) {
 		String url = SystemConst.server_url + SystemConst.FunctionUrl.userLogin
 				+ "?para=" + params[0];
-		System.out.println("url:" + url);
 		String data = CommonHttpUtil.sendHttpRequest(url);
-		System.out.println("data:" + data);
 		return data;
 	}
 

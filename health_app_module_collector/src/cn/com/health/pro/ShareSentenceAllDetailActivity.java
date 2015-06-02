@@ -231,7 +231,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void closeInput(View v) {
-		System.out.println("count:" + share_detail_imgs_gridview.getCount());
 		et_pop.setText("");
 		int vi = share_bottom.getVisibility();
 		if (vi == View.VISIBLE) {

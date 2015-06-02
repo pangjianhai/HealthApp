@@ -820,10 +820,8 @@ public class CommonDateUtil {
 			Date dt1 = df.parse(Date1);
 			Date dt2 = df.parse(Date2);
 			if (dt1.getTime() > dt2.getTime()) {
-				// System.out.println("dt1 在dt2前");
 				return 1;
 			} else if (dt1.getTime() < dt2.getTime()) {
-				// System.out.println("dt1在dt2后");
 				return -1;
 			} else {
 				return 0;
@@ -892,6 +890,5 @@ public class CommonDateUtil {
 	public static void main(String[] args) {
 		Date d1 = getDate("2008-07-06");
 		Date d2 = getDate("2014-10-06");
-		System.out.println(getSpan(d1, d2));
 	}
 }

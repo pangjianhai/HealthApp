@@ -213,7 +213,6 @@ public class FileUploadUtil {
 				conn.disconnect();
 			}
 		}
-		System.out.println("sb:" + sb);
 		return sb.toString();
 	}
 
@@ -270,7 +269,6 @@ public class FileUploadUtil {
 					String filePath = f.getPath();
 					// 尺寸压缩
 					Bitmap bm = thumbnailImg(filePath);
-					System.out.println("压缩filePath:" + filePath);
 					// 质量压缩
 					Bitmap bm2 = compressImage(bm);
 					// 上传压缩信息

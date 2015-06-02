@@ -221,7 +221,6 @@ public class EditUserInfoDetail extends BaseActivity {
 			}
 			outputImg.createNewFile();
 			photo_path = outputImg.getAbsolutePath();
-			System.out.println("photo_path:" + photo_path);
 			imgUri = Uri.fromFile(outputImg);
 			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
@@ -237,7 +236,6 @@ public class EditUserInfoDetail extends BaseActivity {
 	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		System.out.println("onActivityResult");
 		switch (requestCode) {
 		case TAKE_PHOTO:
 			if (resultCode == RESULT_OK) {

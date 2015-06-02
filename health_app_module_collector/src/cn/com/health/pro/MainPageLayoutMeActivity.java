@@ -119,7 +119,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	}
 
 	public void show_me_about(View v) {
-		System.out.println("show_me_about");
 		if (R.id.main_page_me_dangan == v.getId()) {
 			Intent intent = new Intent(MainPageLayoutMeActivity.this,
 					MineSpaceActivity.class);
