@@ -94,6 +94,7 @@
         android:id="@+id/items_ops_rlayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:background="@android:color/transparent" >
 
         <include layout="@layout/single_info_common_bottom" />

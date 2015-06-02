@@ -2,11 +2,13 @@ package cn.com.health.pro;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -32,6 +34,8 @@ import cn.com.health.pro.util.HttpCallbackListener;
  *
  */
 public class InfoDetailActivity extends BaseActivity {
+
+	public static String TAG = "InfoDetailActivity";
 
 	private Button info_detail_ops_sc, info_detail_ops_comment,
 			info_detail_ops_tag, info_detail_ops_ok, info_detail_ops_nook;
@@ -83,6 +87,7 @@ public class InfoDetailActivity extends BaseActivity {
 
 	@Override
 	public void onCreate(Bundle b) {
+		Log.d(TAG, "init");
 		super.onCreate(b);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.info_content_detail);
@@ -247,10 +252,8 @@ public class InfoDetailActivity extends BaseActivity {
 		int vi = share_bottom.getVisibility();
 		if (vi == View.VISIBLE) {
 			share_bottom.setVisibility(View.GONE);
-			((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-					.hideSoftInputFromWindow(InfoDetailActivity.this
-							.getCurrentFocus().getWindowToken(),
-							InputMethodManager.HIDE_NOT_ALWAYS);
+			InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 		}
 	}
 
@@ -262,19 +265,16 @@ public class InfoDetailActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void comment_share(View v) {
-		System.out.println("********************comment_share");
 		Intent intent = new Intent(InfoDetailActivity.this,
 				DocCommentService.class);
 		intent.putExtra("userId", userId);
 		intent.putExtra("docId", docId);
 		intent.putExtra("content", et_pop.getText().toString());
 		startService(intent);
-		System.out.println("---------------");
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
-		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-				.hideSoftInputFromWindow(InfoDetailActivity.this
-						.getCurrentFocus().getWindowToken(),
-						InputMethodManager.HIDE_NOT_ALWAYS);
+		InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
 	}
 }
