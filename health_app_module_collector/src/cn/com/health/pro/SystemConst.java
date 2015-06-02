@@ -129,7 +129,7 @@ public class SystemConst {
 		/**
 		 * 评论文章
 		 */
-		public static final String comment_doc = "appSourceController/addCommentsDocument .do";
+		public static final String comment_doc = "appSourceController/addCommentsDocument.do";
 
 		/**
 		 * 根据用户ID获取相关的数据
