@@ -134,6 +134,11 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					MainPageLayoutMeFocusMeActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
+		} else if (R.id.main_page_me_shoucang == v.getId()) {// 我的收藏
+			Intent intent = new Intent(MainPageLayoutMeActivity.this,
+					MainPageLayoutMeCollectionActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
 		}
 	}
 
