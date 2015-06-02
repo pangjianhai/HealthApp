@@ -236,8 +236,15 @@ public class InfoDetailActivity extends BaseActivity {
 		share_bottom.setVisibility(View.VISIBLE);
 		et_pop.setFocusable(true);
 		et_pop.requestFocus();
+		/**
+		 * 打开输入法
+		 */
 		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
 				.showSoftInput(et_pop, 0);
+		/**
+		 * 隐藏操作蓝
+		 */
+		rlayout.setVisibility(View.GONE);
 	}
 
 	/**
@@ -252,8 +259,15 @@ public class InfoDetailActivity extends BaseActivity {
 		int vi = share_bottom.getVisibility();
 		if (vi == View.VISIBLE) {
 			share_bottom.setVisibility(View.GONE);
+			/**
+			 * 关闭输入法
+			 */
 			InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+			/**
+			 * 显示操作蓝
+			 */
+			rlayout.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -273,8 +287,14 @@ public class InfoDetailActivity extends BaseActivity {
 		startService(intent);
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
+		/**
+		 * 关闭输入法
+		 */
 		InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
+		/**
+		 * 显示操作蓝
+		 */
+		rlayout.setVisibility(View.VISIBLE);
 	}
 }

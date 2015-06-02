@@ -37,7 +37,7 @@ public class DocCommentService extends IntentService {
 			j.put("docId", docId);
 			j.put("content", content);
 			String url = SystemConst.server_url
-					+ SystemConst.FunctionUrl.comment_share;
+					+ SystemConst.FunctionUrl.comment_doc;
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("para", j.toString());
 			String data = CommonHttpUtil.sendHttpRequest(url, map);
