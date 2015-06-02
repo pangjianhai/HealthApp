@@ -94,8 +94,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 			imgs = PicUtil.pureImgList(imgs);
 			if (imgs != null && !imgs.isEmpty()) {
 				ShareSinglePicAdapter adapter = new ShareSinglePicAdapter(
-						ShareSentenceAllDetailActivity.this,
-						entity.getImgsIds());
+						ShareSentenceAllDetailActivity.this, imgs);
 				share_detail_imgs_gridview.setAdapter(adapter);
 			} else {
 				share_detail_imgs_gridview.setVisibility(View.GONE);
@@ -232,6 +231,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void closeInput(View v) {
+		System.out.println("count:" + share_detail_imgs_gridview.getCount());
 		et_pop.setText("");
 		int vi = share_bottom.getVisibility();
 		if (vi == View.VISIBLE) {

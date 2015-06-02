@@ -69,6 +69,7 @@ public class ShareSinglePicAdapter extends BaseAdapter {
 	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		System.out.println("------------>getView");
 		if (convertView == null) {
 			convertView = new ImageView(context);
 			((ImageView) convertView).setScaleType(ScaleType.CENTER_CROP);
