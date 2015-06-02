@@ -6,12 +6,14 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -130,6 +132,10 @@ public class InfoSearchActivity extends BaseActivity {
 			}
 		});
 		loadMoreData();
+		
+		// InputMethodManager m = (InputMethodManager)
+		// getSystemService(Context.INPUT_METHOD_SERVICE);
+		// m.toggleSoftInput(1, InputMethodManager.HIDE_NOT_ALWAYS);
 
 	}
 
