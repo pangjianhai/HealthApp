@@ -1,6 +1,7 @@
 package cn.com.health.pro.abstracts;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 	 */
 	View bottom;
 
-	private Button main_page_layout_home_btn, main_page_layout_info_btn,
+	public Button main_page_layout_home_btn, main_page_layout_info_btn,
 			main_page_layout_share_btn, main_page_layout_order_btn,
 			main_page_layout_me_btn;
 
@@ -60,6 +61,14 @@ public abstract class ParentMainActivity extends BaseActivity {
 				.findViewById(R.id.main_page_layout_order_btn);
 		main_page_layout_me_btn = (Button) bottom
 				.findViewById(R.id.main_page_layout_me_btn);
+
+		Drawable topDrawable = getResources().getDrawable(
+				R.drawable.tabbar_home_highlighted);
+		topDrawable.setBounds(0, 0, topDrawable.getMinimumWidth(),
+				topDrawable.getMinimumHeight());
+		main_page_layout_home_btn.setCompoundDrawables(topDrawable, topDrawable, topDrawable,
+				topDrawable);
+
 	}
 
 	/**
