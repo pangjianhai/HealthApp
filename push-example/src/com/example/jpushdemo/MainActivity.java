@@ -22,12 +22,6 @@ import com.gwh.zc.core.R;
 public class MainActivity extends InstrumentedActivity implements
 		OnClickListener {
 
-	private Button mInit;
-	private Button mSetting;
-	private Button mStopPush;
-	private Button mResumePush;
-	private EditText msgText;
-
 	public static boolean isForeground = false;
 
 	@Override
@@ -36,8 +30,6 @@ public class MainActivity extends InstrumentedActivity implements
 		setContentView(R.layout.main);
 		registerMessageReceiver(); // used for receive msg
 	}
-
-	
 
 	@Override
 	protected void onResume() {
@@ -91,10 +83,6 @@ public class MainActivity extends InstrumentedActivity implements
 	}
 
 	private void setCostomMsg(String msg) {
-		if (null != msgText) {
-			msgText.setText(msg);
-			msgText.setVisibility(android.view.View.VISIBLE);
-		}
 	}
 
 	@Override
