@@ -16,11 +16,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * 
- * @author pang
- *
- */
 public class ExampleUtil {
 	public static final String PREFS_NAME = "JPUSH_EXAMPLE";
 	public static final String PREFS_DAYS = "JPUSH_EXAMPLE_DAYS";
@@ -38,30 +33,14 @@ public class ExampleUtil {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @param s
-	 * @return
-	 * @user:pang
-	 * @data:2015年6月4日
-	 * @todo:校验Tag Alias 只能是数字,英文字母和中文
-	 * @return:boolean
-	 */
+	// 校验Tag Alias 只能是数字,英文字母和中文
 	public static boolean isValidTagAndAlias(String s) {
 		Pattern p = Pattern.compile("^[\u4E00-\u9FA50-9a-zA-Z_-]{0,}$");
 		Matcher m = p.matcher(s);
 		return m.matches();
 	}
 
-	/**
-	 * 
-	 * @param context
-	 * @return
-	 * @user:pang
-	 * @data:2015年6月4日
-	 * @todo:取得AppKey
-	 * @return:String
-	 */
+	// 取得AppKey
 	public static String getAppKey(Context context) {
 		Bundle metaData = null;
 		String appKey = null;
@@ -106,15 +85,6 @@ public class ExampleUtil {
 		}).start();
 	}
 
-	/**
-	 * 
-	 * @param context
-	 * @return
-	 * @user:pang
-	 * @data:2015年6月4日
-	 * @todo:是否联网
-	 * @return:boolean
-	 */
 	public static boolean isConnected(Context context) {
 		ConnectivityManager conn = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
