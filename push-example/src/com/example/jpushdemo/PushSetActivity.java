@@ -22,6 +22,11 @@ import cn.jpush.android.api.JPushInterface;
 import com.gwh.zc.core.R;
 import cn.jpush.android.api.TagAliasCallback;
 
+/**
+ * @todo 高级设置
+ * @author pang
+ *
+ */
 public class PushSetActivity extends InstrumentedActivity implements
 		OnClickListener {
 	private static final String TAG = "JPush";

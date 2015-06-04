@@ -14,6 +14,11 @@ import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 import com.gwh.zc.core.R;
 
+/**
+ * @todo 主页面
+ * @author pang
+ *
+ */
 public class MainActivity extends InstrumentedActivity implements
 		OnClickListener {
 
@@ -129,6 +134,7 @@ public class MainActivity extends InstrumentedActivity implements
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			System.out.println("========================");
 			if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
 				String messge = intent.getStringExtra(KEY_MESSAGE);
 				String extras = intent.getStringExtra(KEY_EXTRAS);
