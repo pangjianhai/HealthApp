@@ -42,7 +42,7 @@ public class PushExample {
 
 		// For push, all you need do is to build PushPayload object.
 		// PushPayload payload = buildPushObject_all_all_alert();
-		PushPayload payload = buildPushObject_all_tag_alertWithTitle("bb");
+		PushPayload payload = buildPushObject_all_alias_alert("123");
 
 		try {
 			PushResult result = jpushClient.sendPush(payload);
@@ -60,6 +60,12 @@ public class PushExample {
 			LOG.info("Error Message: " + e.getErrorMessage());
 			LOG.info("Msg ID: " + e.getMsgId());
 		}
+	}
+
+	public static PushPayload buildPushObject_all_alias_alert(String alias) {
+		return PushPayload.newBuilder().setPlatform(Platform.all())
+				.setAudience(Audience.alias(alias))
+				.setNotification(Notification.alert(ALERT)).build();
 	}
 
 	public static PushPayload buildPushObject_all_all_alert() {
