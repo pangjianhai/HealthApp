@@ -1,5 +1,8 @@
 package cn.jpush.api.examples;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,13 +39,9 @@ public class PushExample {
 	}
 
 	public static void testSendPush() {
-		// HttpProxy proxy = new HttpProxy("localhost", 3128);
-		// Can use this https proxy: https://github.com/Exa-Networks/exaproxy
 		JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
-
-		// For push, all you need do is to build PushPayload object.
-		// PushPayload payload = buildPushObject_all_all_alert();
-		PushPayload payload = buildPushObject_all_alias_alert("123");
+		PushPayload payload = push_zcinfo_to_user("yyyyyyyyyyy",
+				"国家鼓励大众创业，万众创新", "123");
 
 		try {
 			PushResult result = jpushClient.sendPush(payload);
@@ -60,6 +59,30 @@ public class PushExample {
 			LOG.info("Error Message: " + e.getErrorMessage());
 			LOG.info("Msg ID: " + e.getMsgId());
 		}
+	}
+
+	public static PushPayload push_zcinfo_to_user(String zcId, String zcTitle,
+			String userId) {
+		Map<String, String> maps = new HashMap<String, String>();
+		maps.put("zcId", zcId);
+		maps.put("zcTitle", zcTitle);
+		return PushPayload
+				.newBuilder()
+				.setPlatform(Platform.android_ios())
+				.setAudience(Audience.alias(userId))
+				.setNotification(
+						Notification
+								.newBuilder()
+								.setAlert("最新政府政策：" + zcTitle)
+								.addPlatformNotification(
+										AndroidNotification.newBuilder()
+												.addExtras(maps)
+												.setTitle("新消息").build())
+								.addPlatformNotification(
+										IosNotification.newBuilder()
+												.incrBadge(1).setAlert("新消息")
+												.addExtras(maps).build())
+								.build()).build();
 	}
 
 	public static PushPayload buildPushObject_all_alias_alert(String alias) {
