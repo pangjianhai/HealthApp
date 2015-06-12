@@ -1,7 +1,13 @@
 package cn.com.health.pro.listener;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.json.JSONObject;
+
+import cn.com.health.pro.SystemConst;
+import cn.com.health.pro.config.HealthApplication;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -21,13 +27,25 @@ public class MyLocationListener implements BDLocationListener {
 
 	@Override
 	public void onReceiveLocation(BDLocation location) {
-		System.out.println("location--------------");
+		System.out.println("location--------------" + location);
 		if (location != null) {
 			String time = location.getTime();
 			double lat = location.getLatitude();
 			double lon = location.getLongitude();
 			String addr = location.getAddrStr();
-			System.out.println(time + "--" + lat + "--" + lon + "--" + addr);
+			try {
+				JSONObject obj = new JSONObject();
+				obj.put("userId", HealthApplication.getUserId());
+				obj.put("latitude", lat + "");
+				obj.put("longitude", lon + "");
+				obj.put("curraddress", addr);
+
+				Map<String, String> m = new HashMap<String, String>();
+				m.put("para", obj.toString());
+				send(m);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -42,36 +60,29 @@ public class MyLocationListener implements BDLocationListener {
 			params.addBodyParameter(entry.getKey(), entry.getValue());
 		}
 		HttpUtils http = new HttpUtils();
-		http.send(HttpRequest.HttpMethod.POST, "uploadUrl....", params,
+		String url = SystemConst.server_url
+				+ SystemConst.FunctionUrl.update_person_location;
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override
 					public void onStart() {
-						// testTextView.setText("conn...");
 					}
 
 					@Override
 					public void onLoading(long total, long current,
 							boolean isUploading) {
-						// if (isUploading) {
-						// testTextView.setText("upload: " + current + "/" +
-						// total);
-						// } else {
-						// testTextView.setText("reply: " + current + "/" +
-						// total);
-						// }
 					}
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
-						// testTextView.setText("reply: " +
-						// responseInfo.result);
+						System.out.println("==================>");
 					}
 
 					@Override
 					public void onFailure(HttpException error, String msg) {
-						// testTextView.setText(error.getExceptionCode() + ":" +
-						// msg);
+						System.out.println("==================<");
+						;
 					}
 				});
 	}

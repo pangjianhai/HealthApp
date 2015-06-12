@@ -8,8 +8,11 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxParams;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseStream;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 /**
  * 
@@ -107,22 +110,44 @@ public class CommonHttpUtil {
 
 	}
 
+	/**
+	 * 
+	 * @param address
+	 * @param param
+	 * @return
+	 * @user:pang
+	 * @data:2015年6月12日
+	 * @todo:xUtils请求数据
+	 * @return:String
+	 */
 	public static String sendHttpRequest(String address,
 			Map<String, String> param) {
 
-		AjaxParams params = new AjaxParams();
-		if (param != null && !param.isEmpty()) {
-			Iterator<String> keys = param.keySet().iterator();
-			while (keys.hasNext()) {
-				String key = (String) keys.next();
-				String value = param.get(key);
-				params.put(key, value);
-			}
+		RequestParams params = new RequestParams();
+		Iterator<Map.Entry<String, String>> it = param.entrySet().iterator();
+		/**
+		 * 添加参数
+		 */
+		while (it.hasNext()) {
+			Map.Entry<String, String> entry = it.next();
+			params.addBodyParameter(entry.getKey(), entry.getValue());
 		}
-
-		FinalHttp fh = new FinalHttp();
-		Object value = fh.postSync(address, params);
-		return value != null ? value.toString() : "";
+		HttpUtils http = new HttpUtils();
+		try {
+			ResponseStream rs = http.sendSync(HttpMethod.POST, address);
+			InputStream in = rs.getBaseStream();
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(in));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			return sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 }

@@ -150,6 +150,11 @@ public class SystemConst {
 		 * 收藏文章或者信息
 		 */
 		public static final String collect_info_or_sentence = "appSourceController/collectSentenceInfo.do";
+
+		/**
+		 * 修改某人的地理位置信息
+		 */
+		public static final String update_person_location = "appSourceController/editUserPlace.do";
 	}
 
 	/**

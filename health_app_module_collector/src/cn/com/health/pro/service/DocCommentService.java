@@ -41,6 +41,7 @@ public class DocCommentService extends IntentService {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("para", j.toString());
 			String data = CommonHttpUtil.sendHttpRequest(url, map);
+			System.out.println("===================>>>" + data);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
