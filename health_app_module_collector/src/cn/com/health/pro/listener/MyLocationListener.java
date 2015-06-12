@@ -27,7 +27,6 @@ public class MyLocationListener implements BDLocationListener {
 
 	@Override
 	public void onReceiveLocation(BDLocation location) {
-		System.out.println("location--------------" + location);
 		if (location != null) {
 			String time = location.getTime();
 			double lat = location.getLatitude();
@@ -76,13 +75,10 @@ public class MyLocationListener implements BDLocationListener {
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
-						System.out.println("==================>");
 					}
 
 					@Override
 					public void onFailure(HttpException error, String msg) {
-						System.out.println("==================<");
-						;
 					}
 				});
 	}
