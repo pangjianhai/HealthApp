@@ -134,7 +134,7 @@ public class CommonHttpUtil {
 		}
 		HttpUtils http = new HttpUtils();
 		try {
-			ResponseStream rs = http.sendSync(HttpMethod.POST, address);
+			ResponseStream rs = http.sendSync(HttpMethod.POST, address, params);
 			InputStream in = rs.getBaseStream();
 			BufferedReader reader = new BufferedReader(
 					new InputStreamReader(in));
