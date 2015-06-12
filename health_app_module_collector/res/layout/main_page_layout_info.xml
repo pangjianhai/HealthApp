@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#fcfcfc"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <!-- 个人信息展示页面 -->
 
@@ -43,16 +41,13 @@
     <LinearLayout
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/layout_space_title_bar" >
 
         <ListView
             android:id="@+id/home_info_list"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:divider="@color/white"
-            android:dividerHeight="3dp"
-            android:footerDividersEnabled="true" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
         </ListView>
     </LinearLayout>
 
@@ -60,7 +55,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/main_page_layout_common_bottom"
-        android:background="@drawable/common_bottom_shape" />
+        layout="@layout/main_page_layout_common_bottom" />
 
-</LinearLayout>
+</RelativeLayout>
