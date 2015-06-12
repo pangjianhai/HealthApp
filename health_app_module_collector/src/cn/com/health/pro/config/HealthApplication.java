@@ -1,19 +1,24 @@
 package cn.com.health.pro.config;
 
 import java.io.File;
-import java.io.IOException;
 
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Vibrator;
 import cn.com.health.pro.SystemConst;
+import cn.com.health.pro.listener.MyLocationListener;
 import cn.com.health.pro.persist.SharedPreInto;
 
+import com.baidu.location.GeofenceClient;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.LocationClientOption.LocationMode;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -21,7 +26,6 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
 /**
  * 
@@ -30,6 +34,14 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
  *
  */
 public class HealthApplication extends Application {
+
+	/**
+	 * 百度地图相关
+	 */
+	public LocationClient mLocationClient;
+	public GeofenceClient mGeofenceClient;
+	public MyLocationListener mMyLocationListener;
+	public Vibrator mVibrator;
 
 	/**
 	 * 当前上下文环境
@@ -85,6 +97,57 @@ public class HealthApplication extends Application {
 						new BaseImageDownloader(this, 5 * 1000, 30 * 1000))
 				.writeDebugLogs().build();// 创建
 		ImageLoader.getInstance().init(config);
+
+		// 初始化地图
+		initMap();
+		initLocation();
+		startMap();
+	}
+
+	/**
+	 * 
+	 * @user:pang
+	 * @data:2015年6月12日
+	 * @todo:初始化地图的东西
+	 * @return:void
+	 */
+	private void initMap() {
+		mLocationClient = new LocationClient(this.getApplicationContext());
+		mMyLocationListener = new MyLocationListener();
+		mLocationClient.registerLocationListener(mMyLocationListener);
+		mGeofenceClient = new GeofenceClient(getApplicationContext());
+		mVibrator = (Vibrator) getApplicationContext().getSystemService(
+				Service.VIBRATOR_SERVICE);
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月12日
+	 * @todo:TODO
+	 * @return:void
+	 */
+	private void initLocation() {
+		LocationClientOption option = new LocationClientOption();
+		option.setLocationMode(LocationMode.Hight_Accuracy);// 设置定位模式
+		option.setCoorType("gcj02");// 返回的定位结果是百度经纬度，默认值gcj02
+		int span = 50000;
+		option.setScanSpan(span);// 设置发起定位请求的间隔时间为5000ms
+		option.setIsNeedAddress(true);
+		mLocationClient.setLocOption(option);
+	}
+
+	/**
+	 * 
+	 * @user:pang
+	 * @data:2015年6月12日
+	 * @todo:开始地图
+	 * @return:void
+	 */
+	public void startMap() {
+		mLocationClient.start();
 	}
 
 	/**
