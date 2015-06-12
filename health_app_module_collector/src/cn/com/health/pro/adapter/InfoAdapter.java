@@ -3,7 +3,6 @@ package cn.com.health.pro.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import cn.com.health.pro.entity.InfoEntity;
 
 public class InfoAdapter extends ArrayAdapter<InfoEntity> {
 
+	HolderView holder;
 	private int resourceId;
 
 	public InfoAdapter(Context context, int textViewResourceId,
@@ -24,17 +24,27 @@ public class InfoAdapter extends ArrayAdapter<InfoEntity> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		holder = new HolderView();
 		InfoEntity entity = getItem(position);
-		View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-		TextView type = (TextView) view.findViewById(R.id.info_type);
-		TextView title = (TextView) view.findViewById(R.id.info_title);
-		type.setText("[" + entity.getType() + "]");
-		title.setText(entity.getTitle());
+		if (convertView != null) {
+			holder = (HolderView) convertView.getTag();
+		} else {
+			convertView = LayoutInflater.from(getContext()).inflate(resourceId,
+					null);
+			holder.type = (TextView) convertView.findViewById(R.id.info_type);
+			holder.title = (TextView) convertView.findViewById(R.id.info_title);
+			convertView.setTag(holder);
+		}
+		holder.type.setText("[" + entity.getType() + "]");
+		holder.title.setText(entity.getTitle());
 
-		type.setTextSize(16);
-		title.setTextSize(16);
+		holder.type.setTextSize(16);
+		holder.title.setTextSize(16);
+		return convertView;
+	}
 
-		return view;
+	private class HolderView {
+		private TextView type, title;
 	}
 
 }
