@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.view.WindowManager;
 import cn.com.health.pro.SystemConst;
 import cn.com.health.pro.listener.MyLocationListener;
 import cn.com.health.pro.persist.SharedPreInto;
@@ -52,6 +53,11 @@ public class HealthApplication extends Application {
 	 * 当前系统登陆用户
 	 */
 	private static String userId;
+
+	/**
+	 * 浮框全局变量
+	 */
+	private WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();
 
 	@Override
 	public void onCreate() {
@@ -220,6 +226,10 @@ public class HealthApplication extends Application {
 	 */
 	public static void setUserId(String id) {
 		userId = id;
+	}
+
+	public WindowManager.LayoutParams getMywmParams() {
+		return wmParams;
 	}
 
 }
