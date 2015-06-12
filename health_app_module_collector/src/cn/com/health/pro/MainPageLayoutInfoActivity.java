@@ -208,7 +208,7 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	private void createView() {
-		myFV = new MyFloatView(getApplicationContext());
+		myFV = new MyFloatView(MainPageLayoutInfoActivity.this);
 		myFV.setImageResource(R.drawable.fenlei1);
 		wm = (WindowManager) getApplicationContext().getSystemService(
 				Context.WINDOW_SERVICE);
@@ -224,7 +224,6 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 		 * wmParams.flags=LayoutParams.FLAG_NOT_TOUCH_MODAL |
 		 * LayoutParams.FLAG_NOT_FOCUSABLE | LayoutParams.FLAG_NOT_TOUCHABLE;
 		 */
-
 		wmParams.gravity = Gravity.LEFT | Gravity.TOP; // 调整悬浮窗口至左上角
 		// 以屏幕左上角为原点，设置x、y初始值
 		wmParams.x = 200;
@@ -246,6 +245,14 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 
 	}
 
+	public void toNewPage() {
+		Toast.makeText(HealthApplication.getContext(), "toast",
+				Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(MainPageLayoutInfoActivity.this,
+				InfoTypeListviewActivity.class);
+		startActivity(intent);
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -263,8 +270,6 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 
 	@Override
 	protected void onStop() {
-		// 创建悬浮窗口
-		createView();
 		super.onStop();
 	}
 }

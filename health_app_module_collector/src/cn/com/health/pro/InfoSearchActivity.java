@@ -132,7 +132,7 @@ public class InfoSearchActivity extends BaseActivity {
 			}
 		});
 		loadMoreData();
-		
+
 		// InputMethodManager m = (InputMethodManager)
 		// getSystemService(Context.INPUT_METHOD_SERVICE);
 		// m.toggleSoftInput(1, InputMethodManager.HIDE_NOT_ALWAYS);
