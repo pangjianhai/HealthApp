@@ -3,13 +3,6 @@ package cn.com.health.pro;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -17,8 +10,12 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 import cn.com.health.pro.config.HealthApplication;
-import cn.com.health.pro.persist.SharedPreInto;
 import cn.com.health.pro.util.ActivityCollector;
+
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 
@@ -70,7 +67,8 @@ public class BaseActivity extends Activity {
 		return false;
 	}
 
-	public void send_normal_request(Map<String, String> p) {
+	public void send_normal_request(Map<String, String> p,
+			RequestCallBack<?> rcb) {
 		if (!isNetWorkConnected()) {
 			Toast.makeText(getApplicationContext(), "没有网络咯！",
 					Toast.LENGTH_SHORT).show();
@@ -88,82 +86,7 @@ public class BaseActivity extends Activity {
 		HttpUtils http = new HttpUtils();
 		String url = SystemConst.server_url
 				+ SystemConst.FunctionUrl.update_person_location;
-		http.send(HttpRequest.HttpMethod.POST, url, params,
-				new RequestCallBack<String>() {
-
-					@Override
-					public void onStart() {
-						onStart_for_request();
-					}
-
-					@Override
-					public void onLoading(long total, long current,
-							boolean isUploading) {
-						onLoading_for_request(total, current, isUploading);
-					}
-
-					@Override
-					public void onSuccess(ResponseInfo<String> responseInfo) {
-						onSuccess_for_request(responseInfo);
-					}
-
-					@Override
-					public void onFailure(HttpException error, String msg) {
-						onFailure_for_request(error, msg);
-					}
-				});
-	}
-
-	/**
-	 * 
-	 * 
-	 * @user:pang
-	 * @data:2015年6月12日
-	 * @todo:请求普通请求初始工作
-	 * @return:void
-	 */
-	public void onStart_for_request() {
-
-	}
-
-	/**
-	 * 
-	 * @param total
-	 * @param current
-	 * @param isUploading
-	 * @user:pang
-	 * @data:2015年6月12日
-	 * @todo:请求进行中的操作
-	 * @return:void
-	 */
-	public void onLoading_for_request(long total, long current,
-			boolean isUploading) {
-
-	}
-
-	/**
-	 * 
-	 * @param responseInfo
-	 * @user:pang
-	 * @data:2015年6月12日
-	 * @todo:请求成功
-	 * @return:void
-	 */
-	public void onSuccess_for_request(ResponseInfo<String> responseInfo) {
-
-	}
-
-	/**
-	 * 
-	 * @param error
-	 * @param msg
-	 * @user:pang
-	 * @data:2015年6月12日
-	 * @todo:请求失败
-	 * @return:void
-	 */
-	public void onFailure_for_request(HttpException error, String msg) {
-
+		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
 	}
 
 }
