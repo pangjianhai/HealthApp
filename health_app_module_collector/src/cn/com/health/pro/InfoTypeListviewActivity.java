@@ -137,6 +137,7 @@ public class InfoTypeListviewActivity extends BaseActivity {
 					String rs = responseInfo.result;
 					Toast.makeText(getApplicationContext(), rs,
 							Toast.LENGTH_SHORT).show();
+					adapter.notifyDataSetChanged();
 				}
 
 				@Override
