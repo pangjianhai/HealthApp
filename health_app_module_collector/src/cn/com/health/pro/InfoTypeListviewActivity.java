@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.Toast;
 import cn.com.health.pro.adapter.InfoTypeAdapter;
 import cn.com.health.pro.model.InfoTypeEntity;
 import cn.com.health.pro.util.ModelUtil;
@@ -111,6 +112,60 @@ public class InfoTypeListviewActivity extends BaseActivity {
 		String URL = SystemConst.server_url
 				+ SystemConst.FunctionUrl.get_all_doc_type;
 		super.send_normal_request(URL, p, r);
+
+	}
+
+	/**
+	 * 
+	 * @param sub
+	 * @user:pang
+	 * @data:2015年6月14日
+	 * @todo:订阅TRUE或者取消订阅FALSE
+	 * @return:void
+	 */
+	public void subOrCancel(String tid, boolean sub) {
+		try {
+			JSONObject j = new JSONObject();
+			j.put("currentId", userId);
+			j.put("typeId", tid);
+			Map map = new HashMap();
+			map.put("para", j.toString());
+			RequestCallBack<String> r = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String rs = responseInfo.result;
+					Toast.makeText(getApplicationContext(), rs,
+							Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+				}
+			};
+			String URL = null;
+			if (sub) {
+				URL = SystemConst.server_url + SystemConst.FunctionUrl.sub_type;
+			} else {
+				URL = SystemConst.server_url
+						+ SystemConst.FunctionUrl.cancel_type;
+			}
+			super.send_normal_request(URL, map, r);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param tId
+	 * @user:pang
+	 * @data:2015年6月14日
+	 * @todo:根据类型获取文档
+	 * @return:void
+	 */
+	public void checkDocsByType(String tId) {
 
 	}
 }

@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.com.health.pro.InfoTypeListviewActivity;
 import cn.com.health.pro.R;
 import cn.com.health.pro.model.InfoTypeEntity;
 
@@ -34,10 +36,12 @@ public class InfoTypeAdapter extends ArrayAdapter<InfoTypeEntity> {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		InfoTypeEntity entity = getItem(position);
+		final InfoTypeEntity entity = getItem(position);
 		View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
 		TextView type = (TextView) view.findViewById(R.id.typename);
 		TextView if_focus = (TextView) view.findViewById(R.id.if_focus);
+		ImageView check_list_by_type = (ImageView) view
+				.findViewById(R.id.check_list_by_type);
 		type.setText("[" + entity.getName() + "]");
 		String fc = entity.getIfFocus();
 		if ("Y".equals(fc)) {
@@ -59,12 +63,23 @@ public class InfoTypeAdapter extends ArrayAdapter<InfoTypeEntity> {
 					Toast.makeText(getContext(), "成功取消订阅", Toast.LENGTH_SHORT)
 							.show();
 					e.setIfFocus("N");
+					((InfoTypeListviewActivity) context).subOrCancel(
+							entity.getId(), false);
 				} else if ("未订阅".equals(value)) {
 					Toast.makeText(getContext(), "成功订阅", Toast.LENGTH_SHORT)
 							.show();
 					e.setIfFocus("Y");
+					((InfoTypeListviewActivity) context).subOrCancel(
+							entity.getId(), true);
 				}
-				// ((SubscribeTypeActivity) context).refresh();
+
+			}
+		});
+		check_list_by_type.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				((InfoTypeListviewActivity) context).checkDocsByType(entity
+						.getId());
 			}
 		});
 		return view;

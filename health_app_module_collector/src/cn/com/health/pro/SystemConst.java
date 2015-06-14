@@ -160,6 +160,15 @@ public class SystemConst {
 		 * 获取所有的类型信息
 		 */
 		public static final String get_all_doc_type = "appSourceController/getMoldall.do";
+
+		/**
+		 * 订阅
+		 */
+		public static final String sub_type = "appSourceController/subscriptionDocumentByTypeId.do";
+		/**
+		 * 取消订阅
+		 */
+		public static final String cancel_type = "appSourceController/cancelSubscriptionDocumentByTypeId.do";
 	}
 
 	/**

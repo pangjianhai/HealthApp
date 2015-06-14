@@ -75,13 +75,15 @@ public class BaseActivity extends Activity {
 			return;
 		}
 		RequestParams params = new RequestParams();
-		Iterator<Map.Entry<String, String>> it = p.entrySet().iterator();
-		/**
-		 * 添加参数
-		 */
-		while (it.hasNext()) {
-			Map.Entry<String, String> entry = it.next();
-			params.addBodyParameter(entry.getKey(), entry.getValue());
+		if (p != null) {
+			Iterator<Map.Entry<String, String>> it = p.entrySet().iterator();
+			/**
+			 * 添加参数
+			 */
+			while (it.hasNext()) {
+				Map.Entry<String, String> entry = it.next();
+				params.addBodyParameter(entry.getKey(), entry.getValue());
+			}
 		}
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
