@@ -32,11 +32,16 @@ public class ModelUtil {
 					JSONObject obj = jarray.getJSONObject(i);
 					String moldlId = obj.getString("moldlId");
 					String moldName = obj.getString("moldName");
+					String exsubscribe = obj.getString("exsubscribe");
 
 					InfoTypeEntity ie = new InfoTypeEntity();
 					ie.setId(moldlId);
 					ie.setName(moldName);
-					ie.setIfFocus("N");
+					if ("true".equals(exsubscribe)) {
+						ie.setIfFocus("Y");
+					} else {
+						ie.setIfFocus("N");
+					}
 					infoList.add(ie);
 				}
 			}

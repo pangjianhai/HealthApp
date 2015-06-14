@@ -18,6 +18,7 @@ import cn.com.health.pro.util.ShareSentenceUtil;
  * @todo 根据用户ID获取朋友圈的分享分页
  *
  */
+@Deprecated
 public class ShareSentenceHomePageAsyncTask extends
 		AsyncTask<String, Void, Map<String, Object>> {
 

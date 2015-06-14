@@ -1,7 +1,10 @@
 package cn.com.health.pro;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -21,9 +24,13 @@ import cn.com.health.pro.part.XListView;
 import cn.com.health.pro.part.XListView.IXListViewListener;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
-import cn.com.health.pro.task.ShareSentenceHomePageAsyncTask;
 import cn.com.health.pro.util.CommonDateUtil;
 import cn.com.health.pro.util.IShareCallbackOperator;
+import cn.com.health.pro.util.ShareSentenceUtil;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * 
@@ -125,9 +132,42 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			d.put("begin", begin);
 			d.put("limit", limit);
 			begin = begin + 1;
-			ShareSentenceHomePageAsyncTask task = new ShareSentenceHomePageAsyncTask(
-					MainPageLayoutSpaceActivity.this, no_more);
-			task.execute(d.toString());
+
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					Map<String, Object> map = ShareSentenceUtil
+							.parseJsonCondition(responseInfo.result);
+					String searchDay = map.get("searchDay") + "";
+					String begin = map.get("begin") + "";
+					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
+							.get("lst");
+					/**
+					 * 服务器端告诉移动端已经不需要翻页了，没有更多的数据了
+					 */
+					String nomore = map.get("nomore") + "";
+					boolean if_has_nomore_field = true;
+					/**
+					 * 如果存在nomore提示則不需要继续进行加载
+					 */
+					if ("nomore".equals(nomore.trim())) {
+						if_has_nomore_field = false;
+					}
+					asyncAddNewData(searchDay, begin, list, if_has_nomore_field);
+
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			System.out.println("d.toString():" + d.toString());
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getFriendsShareByUserId, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,6 +189,12 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		if (!if_has_nomore_field) {
 			// 如果no_more==true则表明，服务器端已经没有更早的消息用来进行分页了
 			no_more = if_has_nomore_field;
+			Date sd = CommonDateUtil
+					.preDate(CommonDateUtil.getDate(search_day));
+			this.search_day = CommonDateUtil.formatDate(sd);
+			this.begin = 1;
+			Toast.makeText(getApplicationContext(), "已经没有数据了",
+					Toast.LENGTH_SHORT).show();
 		} else {
 			this.search_day = searchDay;
 			this.begin = Integer.parseInt(begin);

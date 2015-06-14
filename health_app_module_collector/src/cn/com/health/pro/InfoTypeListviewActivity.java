@@ -74,8 +74,9 @@ public class InfoTypeListviewActivity extends BaseActivity {
 	public void loadData() {
 		try {
 			JSONObject j = new JSONObject();
-			j.put("pageNum", pageNum);
-			j.put("pageCount", pageCount);
+			// j.put("pageNum", pageNum);
+			// j.put("pageCount", pageCount);
+			j.put("currentId",userId);
 			Map map = new HashMap();
 			map.put("para", j.toString());
 			loadData(map);
@@ -101,6 +102,7 @@ public class InfoTypeListviewActivity extends BaseActivity {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				String rs = responseInfo.result;
+				System.out.println("rs:"+rs);
 				List<InfoTypeEntity> lst = ModelUtil.parseInfo(rs);
 				infoList.addAll(lst);
 				adapter.notifyDataSetChanged();
@@ -110,8 +112,9 @@ public class InfoTypeListviewActivity extends BaseActivity {
 			public void onFailure(HttpException error, String msg) {
 			}
 		};
+		System.out.println("p---------------:"+p.get("para"));
 		String URL = SystemConst.server_url
-				+ SystemConst.FunctionUrl.get_all_doc_type;
+				+ SystemConst.FunctionUrl.get_subscrib_doc_type;
 		super.send_normal_request(URL, p, r);
 
 	}
