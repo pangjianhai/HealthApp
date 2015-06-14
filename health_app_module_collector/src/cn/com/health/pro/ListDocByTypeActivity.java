@@ -11,13 +11,16 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.AdapterView.OnItemClickListener;
 import cn.com.health.pro.adapter.InfoAdapter;
 import cn.com.health.pro.entity.InfoEntity;
 import cn.com.health.pro.model.InfoTypeEntity;
@@ -31,7 +34,7 @@ public class ListDocByTypeActivity extends BaseActivity {
 	private String tId = "";
 	private int page = 0;
 	private int rows = 20;
-
+	ListView listview = null;
 	private List<InfoEntity> infoList = new ArrayList<InfoEntity>();
 	/**
 	 * 加载更多按钮
@@ -49,7 +52,7 @@ public class ListDocByTypeActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.list_doc_by_type);
 		footer = getLayoutInflater().inflate(R.layout.info_search_more, null);
-		ListView listview = (ListView) findViewById(R.id.info_list);
+		listview = (ListView) findViewById(R.id.info_list);
 		listview.addFooterView(footer);
 		adapter = new InfoAdapter(ListDocByTypeActivity.this,
 				R.layout.info_search_item, infoList);
@@ -66,6 +69,26 @@ public class ListDocByTypeActivity extends BaseActivity {
 			}
 		});
 		loadMoreData();
+		addListener();
+	}
+
+	public void addListener() {
+		/**
+		 * listview 选中条目事件
+		 */
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view,
+					int position, long id) {
+				InfoEntity entity = (InfoEntity) infoList.get(position);
+				String docId = entity.getId();
+				Intent intent = new Intent(ListDocByTypeActivity.this,
+						InfoDetailActivity.class);
+				intent.putExtra("doc_id", docId);
+				startActivity(intent);
+			}
+		});
 	}
 
 	public void loadMoreData() {
