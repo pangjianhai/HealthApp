@@ -32,6 +32,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- baidumap end -->
+    <!-- 浮动窗口 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name="cn.com.health.pro.config.HealthApplication"
         android:allowBackup="true"
@@ -113,6 +116,10 @@
         <activity android:name=".MainPageLayoutMeMyFocusActivity" >
         </activity>
         <activity android:name=".MainPageLayoutMeCollectionActivity" >
+        </activity>
+
+        <!-- 关于信息分类 -->
+        <activity android:name=".InfoTypeListviewActivity" >
         </activity>
 
         <!-- 测试activity -->
