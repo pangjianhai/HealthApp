@@ -2,15 +2,20 @@ package cn.com.health.pro;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.util.ActivityCollector;
+import cn.com.health.pro.util.ExampleUtil;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -41,6 +46,10 @@ public class BaseActivity extends Activity {
 		 * activity放入收集器
 		 */
 		ActivityCollector.addActivity(this);
+		/**
+		 * 设置极光通信
+		 */
+		initAlis();
 	}
 
 	@Override
@@ -88,5 +97,95 @@ public class BaseActivity extends Activity {
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
 	}
+
+	/**
+	 * ****************************JPush
+	 */
+
+	public void initAlis() {
+		System.out.println("userId:" + userId);
+		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, userId));
+	}
+
+	private static final int MSG_SET_ALIAS = 1001;
+	private static final int MSG_SET_TAGS = 1002;
+	private final Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(android.os.Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case MSG_SET_ALIAS:// 设置alias
+				System.out.println("设置alias");
+				JPushInterface.setAliasAndTags(getApplicationContext(),
+						(String) msg.obj, null, mAliasCallback);
+				break;
+
+			case MSG_SET_TAGS:// 设置tags
+				JPushInterface.setAliasAndTags(getApplicationContext(), null,
+						(Set<String>) msg.obj, mTagsCallback);
+				break;
+
+			default:
+			}
+		}
+	};
+	private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+
+		@Override
+		public void gotResult(int code, String alias, Set<String> tags) {
+			String logs;
+			System.out.println("code:" + code);
+			switch (code) {
+			case 0:
+				logs = "Set tag and alias success";
+				break;
+
+			case 6002:
+				logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+				if (ExampleUtil.isConnected(getApplicationContext())) {
+					mHandler.sendMessageDelayed(
+							mHandler.obtainMessage(MSG_SET_ALIAS, alias),
+							1000 * 60);
+				} else {
+				}
+				break;
+
+			default:
+				logs = "Failed with errorCode = " + code;
+			}
+
+			ExampleUtil.showToast(logs, getApplicationContext());
+		}
+
+	};
+
+	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
+
+		@Override
+		public void gotResult(int code, String alias, Set<String> tags) {
+			String logs;
+			switch (code) {
+			case 0:
+				logs = "Set tag and alias success";
+				break;
+
+			case 6002:
+				logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+				if (ExampleUtil.isConnected(getApplicationContext())) {
+					mHandler.sendMessageDelayed(
+							mHandler.obtainMessage(MSG_SET_TAGS, tags),
+							1000 * 60);
+				} else {
+				}
+				break;
+
+			default:
+				logs = "Failed with errorCode = " + code;
+			}
+
+			ExampleUtil.showToast(logs, getApplicationContext());
+		}
+
+	};
 
 }

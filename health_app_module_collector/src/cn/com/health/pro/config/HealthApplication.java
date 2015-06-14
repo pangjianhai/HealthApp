@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import cn.com.health.pro.SystemConst;
 import cn.com.health.pro.listener.MyLocationListener;
 import cn.com.health.pro.persist.SharedPreInto;
+import cn.jpush.android.api.JPushInterface;
 
 import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
@@ -35,6 +36,8 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
  *
  */
 public class HealthApplication extends Application {
+
+	private static final String TAG = "HealthApplication";
 
 	/**
 	 * 百度地图相关
@@ -108,6 +111,12 @@ public class HealthApplication extends Application {
 		initMap();
 		initLocation();
 		startMap();
+		initJPush();
+	}
+
+	public void initJPush() {
+		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
+		JPushInterface.init(this); // 初始化 JPush
 	}
 
 	/**
