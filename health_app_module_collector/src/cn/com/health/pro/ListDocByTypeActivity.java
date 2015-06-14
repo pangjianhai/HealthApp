@@ -30,7 +30,7 @@ public class ListDocByTypeActivity extends BaseActivity {
 	 */
 	private String tId = "";
 	private int page = 0;
-	private int rows = 10;
+	private int rows = 20;
 
 	private List<InfoEntity> infoList = new ArrayList<InfoEntity>();
 	/**
@@ -46,7 +46,6 @@ public class ListDocByTypeActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle b) {
 		super.onCreate(b);
-		System.out.println("7&&&&&&&&&&");
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.list_doc_by_type);
 		footer = getLayoutInflater().inflate(R.layout.info_search_more, null);
@@ -59,7 +58,6 @@ public class ListDocByTypeActivity extends BaseActivity {
 		tId = getIntent().getStringExtra("tId");
 		search_loadmore_btn = (Button) findViewById(R.id.search_loadmore_btn);
 		load_progress_bar = (ProgressBar) findViewById(R.id.load_progress_bar);
-		System.out.println("search_loadmore_btn:" + search_loadmore_btn);
 		search_loadmore_btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -76,9 +74,10 @@ public class ListDocByTypeActivity extends BaseActivity {
 			JSONObject j = new JSONObject();
 			j.put("typeId", tId);
 			j.put("page", page);
-			j.put("pageCount", rows);
+			j.put("rows", rows);
 			Map map = new HashMap();
 			map.put("para", j.toString());
+			System.out.println("j.toString()：" + j.toString());
 			loadData(map);
 		} catch (Exception e) {
 			e.printStackTrace();
