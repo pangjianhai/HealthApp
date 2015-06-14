@@ -99,7 +99,7 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 		loadMoreData();
 		addListener();
 
-		createView();
+		// createView();
 	}
 
 	/**
@@ -257,15 +257,10 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		/**
-		 * 在程序退出(Activity销毁）时销毁悬浮窗口
-		 */
-		wm.removeView(myFV);
 	}
 
 	@Override
 	protected void onRestart() {
-		wm.removeView(myFV);
 		super.onRestart();
 	}
 

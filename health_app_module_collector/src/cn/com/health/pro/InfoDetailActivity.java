@@ -158,7 +158,8 @@ public class InfoDetailActivity extends BaseActivity {
 	 * @todo TODO
 	 * @author pang
 	 */
-	public void backoff(View v) {
+	public void goback(View v) {
+		System.out.println("===================>>>>>>");
 		finish();
 	}
 
