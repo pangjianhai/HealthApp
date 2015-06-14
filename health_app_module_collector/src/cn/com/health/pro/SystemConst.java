@@ -155,6 +155,11 @@ public class SystemConst {
 		 * 修改某人的地理位置信息
 		 */
 		public static final String update_person_location = "appSourceController/editUserPlace.do";
+
+		/**
+		 * 获取所有的类型信息
+		 */
+		public static final String get_all_doc_type = "appSourceController/getMoldall.do";
 	}
 
 	/**

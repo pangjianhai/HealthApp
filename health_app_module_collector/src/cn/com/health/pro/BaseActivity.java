@@ -67,7 +67,7 @@ public class BaseActivity extends Activity {
 		return false;
 	}
 
-	public void send_normal_request(Map<String, String> p,
+	public void send_normal_request(String url, Map<String, String> p,
 			RequestCallBack<?> rcb) {
 		if (!isNetWorkConnected()) {
 			Toast.makeText(getApplicationContext(), "没有网络咯！",
@@ -84,8 +84,6 @@ public class BaseActivity extends Activity {
 			params.addBodyParameter(entry.getKey(), entry.getValue());
 		}
 		HttpUtils http = new HttpUtils();
-		String url = SystemConst.server_url
-				+ SystemConst.FunctionUrl.update_person_location;
 		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
 	}
 
