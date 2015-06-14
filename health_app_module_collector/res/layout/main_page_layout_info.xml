@@ -31,11 +31,18 @@
             android:id="@+id/home_page_search_btn"
             android:layout_width="67dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="1dp"
+            android:background="@color/common_title_bar_color"
+            android:src="@drawable/search_info_btn_menu" />
+
+        <ImageButton
+            android:id="@+id/home_page_fenlei_btn"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
             android:background="@color/common_title_bar_color"
-            android:onClick="home_search_info"
-            android:src="@drawable/search_info_btn_menu" />
+            android:src="@drawable/fenlei4" />
     </LinearLayout>
 
     <LinearLayout

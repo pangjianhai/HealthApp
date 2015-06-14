@@ -159,7 +159,6 @@ public class InfoDetailActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void goback(View v) {
-		System.out.println("===================>>>>>>");
 		finish();
 	}
 

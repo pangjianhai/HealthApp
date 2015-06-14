@@ -59,6 +59,9 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 	private EditText home_page_search_key;
 	// 搜索按钮
 	ImageButton search_info_btn_menu = null;
+
+	// 搜索按钮
+	ImageButton home_page_fenlei_btn = null;
 	// 加载更多
 	Button search_loadmore_btn = null;
 	// 进度条
@@ -96,6 +99,7 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 
 		home_page_search_key = (EditText) findViewById(R.id.home_page_search_key);
 		search_info_btn_menu = (ImageButton) findViewById(R.id.home_page_search_btn);
+		home_page_fenlei_btn = (ImageButton) findViewById(R.id.home_page_fenlei_btn);
 		loadMoreData();
 		addListener();
 
@@ -124,6 +128,20 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 				loadMoreData();
 			}
 		});
+
+		/**
+		 * 根据分类查看
+		 */
+		home_page_fenlei_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainPageLayoutInfoActivity.this,
+						InfoTypeListviewActivity.class);
+				startActivity(intent);
+			}
+		});
+
 		/**
 		 * 加载更多事件
 		 */

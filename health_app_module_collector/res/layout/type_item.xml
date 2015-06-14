@@ -20,4 +20,13 @@
         android:layout_weight="1"
         android:text="关注" />
 
+    <ImageView
+        android:id="@+id/check_list_by_type"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dp"
+        android:src="@drawable/check_user3" />
+
 </LinearLayout>

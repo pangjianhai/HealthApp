@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
 import cn.com.health.pro.adapter.InfoTypeAdapter;
@@ -33,5 +34,16 @@ public class InfoTypeListviewActivity extends BaseActivity {
 		adapter = new InfoTypeAdapter(InfoTypeListviewActivity.this,
 				R.layout.type_item, infoList);
 		types.setAdapter(adapter);
+	}
+
+	/**
+	 * 
+	 * @tags @param v
+	 * @date 2015年5月18日
+	 * @todo TODO
+	 * @author pang
+	 */
+	public void goback(View v) {
+		finish();
 	}
 }
