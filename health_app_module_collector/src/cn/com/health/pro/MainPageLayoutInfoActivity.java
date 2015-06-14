@@ -251,6 +251,7 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 		Intent intent = new Intent(MainPageLayoutInfoActivity.this,
 				InfoTypeListviewActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	@Override
