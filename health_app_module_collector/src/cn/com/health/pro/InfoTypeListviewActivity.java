@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -167,6 +168,9 @@ public class InfoTypeListviewActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void checkDocsByType(String tId) {
-
+		Intent intent = new Intent(InfoTypeListviewActivity.this,
+				ListDocByTypeActivity.class);
+		intent.putExtra("tId", tId);
+		startActivity(intent);
 	}
 }

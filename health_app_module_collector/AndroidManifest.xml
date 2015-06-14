@@ -121,7 +121,8 @@
         <!-- 关于信息分类 -->
         <activity android:name=".InfoTypeListviewActivity" >
         </activity>
-
+        <activity android:name=".ListDocByTypeActivity" >
+        </activity>
         <!-- 测试activity -->
         <activity android:name=".TestActivity" >
         </activity>

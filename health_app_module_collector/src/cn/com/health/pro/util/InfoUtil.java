@@ -47,4 +47,38 @@ public class InfoUtil {
 		}
 		return infoList;
 	}
+
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @user:pang
+	 * @data:2015年6月14日
+	 * @todo:解析
+	 * @return:List<InfoEntity>
+	 */
+	public static List<InfoEntity> parseInfoForType(String data) {
+		List<InfoEntity> infoList = new ArrayList<InfoEntity>();
+		try {
+			JSONObject or_obj = new JSONObject(data);
+			JSONArray jarray = or_obj.getJSONArray("baseDocumentlst");
+			if (jarray != null && jarray.length() > 0) {
+				for (int i = 0; i < jarray.length(); i++) {
+					JSONObject obj = jarray.getJSONObject(i);
+					String id = obj.getString("id");
+					String type = obj.getString("typeName");
+					String title = obj.getString("title");
+
+					InfoEntity ie = new InfoEntity();
+					ie.setTitle(title);
+					ie.setType(type);
+					ie.setId(id);
+					infoList.add(ie);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return infoList;
+	}
 }

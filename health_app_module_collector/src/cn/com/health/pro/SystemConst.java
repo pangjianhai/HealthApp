@@ -169,6 +169,11 @@ public class SystemConst {
 		 * 取消订阅
 		 */
 		public static final String cancel_type = "appSourceController/cancelSubscriptionDocumentByTypeId.do";
+
+		/**
+		 * 根据类型获取文档
+		 */
+		public static final String get_docs_by_type = "appSourceController/queryDocumentByTypeId.do";
 	}
 
 	/**
