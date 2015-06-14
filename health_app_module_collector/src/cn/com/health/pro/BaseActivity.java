@@ -49,7 +49,6 @@ public class BaseActivity extends Activity {
 		/**
 		 * 设置极光通信
 		 */
-		initAlis();
 	}
 
 	@Override
@@ -103,7 +102,6 @@ public class BaseActivity extends Activity {
 	 */
 
 	public void initAlis() {
-		System.out.println("userId:" + userId);
 		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, userId));
 	}
 
@@ -154,7 +152,7 @@ public class BaseActivity extends Activity {
 				logs = "Failed with errorCode = " + code;
 			}
 
-			ExampleUtil.showToast(logs, getApplicationContext());
+			// ExampleUtil.showToast(logs, getApplicationContext());
 		}
 
 	};
@@ -183,7 +181,7 @@ public class BaseActivity extends Activity {
 				logs = "Failed with errorCode = " + code;
 			}
 
-			ExampleUtil.showToast(logs, getApplicationContext());
+			// ExampleUtil.showToast(logs, getApplicationContext());
 		}
 
 	};

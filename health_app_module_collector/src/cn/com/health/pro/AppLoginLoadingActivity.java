@@ -19,7 +19,10 @@ public class AppLoginLoadingActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.app_login_loading);
-
+		/**
+		 * 设置极光推送的alias（只要在登陆成功之后设置一次就OK了）
+		 */
+		initAlis();
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
