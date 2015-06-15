@@ -60,6 +60,7 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:drawableTop="@drawable/compose_mentionbutton_background"
+            android:onClick="share_btn"
             android:text="排行"
             android:textColor="#000000"
             android:textSize="10sp" >

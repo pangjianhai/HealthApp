@@ -38,10 +38,11 @@
     <permission
         android:name="cn.com.health.pro.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="cn.com.health.pro.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>  
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -128,6 +129,8 @@
         <activity android:name=".MainPageLayoutMeMyFocusActivity" >
         </activity>
         <activity android:name=".MainPageLayoutMeCollectionActivity" >
+        </activity>
+        <activity android:name=".MainPageLayoutOrderActivity" >
         </activity>
 
         <!-- 关于信息分类 -->

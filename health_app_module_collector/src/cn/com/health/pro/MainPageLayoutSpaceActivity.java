@@ -42,6 +42,11 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		IXListViewListener, IShareCallbackOperator {
 
 	/**
+	 * 最新ID
+	 */
+	private String lastestShareId;
+
+	/**
 	 * 适配器需要的数据结构
 	 */
 	private List<ShareSentenceEntity> dataSourceList = new ArrayList<ShareSentenceEntity>();
@@ -74,7 +79,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	/**
 	 * 当前页
 	 */
-	private int begin = 1;
+	private int begin = 0;
 	/**
 	 * 一页多少行
 	 */
@@ -140,9 +145,12 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 					Map<String, Object> map = ShareSentenceUtil
 							.parseJsonCondition(responseInfo.result);
 					String searchDay = map.get("searchDay") + "";
-					String begin = map.get("begin") + "";
+					String b = map.get("begin") + "";
 					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
 							.get("lst");
+					if (1 == begin && list != null && !list.isEmpty()) {
+						setLastestShareId(list.get(0).getId());
+					}
 					/**
 					 * 服务器端告诉移动端已经不需要翻页了，没有更多的数据了
 					 */
@@ -154,8 +162,51 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 					if ("nomore".equals(nomore.trim())) {
 						if_has_nomore_field = false;
 					}
-					asyncAddNewData(searchDay, begin, list, if_has_nomore_field);
+					asyncAddNewData(searchDay, b, list, if_has_nomore_field);
 
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getFriendsShareByUserId, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月15日
+	 * @todo:更新今天的最新的分享信息
+	 * @return:void
+	 */
+	private void freshData() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("currentId", userId);
+			d.put("lastestShareId", lastestShareId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					Map<String, Object> map = ShareSentenceUtil
+							.parseJsonCondition(responseInfo.result);
+					String searchDay = map.get("searchDay") + "";
+					String b = map.get("begin") + "";
+					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
+							.get("lst");
+					if(list!=null&&!list.isEmpty()){
+						setLastestShareId(list.get(0).getId()); 
+					}
 				}
 
 				@Override
@@ -172,6 +223,19 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @user:pang
+	 * @data:2015年6月15日
+	 * @todo:用户取得第一页数据的时候将第一页的第一个分享新的ID单独设置，以供刷新
+	 * @return:void
+	 */
+	private void setLastestShareId(String id) {
+		lastestShareId = id;
+		System.out.println("-------------->" + lastestShareId);
 	}
 
 	/**

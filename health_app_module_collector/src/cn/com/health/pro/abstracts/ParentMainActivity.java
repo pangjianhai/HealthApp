@@ -8,6 +8,7 @@ import android.widget.Button;
 import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.MainPageLayoutInfoActivity;
 import cn.com.health.pro.MainPageLayoutMeActivity;
+import cn.com.health.pro.MainPageLayoutOrderActivity;
 import cn.com.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.health.pro.R;
 import cn.com.health.pro.SharePrepareActivity;
@@ -66,8 +67,8 @@ public abstract class ParentMainActivity extends BaseActivity {
 				R.drawable.tabbar_home_highlighted);
 		topDrawable.setBounds(0, 0, topDrawable.getMinimumWidth(),
 				topDrawable.getMinimumHeight());
-		main_page_layout_home_btn.setCompoundDrawables(topDrawable, topDrawable, topDrawable,
-				topDrawable);
+		main_page_layout_home_btn.setCompoundDrawables(topDrawable,
+				topDrawable, topDrawable, topDrawable);
 
 	}
 
@@ -97,6 +98,10 @@ public abstract class ParentMainActivity extends BaseActivity {
 		} else if (v.getId() == R.id.main_page_layout_info_btn) {
 			Intent intent = new Intent(ParentMainActivity.this,
 					MainPageLayoutInfoActivity.class);
+			startActivity(intent);
+		} else if (v.getId() == R.id.main_page_layout_order_btn) {
+			Intent intent = new Intent(ParentMainActivity.this,
+					MainPageLayoutOrderActivity.class);
 			startActivity(intent);
 		}
 		finish();
