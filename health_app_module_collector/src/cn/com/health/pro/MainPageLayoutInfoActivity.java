@@ -283,7 +283,7 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 	}
 
 	@Override
-	protected void onStop() {
+	public void onStop() {
 		super.onStop();
 	}
 }

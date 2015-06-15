@@ -14,6 +14,7 @@ import android.widget.Toast;
 import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.util.ActivityCollector;
 import cn.com.health.pro.util.ExampleUtil;
+import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
@@ -28,7 +29,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
  * @todo 所有activity的父类
  *
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends InstrumentedActivity {
 
 	/**
 	 * 用户ID
