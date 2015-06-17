@@ -39,6 +39,38 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/layout_space_order_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_space_title_bar"
+        android:orientation="horizontal" >
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="#00ffffff"
+            android:onClick="add_friends"
+            android:src="@drawable/navigationbar_friendsearch" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="健康排行榜"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="#00ffffff"
+            android:src="@drawable/mm_title_btn_menu" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

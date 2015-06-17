@@ -204,8 +204,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 					String b = map.get("begin") + "";
 					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
 							.get("lst");
-					if(list!=null&&!list.isEmpty()){
-						setLastestShareId(list.get(0).getId()); 
+					if (list != null && !list.isEmpty()) {
+						setLastestShareId(list.get(0).getId());
 					}
 				}
 
