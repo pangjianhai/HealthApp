@@ -174,11 +174,16 @@ public class SystemConst {
 		 * 根据类型获取文档
 		 */
 		public static final String get_docs_by_type = "appSourceController/queryDocumentByTypeId.do";
-		
+
 		/**
 		 * 获取所有的类型信息
 		 */
 		public static final String get_subscrib_doc_type = "appSourceController/getSubscriptionMoldByUserId.do";
+
+		/**
+		 * 刷新最新分享信息的时候
+		 */
+		public static final String get_refrish_share_sentencs = "appSourceController/getRefurbishLatestSentenceInfoByUserId.do";
 	}
 
 	/**

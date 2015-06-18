@@ -44,19 +44,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_space_title_bar"
         android:orientation="horizontal" >
+
         <ImageButton
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_weight="1"
             android:background="#00ffffff"
             android:onClick="add_friends"
-            android:src="@drawable/navigationbar_friendsearch" />
+            android:src="@drawable/day_left0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="健康排行榜"
+            android:layout_weight="1"
+            android:text="2015-06-17"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -66,15 +69,16 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:background="#00ffffff"
-            android:src="@drawable/mm_title_btn_menu" />
+            android:src="@drawable/day_right0" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_space_title_bar" >
+        android:layout_below="@+id/layout_space_order_btn" >
 
         <cn.com.health.pro.part.XListView
             android:id="@+id/space_lv"

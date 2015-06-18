@@ -142,6 +142,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
+					System.out.println("responseInfo.result:"
+							+ responseInfo.result);
 					Map<String, Object> map = ShareSentenceUtil
 							.parseJsonCondition(responseInfo.result);
 					String searchDay = map.get("searchDay") + "";
@@ -193,18 +195,19 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentId", userId);
-			d.put("lastestShareId", lastestShareId);
+			d.put("currentSentenceId", lastestShareId);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
+					System.out.println("responseInfo.result:"
+							+ responseInfo.result);
 					Map<String, Object> map = ShareSentenceUtil
 							.parseJsonCondition(responseInfo.result);
-					String searchDay = map.get("searchDay") + "";
-					String b = map.get("begin") + "";
 					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
 							.get("lst");
 					if (list != null && !list.isEmpty()) {
+						freshData(list);
 						setLastestShareId(list.get(0).getId());
 					}
 				}
@@ -215,14 +218,18 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				}
 			};
 			Map map = new HashMap();
-			System.out.println("d.toString():" + d.toString());
 			map.put("para", d.toString());
 			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.getFriendsShareByUserId, map, rcb);
+					+ SystemConst.FunctionUrl.get_refrish_share_sentencs, map,
+					rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void freshData(List<ShareSentenceEntity> list) {
+		System.out.println("list:" + list.size());
 	}
 
 	/**
@@ -235,7 +242,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 */
 	private void setLastestShareId(String id) {
 		lastestShareId = id;
-		System.out.println("-------------->" + lastestShareId);
 	}
 
 	/**
@@ -296,8 +302,10 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void onRefresh() {
-		dataSourceList.clear();
-		loadDataMore();
+		// dataSourceList.clear();
+		// loadDataMore();
+		System.out.println("------------------开始刷新");
+		freshData();
 	}
 
 	@Override
