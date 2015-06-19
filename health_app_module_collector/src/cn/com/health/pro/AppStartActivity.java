@@ -39,8 +39,8 @@ public class AppStartActivity extends BaseActivity {
 				.getSharedFieldValue("name");
 		String pwd = new SharedPreInto(AppStartActivity.this)
 				.getSharedFieldValue("password");
-		System.out.println("UserId:" + UserId);
-		System.out.println("pwd:" + pwd);
+		// System.out.println("UserId:" + UserId);
+		// System.out.println("pwd:" + pwd);
 		/**
 		 * 已经登陆过用户名密码了先进行验证，如果通过直接登陆成功
 		 */
@@ -63,7 +63,7 @@ public class AppStartActivity extends BaseActivity {
 	 * @return:void
 	 */
 	private void attempToLoginAuto(String UserId, String pwd) {
-		System.out.println("attempToLoginAuto");
+		// System.out.println("attempToLoginAuto");
 		try {
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
@@ -72,7 +72,7 @@ public class AppStartActivity extends BaseActivity {
 				 */
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					System.out.println("onSuccess");
+					// System.out.println("onSuccess");
 					afterAutoLogin(responseInfo.result);
 				}
 
@@ -81,7 +81,7 @@ public class AppStartActivity extends BaseActivity {
 				 */
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					System.out.println("onFailure");
+					// System.out.println("onFailure");
 					skipToLogin();
 				}
 			};
@@ -136,7 +136,7 @@ public class AppStartActivity extends BaseActivity {
 	 * @author pang
 	 */
 	private void skipToLogin() {
-		System.out.println("skipToLogin");
+		// System.out.println("skipToLogin");
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {

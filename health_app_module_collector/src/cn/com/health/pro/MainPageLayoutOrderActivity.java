@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.ShareItemAdapter;
@@ -40,11 +42,6 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  */
 public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		IXListViewListener, IShareCallbackOperator {
-
-	/**
-	 * 最新ID
-	 */
-	private String lastestShareId;
 
 	/**
 	 * 适配器需要的数据结构
@@ -76,19 +73,12 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 */
 	private String search_day = CommonDateUtil.formatDate(CommonDateUtil
 			.getNowTimeDate());
-	/**
-	 * 当前页
-	 */
-	private int begin = 0;
-	/**
-	 * 一页多少行
-	 */
-	private int limit = 5;
 
 	/**
-	 * 能否继续加载的标志
+	 * 时间
 	 */
-	private boolean no_more = true;
+	private ImageButton date_next, date_pre;
+	private TextView date_content;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +95,12 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 
 	}
 
+	/**
+	 * @user:pang
+	 * @data:2015年6月19日
+	 * @todo:初始化组件
+	 * @return:void
+	 */
 	private void findView() {
 		context = this;
 		dataSourceList = new ArrayList<ShareSentenceEntity>();
@@ -113,6 +109,10 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		mListView.setXListViewListener(this);
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
+
+		date_next = (ImageButton) findViewById(R.id.date_next);
+		date_pre = (ImageButton) findViewById(R.id.date_pre);
+		date_content = (TextView) findViewById(R.id.date_content);
 	}
 
 	private void initListView() {
@@ -132,11 +132,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	private void loadDataMore() {
 		try {
 			JSONObject d = new JSONObject();
-			d.put("currentId", userId);
 			d.put("date", search_day);
-			d.put("begin", begin);
-			d.put("limit", limit);
-			begin = begin + 1;
 
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
@@ -148,21 +144,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 					String b = map.get("begin") + "";
 					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
 							.get("lst");
-					if (1 == begin && list != null && !list.isEmpty()) {
-						setLastestShareId(list.get(0).getId());
-					}
-					/**
-					 * 服务器端告诉移动端已经不需要翻页了，没有更多的数据了
-					 */
-					String nomore = map.get("nomore") + "";
-					boolean if_has_nomore_field = true;
-					/**
-					 * 如果存在nomore提示則不需要继续进行加载
-					 */
-					if ("nomore".equals(nomore.trim())) {
-						if_has_nomore_field = false;
-					}
-					asyncAddNewData(searchDay, b, list, if_has_nomore_field);
+					asyncAddNewData(searchDay, b, list);
 
 				}
 
@@ -190,51 +172,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @return:void
 	 */
 	private void freshData() {
-		try {
-			JSONObject d = new JSONObject();
-			d.put("currentId", userId);
-			d.put("lastestShareId", lastestShareId);
-			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo) {
-					Map<String, Object> map = ShareSentenceUtil
-							.parseJsonCondition(responseInfo.result);
-					String searchDay = map.get("searchDay") + "";
-					String b = map.get("begin") + "";
-					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
-							.get("lst");
-					if (list != null && !list.isEmpty()) {
-						setLastestShareId(list.get(0).getId());
-					}
-				}
-
-				@Override
-				public void onFailure(HttpException error, String msg) {
-
-				}
-			};
-			Map map = new HashMap();
-			System.out.println("d.toString():" + d.toString());
-			map.put("para", d.toString());
-			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.getFriendsShareByUserId, map, rcb);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * 
-	 * @param id
-	 * @user:pang
-	 * @data:2015年6月15日
-	 * @todo:用户取得第一页数据的时候将第一页的第一个分享新的ID单独设置，以供刷新
-	 * @return:void
-	 */
-	private void setLastestShareId(String id) {
-		lastestShareId = id;
 	}
 
 	/**
@@ -245,25 +183,10 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @author pang
 	 */
 	public void asyncAddNewData(String searchDay, String begin,
-			List<ShareSentenceEntity> lst, boolean if_has_nomore_field) {
-		/**
-		 * 重置一些字段的值，为下一次分页做准备
-		 */
-		if (!if_has_nomore_field) {
-			// 如果no_more==true则表明，服务器端已经没有更早的消息用来进行分页了
-			no_more = if_has_nomore_field;
-			Date sd = CommonDateUtil
-					.preDate(CommonDateUtil.getDate(search_day));
-			this.search_day = CommonDateUtil.formatDate(sd);
-			this.begin = 1;
-			Toast.makeText(getApplicationContext(), "已经没有数据了",
-					Toast.LENGTH_SHORT).show();
-		} else {
-			this.search_day = searchDay;
-			this.begin = Integer.parseInt(begin);
-		}
-
+			List<ShareSentenceEntity> lst) {
+		// 添加数据
 		dataSourceList.addAll(lst);
+		// 更新UI
 		itemAdapter.notifyDataSetChanged();
 		onLoadOver();
 	};
