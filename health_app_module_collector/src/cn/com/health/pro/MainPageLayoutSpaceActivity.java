@@ -142,17 +142,12 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					System.out.println("responseInfo.result:"
-							+ responseInfo.result);
 					Map<String, Object> map = ShareSentenceUtil
 							.parseJsonCondition(responseInfo.result);
 					String searchDay = map.get("searchDay") + "";
 					String b = map.get("begin") + "";
 					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
 							.get("lst");
-					if (1 == begin && list != null && !list.isEmpty()) {
-						setLastestShareId(list.get(0).getId());
-					}
 					/**
 					 * 服务器端告诉移动端已经不需要翻页了，没有更多的数据了
 					 */
@@ -202,13 +197,10 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					System.out.println("responseInfo.result:"
 							+ responseInfo.result);
-					Map<String, Object> map = ShareSentenceUtil
-							.parseJsonCondition(responseInfo.result);
-					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
-							.get("lst");
+					List<ShareSentenceEntity> list = ShareSentenceUtil
+							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
 						freshData(list);
-						setLastestShareId(list.get(0).getId());
 					}
 				}
 
@@ -219,6 +211,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
+			System.out.println("刷新链接：" + SystemConst.server_url
+					+ SystemConst.FunctionUrl.get_refrish_share_sentencs
+					+ "?para=" + d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.FunctionUrl.get_refrish_share_sentencs, map,
 					rcb);
@@ -230,6 +225,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	private void freshData(List<ShareSentenceEntity> list) {
 		System.out.println("list:" + list.size());
+		dataSourceList.addAll(0, list);
+		setLastestShareId();
 	}
 
 	/**
@@ -240,8 +237,13 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @todo:用户取得第一页数据的时候将第一页的第一个分享新的ID单独设置，以供刷新
 	 * @return:void
 	 */
-	private void setLastestShareId(String id) {
-		lastestShareId = id;
+	private void setLastestShareId() {
+		/**
+		 * 设置最新ID的时机
+		 */
+		if (dataSourceList != null && !dataSourceList.isEmpty()) {//
+			lastestShareId = dataSourceList.get(0).getId();
+		}
 	}
 
 	/**
@@ -269,8 +271,11 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			this.search_day = searchDay;
 			this.begin = Integer.parseInt(begin);
 		}
-
+		// 添加数据
 		dataSourceList.addAll(lst);
+		// 设置最新的ID
+		setLastestShareId();
+		// 更新UI
 		itemAdapter.notifyDataSetChanged();
 		onLoadOver();
 	};
