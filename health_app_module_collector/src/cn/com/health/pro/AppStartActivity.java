@@ -1,13 +1,23 @@
 package cn.com.health.pro;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
+import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.persist.SharedPreInto;
 import cn.com.health.pro.task.SkipLoginAccountTask;
+import cn.com.health.pro.util.ShareSentenceUtil;
 
 /**
  * 
@@ -29,24 +39,62 @@ public class AppStartActivity extends BaseActivity {
 				.getSharedFieldValue("name");
 		String pwd = new SharedPreInto(AppStartActivity.this)
 				.getSharedFieldValue("password");
+		System.out.println("UserId:" + UserId);
+		System.out.println("pwd:" + pwd);
 		/**
 		 * 已经登陆过用户名密码了先进行验证，如果通过直接登陆成功
 		 */
 		if (UserId != null && !"".equals(UserId) && pwd != null
 				&& !"".equals(pwd)) {
-			try {
-				JSONObject j = new JSONObject();
-				j.put("UserId", UserId);
-				j.put("Password", pwd);
-				new SkipLoginAccountTask(AppStartActivity.this).execute(j
-						.toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			attempToLoginAuto(UserId, pwd);
 		} else {
 			skipToLogin();
 		}
 
+	}
+
+	/**
+	 * 
+	 * @param UserId
+	 * @param pwd
+	 * @user:pang
+	 * @data:2015年6月19日
+	 * @todo:尝试自动登陆
+	 * @return:void
+	 */
+	private void attempToLoginAuto(String UserId, String pwd) {
+		System.out.println("attempToLoginAuto");
+		try {
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				/**
+				 * 请求成功，进行处理
+				 */
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					System.out.println("onSuccess");
+					afterAutoLogin(responseInfo.result);
+				}
+
+				/**
+				 * 请求失败，直接登录到填写页面
+				 */
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					System.out.println("onFailure");
+					skipToLogin();
+				}
+			};
+			JSONObject j = new JSONObject();
+			j.put("UserId", UserId);
+			j.put("Password", pwd);
+			Map map = new HashMap();
+			map.put("para", j.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.userLogin, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -56,7 +104,7 @@ public class AppStartActivity extends BaseActivity {
 	 * @todo 验证结束
 	 * @author pang
 	 */
-	public void skipOver(String result) {
+	public void afterAutoLogin(String result) {
 		try {
 			if (result != null && !"".equals(result)) {
 				JSONObject data = new JSONObject(result);
@@ -88,6 +136,7 @@ public class AppStartActivity extends BaseActivity {
 	 * @author pang
 	 */
 	private void skipToLogin() {
+		System.out.println("skipToLogin");
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {

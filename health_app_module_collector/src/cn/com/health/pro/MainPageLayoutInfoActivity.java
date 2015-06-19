@@ -5,16 +5,12 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -27,7 +23,6 @@ import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.InfoAdapter;
 import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.entity.InfoEntity;
-import cn.com.health.pro.part.MyFloatView;
 import cn.com.health.pro.task.SearchInfoAsyncTask;
 
 /**
@@ -76,7 +71,6 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 	 */
 	private WindowManager wm = null;
 	private WindowManager.LayoutParams wmParams = null;
-	private MyFloatView myFV = null;
 
 	@Override
 	public void onCreate(Bundle b) {
@@ -215,52 +209,6 @@ public class MainPageLayoutInfoActivity extends ParentMainActivity {
 
 	public void backoff(View v) {
 		finish();
-	}
-
-	/**
-	 * 
-	 * 
-	 * @user:pang
-	 * @data:2015年6月12日
-	 * @todo:创建浮框，并且显示
-	 * @return:void
-	 */
-	private void createView() {
-		myFV = new MyFloatView(MainPageLayoutInfoActivity.this);
-		myFV.setImageResource(R.drawable.fenlei1);
-		wm = (WindowManager) getApplicationContext().getSystemService(
-				Context.WINDOW_SERVICE);
-		// 设置LayoutParams(全局变量）相关参数
-		wmParams = ((HealthApplication) getApplication()).getMywmParams();
-
-		wmParams.type = LayoutParams.TYPE_PHONE; // 设置window type
-		wmParams.format = PixelFormat.RGBA_8888; // 设置图片格式，效果为背景透明
-		wmParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
-				| LayoutParams.FLAG_NOT_FOCUSABLE;
-		/*
-		 * 下面的flags属性的效果形同“锁定”。 悬浮窗不可触摸，不接受任何事件,同时不影响后面的事件响应。
-		 * wmParams.flags=LayoutParams.FLAG_NOT_TOUCH_MODAL |
-		 * LayoutParams.FLAG_NOT_FOCUSABLE | LayoutParams.FLAG_NOT_TOUCHABLE;
-		 */
-		wmParams.gravity = Gravity.LEFT | Gravity.TOP; // 调整悬浮窗口至左上角
-		// 以屏幕左上角为原点，设置x、y初始值
-		wmParams.x = 200;
-		wmParams.y = 310;
-		// 设置悬浮窗口长宽数据
-		wmParams.width = 100;
-		wmParams.height = 100;
-		// 显示myFloatView图像
-		wm.addView(myFV, wmParams);
-
-		myFV.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "toast",
-						Toast.LENGTH_SHORT).show();
-			}
-		});
-
 	}
 
 	public void toNewPage() {

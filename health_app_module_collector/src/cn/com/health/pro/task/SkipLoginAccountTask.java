@@ -12,6 +12,7 @@ import cn.com.health.pro.util.CommonHttpUtil;
  * @todo 自动登陆任务
  *
  */
+@Deprecated
 public class SkipLoginAccountTask extends AsyncTask<String, Void, String> {
 
 	private Context context;
@@ -37,7 +38,7 @@ public class SkipLoginAccountTask extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-		((AppStartActivity) context).skipOver(result);
+		// ((AppStartActivity) context).skipOver(result);
 	}
 
 }

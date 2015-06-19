@@ -57,10 +57,7 @@ public class HealthApplication extends Application {
 	 */
 	private static String userId;
 
-	/**
-	 * 浮框全局变量
-	 */
-	private WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();
+	
 
 	@Override
 	public void onCreate() {
@@ -237,8 +234,6 @@ public class HealthApplication extends Application {
 		userId = id;
 	}
 
-	public WindowManager.LayoutParams getMywmParams() {
-		return wmParams;
-	}
+	
 
 }
