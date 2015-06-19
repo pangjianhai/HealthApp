@@ -211,9 +211,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			System.out.println("刷新链接：" + SystemConst.server_url
-					+ SystemConst.FunctionUrl.get_refrish_share_sentencs
-					+ "?para=" + d.toString());
+			// System.out.println("刷新链接：" + SystemConst.server_url
+			// + SystemConst.FunctionUrl.get_refrish_share_sentencs
+			// + "?para=" + d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.FunctionUrl.get_refrish_share_sentencs, map,
 					rcb);
@@ -224,9 +224,11 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	private void freshData(List<ShareSentenceEntity> list) {
-		System.out.println("list:" + list.size());
+	//	System.out.println("list:" + list.size());
 		dataSourceList.addAll(0, list);
 		setLastestShareId();
+		itemAdapter.notifyDataSetChanged();
+		onLoadOver();
 	}
 
 	/**
@@ -235,6 +237,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @user:pang
 	 * @data:2015年6月15日
 	 * @todo:用户取得第一页数据的时候将第一页的第一个分享新的ID单独设置，以供刷新
+	 * 
+	 *                                           加载的时候和刷新的时候都需要设置最新的ID
 	 * @return:void
 	 */
 	private void setLastestShareId() {
@@ -309,7 +313,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	public void onRefresh() {
 		// dataSourceList.clear();
 		// loadDataMore();
-		System.out.println("------------------开始刷新");
+		//System.out.println("------------------开始刷新");
 		freshData();
 	}
 
