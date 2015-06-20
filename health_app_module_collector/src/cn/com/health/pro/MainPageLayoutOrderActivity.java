@@ -78,6 +78,9 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	/**
 	 * 时间
 	 */
+	private String today = CommonDateUtil.formatDate(new Date());
+	private String yesterday = CommonDateUtil.formatDate(CommonDateUtil
+			.preDate(new Date()));
 	private String df_date = CommonDateUtil.formatDate(new Date());
 	private ImageButton date_next, date_pre;
 	private TextView date_content;
@@ -107,7 +110,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		context = this;
 		dataSourceList = new ArrayList<ShareSentenceEntity>();
 		mListView = (XListView) findViewById(R.id.space_lv);
-		mListView.setPullLoadEnable(true);
+		mListView.setPullLoadEnable(false);
 		mListView.setXListViewListener(this);
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
@@ -156,7 +159,6 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @author pang
 	 */
 	private void loadDataMore() {
-		System.out.println("----------->loadDataMore");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentDate", df_date);
@@ -165,7 +167,6 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					System.out.println("responseInfo.result:"+responseInfo.result);
 					List<ShareSentenceEntity> list = ShareSentenceUtil
 							.parseJsonAddToList(responseInfo.result);
 					afterGetOrder(list);
@@ -201,7 +202,13 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		}
 
 		// 重绘UI
-		date_content.setText(df_date);
+		if (df_date.equals(today)) {
+			date_content.setText("今天");
+		} else if (df_date.equals(yesterday)) {
+			date_content.setText("昨天");
+		} else {
+			date_content.setText(df_date);
+		}
 		// 清空旧数据
 		dataSourceList.clear();
 		// 添加数据
@@ -222,6 +229,8 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
 		mListView.setRefreshTime("刚才");
+		Toast.makeText(getApplicationContext(),
+				"总共" + dataSourceList.size() + "条", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -244,7 +253,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 
 	@Override
 	public void onLoadMore() {
-		// loadDataMore();
+		onLoadOver();
 	}
 
 	@Override

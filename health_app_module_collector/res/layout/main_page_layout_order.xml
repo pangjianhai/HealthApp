@@ -63,7 +63,8 @@
             android:layout_weight="1"
             android:text="2015-06-17"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp" 
+            android:layout_gravity="center"/>
 
         <ImageButton
             android:id="@+id/date_pre"
