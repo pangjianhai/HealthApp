@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -77,6 +78,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	/**
 	 * 时间
 	 */
+	private String df_date = CommonDateUtil.formatDate(new Date());
 	private ImageButton date_next, date_pre;
 	private TextView date_content;
 
@@ -110,9 +112,33 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
 
+		/**
+		 * 选择按钮
+		 */
 		date_next = (ImageButton) findViewById(R.id.date_next);
 		date_pre = (ImageButton) findViewById(R.id.date_pre);
 		date_content = (TextView) findViewById(R.id.date_content);
+		date_content.setText(df_date);
+		date_next.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Date current_d = CommonDateUtil.getDate(df_date);
+				Date next_day = CommonDateUtil.nextDay(current_d);
+				df_date = CommonDateUtil.formatDate(next_day);
+				loadDataMore();
+			}
+		});
+		date_pre.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Date current_d = CommonDateUtil.getDate(df_date);
+				Date next_day = CommonDateUtil.preDate(current_d);
+				df_date = CommonDateUtil.formatDate(next_day);
+				loadDataMore();
+			}
+		});
 	}
 
 	private void initListView() {
@@ -130,21 +156,19 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @author pang
 	 */
 	private void loadDataMore() {
+		System.out.println("----------->loadDataMore");
 		try {
 			JSONObject d = new JSONObject();
-			d.put("date", search_day);
+			d.put("currentDate", df_date);
 
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					Map<String, Object> map = ShareSentenceUtil
-							.parseJsonCondition(responseInfo.result);
-					String searchDay = map.get("searchDay") + "";
-					String b = map.get("begin") + "";
-					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
-							.get("lst");
-					asyncAddNewData(searchDay, b, list);
+					System.out.println("responseInfo.result:"+responseInfo.result);
+					List<ShareSentenceEntity> list = ShareSentenceUtil
+							.parseJsonAddToList(responseInfo.result);
+					afterGetOrder(list);
 
 				}
 
@@ -156,22 +180,10 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 			Map map = new HashMap();
 			map.put("para", d.toString());
 			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.getFriendsShareByUserId, map, rcb);
+					+ SystemConst.FunctionUrl.get_share_order, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	/**
-	 * 
-	 * 
-	 * @user:pang
-	 * @data:2015年6月15日
-	 * @todo:更新今天的最新的分享信息
-	 * @return:void
-	 */
-	private void freshData() {
 
 	}
 
@@ -182,12 +194,21 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @todo 异步请求获取数据
 	 * @author pang
 	 */
-	public void asyncAddNewData(String searchDay, String begin,
-			List<ShareSentenceEntity> lst) {
+	public void afterGetOrder(List<ShareSentenceEntity> lst) {
+		if (lst == null || lst.size() <= 0) {
+			Toast.makeText(getApplicationContext(), "没有产生排行榜哦",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		// 重绘UI
+		date_content.setText(df_date);
+		// 清空旧数据
+		dataSourceList.clear();
 		// 添加数据
 		dataSourceList.addAll(lst);
 		// 更新UI
 		itemAdapter.notifyDataSetChanged();
+		// 刷新
 		onLoadOver();
 	};
 
@@ -218,19 +239,12 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 
 	@Override
 	public void onRefresh() {
-		dataSourceList.clear();
-		loadDataMore();
+		// loadDataMore();
 	}
 
 	@Override
 	public void onLoadMore() {
-		loadDataMore();
-	}
-
-	public void add_friends(View v) {
-		Intent intent = new Intent(MainPageLayoutOrderActivity.this,
-				FriendSeachOpsActivity.class);
-		startActivity(intent);
+		// loadDataMore();
 	}
 
 	@Override

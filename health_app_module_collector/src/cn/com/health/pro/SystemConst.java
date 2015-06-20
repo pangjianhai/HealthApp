@@ -184,6 +184,11 @@ public class SystemConst {
 		 * 刷新最新分享信息的时候
 		 */
 		public static final String get_refrish_share_sentencs = "appSourceController/getRefurbishLatestSentenceInfoByUserId.do";
+
+		/**
+		 * 获取分享信息日排行榜
+		 */
+		public static final String get_share_order = "appSourceController/getRankinglistSentenceInfoBylikeNum.do";
 	}
 
 	/**
