@@ -196,10 +196,6 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @author pang
 	 */
 	public void afterGetOrder(List<ShareSentenceEntity> lst) {
-		if (lst == null || lst.size() <= 0) {
-			Toast.makeText(getApplicationContext(), "没有产生排行榜哦",
-					Toast.LENGTH_SHORT).show();
-		}
 
 		// 重绘UI
 		if (df_date.equals(today)) {
@@ -339,6 +335,10 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 							.getCurrentFocus().getWindowToken(),
 							InputMethodManager.HIDE_NOT_ALWAYS);
 		}
+	}
+
+	public void backoff(View v) {
+		finish();
 	}
 
 }

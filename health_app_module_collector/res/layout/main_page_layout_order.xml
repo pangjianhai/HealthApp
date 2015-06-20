@@ -16,9 +16,9 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="#00ffffff"
-            android:onClick="add_friends"
-            android:src="@drawable/navigationbar_friendsearch" />
+            android:background="@color/common_title_bar_color"
+            android:onClick="backoff"
+            android:src="@drawable/close_page" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,15 +27,6 @@
             android:text="健康排行榜"
             android:textColor="@color/black"
             android:textSize="20sp" />
-
-        <ImageButton
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:background="#00ffffff"
-            android:src="@drawable/mm_title_btn_menu" />
     </RelativeLayout>
 
     <LinearLayout
@@ -49,7 +40,6 @@
             android:id="@+id/date_next"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_weight="1"
             android:background="#00ffffff"
             android:onClick="add_friends"
@@ -59,19 +49,16 @@
             android:id="@+id/date_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="2015-06-17"
+            android:gravity="center_horizontal"
             android:textColor="@color/black"
-            android:textSize="20sp" 
-            android:layout_gravity="center"/>
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/date_pre"
             android:layout_width="67dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="#00ffffff"
