@@ -237,14 +237,8 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void initTagInput() {
-		System.out.println("---------------------------0");
 		share_send_commont_tags_input = (EditText) rightView
 				.findViewById(R.id.share_send_commont_tags_input);
-		search_tags_listview = (ListView) rightView
-				.findViewById(R.id.search_tags_listview);
-		adapter = new TagAdapter(this, dataSource);
-		System.out.println("---------------------------1");
-		search_tags_listview.setAdapter(adapter);
 		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -266,20 +260,27 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
 			@Override
 			public void afterTextChanged(Editable edit) {
-				System.out.println("edit:" + edit.toString());
+				testList();
 
 			}
 		});
+		// testList();
+
+		search_tags_listview = (ListView) rightView
+				.findViewById(R.id.search_tags_listview);
+		adapter = new TagAdapter(this, dataSource);
+		search_tags_listview.setAdapter(adapter);
 	}
 
 	public void testList() {
-		List l = new ArrayList();
+		List<Tag> l = new ArrayList<Tag>();
 		for (int i = 0; i < 5; i++) {
 			Tag t = new Tag();
 			t.setDisplayName("dsi" + i);
 			t.setId("1" + i);
 			l.add(t);
 		}
+		//dataSource.clear();
 		dataSource.addAll(l);
 		adapter.notifyDataSetChanged();
 	}

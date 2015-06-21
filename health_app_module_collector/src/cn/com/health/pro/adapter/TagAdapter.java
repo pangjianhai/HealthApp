@@ -58,8 +58,7 @@ public class TagAdapter extends BaseAdapter {
 		if (convertView != null) {
 			holder = (HolderView) convertView.getTag();
 		} else {
-			convertView = View.inflate(context,
-					R.layout.friends_search_users_item, null);
+			convertView = View.inflate(context, R.layout.tag_item, null);
 			holder.tag_id = (TextView) convertView.findViewById(R.id.tag_id);
 			holder.tag_name = (TextView) convertView
 					.findViewById(R.id.tag_name);
