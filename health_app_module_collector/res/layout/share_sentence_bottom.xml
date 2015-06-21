@@ -8,6 +8,8 @@
     android:orientation="horizontal"
     android:showDividers="middle" >
 
+    <!-- 分享健康信息最后一行 -->
+
     <Button
         android:id="@+id/infodetail_ops_select_pic"
         android:layout_width="wrap_content"
@@ -18,19 +20,6 @@
         android:drawableLeft="@drawable/surprise_picturebutton_highlighted"
         android:onClick="selectPicture"
         android:text="上图片"
-        android:textSize="15sp" />
-
-    <Button
-        android:id="@+id/infodetail_ops_good"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_toRightOf="@+id/infodetail_ops_select_pic"
-        android:background="@color/common_title_bar_color"
-        android:drawableLeft="@drawable/compose_keyboardbutton_background_highlighted"
-        android:onClick="shareAddTags"
-        android:text="加标签"
         android:textSize="15sp" />
 
 </LinearLayout>

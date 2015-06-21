@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -191,29 +192,29 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
 		@Override
 		public void onPageSelected(int arg0) {
+			int black_color = Color.parseColor("#000000");
+			int gray_color = Color.parseColor("#BEBEBE");
 			Animation animation = null;
 			switch (arg0) {
-			case 0:
+			case 0://
 				animation = new TranslateAnimation(one, 0, 0, 0);
-				t1.setTextColor(0xffffffff);
-				t2.setTextColor(0xff808080);
+				t1.setTextColor(black_color);
+				t2.setTextColor(gray_color);
 				break;
-			case 1:
-				if (currIndex == 0) {
+			case 1://
+				if (currIndex == 0) {//
 					animation = new TranslateAnimation(offset, one, 0, 0);
-					t2.setTextColor(0xffffffff);
-					t1.setTextColor(0xff808080);
+					t2.setTextColor(black_color);
+					t1.setTextColor(gray_color);
 				} else if (currIndex == 2) {
 					animation = new TranslateAnimation(two, one, 0, 0);
-					t2.setTextColor(0xffffffff);
-					// t3.setTextColor(0xff808080);
+					t2.setTextColor(black_color);
 				}
 				break;
 			case 2:
 
 				animation = new TranslateAnimation(one, two, 0, 0);
-				// t3.setTextColor(0xffffffff);
-				t2.setTextColor(0xff808080);
+				t2.setTextColor(black_color);
 
 				break;
 			}
@@ -264,11 +265,6 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 			@Override
 			public void onTextChanged(CharSequence text, int start, int before,
 					int count) {
-				// text 输入框中改变后的字符串信息
-				// start 输入框中改变后的字符串的起始位置
-				// before 输入框中改变前的字符串的位置 默认为0
-				// count 输入框中改变后的一共输入字符串的数量
-				System.out.println("text:" + text);
 
 			}
 
@@ -312,6 +308,14 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		});
 	}
 
+	/**
+	 * 
+	 * @param tag
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:选中一个标签之后更新UI
+	 * @return:void
+	 */
 	private void afterTagSelected(Tag tag) {
 		if (tags_selected != null && tags_selected.size() >= 4) {
 			Toast.makeText(getApplicationContext(), "最多只能添加4个标签",

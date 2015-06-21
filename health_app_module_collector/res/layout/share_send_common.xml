@@ -22,8 +22,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="正文"
-            android:textColor="#fff"
-            android:textSize="18.0dip" />
+            android:textColor="@color/black"
+            android:textSize="14.0dip" />
 
         <TextView
             android:id="@+id/text2"
@@ -32,8 +32,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="标签"
-            android:textColor="#808080"
-            android:textSize="18.0dip" />
+            android:textColor="@color/deepgray"
+            android:textSize="14.0dip" />
     </LinearLayout>
 
     <ImageView

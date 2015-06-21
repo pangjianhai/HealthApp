@@ -26,4 +26,4 @@
     <color name="gray_active">#F0F0F0</color>
     <color name="space_title_bar">#d0d0d0</color>
     <color name="common_title_bar_color">#00ffffff</color>
-</resources>
+    <color name="deepgray">#BEBEBE</color></resources>
