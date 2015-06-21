@@ -1,7 +1,15 @@
 package cn.com.health.pro.abstracts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -31,13 +39,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.R;
+import cn.com.health.pro.SystemConst;
 import cn.com.health.pro.adapter.TagAdapter;
+import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.model.Tag;
+import cn.com.health.pro.util.ShareSentenceUtil;
+import cn.com.health.pro.util.TagUtils;
 
 /**
  * 
@@ -76,6 +89,17 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	private LinearLayout selected_tag_linearlayout = null;
 	private List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
 	private String will_del_tag_id = "";
+	/*
+	 * 标签分页
+	 */
+	private String key = "";
+	private int page = 0;
+	private int size = 5;
+	private View footer;
+	// 加载更多
+	Button search_loadmore_btn = null;
+	// 进度条
+	ProgressBar load_progress_bar = null;
 
 	@Override
 	public void onCreate(Bundle b) {
@@ -278,9 +302,17 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
 			}
 
+			/**
+			 * 每次重置搜索条件
+			 */
 			@Override
 			public void afterTextChanged(Editable edit) {
-				testList();
+				key = edit.toString();// 关键词
+				page = 0;// 重新搜索
+				dataSource.clear();// 关键词换了，列表清空
+				if (key != null && !"".equals(key.trim())) {
+					freshDataForListView();
+				}
 
 			}
 		});
@@ -296,8 +328,14 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void initTagView() {
+
 		search_tags_listview = (ListView) rightView
 				.findViewById(R.id.search_tags_listview);
+		/**
+		 * 加载按钮的操作view
+		 */
+		footer = getLayoutInflater().inflate(R.layout.info_search_more, null);
+		search_tags_listview.addFooterView(footer);
 		adapter = new TagAdapter(this, dataSource);
 		search_tags_listview.setAdapter(adapter);
 
@@ -308,6 +346,24 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 					int position, long id) {
 				Tag tag = dataSource.get(position);
 				afterTagSelected(tag);
+			}
+		});
+
+		/**
+		 * 获取“加载更多数据”和“进度条”的view，通过footer获取
+		 */
+		search_loadmore_btn = (Button) footer
+				.findViewById(R.id.search_loadmore_btn);
+		load_progress_bar = (ProgressBar) footer
+				.findViewById(R.id.load_progress_bar);
+		/**
+		 * 加载更多事件
+		 */
+		search_loadmore_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				freshDataForListView();
 			}
 		});
 	}
@@ -423,7 +479,6 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void repaintUI(String willDelId) {
-		System.out.println("--------------------repaintUI");
 		List<Tag> new_selected_list = new ArrayList<Tag>();
 		if (tags_selected != null && !tags_selected.isEmpty()) {
 			selected_tag_linearlayout.removeAllViews();// 请控所有的
@@ -432,28 +487,63 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 				if (!tId.equals(willDelId)) {// 把选中的排除在外
 					new_selected_list.add(tag);// 把留下来的tag放入新的list
 					Button btn2 = createButton(tag);
-					System.out.println("------->>");
 					selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
 				}
 			}
-			System.out.println("-----------over");
 			tags_selected.clear();
 			tags_selected.addAll(new_selected_list);
 		}
 
 	}
 
-	public void testList() {
-		List<Tag> l = new ArrayList<Tag>();
-		for (int i = 0; i < 5; i++) {
-			Tag t = new Tag();
-			t.setDisplayName("程序员" + i);
-			t.setId("1" + i);
-			l.add(t);
-		}
-		// dataSource.clear();
-		dataSource.addAll(l);
-		adapter.notifyDataSetChanged();
-	}
+	/**
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:刷新
+	 * @return:void
+	 */
+	public void freshDataForListView() {
+		try {
+			page = page + 1;
+			JSONObject d = new JSONObject();
+			d.put("tagName", key);
+			d.put("page", page);
+			d.put("rows", size);
 
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					List<Tag> list = TagUtils
+							.parseJsonAddToList(responseInfo.result);
+					if (list != null && !list.isEmpty()) {
+						dataSource.addAll(list);
+						adapter.notifyDataSetChanged();
+					}
+					if (list == null || list.size() < size) {
+						load_progress_bar.setVisibility(View.GONE);
+						search_loadmore_btn.setVisibility(View.GONE);
+					} else {
+						load_progress_bar.setVisibility(View.GONE);
+						search_loadmore_btn.setVisibility(View.VISIBLE);
+					}
+
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					load_progress_bar.setVisibility(View.GONE);
+					search_loadmore_btn.setVisibility(View.GONE);
+				}
+			};
+			load_progress_bar.setVisibility(View.VISIBLE);
+			search_loadmore_btn.setVisibility(View.GONE);
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			System.out.println(" d.toString():" + d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.get_tag_by_key, map, rcb);
+		} catch (Exception e) {
+		}
+	}
 }

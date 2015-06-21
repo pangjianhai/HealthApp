@@ -189,6 +189,11 @@ public class SystemConst {
 		 * 获取分享信息日排行榜
 		 */
 		public static final String get_share_order = "appSourceController/getRankinglistSentenceInfoBylikeNum.do";
+
+		/**
+		 * 根据关键词搜索标签
+		 */
+		public static final String get_tag_by_key = "appSourceController/queryTagBytagName.do";
 	}
 
 	/**
