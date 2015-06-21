@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <EditText
+        android:id="@+id/share_send_sport_content"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_below="@+id/share_send_sport_layout"
+        android:background="@drawable/bg_edittext"
+        android:gravity="top"
+        android:hint="@string/share_health_input"
+        android:maxLines="6" />
+
+    <TextView
+        android:id="@+id/share_send_sport_all_tags"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/share_send_sport_content"
+        android:text="标签xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        android:textColor="#2828FF" />
+
+</RelativeLayout>
