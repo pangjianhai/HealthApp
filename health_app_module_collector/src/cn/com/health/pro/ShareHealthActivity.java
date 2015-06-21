@@ -54,15 +54,16 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.share_send_health);
-		gridview = (GridView) findViewById(R.id.share_health_gridview);
-		share_send_health_content = (EditText) findViewById(R.id.share_send_health_content);
-		share_send_health_all_tags = (TextView) findViewById(R.id.share_send_health_all_tags);
+		gridview = (GridView) leftView.findViewById(R.id.share_health_gridview);
+		share_send_health_content = (EditText) leftView
+				.findViewById(R.id.share_send_health_content);
+		share_send_health_all_tags = (TextView) leftView
+				.findViewById(R.id.share_send_health_all_tags);
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 
-		share_health_bar = (ProgressBar) findViewById(R.id.share_health_bar);
+		share_health_bar = (ProgressBar) leftView
+				.findViewById(R.id.share_health_bar);
 		init();
 	}
 

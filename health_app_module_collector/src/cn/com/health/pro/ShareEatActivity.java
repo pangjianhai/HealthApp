@@ -54,22 +54,25 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.share_send_eating);
-		gridview = (GridView) findViewById(R.id.share_eat_gridview);
+		gridview = (GridView) leftView.findViewById(R.id.share_eat_gridview);
 
-		share_eat_material = (EditText) findViewById(R.id.share_eat_material);
-		share_eat_function = (EditText) findViewById(R.id.share_eat_function);
-		share_send_health_content = (EditText) findViewById(R.id.share_send_eat_content);
+		share_eat_material = (EditText) leftView
+				.findViewById(R.id.share_eat_material);
+		share_eat_function = (EditText) leftView
+				.findViewById(R.id.share_eat_function);
+		share_send_health_content = (EditText) leftView
+				.findViewById(R.id.share_send_eat_content);
 
-		share_send_eat_all_tags = (TextView) findViewById(R.id.share_send_eat_all_tags);
+		share_send_eat_all_tags = (TextView) leftView
+				.findViewById(R.id.share_send_eat_all_tags);
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 
-		share_health_bar = (ProgressBar) findViewById(R.id.share_eat_bar);
+		share_health_bar = (ProgressBar) leftView
+				.findViewById(R.id.share_eat_bar);
 		init();
 	}
-	
+
 	/**
 	 * 
 	 * @param id

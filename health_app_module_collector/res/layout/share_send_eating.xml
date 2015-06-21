@@ -5,13 +5,6 @@
 
     <!-- 图片选择的入口，选择完后图片渲染的地方 -->
 
-    <include
-        android:id="@+id/share_send_eating_layout"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_weight="1"
-        layout="@layout/share_sentence_top" />
 
     <LinearLayout
         android:id="@+id/share_eat_layouts"
