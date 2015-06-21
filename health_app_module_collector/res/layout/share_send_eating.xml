@@ -5,7 +5,6 @@
 
     <!-- 图片选择的入口，选择完后图片渲染的地方 -->
 
-
     <LinearLayout
         android:id="@+id/share_eat_layouts"
         android:layout_width="match_parent"
@@ -80,19 +79,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/share_send_eat_all_tags"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/share_eat_layouts"
-        android:text="标签:"
-        android:textColor="#2828FF" />
-
     <GridView
         android:id="@+id/share_eat_gridview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/share_send_eat_all_tags"
+        android:layout_below="@+id/share_eat_layouts"
         android:columnWidth="110dp"
         android:gravity="center"
         android:horizontalSpacing="4dp"

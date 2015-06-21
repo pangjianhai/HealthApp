@@ -10,6 +10,8 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.R;
+import cn.com.health.pro.adapter.TagAdapter;
+import cn.com.health.pro.model.Tag;
 
 /**
  * 
@@ -31,6 +37,9 @@ import cn.com.health.pro.R;
  */
 public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
+	/**
+	 * 切换页面的配置
+	 */
 	ViewPager pager = null;
 	TabHost tabHost = null;
 	TextView t1, t2, t3;
@@ -46,6 +55,14 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	private List<String> titles = new ArrayList<String>();
 	private ArrayList<View> list = new ArrayList<View>();
 
+	/**
+	 * 右侧标签页面的东西
+	 */
+	private EditText share_send_commont_tags_input;
+	private ListView search_tags_listview;
+	private List<Tag> dataSource = new ArrayList<Tag>();
+	private TagAdapter adapter = null;
+
 	@Override
 	public void onCreate(Bundle b) {
 		super.onCreate(b);
@@ -56,6 +73,8 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		InitImageView();
 		initTextView();
 		initPagerViewer();
+
+		initTagInput();
 	}
 
 	public abstract void setLeftViewId(int id);
@@ -209,5 +228,60 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 			pager.setCurrentItem(index);
 		}
 	};
+
+	/**
+	 * 
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:初始化输入框
+	 * @return:void
+	 */
+	public void initTagInput() {
+		System.out.println("---------------------------0");
+		share_send_commont_tags_input = (EditText) rightView
+				.findViewById(R.id.share_send_commont_tags_input);
+		search_tags_listview = (ListView) rightView
+				.findViewById(R.id.search_tags_listview);
+		adapter = new TagAdapter(this, dataSource);
+		System.out.println("---------------------------1");
+		search_tags_listview.setAdapter(adapter);
+		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence text, int start, int before,
+					int count) {
+				// text 输入框中改变后的字符串信息
+				// start 输入框中改变后的字符串的起始位置
+				// before 输入框中改变前的字符串的位置 默认为0
+				// count 输入框中改变后的一共输入字符串的数量
+				System.out.println("text:" + text);
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+					int count, int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable edit) {
+				System.out.println("edit:" + edit.toString());
+
+			}
+		});
+	}
+
+	public void testList() {
+		List l = new ArrayList();
+		for (int i = 0; i < 5; i++) {
+			Tag t = new Tag();
+			t.setDisplayName("dsi" + i);
+			t.setId("1" + i);
+			l.add(t);
+		}
+		dataSource.addAll(l);
+		adapter.notifyDataSetChanged();
+	}
 
 }

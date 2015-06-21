@@ -15,19 +15,11 @@
         android:hint="@string/share_health_input"
         android:maxLines="6" />
 
-    <TextView
-        android:id="@+id/share_send_sport_all_tags"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/share_send_sport_content"
-        android:text="标签:"
-        android:textColor="#2828FF" />
-
     <GridView
         android:id="@+id/share_sport_gridview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/share_send_sport_all_tags"
+        android:layout_below="@+id/share_send_sport_content"
         android:layout_marginTop="10dp"
         android:columnWidth="110dp"
         android:gravity="center"
