@@ -40,11 +40,6 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 	private EditText share_send_health_content;
 	private ProgressBar share_health_bar;
 
-	/**
-	 * ��ǩ
-	 */
-	private TextView share_send_sport_all_tags;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,8 +47,6 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 		gridview = (GridView) leftView.findViewById(R.id.share_sport_gridview);
 		share_send_health_content = (EditText) leftView
 				.findViewById(R.id.share_send_sport_content);
-		share_send_sport_all_tags = (TextView) leftView
-				.findViewById(R.id.share_send_sport_all_tags);
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 
@@ -141,7 +134,7 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 			obj.put("content", share_send_health_content.getText().toString());
 			obj.put("type", SystemConst.ShareInfoType.SHARE_TYPE_SPORTS);
 			obj.put("userId", userId);
-			obj.put("tags", tags);
+			obj.put("tags", "");
 			textPram.put(SystemConst.json_param_name, obj.toString());
 			for (int i = 0; i < selectedPicture.size(); i++) {
 				files.add(new File(selectedPicture.get(i)));
@@ -154,11 +147,6 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 			e.printStackTrace();
 		}
 
-	}
-
-	@Override
-	public void displayTags() {
-		share_send_sport_all_tags.setText("标签：" + tags);
 	}
 
 }

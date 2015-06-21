@@ -11,30 +11,23 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import cn.com.health.pro.abstracts.ParentShareInfoActivity;
 import cn.com.health.pro.task.UploadFileTask;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -46,10 +39,6 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 	private EditText share_eat_material, share_eat_function,
 			share_send_health_content;
 	private ProgressBar share_health_bar;
-	/**
-	 * ��ǩ
-	 */
-	private TextView share_send_eat_all_tags;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,8 +52,6 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 		share_send_health_content = (EditText) leftView
 				.findViewById(R.id.share_send_eat_content);
 
-		share_send_eat_all_tags = (TextView) leftView
-				.findViewById(R.id.share_send_eat_all_tags);
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 
@@ -154,7 +141,7 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 			obj.put("content", share_send_health_content.getText().toString());
 			obj.put("type", SystemConst.ShareInfoType.SHARE_TYPE_FOOD);
 			obj.put("userId", userId);
-			obj.put("tags", tags);
+			obj.put("tags", "");
 			textPram.put(SystemConst.json_param_name, obj.toString());
 			for (int i = 0; i < selectedPicture.size(); i++) {
 				files.add(new File(selectedPicture.get(i)));
@@ -171,9 +158,4 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 
 	}
 
-	@Override
-	public void displayTags() {
-		share_send_eat_all_tags.setText("标签：" + tags);
-
-	}
 }

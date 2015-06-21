@@ -36,16 +36,6 @@ public abstract class ParentShareInfoActivity extends
 		ParentShareInfoViewPaperActivity {
 
 	/**
-	 * 标签
-	 */
-	public String tags = "";
-
-	/**
-	 * 待填写的标签
-	 */
-	public EditText tag1, tag2, tag3, tag4;
-
-	/**
 	 * 显示图片的gridview
 	 */
 	public GridView gridview;
@@ -160,8 +150,6 @@ public abstract class ParentShareInfoActivity extends
 	public void backShare(View view) {
 		finish();
 	}
-
-	public abstract void displayTags();
 
 	/**
 	 * ]

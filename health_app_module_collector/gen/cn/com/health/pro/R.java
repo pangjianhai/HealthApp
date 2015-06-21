@@ -428,7 +428,7 @@ public final class R {
         public static final int share_eat_bar=0x7f0a0080;
         public static final int share_eat_function=0x7f0a007b;
         public static final int share_eat_gridview=0x7f0a007f;
-        public static final int share_eat_layouts=0x7f0a0077;
+        public static final int share_eat_layouts=0x7f0a0076;
         public static final int share_eat_material=0x7f0a0079;
         public static final int share_eat_material_function_layout=0x7f0a007a;
         public static final int share_eat_material_layout=0x7f0a0078;
@@ -450,10 +450,10 @@ public final class R {
         public static final int share_send_eat_all_tags=0x7f0a007e;
         public static final int share_send_eat_content=0x7f0a007d;
         public static final int share_send_eat_content_layout=0x7f0a007c;
-        public static final int share_send_eating_layout=0x7f0a0076;
+        public static final int share_send_eating_layout=0x7f0a0077;
         public static final int share_send_health_all_tags=0x7f0a0083;
-        public static final int share_send_health_content=0x7f0a0082;
-        public static final int share_send_health_layout=0x7f0a0081;
+        public static final int share_send_health_content=0x7f0a0081;
+        public static final int share_send_health_layout=0x7f0a0082;
         public static final int share_send_sport_all_tags=0x7f0a008b;
         public static final int share_send_sport_content=0x7f0a008a;
         public static final int share_send_sport_layout=0x7f0a0071;
