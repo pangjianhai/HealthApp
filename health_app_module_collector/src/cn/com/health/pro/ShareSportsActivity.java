@@ -11,30 +11,24 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import cn.com.health.pro.abstracts.ParentShareInfoActivity;
 import cn.com.health.pro.task.UploadFileTask;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -54,16 +48,30 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.share_send_sport);
-		gridview = (GridView) findViewById(R.id.share_sport_gridview);
-		share_send_health_content = (EditText) findViewById(R.id.share_send_sport_content);
-		share_send_sport_all_tags = (TextView) findViewById(R.id.share_send_sport_all_tags);
+
+		gridview = (GridView) leftView.findViewById(R.id.share_sport_gridview);
+		share_send_health_content = (EditText) leftView
+				.findViewById(R.id.share_send_sport_content);
+		share_send_sport_all_tags = (TextView) leftView
+				.findViewById(R.id.share_send_sport_all_tags);
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 
-		share_health_bar = (ProgressBar) findViewById(R.id.share_sport_bar);
+		share_health_bar = (ProgressBar) leftView
+				.findViewById(R.id.share_sport_bar);
 		init();
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:设置左边的分享
+	 * @return:void
+	 */
+	public void setLeftViewId(int id) {
+		this.leftViewId = R.layout.share_send_sport;
 	}
 
 	public void init() {

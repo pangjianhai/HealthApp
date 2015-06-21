@@ -32,7 +32,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * @todo 分享健康信息的父类
  *
  */
-public abstract class ParentShareInfoActivity extends BaseActivity {
+public abstract class ParentShareInfoActivity extends
+		ParentShareInfoViewPaperActivity {
 
 	/**
 	 * 标签

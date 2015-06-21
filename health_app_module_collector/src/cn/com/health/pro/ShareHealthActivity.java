@@ -66,6 +66,18 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 		init();
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:设置左边的分享
+	 * @return:void
+	 */
+	public void setLeftViewId(int id) {
+		this.leftViewId = R.layout.share_send_health;
+	}
+
 	public void init() {
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 

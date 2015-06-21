@@ -69,6 +69,18 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 		share_health_bar = (ProgressBar) findViewById(R.id.share_eat_bar);
 		init();
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:设置左边的分享
+	 * @return:void
+	 */
+	public void setLeftViewId(int id) {
+		this.leftViewId = R.layout.share_send_eating;
+	}
 
 	public void init() {
 		gridview.setOnItemClickListener(new OnItemClickListener() {
