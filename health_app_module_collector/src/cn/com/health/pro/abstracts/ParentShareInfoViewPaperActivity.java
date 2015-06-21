@@ -3,6 +3,8 @@ package cn.com.health.pro.abstracts;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -17,6 +19,7 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -72,6 +75,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
 	private LinearLayout selected_tag_linearlayout = null;
 	private List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
+	private String will_del_tag_id = "";
 
 	@Override
 	public void onCreate(Bundle b) {
@@ -324,7 +328,21 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		}
 		selected_tag_linearlayout.setVisibility(View.VISIBLE);
 		tags_selected.add(tag);
-		String tId = tag.getId();
+		Button btn2 = createButton(tag);
+		selected_tag_linearlayout.addView(btn2);
+	}
+
+	/**
+	 * 
+	 * @param tag
+	 * @return
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:构造每一个选中的标签
+	 * @return:Button
+	 */
+	private Button createButton(Tag tag) {
+		final String tId = tag.getId();
 		String tName = tag.getDisplayName();
 		Button btn2 = new Button(this);
 		btn2.setText(tName);
@@ -334,8 +352,58 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		btn2.setTextSize(14);
 		btn2.setHeight(10);
 		btn2.setMinHeight(11);
-		selected_tag_linearlayout.addView(btn2);
-		// selected_tag_linearlayout
+		btn2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				will_del_tag_id = tId;// 点击标签允许其进行删除
+				/**
+				 * 注意构造builder的参数是rightView.getContext()
+				 */
+				AlertDialog.Builder builder = new AlertDialog.Builder(rightView
+						.getContext()).setTitle("提示").setMessage("要删除吗？");
+				builder.setPositiveButton("确定",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								repaintUI(will_del_tag_id);
+							}
+						});
+				builder.setNegativeButton("取消",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								will_del_tag_id = "";
+							}
+						});
+				builder.show();
+
+			}
+		});
+		return btn2;
+	}
+
+	public void repaintUI(String willDelId) {
+		System.out.println(tags_selected.size() + ":willDelId:" + willDelId);
+		List<Tag> new_selected_list = new ArrayList<Tag>();
+		if (tags_selected != null && !tags_selected.isEmpty()) {
+			for (Tag tag : tags_selected) {
+				final String tId = tag.getId();
+				System.out.println("tId:" + tId);
+				String tName = tag.getDisplayName();
+				if (!tId.equals(willDelId)) {
+					Button btn2 = createButton(tag);
+					selected_tag_linearlayout.addView(btn2);
+					System.out.println("add-----");
+					new_selected_list.add(tag);
+				}
+			}
+			tags_selected.clear();
+			tags_selected.addAll(new_selected_list);
+		}
+
 	}
 
 	public void testList() {

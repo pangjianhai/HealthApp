@@ -15,7 +15,7 @@
     <EditText
         android:id="@+id/share_send_commont_tags_input"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:background="@drawable/bg_edittext"
         android:gravity="top"
         android:hint="@string/share_health_input" />
