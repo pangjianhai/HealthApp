@@ -326,10 +326,36 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		selected_tag_linearlayout.setVisibility(View.VISIBLE);
-		tags_selected.add(tag);
-		Button btn2 = createButton(tag);
-		selected_tag_linearlayout.addView(btn2);
+		// 如果没有被选中过则添加
+		if (!ifChosen(tag)) {
+			tags_selected.add(tag);// 将选择的tag放入list中
+			selected_tag_linearlayout.setVisibility(View.VISIBLE);
+			Button btn2 = createButton(tag);
+			selected_tag_linearlayout.addView(btn2);
+		}
+	}
+
+	/**
+	 * 
+	 * @param tag
+	 * @return
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:判断选中的标签是否已经被选中过了，如果是则忽略
+	 * @return:boolean
+	 */
+	private boolean ifChosen(Tag tag) {
+		String tagId = tag.getId();
+		boolean b = false;
+		if (tags_selected != null && !tags_selected.isEmpty()) {
+			for (Tag t : tags_selected) {
+				String id = t.getId();
+				if (id.equals(tagId)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -351,7 +377,10 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		btn2.setBackgroundDrawable(d);
 		btn2.setTextSize(14);
 		btn2.setHeight(10);
-		btn2.setMinHeight(11);
+		btn2.setMinHeight(11);// 构造完毕button
+		/**
+		 * 添加监听事件，可以让用户删除标签
+		 */
 		btn2.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -385,21 +414,29 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		return btn2;
 	}
 
+	/**
+	 * 
+	 * @param willDelId
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:确定删除一个标签
+	 * @return:void
+	 */
 	public void repaintUI(String willDelId) {
-		System.out.println(tags_selected.size() + ":willDelId:" + willDelId);
+		System.out.println("--------------------repaintUI");
 		List<Tag> new_selected_list = new ArrayList<Tag>();
 		if (tags_selected != null && !tags_selected.isEmpty()) {
+			selected_tag_linearlayout.removeAllViews();// 请控所有的
 			for (Tag tag : tags_selected) {
 				final String tId = tag.getId();
-				System.out.println("tId:" + tId);
-				String tName = tag.getDisplayName();
-				if (!tId.equals(willDelId)) {
+				if (!tId.equals(willDelId)) {// 把选中的排除在外
+					new_selected_list.add(tag);// 把留下来的tag放入新的list
 					Button btn2 = createButton(tag);
-					selected_tag_linearlayout.addView(btn2);
-					System.out.println("add-----");
-					new_selected_list.add(tag);
+					System.out.println("------->>");
+					selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
 				}
 			}
+			System.out.println("-----------over");
 			tags_selected.clear();
 			tags_selected.addAll(new_selected_list);
 		}

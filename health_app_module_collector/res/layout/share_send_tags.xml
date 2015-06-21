@@ -18,7 +18,8 @@
         android:layout_height="30dp"
         android:background="@drawable/bg_edittext"
         android:gravity="top"
-        android:hint="@string/share_health_input" />
+        android:hint="@string/share_health_input"
+        android:textSize="13sp" />
 
     <ListView
         android:id="@+id/search_tags_listview"
