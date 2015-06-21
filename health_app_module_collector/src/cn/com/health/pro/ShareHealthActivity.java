@@ -55,10 +55,13 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		gridview = (GridView) leftView.findViewById(R.id.share_health_gridview);
+		System.out.println(leftView + "=====" + gridview);
 		share_send_health_content = (EditText) leftView
 				.findViewById(R.id.share_send_health_content);
+		System.out.println(leftView + "=====" + share_send_health_content);
 		share_send_health_all_tags = (TextView) leftView
 				.findViewById(R.id.share_send_health_all_tags);
+		System.out.println(leftView + "=====" + share_send_health_all_tags);
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 
@@ -137,6 +140,7 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
+		System.out.println("------------------saveShare");
 		try {
 			Map map = new HashMap();
 
