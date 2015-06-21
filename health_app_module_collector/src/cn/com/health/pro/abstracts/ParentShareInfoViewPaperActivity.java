@@ -325,8 +325,11 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		Button btn2 = new Button(this);
 		btn2.setText(tName);
 		Drawable d = getApplication().getResources().getDrawable(
-				R.drawable.tag1);
+				R.drawable.tag6);
 		btn2.setBackgroundDrawable(d);
+		btn2.setTextSize(14);
+		btn2.setHeight(10);
+		btn2.setMinHeight(11);
 		selected_tag_linearlayout.addView(btn2);
 		// selected_tag_linearlayout
 	}
@@ -335,7 +338,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		List<Tag> l = new ArrayList<Tag>();
 		for (int i = 0; i < 5; i++) {
 			Tag t = new Tag();
-			t.setDisplayName("dsidsidsi" + i);
+			t.setDisplayName("程序员" + i);
 			t.setId("1" + i);
 			l.add(t);
 		}
