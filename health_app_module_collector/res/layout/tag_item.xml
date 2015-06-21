@@ -13,12 +13,13 @@
         android:layout_weight="1"
         android:drawableLeft="@drawable/comment1"
         android:padding="5dp"
-        android:text="0" />
+        android:text="0"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tag_name"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_weight="1"
         android:text="关注" />
 

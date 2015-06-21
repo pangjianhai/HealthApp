@@ -19,11 +19,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.R;
 import cn.com.health.pro.adapter.TagAdapter;
@@ -44,24 +47,25 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	TabHost tabHost = null;
 	TextView t1, t2, t3;
 
-	private int offset = 0;
-	private int currIndex = 0;
-	private int bmpW;
-	private ImageView cursor;
+	private int offset = 0;// 动画图片偏移量
+	private int currIndex = 0;// 当前页卡编号
+	private int bmpW;// 动画图片宽度
+	private ImageView cursor;// 动画图片
 	public View leftView = null;
 	public View rightView = null;
 	public int leftViewId;
 
 	private List<String> titles = new ArrayList<String>();
-	private ArrayList<View> list = new ArrayList<View>();
+	private ArrayList<View> list = new ArrayList<View>();// Tab页面列表
 
 	/**
 	 * 右侧标签页面的东西
 	 */
-	private EditText share_send_commont_tags_input;
-	private ListView search_tags_listview;
-	private List<Tag> dataSource = new ArrayList<Tag>();
-	private TagAdapter adapter = null;
+	private EditText share_send_commont_tags_input;// 搜索框
+	private ListView search_tags_listview;// listview
+	private List<Tag> dataSource = new ArrayList<Tag>();// 标签源
+	private TagAdapter adapter = null;// 适配器
+	private List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
 
 	@Override
 	public void onCreate(Bundle b) {
@@ -75,6 +79,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		initPagerViewer();
 
 		initTagInput();
+		initTagView();
 	}
 
 	public abstract void setLeftViewId(int id);
@@ -102,18 +107,26 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		pager.setOnPageChangeListener(new MyOnPageChangeListener());
 	}
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:初始动画
+	 * @return:void
+	 */
 	private void InitImageView() {
 		cursor = (ImageView) findViewById(R.id.cursor);
 		bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.roller)
-				.getWidth();
+				.getWidth();// 获取图片宽度
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int screenW = dm.widthPixels;
+		int screenW = dm.widthPixels;// 获取分辨率宽度
 		// offset = (screenW / 3 - bmpW) / 2;
-		offset = (screenW / 2 - bmpW) / 2;
+		offset = (screenW / 2 - bmpW) / 2;// 计算偏移量
 		Matrix matrix = new Matrix();
 		matrix.postTranslate(offset, 0);
-		cursor.setImageMatrix(matrix);
+		cursor.setImageMatrix(matrix);// 设置动画初始位置
 	}
 
 	public class MyPagerAdapter extends PagerAdapter {
@@ -264,12 +277,40 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
 			}
 		});
-		// testList();
 
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月21日
+	 * @todo:初始化标签ListView
+	 * @return:void
+	 */
+	public void initTagView() {
 		search_tags_listview = (ListView) rightView
 				.findViewById(R.id.search_tags_listview);
 		adapter = new TagAdapter(this, dataSource);
 		search_tags_listview.setAdapter(adapter);
+
+		search_tags_listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Tag tag = dataSource.get(position);
+				afterTagSelected(tag);
+			}
+		});
+	}
+
+	private void afterTagSelected(Tag tag) {
+		tags_selected.add(tag);
+		String tId = tag.getId();
+		String tName = tag.getDisplayName();
+		Toast.makeText(getApplicationContext(), tName, Toast.LENGTH_SHORT)
+				.show();
 	}
 
 	public void testList() {
@@ -280,7 +321,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 			t.setId("1" + i);
 			l.add(t);
 		}
-		//dataSource.clear();
+		// dataSource.clear();
 		dataSource.addAll(l);
 		adapter.notifyDataSetChanged();
 	}

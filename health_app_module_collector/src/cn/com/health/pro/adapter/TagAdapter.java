@@ -68,7 +68,7 @@ public class TagAdapter extends BaseAdapter {
 		holder.tag_id.setText(tag.getId());
 		holder.tag_name.setText(tag.getDisplayName());
 
-		convertView.setClickable(true);
+		//convertView.setClickable(true);
 		return convertView;
 	}
 
