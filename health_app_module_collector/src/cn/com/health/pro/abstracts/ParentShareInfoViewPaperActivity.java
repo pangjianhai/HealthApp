@@ -540,7 +540,6 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 			search_loadmore_btn.setVisibility(View.GONE);
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			System.out.println(" d.toString():" + d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.FunctionUrl.get_tag_by_key, map, rcb);
 		} catch (Exception e) {
