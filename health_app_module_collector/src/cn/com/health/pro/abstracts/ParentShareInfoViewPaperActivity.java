@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -21,8 +22,10 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -65,6 +68,8 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	private ListView search_tags_listview;// listview
 	private List<Tag> dataSource = new ArrayList<Tag>();// 标签源
 	private TagAdapter adapter = null;// 适配器
+
+	private LinearLayout selected_tag_linearlayout = null;
 	private List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
 
 	@Override
@@ -250,6 +255,8 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void initTagInput() {
+		selected_tag_linearlayout = (LinearLayout) rightView
+				.findViewById(R.id.selected_tag_linearlayout);
 		share_send_commont_tags_input = (EditText) rightView
 				.findViewById(R.id.share_send_commont_tags_input);
 		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
@@ -306,18 +313,29 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	}
 
 	private void afterTagSelected(Tag tag) {
+		if (tags_selected != null && tags_selected.size() >= 4) {
+			Toast.makeText(getApplicationContext(), "最多只能添加4个标签",
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		selected_tag_linearlayout.setVisibility(View.VISIBLE);
 		tags_selected.add(tag);
 		String tId = tag.getId();
 		String tName = tag.getDisplayName();
-		Toast.makeText(getApplicationContext(), tName, Toast.LENGTH_SHORT)
-				.show();
+		Button btn2 = new Button(this);
+		btn2.setText(tName);
+		Drawable d = getApplication().getResources().getDrawable(
+				R.drawable.tag1);
+		btn2.setBackgroundDrawable(d);
+		selected_tag_linearlayout.addView(btn2);
+		// selected_tag_linearlayout
 	}
 
 	public void testList() {
 		List<Tag> l = new ArrayList<Tag>();
 		for (int i = 0; i < 5; i++) {
 			Tag t = new Tag();
-			t.setDisplayName("dsi" + i);
+			t.setDisplayName("dsidsidsi" + i);
 			t.setId("1" + i);
 			l.add(t);
 		}

@@ -4,6 +4,14 @@
     android:background="#fcfcfc"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:id="@+id/selected_tag_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+    </LinearLayout>
+
     <EditText
         android:id="@+id/share_send_commont_tags_input"
         android:layout_width="match_parent"
