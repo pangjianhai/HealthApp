@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgray" >
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/layout_space_title_bar"
@@ -46,31 +46,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_space_title_bar"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" >
+        android:padding="10dp" >
 
         <TextView
             android:id="@+id/share_all_detail_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textSize="15sp" />
-        
-        <TextView
-            android:id="@+id/share_all_detail_tag"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/share_all_detail_tag_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textSize="15sp" />
+            android:layout_height="20dp"
+            android:layout_below="@+id/share_all_detail_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:contentDescription="标签"
+                android:src="@drawable/tag8" />
+
+            <TextView
+                android:id="@+id/share_all_detail_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp" />
+        </LinearLayout>
 
         <GridView
             android:id="@+id/share_detail_imgs_gridview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/share_all_detail_content"
+            android:layout_below="@+id/share_all_detail_tag_layout"
             android:layout_marginTop="10dp"
-            android:background="@color/white"
             android:horizontalSpacing="5dip"
             android:numColumns="3"
             android:stretchMode="columnWidth"
@@ -81,7 +93,7 @@
     <RelativeLayout
         android:id="@+id/share_all_detail_bottom_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent" >
 
