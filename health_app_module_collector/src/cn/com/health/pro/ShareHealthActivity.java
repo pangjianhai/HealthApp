@@ -131,7 +131,6 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
-		System.out.println("------------------saveShare");
 		try {
 			Map map = new HashMap();
 
@@ -141,7 +140,7 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 			obj.put("content", share_send_health_content.getText().toString());
 			obj.put("type", SystemConst.ShareInfoType.SHARE_TYPE_HEALTH);
 			obj.put("userId", userId);
-			obj.put("tags", "");
+			obj.put("tags", getSelectedTagIds());
 			textPram.put(SystemConst.json_param_name, obj.toString());
 			for (int i = 0; i < selectedPicture.size(); i++) {
 				files.add(new File(selectedPicture.get(i)));

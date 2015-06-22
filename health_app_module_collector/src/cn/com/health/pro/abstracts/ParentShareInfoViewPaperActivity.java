@@ -87,7 +87,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	private TagAdapter adapter = null;// 适配器
 
 	private LinearLayout selected_tag_linearlayout = null;
-	private List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
+	public List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
 	private String will_del_tag_id = "";
 	/*
 	 * 标签分页

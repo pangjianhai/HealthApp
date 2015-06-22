@@ -2,26 +2,20 @@ package cn.com.health.pro.abstracts;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import cn.com.health.pro.AppLoginLoadingActivity;
-import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.MainPageLayoutSpaceActivity;
-import cn.com.health.pro.R;
 import cn.com.health.pro.ShareSelectPicActivity;
+import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.persist.SharedPreInto;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -165,4 +159,25 @@ public abstract class ParentShareInfoActivity extends
 		startActivity(intent);
 		finish();
 	}
+
+	/**
+	 * 
+	 * @return
+	 * @user:pang
+	 * @data:2015年6月22日
+	 * @todo:拼接用户选中的标签
+	 * @return:String
+	 */
+	public String getSelectedTagIds() {
+		StringBuffer sb = new StringBuffer("");
+		String tags = "";
+		if (tags_selected != null && !tags_selected.isEmpty()) {
+			for (Tag tag : tags_selected) {
+				sb.append(tag.getId()).append(",");
+			}
+			tags = sb.substring(0, sb.length() - 1);
+		}
+		return tags;
+	}
+
 }
