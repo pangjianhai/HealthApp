@@ -56,6 +56,13 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/share_all_detail_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textSize="15sp" />
 
         <GridView
             android:id="@+id/share_detail_imgs_gridview"

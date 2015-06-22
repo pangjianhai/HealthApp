@@ -38,18 +38,7 @@
             android:textSize="10sp" >
         </Button>
 
-        <Button
-            android:id="@+id/single_share_bottom_ops_tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:drawableTop="@drawable/info_tags"
-            android:onClick="share_ops_bar"
-            android:text="标签"
-            android:textColor="#000000"
-            android:textSize="10sp" >
-        </Button>
+        
 
         <Button
             android:id="@+id/single_share_bottom_ops_ok"

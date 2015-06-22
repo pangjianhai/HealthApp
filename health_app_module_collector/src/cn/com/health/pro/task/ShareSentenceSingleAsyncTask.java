@@ -8,6 +8,10 @@ import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.util.CommonHttpUtil;
 import cn.com.health.pro.util.ShareSentenceUtil;
 
+/**
+ * 获取健康详情接口
+ */
+@Deprecated
 public class ShareSentenceSingleAsyncTask extends
 		AsyncTask<String, Void, ShareSentenceEntity> {
 

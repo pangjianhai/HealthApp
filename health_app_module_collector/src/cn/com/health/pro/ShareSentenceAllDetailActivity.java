@@ -1,6 +1,14 @@
 package cn.com.health.pro;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +32,9 @@ import cn.com.health.pro.service.CollectionForInfoService;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
 import cn.com.health.pro.task.ShareSentenceSingleAsyncTask;
+import cn.com.health.pro.util.CommonHttpUtil;
 import cn.com.health.pro.util.PicUtil;
+import cn.com.health.pro.util.ShareSentenceUtil;
 
 /**
  * 
@@ -34,7 +44,7 @@ import cn.com.health.pro.util.PicUtil;
  */
 public class ShareSentenceAllDetailActivity extends BaseActivity {
 
-	private TextView share_all_detail_content;
+	private TextView share_all_detail_content, share_all_detail_tag;
 
 	private GridView share_detail_imgs_gridview;
 
@@ -61,12 +71,40 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 
 	private void init() {
 		share_all_detail_content = (TextView) findViewById(R.id.share_all_detail_content);
-		new ShareSentenceSingleAsyncTask(ShareSentenceAllDetailActivity.this)
-				.execute(share_sentence_id);
+		share_all_detail_tag = (TextView) findViewById(R.id.share_all_detail_tag);
+		loadData();
 		share_detail_imgs_gridview = (GridView) findViewById(R.id.share_detail_imgs_gridview);
 
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
+	}
+
+	private void loadData() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("key", share_sentence_id);
+
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					ShareSentenceEntity entity = ShareSentenceUtil
+							.parseJsonAddToEntity(data);
+					renderText(entity);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getShareDetailById, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -83,9 +121,16 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 			String material = entity.getMaterial();
 			String function = entity.getFunction();
 			String content = entity.getContent();
+			String tags = entity.getTags();
+
 			if (SystemConst.ShareInfoType.SHARE_TYPE_FOOD.equals(type)) {
 				content = material + "\n" + function + "\n" + content;
 			}
+			String displayTags = "无";
+			if (tags != null && !"".equals(tags)) {
+				displayTags = tags;
+			}
+			share_all_detail_tag.setText("【健康标签】" + displayTags);
 			share_all_detail_content.setText(content);
 			/**
 			 * 图片适配器
@@ -163,8 +208,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 					Toast.LENGTH_SHORT).show();
 		} else if (v.getId() == R.id.single_share_bottom_ops_comment) {
 			showInput();
-		} else if (v.getId() == R.id.single_share_bottom_ops_tags) {
-
 		} else if (v.getId() == R.id.single_share_bottom_ops_ok) {
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
 					ViewForInfoService.class);
