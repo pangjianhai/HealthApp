@@ -28,7 +28,7 @@ public class TagUtils {
 						JSONObject obj = jarray.getJSONObject(i);
 						Tag bean = new Tag();
 						// 通用字段的处理
-						String id = obj.getString("id");
+						String id = obj.getString("tagId");
 						String tagName = obj.getString("tagName");
 
 						bean.setId(id);

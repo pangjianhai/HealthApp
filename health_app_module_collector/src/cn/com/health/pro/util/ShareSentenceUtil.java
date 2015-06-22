@@ -35,6 +35,7 @@ public class ShareSentenceUtil {
 			String commentNum = obj.has("commentNum") ? obj
 					.getString("commentNum") : "0";
 			String createDate = obj.getString("createDate");
+			String tags = obj.getString("tags");
 			bean.setType(type);
 			bean.setContent(content);
 			bean.setUserId(userId);
@@ -43,6 +44,7 @@ public class ShareSentenceUtil {
 			bean.setGoodNum(likeNum);
 			bean.setBadNum(disLikeNum);
 			bean.setCommentNum(commentNum);
+			bean.setTags(tags);
 			// 特殊字段处理
 			if (SystemConst.ShareInfoType.SHARE_TYPE_FOOD.equals(type)) {
 				String material = obj.getString("material");
@@ -115,6 +117,7 @@ public class ShareSentenceUtil {
 				String disLikeNum = obj.getString("disLikeNum");
 				String createDate = obj.getString("createDateStr");
 				String commentNum = obj.getString("commentNum");
+				String tags = obj.getString("tags");
 				bean.setId(id);
 				bean.setType(type);
 				bean.setContent(content);
@@ -125,6 +128,7 @@ public class ShareSentenceUtil {
 				bean.setBadNum(disLikeNum);
 				bean.setcDate(createDate);
 				bean.setCommentNum(commentNum);
+				bean.setTags(tags);
 				// 图片的处理
 				List<String> imgs = new ArrayList<String>();
 				String img0 = obj.getString("img0");

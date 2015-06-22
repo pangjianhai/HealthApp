@@ -199,6 +199,7 @@ public class ShareItemAdapter extends BaseAdapter {
 		 */
 		holder.share_id.setText(entity.getId());
 		holder.share_name.setText(entity.getAuthor());
+		
 		String userId = entity.getUserId();
 		String typeCode = entity.getType();
 		String typeName = "";
@@ -206,6 +207,7 @@ public class ShareItemAdapter extends BaseAdapter {
 		String common_content = entity.getContent();
 		String commentNum = entity.getCommentNum();
 		String date = entity.getcDate();
+		String tags =entity.getTags();
 		if (typeCode.equals(SystemConst.ShareInfoType.SHARE_TYPE_FOOD)) {
 			typeName = "【饮食】";
 			function_field = "功效：" + entity.getFunction();
@@ -219,7 +221,7 @@ public class ShareItemAdapter extends BaseAdapter {
 		}
 		holder.share_content.setVisibility(View.VISIBLE);
 		holder.share_content.setText(common_content);
-		holder.share_type.setText(typeName);
+		holder.share_type.setText(typeName+" "+tags);
 		holder.share_reply.setText(commentNum);
 		if (today.equals(date)) {
 			holder.share_time.setText("今天");

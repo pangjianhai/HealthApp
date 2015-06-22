@@ -85,6 +85,11 @@ public class ShareSentenceEntity extends ParentShareSentenceEntity {
 	 */
 	private String function;
 
+	/**
+	 * 标签
+	 */
+	private String tags;
+
 	public ShareSentenceEntity() {
 		super();
 		this.ops = ParentShareSentenceEntity.NO_OPS;
@@ -264,6 +269,14 @@ public class ShareSentenceEntity extends ParentShareSentenceEntity {
 
 	public void setcDate(String cDate) {
 		this.cDate = cDate;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 }
