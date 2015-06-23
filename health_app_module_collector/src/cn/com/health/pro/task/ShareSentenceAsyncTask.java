@@ -10,6 +10,12 @@ import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.util.CommonHttpUtil;
 import cn.com.health.pro.util.ShareSentenceUtil;
 
+/**
+ * @todo 个人档案查询task
+ * @author pang
+ *
+ */
+@Deprecated
 public class ShareSentenceAsyncTask extends
 		AsyncTask<String, Void, List<ShareSentenceEntity>> {
 

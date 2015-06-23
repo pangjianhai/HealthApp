@@ -134,6 +134,8 @@
         </activity>
         <activity android:name=".MainPageLayoutTagActivity" >
         </activity>
+        <activity android:name=".ShareByTagActivity" >
+        </activity>
 
         <!-- 关于信息分类 -->
         <activity android:name=".InfoTypeListviewActivity" >

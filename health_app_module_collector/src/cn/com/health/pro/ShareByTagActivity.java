@@ -1,15 +1,7 @@
 package cn.com.health.pro;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.json.JSONObject;
-
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +24,6 @@ import cn.com.health.pro.part.XListView.IXListViewListener;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.task.ShareSentenceAsyncTask;
 import cn.com.health.pro.util.IShareCallbackOperator;
-import cn.com.health.pro.util.ShareSentenceUtil;
 
 /**
  * 
@@ -40,8 +31,10 @@ import cn.com.health.pro.util.ShareSentenceUtil;
  * @todo 个人健康空间activity
  *
  */
-public class MineSpaceActivity extends BaseActivity implements
+public class ShareByTagActivity extends BaseActivity implements
 		IXListViewListener, IShareCallbackOperator {
+
+	private String tagId = "";
 	/**
 	 * 适配器需要的数据结构
 	 */
@@ -79,13 +72,17 @@ public class MineSpaceActivity extends BaseActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.share_space_mine);
+		setContentView(R.layout.share_by_tag);
 		userId = HealthApplication.getUserId();
+		tagId = getIntent().getStringExtra("tagId");
+		System.out.println("tagId:" + tagId);
 		findView();
+		System.out.println("--------------------------------0");
 		/**
 		 * 先后顺序
 		 */
 		initListView();
+		System.out.println("--------------------------------1");
 		loadDataMore();
 	}
 
@@ -129,38 +126,10 @@ public class MineSpaceActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	private void loadDataMore() {
-		System.out.println("loadDataMore");
-		try {
-			currentPage = currentPage + 1;
-			JSONObject d = new JSONObject();
-			d.put("userId", userId);
-			d.put("begin", currentPage + "");
-			d.put("limit", 10);
-
-			RequestCallBack<String> rcb = new RequestCallBack<String>() {
-
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo) {
-					List<ShareSentenceEntity> lst = ShareSentenceUtil
-							.parseJsonAddToList(responseInfo.result);
-					System.out.println("responseInfo.result:"
-							+ responseInfo.result);
-					asyncAddNewData(lst);
-				}
-
-				@Override
-				public void onFailure(HttpException error, String msg) {
-					System.out.println("msg:" + msg);
-				}
-			};
-			Map map = new HashMap();
-			map.put("para", d.toString());
-			System.out.println("d.:" + d.toString());
-			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.getShareByUserId, map, rcb);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		currentPage = currentPage + 1;
+		ShareSentenceAsyncTask task = new ShareSentenceAsyncTask(
+				ShareByTagActivity.this);
+		task.execute(userId, currentPage + "");
 	}
 
 	public void asyncAddNewData(List<ShareSentenceEntity> lst) {
@@ -170,8 +139,8 @@ public class MineSpaceActivity extends BaseActivity implements
 	};
 
 	private void initListView() {
-		itemAdapter = new ShareItemAdapter(MineSpaceActivity.this,
-				MineSpaceActivity.this, dataSourceList);
+		itemAdapter = new ShareItemAdapter(ShareByTagActivity.this,
+				ShareByTagActivity.this, dataSourceList);
 
 		mListView.setAdapter(itemAdapter);
 	}
@@ -221,7 +190,7 @@ public class MineSpaceActivity extends BaseActivity implements
 
 	@Override
 	public void afterClickContent(String shareId) {
-		Intent intent = new Intent(MineSpaceActivity.this,
+		Intent intent = new Intent(ShareByTagActivity.this,
 				ShareSentenceAllDetailActivity.class);
 		intent.putExtra("share_sentence_id", shareId);
 		startActivity(intent);
@@ -250,7 +219,7 @@ public class MineSpaceActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	public void comment_share(View v) {
-		Intent intent = new Intent(MineSpaceActivity.this,
+		Intent intent = new Intent(ShareByTagActivity.this,
 				ShareCommentService.class);
 		intent.putExtra("userId", userId);
 		intent.putExtra("sentenceId", commentShareId);
@@ -259,7 +228,7 @@ public class MineSpaceActivity extends BaseActivity implements
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
 		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-				.hideSoftInputFromWindow(MineSpaceActivity.this
+				.hideSoftInputFromWindow(ShareByTagActivity.this
 						.getCurrentFocus().getWindowToken(),
 						InputMethodManager.HIDE_NOT_ALWAYS);
 	}
@@ -270,7 +239,7 @@ public class MineSpaceActivity extends BaseActivity implements
 		if (vi == View.VISIBLE) {
 			share_bottom.setVisibility(View.GONE);
 			((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-					.hideSoftInputFromWindow(MineSpaceActivity.this
+					.hideSoftInputFromWindow(ShareByTagActivity.this
 							.getCurrentFocus().getWindowToken(),
 							InputMethodManager.HIDE_NOT_ALWAYS);
 		}

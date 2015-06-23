@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -94,6 +94,11 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Tag tag = dataSource.get(position);
+				String tagId = tag.getId();
+				Intent it = new Intent(MainPageLayoutTagActivity.this,
+						ShareByTagActivity.class);
+				it.putExtra("tagId", tagId);
+				startActivity(it);
 			}
 		});
 
