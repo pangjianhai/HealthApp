@@ -25,8 +25,8 @@ public class PushExample {
 			.getLogger(PushExample.class);
 
 	// demo App defined in resources/jpush-api.conf
-	private static final String appKey = "010b8c6cfca2cc64e7f513b3";
-	private static final String masterSecret = "eed635a975d42a167e68c2ed";
+	private static final String appKey = "2f2bbdcd69bf3749b8577f22";
+	private static final String masterSecret = "88495ca3f173c3a7a86853af";
 
 	public static final String TITLE = "消息标题";
 	public static final String ALERT = "警报信息";
@@ -40,8 +40,8 @@ public class PushExample {
 
 	public static void testSendPush() {
 		JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
-		PushPayload payload = push_zcinfo_to_user("yyyyyyyyyyy",
-				"国家鼓励大众创业，万众创新", "123");
+		PushPayload payload = push_zcinfo_to_user("5534bbf219ba8f03c39a50b7",
+				"吃对食物抗过敏 不做“敏感”之人", "ziLegfyjxjGcarEUtjZu6BN8SYyJYK7G");
 
 		try {
 			PushResult result = jpushClient.sendPush(payload);
@@ -73,7 +73,7 @@ public class PushExample {
 				.setNotification(
 						Notification
 								.newBuilder()
-								.setAlert("最新政府政策：" + zcTitle)
+								.setAlert("最新健康消息：" + zcTitle)
 								.addPlatformNotification(
 										AndroidNotification.newBuilder()
 												.addExtras(maps)
