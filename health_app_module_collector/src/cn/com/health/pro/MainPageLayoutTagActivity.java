@@ -7,11 +7,9 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
-import android.opengl.Visibility;
+import android.R.color;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,10 +23,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.TagAdapter;
 import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.util.TagUtils;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * 
@@ -65,6 +68,7 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		setContentView(R.layout.main_page_layout_tag);
 		initListView();
 		initTagInput();
+		initSelfTag();
 
 	}
 
@@ -224,4 +228,24 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		}
 	}
 
+	public void initSelfTag() {
+
+		Button tagBtn = createMyButtonTag();
+		selected_tag_linearlayout.addView(tagBtn);
+		selected_tag_linearlayout.setVisibility(View.VISIBLE);
+	}
+
+	private Button createMyButtonTag() {
+		Drawable bg = getApplication().getResources().getDrawable(
+				R.drawable.tag_bg2);
+		Button tv1 = new Button(getApplicationContext());
+		tv1.setText("标签1");
+		// tv1.setBackgroundDrawable(bg);
+		int black_color = Color.parseColor("#000000");
+		tv1.setTextColor(black_color);
+		tv1.setBackgroundResource(R.drawable.round_button);
+		tv1.setTextSize(11);
+		return tv1;
+
+	}
 }

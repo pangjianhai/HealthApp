@@ -37,22 +37,31 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/selected_tag_linearlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:visibility="gone" >
+            android:id="@+id/selected_tag_input_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/share_send_commont_tags_input"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/tag_input_search"
+                android:gravity="left"
+                android:hint="@string/share_health_input"
+                android:paddingTop="4dp"
+                android:textSize="13sp" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/share_send_commont_tags_input"
+        <LinearLayout
+            android:id="@+id/selected_tag_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@drawable/tag_input_search"
-            android:gravity="left"
-            android:hint="@string/share_health_input"
-            android:paddingTop="4dp"
-            android:textSize="13sp" />
+            android:layout_height="40dp"
+            android:divider="@drawable/divider2"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:visibility="visible" >
+        </LinearLayout>
 
         <ListView
             android:id="@+id/search_tags_listview"
