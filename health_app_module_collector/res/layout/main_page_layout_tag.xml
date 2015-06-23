@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="健康排行榜"
+            android:text="个性匹配"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -35,6 +35,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_space_title_bar"
         android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/selected_tag_linearlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/share_send_commont_tags_input"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_edittext"
+            android:gravity="left"
+            android:hint="@string/share_health_input"
+            android:paddingTop="4dp"
+            android:textSize="13sp" />
+
+        <ListView
+            android:id="@+id/search_tags_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/white"
+            android:dividerHeight="3dp"
+            android:footerDividersEnabled="true"
+            android:paddingTop="4dp"
+            android:visibility="gone" >
+        </ListView>
     </LinearLayout>
 
     <RelativeLayout

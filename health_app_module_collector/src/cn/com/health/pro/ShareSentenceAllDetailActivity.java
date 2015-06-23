@@ -66,6 +66,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 		setContentView(R.layout.share_sentence_all_detail);
 		Intent intent = getIntent();
 		share_sentence_id = intent.getStringExtra("share_sentence_id");
+		System.out.println("-----------------------"+share_sentence_id);
 		init();
 	}
 
@@ -88,6 +89,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
+					System.out.println("data:"+data);
 					ShareSentenceEntity entity = ShareSentenceUtil
 							.parseJsonAddToEntity(data);
 					renderText(entity);

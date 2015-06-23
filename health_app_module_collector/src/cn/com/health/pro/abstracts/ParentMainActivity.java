@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import cn.com.health.pro.BaseActivity;
-import cn.com.health.pro.MainPageLayoutInfoActivity;
 import cn.com.health.pro.MainPageLayoutMeActivity;
 import cn.com.health.pro.MainPageLayoutOrderActivity;
 import cn.com.health.pro.MainPageLayoutSpaceActivity;
+import cn.com.health.pro.MainPageLayoutTagActivity;
 import cn.com.health.pro.R;
 import cn.com.health.pro.SharePrepareActivity;
 import cn.com.health.pro.persist.SharedPreInto;
@@ -97,7 +97,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 			startActivity(intent);
 		} else if (v.getId() == R.id.main_page_layout_info_btn) {
 			Intent intent = new Intent(ParentMainActivity.this,
-					MainPageLayoutInfoActivity.class);
+					MainPageLayoutTagActivity.class);
 			startActivity(intent);
 		} else if (v.getId() == R.id.main_page_layout_order_btn) {
 			Intent intent = new Intent(ParentMainActivity.this,

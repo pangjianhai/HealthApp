@@ -35,7 +35,7 @@ public class ShareSentenceUtil {
 			String commentNum = obj.has("commentNum") ? obj
 					.getString("commentNum") : "0";
 			String createDate = obj.getString("createDate");
-			String tags = obj.getString("tags");
+			String tags = obj.has("tags")?obj.getString("tags"):"";
 			bean.setType(type);
 			bean.setContent(content);
 			bean.setUserId(userId);
@@ -117,7 +117,7 @@ public class ShareSentenceUtil {
 				String disLikeNum = obj.getString("disLikeNum");
 				String createDate = obj.getString("createDateStr");
 				String commentNum = obj.getString("commentNum");
-				String tags = obj.getString("tags");
+				String tags = obj.has("tags")?obj.getString("tags"):"";
 				bean.setId(id);
 				bean.setType(type);
 				bean.setContent(content);
