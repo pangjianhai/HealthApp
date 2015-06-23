@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fcfcfc"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/selected_tag_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/share_send_commont_tags_input"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_edittext"
+        android:gravity="top"
+        android:hint="@string/share_health_input"
+        android:textSize="13sp" />
+
+    <ListView
+        android:id="@+id/search_tags_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/white"
+        android:dividerHeight="3dp"
+        android:footerDividersEnabled="true" >
+    </ListView>
+
+</LinearLayout>
