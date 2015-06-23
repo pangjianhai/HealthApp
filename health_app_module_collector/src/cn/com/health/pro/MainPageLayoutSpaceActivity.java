@@ -224,7 +224,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	private void freshData(List<ShareSentenceEntity> list) {
-	//	System.out.println("list:" + list.size());
+		// System.out.println("list:" + list.size());
 		dataSourceList.addAll(0, list);
 		setLastestShareId();
 		itemAdapter.notifyDataSetChanged();
@@ -313,7 +313,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	public void onRefresh() {
 		// dataSourceList.clear();
 		// loadDataMore();
-		//System.out.println("------------------开始刷新");
+		// System.out.println("------------------开始刷新");
 		freshData();
 	}
 
@@ -411,6 +411,19 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 							.getCurrentFocus().getWindowToken(),
 							InputMethodManager.HIDE_NOT_ALWAYS);
 		}
+	}
+
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年6月22日
+	 * @todo:查看信息库
+	 * @return:void
+	 */
+	public void to_info_rep(View v) {
+		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
+				MainPageLayoutInfoActivity.class);
+		startActivity(intent);
 	}
 
 }
