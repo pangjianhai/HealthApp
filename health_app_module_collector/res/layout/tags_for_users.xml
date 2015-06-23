@@ -1,33 +1,66 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#fcfcfc"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/layout_space_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/space_title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/common_title_bar_color"
+            android:onClick="backoff"
+            android:src="@drawable/close_page" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的健康档案"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/input_tag_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/layout_space_title_bar"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/share_send_commont_tags_input"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_edittext"
+            android:gravity="left"
+            android:hint="@string/share_health_input"
+            android:textSize="13sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/selected_tag_linearlayout"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_below="@+id/input_tag_linearlayout"
         android:orientation="horizontal"
         android:visibility="gone" >
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/share_send_commont_tags_input"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/bg_edittext"
-        android:gravity="top"
-        android:hint="@string/share_health_input"
-        android:textSize="13sp" />
 
     <ListView
         android:id="@+id/search_tags_listview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/selected_tag_linearlayout"
         android:divider="@color/white"
         android:dividerHeight="3dp"
         android:footerDividersEnabled="true" >
     </ListView>
 
-</LinearLayout>
+</RelativeLayout>

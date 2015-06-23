@@ -330,12 +330,12 @@ public final class R {
         public static final int xlistview_arrow=0x7f020106;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a00c9;
+        public static final int action_settings=0x7f0a00ca;
         public static final int bottom=0x7f0a0006;
         public static final int bottom_layout=0x7f0a0069;
         public static final int btn_back=0x7f0a0003;
         public static final int check=0x7f0a000a;
-        public static final int check_list_by_type=0x7f0a00bb;
+        public static final int check_list_by_type=0x7f0a00bc;
         public static final int check_someone=0x7f0a0021;
         public static final int choose=0x7f0a0036;
         public static final int choose_photo=0x7f0a0001;
@@ -346,12 +346,12 @@ public final class R {
         public static final int date_next=0x7f0a0051;
         public static final int date_pre=0x7f0a0053;
         public static final int doc_bottom=0x7f0a002a;
-        public static final int edit_user_birthday=0x7f0a00c0;
-        public static final int edit_user_header=0x7f0a00bc;
-        public static final int edit_user_id=0x7f0a00bd;
-        public static final int edit_user_nickname=0x7f0a00be;
-        public static final int edit_user_sex=0x7f0a00bf;
-        public static final int edit_user_signiture=0x7f0a00c1;
+        public static final int edit_user_birthday=0x7f0a00c1;
+        public static final int edit_user_header=0x7f0a00bd;
+        public static final int edit_user_id=0x7f0a00be;
+        public static final int edit_user_nickname=0x7f0a00bf;
+        public static final int edit_user_sex=0x7f0a00c0;
+        public static final int edit_user_signiture=0x7f0a00c2;
         public static final int find_search_result_header=0x7f0a001e;
         public static final int find_search_result_tags=0x7f0a0020;
         public static final int find_search_result_username=0x7f0a001f;
@@ -364,7 +364,7 @@ public final class R {
         public static final int id_dir_item_image=0x7f0a0033;
         public static final int id_dir_item_name=0x7f0a0034;
         public static final int id_viewPager=0x7f0a005d;
-        public static final int if_focus=0x7f0a00ba;
+        public static final int if_focus=0x7f0a00bb;
         public static final int image=0x7f0a005f;
         public static final int info_content=0x7f0a0028;
         public static final int info_detail_author=0x7f0a0024;
@@ -381,6 +381,7 @@ public final class R {
         public static final int info_type_listview=0x7f0a0032;
         public static final int infodetail_content_view=0x7f0a0026;
         public static final int infodetail_ops_select_pic=0x7f0a0098;
+        public static final int input_tag_linearlayout=0x7f0a00b9;
         public static final int items_ops_rlayout=0x7f0a0029;
         public static final int iv=0x7f0a0009;
         public static final int key_copy=0x7f0a001d;
@@ -490,14 +491,14 @@ public final class R {
         public static final int share_time=0x7f0a009f;
         public static final int share_type=0x7f0a009c;
         public static final int share_username=0x7f0a009b;
-        public static final int showUserBtu=0x7f0a00c8;
+        public static final int showUserBtu=0x7f0a00c9;
         public static final int show_pic_viewpager_title=0x7f0a005b;
-        public static final int show_user_detail_account=0x7f0a00c4;
-        public static final int show_user_detail_birthday=0x7f0a00c6;
-        public static final int show_user_detail_email=0x7f0a00c7;
-        public static final int show_user_detail_head=0x7f0a00c2;
-        public static final int show_user_detail_nickname=0x7f0a00c3;
-        public static final int show_user_detail_sex=0x7f0a00c5;
+        public static final int show_user_detail_account=0x7f0a00c5;
+        public static final int show_user_detail_birthday=0x7f0a00c7;
+        public static final int show_user_detail_email=0x7f0a00c8;
+        public static final int show_user_detail_head=0x7f0a00c3;
+        public static final int show_user_detail_nickname=0x7f0a00c4;
+        public static final int show_user_detail_sex=0x7f0a00c6;
         public static final int single_share_bottom_ops_comment=0x7f0a00b4;
         public static final int single_share_bottom_ops_nook=0x7f0a00b6;
         public static final int single_share_bottom_ops_ok=0x7f0a00b5;
@@ -521,7 +522,7 @@ public final class R {
         public static final int title=0x7f0a0027;
         public static final int top_layout=0x7f0a0063;
         public static final int tv_pop=0x7f0a0076;
-        public static final int typename=0x7f0a00b9;
+        public static final int typename=0x7f0a00ba;
         public static final int viewpage=0x7f0a007b;
         public static final int xlistview_footer_content=0x7f0a0073;
         public static final int xlistview_footer_hint_textview=0x7f0a0075;
