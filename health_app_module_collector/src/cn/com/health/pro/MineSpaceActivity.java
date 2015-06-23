@@ -143,8 +143,6 @@ public class MineSpaceActivity extends BaseActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					List<ShareSentenceEntity> lst = ShareSentenceUtil
 							.parseJsonAddToList(responseInfo.result);
-					System.out.println("responseInfo.result:"
-							+ responseInfo.result);
 					asyncAddNewData(lst);
 				}
 
@@ -155,7 +153,6 @@ public class MineSpaceActivity extends BaseActivity implements
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			System.out.println("d.:" + d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.FunctionUrl.getShareByUserId, map, rcb);
 		} catch (Exception e) {

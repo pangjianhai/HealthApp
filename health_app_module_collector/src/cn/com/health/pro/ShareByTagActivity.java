@@ -1,7 +1,15 @@
 package cn.com.health.pro;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +32,12 @@ import cn.com.health.pro.part.XListView.IXListViewListener;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.task.ShareSentenceAsyncTask;
 import cn.com.health.pro.util.IShareCallbackOperator;
+import cn.com.health.pro.util.ShareSentenceUtil;
 
 /**
  * 
  * @author pang
- * @todo 个人健康空间activity
+ * @todo 根据标签获取分享信息activity
  *
  */
 public class ShareByTagActivity extends BaseActivity implements
@@ -75,14 +84,11 @@ public class ShareByTagActivity extends BaseActivity implements
 		setContentView(R.layout.share_by_tag);
 		userId = HealthApplication.getUserId();
 		tagId = getIntent().getStringExtra("tagId");
-		System.out.println("tagId:" + tagId);
 		findView();
-		System.out.println("--------------------------------0");
 		/**
 		 * 先后顺序
 		 */
 		initListView();
-		System.out.println("--------------------------------1");
 		loadDataMore();
 	}
 
@@ -126,10 +132,33 @@ public class ShareByTagActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	private void loadDataMore() {
-		currentPage = currentPage + 1;
-		ShareSentenceAsyncTask task = new ShareSentenceAsyncTask(
-				ShareByTagActivity.this);
-		task.execute(userId, currentPage + "");
+		try {
+			currentPage = currentPage + 1;
+			JSONObject d = new JSONObject();
+			d.put("tagId", tagId);
+			d.put("begin", currentPage + "");
+			d.put("limit", 4);
+
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					List<ShareSentenceEntity> lst = ShareSentenceUtil
+							.parseJsonAddToList(responseInfo.result);
+					asyncAddNewData(lst);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.get_share_by_tag, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void asyncAddNewData(List<ShareSentenceEntity> lst) {

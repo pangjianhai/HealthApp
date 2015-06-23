@@ -22,7 +22,7 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	public static final String server_url = "http://192.168.0.101:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
 
 	// public static final String server_url =
 	// "http://192.168.0.105:8080/IotApp/";
@@ -194,6 +194,10 @@ public class SystemConst {
 		 * 根据关键词搜索标签
 		 */
 		public static final String get_tag_by_key = "appSourceController/queryTagBytagName.do";
+
+		/**
+		 */
+		public static final String get_share_by_tag = "appSourceController/getShareTagsByTagId.do";
 	}
 
 	/**
