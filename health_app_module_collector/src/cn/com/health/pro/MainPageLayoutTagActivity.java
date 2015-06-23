@@ -34,7 +34,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 /**
  * 
  * @author pang
- * @todo 首页我的排行
+ * @todo 查看标签库的所有标签
  *
  */
 public class MainPageLayoutTagActivity extends ParentMainActivity {
@@ -261,6 +261,8 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	public void add_my_tag(View v) {
-
+		Intent it = new Intent(getApplicationContext(),
+				TagsForUserActivity.class);
+		startActivity(it);
 	}
 }
