@@ -63,12 +63,20 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.main_page_layout_tag);
-		init();
+		initListView();
 		initTagInput();
 
 	}
 
-	private void init() {
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月23日
+	 * @todo:初始化标签选择listview
+	 * @return:void
+	 */
+	private void initListView() {
 		search_tags_listview = (ListView) findViewById(R.id.search_tags_listview);
 		/**
 		 * 加载按钮的操作view
@@ -101,14 +109,16 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 
 			@Override
 			public void onClick(View v) {
+				freshDataForListView();
 			}
 		});
 	}
 
 	/**
 	 * 
+	 * 
 	 * @user:pang
-	 * @data:2015年6月21日
+	 * @data:2015年6月23日
 	 * @todo:初始化输入框
 	 * @return:void
 	 */
@@ -147,6 +157,14 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 
 	}
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月23日
+	 * @todo:进行新的关键词搜索之前清空之前的搜索
+	 * @return:void
+	 */
 	public void clearListView() {
 		search_tags_listview.setVisibility(View.GONE);
 		dataSource.clear();
@@ -154,9 +172,11 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @user:pang
-	 * @data:2015年6月21日
-	 * @todo:刷新
+	 * @data:2015年6月23日
+	 * @todo:根据关键词搜索标签
 	 * @return:void
 	 */
 	public void freshDataForListView() {
