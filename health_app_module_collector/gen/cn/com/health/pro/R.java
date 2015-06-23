@@ -308,20 +308,23 @@ public final class R {
         public static final int tag_active=0x7f0200f0;
         public static final int tag_bg=0x7f0200f1;
         public static final int tag_default=0x7f0200f2;
-        public static final int tag_shape=0x7f0200f3;
-        public static final int title_bar=0x7f0200f4;
-        public static final int title_btn_back=0x7f0200f5;
-        public static final int title_btn_function=0x7f0200f6;
-        public static final int title_btn_right=0x7f0200f7;
-        public static final int toolbar_saysomething_icon_nor=0x7f0200f8;
-        public static final int toolbar_saysomething_icon_res=0x7f0200f9;
-        public static final int welcome=0x7f0200fa;
-        public static final int widget_icon_write=0x7f0200fb;
-        public static final int widget_icon_write_highlighted=0x7f0200fc;
-        public static final int xiaohei=0x7f0200fd;
-        public static final int xiaohei_big=0x7f0200fe;
-        public static final int xinxi=0x7f0200ff;
-        public static final int xlistview_arrow=0x7f020100;
+        public static final int tag_input_normal=0x7f0200f3;
+        public static final int tag_input_pressed=0x7f0200f4;
+        public static final int tag_input_search=0x7f0200f5;
+        public static final int tag_shape=0x7f0200f6;
+        public static final int title_bar=0x7f0200f7;
+        public static final int title_btn_back=0x7f0200f8;
+        public static final int title_btn_function=0x7f0200f9;
+        public static final int title_btn_right=0x7f0200fa;
+        public static final int toolbar_saysomething_icon_nor=0x7f0200fb;
+        public static final int toolbar_saysomething_icon_res=0x7f0200fc;
+        public static final int welcome=0x7f0200fd;
+        public static final int widget_icon_write=0x7f0200fe;
+        public static final int widget_icon_write_highlighted=0x7f0200ff;
+        public static final int xiaohei=0x7f020100;
+        public static final int xiaohei_big=0x7f020101;
+        public static final int xinxi=0x7f020102;
+        public static final int xlistview_arrow=0x7f020103;
     }
     public static final class id {
         public static final int action_settings=0x7f0a00c8;
