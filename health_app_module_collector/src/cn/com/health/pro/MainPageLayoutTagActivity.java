@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import android.R.color;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.TagAdapter;
 import cn.com.health.pro.model.Tag;
@@ -236,8 +234,8 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	}
 
 	private Button createMyButtonTag() {
-		Drawable bg = getApplication().getResources().getDrawable(
-				R.drawable.tag_bg_normalpressed);
+		// Drawable bg = getApplication().getResources().getDrawable(
+		// R.drawable.tag_bg_normalpressed);
 		Button tv1 = new Button(getApplicationContext());
 		tv1.setText("标签1");
 		// tv1.setBackgroundDrawable(bg);
@@ -246,6 +244,18 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		tv1.setBackgroundResource(R.drawable.round_button);
 		tv1.setTextSize(11);
 		return tv1;
+
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年6月23日
+	 * @todo:添加自定义标签
+	 * @return:void
+	 */
+	public void add_my_tag(View v) {
 
 	}
 }

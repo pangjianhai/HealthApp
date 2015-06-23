@@ -27,6 +27,16 @@
             android:text="个性匹配"
             android:textColor="@color/black"
             android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="#00ffffff"
+            android:onClick="add_my_tag"
+            android:src="@drawable/addtag1" />
     </RelativeLayout>
 
     <LinearLayout
@@ -48,7 +58,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/tag_input_search"
                 android:gravity="left"
-                android:hint="@string/share_health_input"
+                android:hint="@string/tag_input_search"
                 android:paddingTop="4dp"
                 android:textSize="13sp" />
         </LinearLayout>

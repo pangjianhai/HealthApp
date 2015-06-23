@@ -48,4 +48,5 @@
     <string name="friends_add_search_firends">搜索好友</string>
     <string name="friends_add_search_firends_results">搜索结果</string>
     <string name="xxxxxxxxxxxxxxx">测试</string>
+    <string name="tag_input_search">标签匹配</string>
 </resources>
