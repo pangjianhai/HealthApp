@@ -307,9 +307,9 @@ public final class R {
         public static final int tag7=0x7f0200ef;
         public static final int tag8=0x7f0200f0;
         public static final int tag_active=0x7f0200f1;
-        public static final int tag_bg=0x7f0200f2;
-        public static final int tag_bg0=0x7f0200f3;
-        public static final int tag_bg2=0x7f0200f4;
+        public static final int tag_bg0=0x7f0200f2;
+        public static final int tag_bg2=0x7f0200f3;
+        public static final int tag_bg_normalpressed=0x7f0200f4;
         public static final int tag_default=0x7f0200f5;
         public static final int tag_input_normal=0x7f0200f6;
         public static final int tag_input_pressed=0x7f0200f7;

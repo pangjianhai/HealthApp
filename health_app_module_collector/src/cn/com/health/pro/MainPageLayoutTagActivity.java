@@ -237,7 +237,7 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 
 	private Button createMyButtonTag() {
 		Drawable bg = getApplication().getResources().getDrawable(
-				R.drawable.tag_bg2);
+				R.drawable.tag_bg_normalpressed);
 		Button tv1 = new Button(getApplicationContext());
 		tv1.setText("标签1");
 		// tv1.setBackgroundDrawable(bg);

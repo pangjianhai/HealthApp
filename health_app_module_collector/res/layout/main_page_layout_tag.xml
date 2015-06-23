@@ -60,7 +60,7 @@
             android:divider="@drawable/divider2"
             android:orientation="horizontal"
             android:showDividers="middle"
-            android:visibility="visible" >
+            android:visibility="gone" >
         </LinearLayout>
 
         <ListView
