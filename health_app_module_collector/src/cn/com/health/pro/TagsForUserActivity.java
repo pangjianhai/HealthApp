@@ -188,6 +188,7 @@ public class TagsForUserActivity extends BaseActivity {
 		TextView btn2 = new TextView(this);
 		btn2.setText(tName);
 		btn2.setTextSize(14);
+		btn2.setPadding(0, 0, 2, 0);
 		btn2.setBackgroundResource(R.drawable.self_tag_shape);
 
 		/**
@@ -385,7 +386,6 @@ public class TagsForUserActivity extends BaseActivity {
 	/************************************************** 初始化已经选过的标签 ************************************************************************/
 	public void initSelfTag() {
 		try {
-			page = page + 1;
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
 

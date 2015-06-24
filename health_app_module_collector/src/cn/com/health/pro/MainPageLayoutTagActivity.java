@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.TagAdapter;
 import cn.com.health.pro.model.Tag;
@@ -231,25 +232,76 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月24日
+	 * @todo:初始化用户已经选中过的标签
+	 * @return:void
+	 */
 	public void initSelfTag() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("userId", userId);
 
-		Button tagBtn = createMyButtonTag();
-		selected_tag_linearlayout.addView(tagBtn);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					List<Tag> list = TagUtils
+							.parseJsonAddToList(responseInfo.result);
+					if (list != null && !list.isEmpty()) {
+						repaintUI(list);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.get_tags_by_user, map, rcb);
+		} catch (Exception e) {
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param list
+	 * @user:pang
+	 * @data:2015年6月24日
+	 * @todo:根据用户选中过的标签渲染页面
+	 * @return:void
+	 */
+	private void repaintUI(List<Tag> list) {
+		for (Tag tag : list) {
+			View tagBtn = createMyButtonTag(tag);
+			selected_tag_linearlayout.addView(tagBtn);
+		}
 		selected_tag_linearlayout.setVisibility(View.VISIBLE);
 	}
 
-	private Button createMyButtonTag() {
-		// Drawable bg = getApplication().getResources().getDrawable(
-		// R.drawable.tag_bg_normalpressed);
-		Button tv1 = new Button(getApplicationContext());
-		tv1.setText("标签1");
-		// tv1.setBackgroundDrawable(bg);
-		int black_color = Color.parseColor("#000000");
-		tv1.setTextColor(black_color);
-		tv1.setBackgroundResource(R.drawable.round_button);
-		tv1.setTextSize(11);
-		return tv1;
-
+	/**
+	 * 
+	 * @param tag
+	 * @return
+	 * @user:pang
+	 * @data:2015年6月24日
+	 * @todo:创造渲染的单个元素
+	 * @return:View
+	 */
+	private View createMyButtonTag(Tag tag) {
+		String tName = tag.getDisplayName();
+		TextView btn2 = new TextView(this);
+		btn2.setText(tName);
+		btn2.setTextSize(14);
+		btn2.setPadding(0, 0, 2, 0);
+		btn2.setBackgroundResource(R.drawable.self_tag_shape);
+		return btn2;
 	}
 
 	/**

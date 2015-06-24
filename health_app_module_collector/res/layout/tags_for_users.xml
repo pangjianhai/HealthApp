@@ -58,14 +58,15 @@
     <LinearLayout
         android:id="@+id/selected_tag_linearlayout_hint"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/input_tag_linearlayout"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="已经选择的标签：" />
+            android:text="已经选择的标签："
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +76,7 @@
         android:layout_below="@+id/selected_tag_linearlayout_hint"
         android:divider="@drawable/divider2"
         android:orientation="horizontal"
+        android:paddingTop="4dp"
         android:visibility="gone" >
     </LinearLayout>
 
