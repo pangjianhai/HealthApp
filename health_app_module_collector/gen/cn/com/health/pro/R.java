@@ -639,6 +639,7 @@ public final class R {
         public static final int share_prepare_go=0x7f07000a;
         public static final int share_prepare_info=0x7f07000b;
         public static final int share_prepare_top_hint=0x7f070008;
+        public static final int tag_input_request=0x7f07002c;
         public static final int tag_input_search=0x7f07002b;
         public static final int xlistview_footer_hint_normal=0x7f07001d;
         public static final int xlistview_footer_hint_ready=0x7f07001e;

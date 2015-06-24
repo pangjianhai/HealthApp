@@ -307,6 +307,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 			 */
 			@Override
 			public void afterTextChanged(Editable edit) {
+				clearListView();// 清空listview重新生成
 				key = edit.toString();// 关键词
 				page = 0;// 重新搜索
 				dataSource.clear();// 关键词换了，列表清空
@@ -317,6 +318,20 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 			}
 		});
 
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月24日
+	 * @todo:进行新的关键词搜索之前清空之前的搜索
+	 * @return:void
+	 */
+	public void clearListView() {
+		search_tags_listview.setVisibility(View.GONE);
+		dataSource.clear();
+		adapter.notifyDataSetChanged();
 	}
 
 	/**
@@ -386,7 +401,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		if (!ifChosen(tag)) {
 			tags_selected.add(tag);// 将选择的tag放入list中
 			selected_tag_linearlayout.setVisibility(View.VISIBLE);
-			Button btn2 = createButton(tag);
+			View btn2 = createButton(tag);
 			selected_tag_linearlayout.addView(btn2);
 		}
 	}
@@ -423,17 +438,14 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	 * @todo:构造每一个选中的标签
 	 * @return:Button
 	 */
-	private Button createButton(Tag tag) {
+	private View createButton(Tag tag) {
 		final String tId = tag.getId();
 		String tName = tag.getDisplayName();
-		Button btn2 = new Button(this);
+		TextView btn2 = new TextView(this);
 		btn2.setText(tName);
-		Drawable d = getApplication().getResources().getDrawable(
-				R.drawable.tag6);
-		btn2.setBackgroundDrawable(d);
 		btn2.setTextSize(14);
-		btn2.setHeight(10);
-		btn2.setMinHeight(11);// 构造完毕button
+		btn2.setPadding(0, 0, 2, 0);
+		btn2.setBackgroundResource(R.drawable.self_tag_shape);
 		/**
 		 * 添加监听事件，可以让用户删除标签
 		 */
@@ -486,7 +498,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 				final String tId = tag.getId();
 				if (!tId.equals(willDelId)) {// 把选中的排除在外
 					new_selected_list.add(tag);// 把留下来的tag放入新的list
-					Button btn2 = createButton(tag);
+					View btn2 = createButton(tag);
 					selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
 				}
 			}
@@ -516,6 +528,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					List<Tag> list = TagUtils
 							.parseJsonAddToList(responseInfo.result);
+					search_tags_listview.setVisibility(View.VISIBLE);
 					if (list != null && !list.isEmpty()) {
 						dataSource.addAll(list);
 						adapter.notifyDataSetChanged();
