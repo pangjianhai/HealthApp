@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.health.pro.adapter.TagAdapter;
 import cn.com.health.pro.model.Tag;
@@ -176,22 +177,19 @@ public class TagsForUserActivity extends BaseActivity {
 		if (!ifChosen(tag)) {
 			tags_selected.add(tag);// 将选择的tag放入list中
 			selected_tag_linearlayout.setVisibility(View.VISIBLE);
-			Button btn2 = createButton(tag);
+			View btn2 = createButton(tag);
 			selected_tag_linearlayout.addView(btn2);
 		}
 	}
 
-	private Button createButton(Tag tag) {
+	private View createButton(Tag tag) {
 		final String tId = tag.getId();
 		String tName = tag.getDisplayName();
-		Button btn2 = new Button(this);
+		TextView btn2 = new TextView(this);
 		btn2.setText(tName);
-		Drawable d = getApplication().getResources().getDrawable(
-				R.drawable.tag6);
-		btn2.setBackgroundDrawable(d);
 		btn2.setTextSize(14);
-		btn2.setHeight(10);
-		btn2.setMinHeight(11);// 构造完毕button
+		btn2.setBackgroundResource(R.drawable.self_tag_shape);
+
 		/**
 		 * 添加监听事件，可以让用户删除标签
 		 */
@@ -237,7 +235,7 @@ public class TagsForUserActivity extends BaseActivity {
 				final String tId = tag.getId();
 				if (!tId.equals(willDelId)) {// 把选中的排除在外
 					new_selected_list.add(tag);// 把留下来的tag放入新的list
-					Button btn2 = createButton(tag);
+					View btn2 = createButton(tag);
 					selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
 				}
 			}
@@ -427,7 +425,7 @@ public class TagsForUserActivity extends BaseActivity {
 		if (tags_selected != null && !tags_selected.isEmpty()) {
 			selected_tag_linearlayout.removeAllViews();// 请控所有的
 			for (Tag tag : tags_selected) {
-				Button btn2 = createButton(tag);
+				View btn2 = createButton(tag);
 				selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
 			}
 			selected_tag_linearlayout.setVisibility(View.VISIBLE);

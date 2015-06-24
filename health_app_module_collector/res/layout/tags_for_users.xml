@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/layout_space_title_bar"
@@ -25,7 +26,8 @@
             android:text="我的标签"
             android:textColor="@color/black"
             android:textSize="20sp" />
-        <ImageButton
+
+        <ImageButton
             android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -54,10 +56,24 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/selected_tag_linearlayout"
+        android:id="@+id/selected_tag_linearlayout_hint"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_below="@+id/input_tag_linearlayout"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="已经选择的标签：" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/selected_tag_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/selected_tag_linearlayout_hint"
+        android:divider="@drawable/divider2"
         android:orientation="horizontal"
         android:visibility="gone" >
     </LinearLayout>
