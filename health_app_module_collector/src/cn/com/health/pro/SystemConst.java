@@ -22,7 +22,7 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	public static final String server_url = "http://192.168.0.101:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
 
 	// public static final String server_url =
 	// "http://192.168.0.105:8080/IotApp/";
@@ -196,8 +196,19 @@ public class SystemConst {
 		public static final String get_tag_by_key = "appSourceController/queryTagBytagName.do";
 
 		/**
+		 * 根据标签获取分享信息
 		 */
 		public static final String get_share_by_tag = "appSourceController/getShareTagsByTagId.do";
+
+		/**
+		 * 给用户添加标签
+		 */
+		public static final String add_tag_to_user = "appSourceController/addUserTagsByUserId.do";
+
+		/**
+		 * 根据用户ID获取已经自定义的标签
+		 */
+		public static final String get_tags_by_user = "appSourceController/getUserTagsByUserId.do";
 	}
 
 	/**

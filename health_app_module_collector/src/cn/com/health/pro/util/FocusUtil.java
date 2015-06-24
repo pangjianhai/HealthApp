@@ -2,8 +2,6 @@ package cn.com.health.pro.util;
 
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
-
 /**
  * 
  * @author pang
@@ -20,7 +18,6 @@ public class FocusUtil {
 	 * @todo 解析关注之后的返回结果，是否关注成功
 	 * @author pang
 	 */
-	@SuppressLint("UseValueOf")
 	public static Boolean commonFocusResult(String data) {
 		try {
 			JSONObject or_obj = new JSONObject(data);
