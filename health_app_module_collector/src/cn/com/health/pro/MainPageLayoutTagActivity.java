@@ -332,5 +332,19 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		Intent it = new Intent(getApplicationContext(),
 				TagsForUserActivity.class);
 		startActivity(it);
+		finish();
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年6月24日
+	 * @todo:返回
+	 * @return:void
+	 */
+	public void backoff(View v) {
+		to_home_page();
+		finish();
 	}
 }

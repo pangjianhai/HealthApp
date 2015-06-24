@@ -338,6 +338,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	public void backoff(View v) {
+		to_home_page();
 		finish();
 	}
 

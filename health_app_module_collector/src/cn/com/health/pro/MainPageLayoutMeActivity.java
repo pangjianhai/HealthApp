@@ -143,6 +143,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	}
 
 	public void backoff(View v) {
+		to_home_page();
 		finish();
 	}
 }

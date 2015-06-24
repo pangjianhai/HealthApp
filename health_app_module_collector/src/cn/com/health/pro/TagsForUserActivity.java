@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -357,6 +358,9 @@ public class TagsForUserActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					Toast.makeText(getApplicationContext(), "添加成功",
 							Toast.LENGTH_SHORT).show();
+					Intent it = new Intent(getApplicationContext(),
+							MainPageLayoutTagActivity.class);
+					startActivity(it);
 					finish();
 				}
 

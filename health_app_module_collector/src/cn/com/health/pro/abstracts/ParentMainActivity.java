@@ -107,4 +107,18 @@ public abstract class ParentMainActivity extends BaseActivity {
 		finish();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月24日
+	 * @todo:返回首页
+	 * @return:void
+	 */
+	public void to_home_page() {
+		Intent intent = new Intent(getApplicationContext(),
+				MainPageLayoutSpaceActivity.class);
+		startActivity(intent);
+	}
+
 }
