@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -107,6 +106,7 @@ public class TagsForUserActivity extends BaseActivity {
 			 */
 			@Override
 			public void afterTextChanged(Editable edit) {
+				clearListView();// 清空listview重新生成
 				key = edit.toString();// 关键词
 				page = 0;// 重新搜索
 				dataSource.clear();// 关键词换了，列表清空
@@ -117,6 +117,20 @@ public class TagsForUserActivity extends BaseActivity {
 			}
 		});
 
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月23日
+	 * @todo:进行新的关键词搜索之前清空之前的搜索
+	 * @return:void
+	 */
+	public void clearListView() {
+		search_tags_listview.setVisibility(View.GONE);
+		dataSource.clear();
+		adapter.notifyDataSetChanged();
 	}
 
 	public void initTagView() {
@@ -291,6 +305,7 @@ public class TagsForUserActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					List<Tag> list = TagUtils
 							.parseJsonAddToList(responseInfo.result);
+					search_tags_listview.setVisibility(View.VISIBLE);
 					if (list != null && !list.isEmpty()) {
 						dataSource.addAll(list);
 						adapter.notifyDataSetChanged();

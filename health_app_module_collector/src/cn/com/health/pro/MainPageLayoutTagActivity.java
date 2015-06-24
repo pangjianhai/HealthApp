@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -295,12 +297,26 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	 * @return:View
 	 */
 	private View createMyButtonTag(Tag tag) {
+		final String tId = tag.getId();
 		String tName = tag.getDisplayName();
 		TextView btn2 = new TextView(this);
 		btn2.setText(tName);
 		btn2.setTextSize(14);
 		btn2.setPadding(0, 0, 2, 0);
 		btn2.setBackgroundResource(R.drawable.self_tag_shape);
+		/**
+		 * 添加监听事件，可以让用户删除标签
+		 */
+		btn2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent it = new Intent(MainPageLayoutTagActivity.this,
+						ShareByTagActivity.class);
+				it.putExtra("tagId", tId);
+				startActivity(it);
+			}
+		});
 		return btn2;
 	}
 
