@@ -156,10 +156,6 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 			intent.putExtra("doc_id", id);
 			startActivity(intent);
 		}
-		Intent intent = new Intent(MainPageLayoutMeCollectionActivity.this,
-				ShowUserInfoDetail.class);
-		intent.putExtra("uuid", id);
-		startActivity(intent);
 	}
 
 	/**
