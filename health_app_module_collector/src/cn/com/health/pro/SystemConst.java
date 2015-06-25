@@ -7,6 +7,10 @@ package cn.com.health.pro;
  *
  */
 public class SystemConst {
+	/**
+	 * 普通一页多少航
+	 */
+	public static final int page_size = 20;
 
 	public static final String mobile_local_dir = "G_HEALTH";
 
@@ -209,6 +213,11 @@ public class SystemConst {
 		 * 根据用户ID获取已经自定义的标签
 		 */
 		public static final String get_tags_by_user = "appSourceController/getUserTagsByUserId.do";
+
+		/**
+		 * 根据用户ID获取用户收藏
+		 */
+		public static final String get_collection_by_id = "appSourceController/getCollectsByuserId.do";
 	}
 
 	/**

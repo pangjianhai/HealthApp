@@ -420,9 +420,9 @@ public final class R {
         public static final int me_my_focusme=0x7f0a0049;
         public static final int me_my_msg=0x7f0a004b;
         public static final int me_my_shoucang=0x7f0a004d;
-        public static final int my_collection_id=0x7f0a001a;
+        public static final int my_collection_id=0x7f0a0019;
         public static final int my_collection_listview=0x7f0a004f;
-        public static final int my_collection_title=0x7f0a0019;
+        public static final int my_collection_title=0x7f0a001a;
         public static final int pic_folder_select=0x7f0a0007;
         public static final int pic_folders_listview=0x7f0a0008;
         public static final int pic_select_ok=0x7f0a0004;

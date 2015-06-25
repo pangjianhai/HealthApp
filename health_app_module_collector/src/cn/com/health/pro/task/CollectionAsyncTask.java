@@ -16,6 +16,7 @@ import cn.com.health.pro.util.CommonHttpUtil;
  * @todo 获取“我的收藏”人员分页
  *
  */
+@Deprecated
 public class CollectionAsyncTask extends
 		AsyncTask<String, Void, List<CollectionItem>> {
 

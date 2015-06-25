@@ -1,9 +1,15 @@
 package cn.com.health.pro;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +25,10 @@ import android.widget.Toast;
 import cn.com.health.pro.adapter.CollectionItemAdapter;
 import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.model.CollectionItem;
+import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.task.CollectionAsyncTask;
+import cn.com.health.pro.util.CollectionUtil;
+import cn.com.health.pro.util.ShareSentenceUtil;
 
 /**
  * 
@@ -31,10 +40,6 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 	private ListView my_collection_listview;
 	private List<CollectionItem> collList = new ArrayList<CollectionItem>();
 	private CollectionItemAdapter adapter;
-	/**
-	 * 搜索关键词
-	 */
-	private String key;
 
 	/**
 	 * 当前页
@@ -43,7 +48,7 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 	/**
 	 * 一页多少行
 	 */
-	private int pageSize = 10;
+	private int pageSize = SystemConst.page_size;
 
 	View footer;
 	/**
@@ -57,8 +62,6 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main_page_layout_me_collection);
-		Intent intent = getIntent();
-		key = "1";// intent.getStringExtra("key");
 		init();
 	}
 
@@ -88,14 +91,30 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 		search_loadmore_btn.setVisibility(View.GONE);
 		try {
 			currentPage = currentPage + 1;
-			CollectionAsyncTask task = new CollectionAsyncTask(
-					MainPageLayoutMeCollectionActivity.this);
-			JSONObject map = new JSONObject();
-			map.put("currentId", HealthApplication.getUserId());
-			map.put("begin", (currentPage - 1) * pageSize);
-			map.put("limit", pageSize);
-			map.put("limit", pageSize);
-			task.execute(map.toString());
+			JSONObject d = new JSONObject();
+			d.put("userId", HealthApplication.getUserId());
+			d.put("pageNum", currentPage);
+			d.put("pageSize", pageSize);
+
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					List<CollectionItem> lst = CollectionUtil
+							.parseInfo(responseInfo.result);
+					searchOver(lst);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			System.out.println("d.toString():" + d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.get_collection_by_id, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,6 +130,14 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 		adapter.notifyDataSetChanged();
 	}
 
+	/**
+	 * 
+	 * @param view
+	 * @user:pang
+	 * @data:2015年6月25日
+	 * @todo:退出当前页面
+	 * @return:void
+	 */
 	public void search_back(View view) {
 		this.finish();
 	}
