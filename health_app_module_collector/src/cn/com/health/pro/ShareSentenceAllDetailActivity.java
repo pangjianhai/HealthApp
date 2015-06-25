@@ -31,6 +31,7 @@ import cn.com.health.pro.adapter.CommentAdapter;
 import cn.com.health.pro.adapter.ShareSinglePicAdapter;
 import cn.com.health.pro.model.CommentEntity;
 import cn.com.health.pro.model.ShareSentenceEntity;
+import cn.com.health.pro.part.XListView.IXListViewListener;
 import cn.com.health.pro.service.CollectionForInfoService;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
@@ -48,7 +49,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @todo 分享信息详情activity
  *
  */
-public class ShareSentenceAllDetailActivity extends BaseActivity {
+public class ShareSentenceAllDetailActivity extends BaseActivity implements
+		IXListViewListener {
 
 	private TextView share_all_detail_content, share_all_detail_tag;
 
@@ -68,20 +70,11 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	/**
 	 * 关于评论的东西
 	 */
-	private ListView share_comment_listview;
+	private cn.com.health.pro.part.XListView share_comment_listview;
 	private CommentAdapter ad = null;
 	List<CommentEntity> ds = new ArrayList<CommentEntity>();
 	private int page = 0;
-	private int size = SystemConst.page_size;
-	/**
-	 * 底部
-	 */
-	View footer;
-	/**
-	 * 加载更多按钮
-	 */
-	private Button search_loadmore_btn;
-	ProgressBar load_progress_bar = null;
+	private int size = 7;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -122,22 +115,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	 * @return:void
 	 */
 	private void initListView() {
-		share_comment_listview = (ListView) findViewById(R.id.share_comment_listview);
-		footer = getLayoutInflater().inflate(R.layout.info_search_more, null);
-		share_comment_listview.addFooterView(footer);
-		search_loadmore_btn = (Button) findViewById(R.id.search_loadmore_btn);
-		load_progress_bar = (ProgressBar) findViewById(R.id.load_progress_bar);
-		/**
-		 * 加载更多事件
-		 */
-		search_loadmore_btn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				loadCommentData();
-			}
-		});
-
+		share_comment_listview = (cn.com.health.pro.part.XListView) findViewById(R.id.share_comment_listview);
+		share_comment_listview.setPullLoadEnable(true);
+		share_comment_listview.setXListViewListener(this);
 		ad = new CommentAdapter(getApplicationContext(), ds);
 		share_comment_listview.setAdapter(ad);
 		loadCommentData();
@@ -373,26 +353,17 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 					String data = responseInfo.result;
 					List<CommentEntity> list = CommentUtil.parseInfo(data);
 					if (list != null && !list.isEmpty()) {
+						System.out.println("list:" + list.size());
 						ds.addAll(list);
 						ad.notifyDataSetChanged();
 					}
-					if (list == null || list.size() < size) {
-						load_progress_bar.setVisibility(View.GONE);
-						search_loadmore_btn.setVisibility(View.GONE);
-					} else {
-						load_progress_bar.setVisibility(View.GONE);
-						search_loadmore_btn.setVisibility(View.VISIBLE);
-					}
+					onLoadOver();
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					load_progress_bar.setVisibility(View.GONE);
-					search_loadmore_btn.setVisibility(View.GONE);
 				}
 			};
-			load_progress_bar.setVisibility(View.VISIBLE);
-			search_loadmore_btn.setVisibility(View.GONE);
 			Map map = new HashMap();
 			map.put("para", d.toString());
 			send_normal_request(SystemConst.server_url
@@ -400,6 +371,30 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 
+	 * @tags
+	 * @todo 刷新完毕或加载完毕
+	 * @author pang
+	 */
+	private void onLoadOver() {
+		share_comment_listview.stopRefresh();
+		share_comment_listview.stopLoadMore();
+		share_comment_listview.setRefreshTime("刚才");
+	}
+
+	@Override
+	public void onRefresh() {
+		System.out.println("-------onRefresh");
+
+	}
+
+	@Override
+	public void onLoadMore() {
+		System.out.println("-------onLoadMore");
+		loadCommentData();
 	}
 
 }
