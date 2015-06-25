@@ -72,7 +72,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	private CommentAdapter ad = null;
 	List<CommentEntity> ds = new ArrayList<CommentEntity>();
 	private int page = 0;
-	private int size = 2;
+	private int size = SystemConst.page_size;
 	/**
 	 * 底部
 	 */
