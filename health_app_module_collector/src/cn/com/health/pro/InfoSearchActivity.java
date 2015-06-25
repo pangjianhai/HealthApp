@@ -40,7 +40,7 @@ public class InfoSearchActivity extends BaseActivity {
 	 */
 	private String key = "";
 	private int rowNum = 0;
-	private int pageCount = 10;
+	private int pageCount = SystemConst.page_size;
 
 	private List<InfoEntity> infoList = new ArrayList<InfoEntity>();
 

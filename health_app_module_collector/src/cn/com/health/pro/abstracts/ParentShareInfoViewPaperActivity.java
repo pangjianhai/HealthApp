@@ -94,7 +94,7 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 	 */
 	private String key = "";
 	private int page = 0;
-	private int size = 5;
+	private int size = SystemConst.page_size;
 	private View footer;
 	// 加载更多
 	Button search_loadmore_btn = null;

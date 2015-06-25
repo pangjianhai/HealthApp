@@ -33,7 +33,7 @@ public class ListDocByTypeActivity extends BaseActivity {
 	 */
 	private String tId = "";
 	private int page = 0;
-	private int rows = 20;
+	private int rows = SystemConst.page_size;
 	ListView listview = null;
 	private List<InfoEntity> infoList = new ArrayList<InfoEntity>();
 	/**

@@ -36,7 +36,7 @@ public class FriendSearchResultActivity extends BaseActivity {
 	/**
 	 * 一页多少行
 	 */
-	private int pageSize = 10;
+	private int pageSize = SystemConst.page_size;
 
 	/**
 	 * 底部

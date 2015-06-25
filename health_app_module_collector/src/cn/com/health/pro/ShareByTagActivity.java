@@ -73,7 +73,7 @@ public class ShareByTagActivity extends BaseActivity implements
 	/**
 	 * 一页多少行
 	 */
-	private int pageSize = 5;
+	private int pageSize = SystemConst.page_size;
 
 	private String userId;
 
