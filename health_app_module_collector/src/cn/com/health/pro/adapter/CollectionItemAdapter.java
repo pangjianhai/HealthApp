@@ -63,18 +63,30 @@ public class CollectionItemAdapter extends BaseAdapter {
 					.findViewById(R.id.my_collection_title);
 			holder.my_collection_id = (TextView) convertView
 					.findViewById(R.id.my_collection_id);
+			holder.my_collection_type = (TextView) convertView
+					.findViewById(R.id.my_collection_type);
 			convertView.setTag(holder);
 		}
-		CollectionItem ui = dataSourceList.get(position);
-		holder.my_collection_id.setText(ui.getId());
-		holder.my_collection_title.setText(ui.getTitle());
+		CollectionItem ci = dataSourceList.get(position);
+		holder.my_collection_id.setText(ci.getId());
+		holder.my_collection_title.setText(ci.getTitle());
+		final String id = ci.getId();
+		final String type = ci.getType();
+		String typeName = "";
+		if (SystemConst.CollectionType.COLLECTION_TYPE_SHARE.equals(type)) {
+			typeName = "分享";
+
+		} else if (SystemConst.CollectionType.COLLECTION_TYPE_DOC.equals(type)) {
+			typeName = "报道";
+		}
+		holder.my_collection_type.setText(typeName);
 		holder.my_collection_title.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (context instanceof MainPageLayoutMeCollectionActivity) {
 					((MainPageLayoutMeCollectionActivity) context)
-							.checkCollection("");
+							.checkCollection(id, type);
 				}
 			}
 		});
@@ -83,7 +95,8 @@ public class CollectionItemAdapter extends BaseAdapter {
 	}
 
 	private class HolderView {
-		private TextView my_collection_title, my_collection_id;
+		private TextView my_collection_title, my_collection_id,
+				my_collection_type;
 	}
 
 }

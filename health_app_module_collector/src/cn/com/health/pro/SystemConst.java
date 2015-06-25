@@ -231,4 +231,14 @@ public class SystemConst {
 		public static final String SHARE_TYPE_HEALTH = "1";
 		public static final String SHARE_TYPE_SPORTS = "2";
 	}
+
+	/**
+	 * @todo 收藏的类型
+	 * @author pang
+	 *
+	 */
+	public class CollectionType {
+		public static final String COLLECTION_TYPE_SHARE = "0";
+		public static final String COLLECTION_TYPE_DOC = "1";
+	}
 }

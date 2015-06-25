@@ -7,28 +7,22 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import cn.com.health.pro.adapter.CollectionItemAdapter;
 import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.model.CollectionItem;
-import cn.com.health.pro.model.ShareSentenceEntity;
-import cn.com.health.pro.task.CollectionAsyncTask;
 import cn.com.health.pro.util.CollectionUtil;
-import cn.com.health.pro.util.ShareSentenceUtil;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * 
@@ -150,9 +144,18 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 	 * @todo:查看收藏
 	 * @return:void
 	 */
-	public void checkCollection(String id) {
-		Toast.makeText(MainPageLayoutMeCollectionActivity.this,
-				"xxxxxxxxxxxxxxxxxxx", Toast.LENGTH_SHORT).show();
+	public void checkCollection(String id, String type) {
+		if (SystemConst.CollectionType.COLLECTION_TYPE_SHARE.equals(type)) {
+			Intent intent = new Intent(MainPageLayoutMeCollectionActivity.this,
+					ShareSentenceAllDetailActivity.class);
+			intent.putExtra("share_sentence_id", id);
+			startActivity(intent);
+		} else if (SystemConst.CollectionType.COLLECTION_TYPE_DOC.equals(type)) {
+			Intent intent = new Intent(MainPageLayoutMeCollectionActivity.this,
+					InfoDetailActivity.class);
+			intent.putExtra("doc_id", id);
+			startActivity(intent);
+		}
 		Intent intent = new Intent(MainPageLayoutMeCollectionActivity.this,
 				ShowUserInfoDetail.class);
 		intent.putExtra("uuid", id);
