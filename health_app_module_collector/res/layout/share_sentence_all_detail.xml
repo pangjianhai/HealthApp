@@ -88,6 +88,14 @@
             android:stretchMode="columnWidth"
             android:verticalSpacing="3dip" >
         </GridView>
+
+        <ListView
+            android:id="@+id/share_comment_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/share_detail_imgs_gridview"
+            android:layout_marginTop="10dp" >
+        </ListView>
     </RelativeLayout>
 
     <RelativeLayout

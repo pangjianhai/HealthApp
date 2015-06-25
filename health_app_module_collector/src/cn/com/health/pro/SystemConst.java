@@ -218,6 +218,11 @@ public class SystemConst {
 		 * 根据用户ID获取用户收藏
 		 */
 		public static final String get_collection_by_id = "appSourceController/getCollectsByuserId.do";
+
+		/**
+		 * 根据分享ID获取评论
+		 */
+		public static final String get_share_comment_by_id = "appSourceController/getPageShareCommentByShareId.do";
 	}
 
 	/**

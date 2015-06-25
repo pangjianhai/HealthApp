@@ -1,14 +1,11 @@
 package cn.com.health.pro;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
-
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,22 +16,30 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.com.health.pro.adapter.CommentAdapter;
 import cn.com.health.pro.adapter.ShareSinglePicAdapter;
+import cn.com.health.pro.model.CommentEntity;
 import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.service.CollectionForInfoService;
 import cn.com.health.pro.service.ShareCommentService;
 import cn.com.health.pro.service.ViewForInfoService;
-import cn.com.health.pro.task.ShareSentenceSingleAsyncTask;
-import cn.com.health.pro.util.CommonHttpUtil;
+import cn.com.health.pro.util.CommentUtil;
 import cn.com.health.pro.util.PicUtil;
 import cn.com.health.pro.util.ShareSentenceUtil;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * 
@@ -59,6 +64,24 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	private LinearLayout share_bottom;
 	private EditText et_pop;
 
+	/**
+	 * 关于评论的东西
+	 */
+	private ListView share_comment_listview;
+	private CommentAdapter ad = null;
+	List<CommentEntity> ds = new ArrayList<CommentEntity>();
+	private int page = 0;
+	private int size = 2;
+	/**
+	 * 底部
+	 */
+	View footer;
+	/**
+	 * 加载更多按钮
+	 */
+	private Button search_loadmore_btn;
+	ProgressBar load_progress_bar = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,10 +89,18 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 		setContentView(R.layout.share_sentence_all_detail);
 		Intent intent = getIntent();
 		share_sentence_id = intent.getStringExtra("share_sentence_id");
-		System.out.println("-----------------------"+share_sentence_id);
 		init();
+		initListView();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月25日
+	 * @todo:初始化内容
+	 * @return:void
+	 */
 	private void init() {
 		share_all_detail_content = (TextView) findViewById(R.id.share_all_detail_content);
 		share_all_detail_tag = (TextView) findViewById(R.id.share_all_detail_tag);
@@ -78,6 +109,26 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月25日
+	 * @todo:初始化listview
+	 * @return:void
+	 */
+	private void initListView() {
+		share_comment_listview = (ListView) findViewById(R.id.share_comment_listview);
+		footer = getLayoutInflater().inflate(R.layout.info_search_more, null);
+		share_comment_listview.addFooterView(footer);
+		search_loadmore_btn = (Button) findViewById(R.id.search_loadmore_btn);
+		load_progress_bar = (ProgressBar) findViewById(R.id.load_progress_bar);
+		System.out.println("search_loadmore_btn:" + search_loadmore_btn);
+		ad = new CommentAdapter(getApplicationContext(), ds);
+		loadCommentData();
 	}
 
 	private void loadData() {
@@ -89,7 +140,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("data:"+data);
 					ShareSentenceEntity entity = ShareSentenceUtil
 							.parseJsonAddToEntity(data);
 					renderText(entity);
@@ -285,6 +335,63 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 							ShareSentenceAllDetailActivity.this
 									.getCurrentFocus().getWindowToken(),
 							InputMethodManager.HIDE_NOT_ALWAYS);
+		}
+	}
+
+	/**************************************************** 加载评论 ************************************************************/
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年6月25日
+	 * @todo:加载评论数据
+	 * @return:void
+	 */
+	private void loadCommentData() {
+		System.out.println("loadCommentData");
+		try {
+			page = page + 1;
+			JSONObject d = new JSONObject();
+			d.put("sentenceId", share_sentence_id);
+			d.put("pageNum", page);
+			d.put("pageSize", size);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					System.out.println("ok" + data);
+					List<CommentEntity> list = CommentUtil.parseInfo(data);
+					System.out.println("list:" + list);
+					if (list != null && !list.isEmpty()) {
+						System.out.println("------------------000");
+						ds.addAll(list);
+						ad.notifyDataSetChanged();
+					}
+					if (list == null || list.size() < size) {
+						load_progress_bar.setVisibility(View.GONE);
+						search_loadmore_btn.setVisibility(View.GONE);
+					} else {
+						load_progress_bar.setVisibility(View.GONE);
+						search_loadmore_btn.setVisibility(View.VISIBLE);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					System.out.println("-------------wrong");
+					load_progress_bar.setVisibility(View.GONE);
+					search_loadmore_btn.setVisibility(View.GONE);
+				}
+			};
+			load_progress_bar.setVisibility(View.VISIBLE);
+			search_loadmore_btn.setVisibility(View.GONE);
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.get_share_comment_by_id, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
