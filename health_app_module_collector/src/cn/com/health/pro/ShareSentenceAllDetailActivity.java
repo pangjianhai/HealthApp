@@ -74,7 +74,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	private CommentAdapter ad = null;
 	List<CommentEntity> ds = new ArrayList<CommentEntity>();
 	private int page = 0;
-	private int size = 7;
+	private int size = SystemConst.page_size;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -387,13 +387,11 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 
 	@Override
 	public void onRefresh() {
-		System.out.println("-------onRefresh");
-
+		onLoadOver();
 	}
 
 	@Override
 	public void onLoadMore() {
-		System.out.println("-------onLoadMore");
 		loadCommentData();
 	}
 
