@@ -3,12 +3,17 @@ package cn.com.health.pro.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.health.pro.R;
+import cn.com.health.pro.SystemConst;
+import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.model.CommentEntity;
 
 /**
@@ -51,19 +56,38 @@ public class CommentAdapter extends BaseAdapter {
 		} else {
 			convertView = View.inflate(context, R.layout.comment_item, null);
 			holder.tag_id = (TextView) convertView.findViewById(R.id.c_id);
-			holder.tag_name = (TextView) convertView
+			holder.c_content = (TextView) convertView
 					.findViewById(R.id.c_content);
+			holder.c_username = (TextView) convertView
+					.findViewById(R.id.c_username);
+			holder.share_c_photo = (ImageView) convertView
+					.findViewById(R.id.share_c_photo);
 			convertView.setTag(holder);
 		}
 		CommentEntity ce = dataSourceList.get(position);
 		holder.tag_id.setText(ce.getId());
-		holder.tag_name.setText(ce.getContent());
+		holder.c_content.setText(ce.getContent());
+		holder.c_username.setText(ce.getUserName());
+		String userId = ce.getUserId();
+		if (userId != null && !"".equals(userId)) {
+			String pic_url = SystemConst.server_url
+					+ SystemConst.FunctionUrl.getHeadImgByUserId
+					+ "?para={userId:'" + userId + "'}";
+			ImageLoader.getInstance().displayImage(pic_url,
+					holder.share_c_photo,
+					HealthApplication.getDisplayImageOption());
+		} else {
+			String imageUri = "drawable://" + R.drawable.head_default;
+			ImageLoader.getInstance().displayImage(imageUri,
+					holder.share_c_photo);
+		}
 
 		return convertView;
 	}
 
 	private class HolderView {
-		private TextView tag_id, tag_name;
+		private TextView tag_id, c_content, c_username;
+		private ImageView share_c_photo;
 	}
 
 }

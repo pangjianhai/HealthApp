@@ -35,10 +35,12 @@ public class CommentUtil {
 					JSONObject obj = jarray.getJSONObject(i);
 					String userId = obj.getString("userId");
 					String content = obj.getString("content");
+					String userName = obj.getString("userName");
 
 					CommentEntity ci = new CommentEntity();
 					ci.setUserId(userId);
 					ci.setContent(content);
+					ci.setUserName(userName);
 					ciList.add(ci);
 				}
 			}

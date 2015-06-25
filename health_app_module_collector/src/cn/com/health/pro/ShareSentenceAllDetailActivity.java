@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -126,8 +127,19 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 		share_comment_listview.addFooterView(footer);
 		search_loadmore_btn = (Button) findViewById(R.id.search_loadmore_btn);
 		load_progress_bar = (ProgressBar) findViewById(R.id.load_progress_bar);
-		System.out.println("search_loadmore_btn:" + search_loadmore_btn);
+		/**
+		 * 加载更多事件
+		 */
+		search_loadmore_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				loadCommentData();
+			}
+		});
+
 		ad = new CommentAdapter(getApplicationContext(), ds);
+		share_comment_listview.setAdapter(ad);
 		loadCommentData();
 	}
 
@@ -349,7 +361,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 	 * @return:void
 	 */
 	private void loadCommentData() {
-		System.out.println("loadCommentData");
 		try {
 			page = page + 1;
 			JSONObject d = new JSONObject();
@@ -360,11 +371,8 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("ok" + data);
 					List<CommentEntity> list = CommentUtil.parseInfo(data);
-					System.out.println("list:" + list);
 					if (list != null && !list.isEmpty()) {
-						System.out.println("------------------000");
 						ds.addAll(list);
 						ad.notifyDataSetChanged();
 					}
@@ -379,7 +387,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity {
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					System.out.println("-------------wrong");
 					load_progress_bar.setVisibility(View.GONE);
 					search_loadmore_btn.setVisibility(View.GONE);
 				}
