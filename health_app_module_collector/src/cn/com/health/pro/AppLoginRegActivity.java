@@ -8,7 +8,7 @@ import android.view.Window;
 /**
  * 
  * @author pang
- * @todo 注册或者登陆activity
+ * @todo 注册或者登陆选择去向activity
  *
  */
 public class AppLoginRegActivity extends BaseActivity {

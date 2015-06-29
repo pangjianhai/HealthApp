@@ -12,6 +12,7 @@ import cn.com.health.pro.util.CommonHttpUtil;
  * @todo 登陆任务
  *
  */
+@Deprecated
 public class LoginAccountTask extends AsyncTask<String, Void, String> {
 
 	private Context context;

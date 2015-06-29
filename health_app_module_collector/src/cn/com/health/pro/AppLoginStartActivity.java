@@ -1,5 +1,8 @@
 package cn.com.health.pro;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
@@ -10,6 +13,10 @@ import android.view.Window;
 import android.widget.EditText;
 import cn.com.health.pro.persist.SharedPreInto;
 import cn.com.health.pro.task.LoginAccountTask;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * @author pang
@@ -59,12 +66,38 @@ public class AppLoginStartActivity extends BaseActivity {
 			JSONObject j = new JSONObject();
 			j.put("UserId", UserId);
 			j.put("Password", pdw);
-			new LoginAccountTask(AppLoginStartActivity.this).execute(j
-					.toString());
+			realLogin(j);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 
+	 * @param j
+	 * @user:pang
+	 * @data:2015年6月29日
+	 * @todo:真正的请求验证用户名密码
+	 * @return:void
+	 */
+	private void realLogin(JSONObject j) {
+		RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				String data = responseInfo.result;
+				loginOver(data);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+			}
+		};
+		Map map = new HashMap();
+		map.put("para", j.toString());
+		send_normal_request(SystemConst.server_url
+				+ SystemConst.FunctionUrl.userLogin, map, rcb);
 	}
 
 	/**
