@@ -58,8 +58,7 @@ public class TopUserItemAdapter extends BaseAdapter {
 		if (convertView != null) {
 			holder = (HolderView) convertView.getTag();
 		} else {
-			convertView = View.inflate(context,
-					R.layout.friends_search_users_item, null);
+			convertView = View.inflate(context, R.layout.top_users_item, null);
 			holder.find_search_result_header = (ImageView) convertView
 					.findViewById(R.id.find_search_result_header);
 			holder.check_someone = (ImageView) convertView

@@ -457,10 +457,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	private void showPopWindows(View view) {
-		System.out.println("=============<>");
 		for (int i = 0; i < 8; i++) {
 			UserItem ui = new UserItem();
-			ui.setUserName("pangjianhai" + i);
+			ui.setUserId("pangjianhai" + i);
 			userList.add(ui);
 		}
 		LayoutInflater inflater = LayoutInflater.from(this);

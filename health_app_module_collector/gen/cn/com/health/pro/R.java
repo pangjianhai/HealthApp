@@ -612,9 +612,10 @@ public final class R {
         public static final int single_share_common_bottom=0x7f030036;
         public static final int tag_item=0x7f030037;
         public static final int tags_for_users=0x7f030038;
-        public static final int type_item=0x7f030039;
-        public static final int user_info_detail_edit=0x7f03003a;
-        public static final int user_info_detail_show=0x7f03003b;
+        public static final int top_users_item=0x7f030039;
+        public static final int type_item=0x7f03003a;
+        public static final int user_info_detail_edit=0x7f03003b;
+        public static final int user_info_detail_show=0x7f03003c;
     }
     public static final class menu {
         public static final int d=0x7f090000;
