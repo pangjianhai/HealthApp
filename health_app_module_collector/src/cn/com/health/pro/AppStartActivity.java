@@ -160,6 +160,10 @@ public class AppStartActivity extends BaseActivity {
 		Intent intent = new Intent();
 		intent.setClass(AppStartActivity.this, AppLoginLoadingActivity.class);
 		startActivity(intent);
+		/**
+		 * 必须有这一行代码，否则回退的时候有时候会出问题
+		 */
+		finish();
 	}
 
 }

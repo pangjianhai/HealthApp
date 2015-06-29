@@ -104,7 +104,8 @@ public abstract class ParentMainActivity extends BaseActivity {
 					MainPageLayoutOrderActivity.class);
 			startActivity(intent);
 		}
-		finish();
+
+		// finish();
 	}
 
 	/**
