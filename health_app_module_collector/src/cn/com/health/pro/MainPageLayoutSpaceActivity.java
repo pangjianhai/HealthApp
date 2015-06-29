@@ -11,15 +11,23 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.ShareItemAdapter;
+import cn.com.health.pro.adapter.TopUserItemAdapter;
 import cn.com.health.pro.model.ShareSentenceEntity;
+import cn.com.health.pro.model.UserItem;
 import cn.com.health.pro.part.XListView;
 import cn.com.health.pro.part.XListView.IXListViewListener;
 import cn.com.health.pro.service.ShareCommentService;
@@ -90,6 +98,13 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 */
 	private boolean no_more = true;
 
+	/************************ 推荐开始 **************************/
+	private XListView search_friends_listview;
+	private List<UserItem> userList = new ArrayList<UserItem>();
+	private TopUserItemAdapter adapter;
+	private boolean ifShow = false;// 是否展示过了
+
+	/************************ 推荐结束 **************************/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -424,6 +439,55 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				MainPageLayoutInfoActivity.class);
 		startActivity(intent);
+	}
+
+	/************************************* 关于弹出推荐框 *********************************************/
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (!ifShow) {
+			/**
+			 * 判断是否推荐好友
+			 */
+			View v = LayoutInflater.from(getApplicationContext()).inflate(
+					R.layout.main_page_layout_space, null);
+			showPopWindows(v);
+			ifShow = true;
+		}
+	}
+
+	private void showPopWindows(View view) {
+		System.out.println("=============<>");
+		for (int i = 0; i < 8; i++) {
+			UserItem ui = new UserItem();
+			ui.setUserName("pangjianhai" + i);
+			userList.add(ui);
+		}
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View popwindow = inflater.inflate(R.layout.notice_great_share_popwin,
+				null);
+		final PopupWindow pop = new PopupWindow(popwindow,
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
+		pop.setOutsideTouchable(true);
+		pop.setTouchable(true);
+		pop.setFocusable(true);
+		Button start = (Button) popwindow.findViewById(R.id.start);
+		Button cancle = (Button) popwindow.findViewById(R.id.cancel);
+		cancle.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				pop.dismiss();
+
+			}
+		});
+		search_friends_listview = (XListView) popwindow
+				.findViewById(R.id.notice_user_lv);
+		search_friends_listview.setPullLoadEnable(false);
+		adapter = new TopUserItemAdapter(MainPageLayoutSpaceActivity.this,
+				userList);
+		search_friends_listview.setAdapter(adapter);
+		pop.showAtLocation(view, Gravity.CENTER, 0, 0);
 	}
 
 }

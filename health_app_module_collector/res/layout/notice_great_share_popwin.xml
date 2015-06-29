@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/space_title_bar" >
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
+            android:text="一键关注"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:text="关闭"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <!-- 数据区 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <cn.com.health.pro.part.XListView
+            android:id="@+id/notice_user_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#dedede"
+            android:dividerHeight="5dp" >
+        </cn.com.health.pro.part.XListView>
+    </LinearLayout>
+
+</LinearLayout>
