@@ -29,11 +29,13 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <LinearLayout
+    <!-- 时间操作栏 -->
+    <LinearLayout
         android:id="@+id/layout_space_order_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_space_title_bar"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <ImageButton
@@ -43,7 +45,7 @@
             android:layout_weight="1"
             android:background="#00ffffff"
             android:onClick="add_friends"
-            android:src="@drawable/day_left0" />
+            android:src="@drawable/day_left2" />
 
         <TextView
             android:id="@+id/date_content"
@@ -62,7 +64,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="#00ffffff"
-            android:src="@drawable/day_right0" />
+            android:src="@drawable/day_right2" />
     </LinearLayout>
 
     <LinearLayout
