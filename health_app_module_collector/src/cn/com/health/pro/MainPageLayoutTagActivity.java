@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.TagAdapter;
+import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.util.TagUtils;
 
@@ -60,7 +61,7 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 
 	private String key = "";
 	private int page = 0;
-	private int size = 5;
+	private int size = SystemConst.page_size;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

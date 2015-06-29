@@ -89,12 +89,24 @@
             android:verticalSpacing="3dip" >
         </GridView>
 
+        <TextView
+            android:id="@+id/share_comment_listview_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/share_detail_imgs_gridview"
+            android:layout_marginTop="50dp"
+            android:background="@color/gray"
+            android:gravity="left"
+            android:hint="健康评论:"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
         <cn.com.health.pro.part.XListView
             android:id="@+id/share_comment_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/share_detail_imgs_gridview"
-            android:layout_marginTop="50dp"
+            android:layout_below="@+id/share_comment_listview_notice"
+            android:layout_marginTop="15dp"
             android:divider="@drawable/divider_share_comments"
             android:showDividers="middle" >
         </cn.com.health.pro.part.XListView>
