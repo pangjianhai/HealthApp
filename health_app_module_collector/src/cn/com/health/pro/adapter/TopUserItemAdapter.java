@@ -71,7 +71,7 @@ public class TopUserItemAdapter extends BaseAdapter {
 		}
 		UserItem ui = dataSourceList.get(position);
 		holder.find_search_result_username.setText(ui.getUserId());
-		holder.find_search_result_tags.setText(ui.getTags());
+		holder.find_search_result_tags.setText("XXXXXXXXOOOOOOOOO");
 		String imgId = ui.getImg();
 		final String uuid = ui.getUuid();
 		if (imgId != null && !"".equals(imgId)) {
