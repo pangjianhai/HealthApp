@@ -24,7 +24,7 @@
     <color name="grey">#BEBEBE</color>
     <color name="gray_default">#E0E0E0</color>
     <color name="gray_active">#F0F0F0</color>
-    <color name="space_title_bar">#d0d0d0</color>
+    <color name="space_title_bar">#f2eada</color>
     <color name="common_title_bar_color">#00ffffff</color>
     <color name="deepgray">#BEBEBE</color>
     <color name="yellow">#FFD700</color>
