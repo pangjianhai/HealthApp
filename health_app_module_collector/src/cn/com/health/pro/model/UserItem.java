@@ -50,6 +50,11 @@ public class UserItem {
 	 */
 	private String sentence;
 
+	/**
+	 * 专门给第一次登陆的用户在推荐用户的时候用到的字段
+	 */
+	private boolean ifAddedInTopList;
+
 	public String getImg() {
 		return img;
 	}
@@ -120,5 +125,13 @@ public class UserItem {
 
 	public void setSentence(String sentence) {
 		this.sentence = sentence;
+	}
+
+	public boolean isIfAddedInTopList() {
+		return ifAddedInTopList;
+	}
+
+	public void setIfAddedInTopList(boolean ifAddedInTopList) {
+		this.ifAddedInTopList = ifAddedInTopList;
 	}
 }

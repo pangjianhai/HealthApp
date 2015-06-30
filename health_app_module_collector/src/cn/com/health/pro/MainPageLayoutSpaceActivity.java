@@ -460,6 +460,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		for (int i = 0; i < 8; i++) {
 			UserItem ui = new UserItem();
 			ui.setUserId("pangjianhai" + i);
+			ui.setIfAddedInTopList(false);
 			userList.add(ui);
 		}
 		LayoutInflater inflater = LayoutInflater.from(this);
@@ -487,6 +488,10 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				userList);
 		search_friends_listview.setAdapter(adapter);
 		pop.showAtLocation(view, Gravity.CENTER, 0, 0);
+	}
+
+	public void checkSomeOne(String id) {
+		adapter.notifyDataSetChanged();
 	}
 
 }
