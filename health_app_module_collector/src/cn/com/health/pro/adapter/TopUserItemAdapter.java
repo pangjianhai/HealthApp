@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.com.health.pro.MainPageLayoutSpaceActivity;
+import cn.com.health.pro.FirstLoginTopUserListLayout;
 import cn.com.health.pro.R;
 import cn.com.health.pro.SystemConst;
 import cn.com.health.pro.config.HealthApplication;
@@ -74,7 +74,7 @@ public class TopUserItemAdapter extends BaseAdapter {
 		final String uuid = ui.getUuid();
 		boolean ifAdded = ui.isIfAddedInTopList();
 		if (ifAdded) {
-			holder.check_someone.setImageResource(R.drawable.addtag1);
+			holder.check_someone.setImageResource(R.drawable.add_ok);
 		}
 		if (imgId != null && !"".equals(imgId)) {
 			String pic_url = SystemConst.server_url
@@ -93,8 +93,8 @@ public class TopUserItemAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				ui.setIfAddedInTopList(true);
-				if (context instanceof MainPageLayoutSpaceActivity) {
-					((MainPageLayoutSpaceActivity) context).checkSomeOne(uuid);
+				if (context instanceof FirstLoginTopUserListLayout) {
+					((FirstLoginTopUserListLayout) context).checkSomeOne(uuid);
 				}
 			}
 		});

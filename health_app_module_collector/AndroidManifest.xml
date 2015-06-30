@@ -136,6 +136,8 @@
         </activity>
         <activity android:name=".ShareByTagActivity" >
         </activity>
+        <activity android:name=".FirstLoginTopUserListLayout" >
+        </activity>
 
         <!-- 关于信息分类 -->
         <activity android:name=".InfoTypeListviewActivity" >
