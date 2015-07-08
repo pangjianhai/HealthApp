@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:paddingLeft="5dp"
-        android:src="@drawable/xiaohei" />
+        android:src="@drawable/default_head0" />
 
     <TextView
         android:id="@+id/find_search_result_username"

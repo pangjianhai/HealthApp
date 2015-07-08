@@ -440,9 +440,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
-				FirstLoginTopUserListLayout.class);
-		startActivity(intent);
+//		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
+//				FirstLoginTopUserListLayout.class);
+//		startActivity(intent);
 	}
 
 }
