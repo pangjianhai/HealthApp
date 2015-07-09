@@ -12,6 +12,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -91,6 +92,7 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 						account_msg(0);
 					} else if ("success".equals(data)) {
 						account_msg(1);
+						// to_login();// 进入登陆页面
 					} else if ("fail".equals(data)) {
 						account_msg(2);
 					}
@@ -126,13 +128,38 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 			content = "该账号不存在！";
 		} else if (type == 1) {
 			title = "找回密码";
-			content = "找回成功，请登录！";
+			content = "密码发至您的邮箱  \n 找回成功，请登录！";
 		} else if (type == 2) {
 			content = "找回失败！";
 		}
 		new AlertDialog.Builder(AppLoginGetPwdActivity.this)
 				.setIcon(
-						getResources().getDrawable(R.drawable.login_error_icon))
+						getResources().getDrawable(
+								R.drawable.tabbar_message_center_highlighted))
 				.setTitle(title).setMessage(content).create().show();
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年7月9日
+	 * @todo:进入登陆页面
+	 * @return:void
+	 */
+	public void to_login() {
+		Intent intent = new Intent();
+		intent.setClass(AppLoginGetPwdActivity.this,
+				AppLoginStartActivity.class);
+		startActivity(intent);
+	}
+
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年7月9日
+	 * @todo:返回登陆页面
+	 * @return:void
+	 */
+	public void login_back(View v) {
+		this.finish();
 	}
 }
