@@ -151,6 +151,9 @@
         <!-- 关于标签 -->
         <activity android:name=".TagsForUserActivity" >
         </activity>
+        <!-- 关于反馈 -->
+        <activity android:name=".AppFeedbackActivity" >
+        </activity>
         <!-- 测试activity -->
         <activity android:name=".TestActivity" >
         </activity>

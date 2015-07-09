@@ -228,7 +228,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_last_item"
             android:clickable="true"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical"
+            android:onClick="show_me_about" >
 
             <TextView
                 android:layout_width="wrap_content"

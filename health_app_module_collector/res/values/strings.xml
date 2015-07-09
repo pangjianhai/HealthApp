@@ -22,6 +22,10 @@
     <string name="share_health_input">请输入内容</string>
     <string name="share_health_addpic">添加图片</string>
     <string name="share_health_addtag">添加标签</string>
+    <string name="app_feed_back">我要吐槽</string>
+    <string name="app_feed_back_btn">吐槽</string>
+    <string name="app_feed_back_into_text">可以进入群进行定制化服务哦：</string>
+    <string name="app_feed_back_into_scan_text">可以扫描参与：</string>
     <!-- 关于分页 -->
     <string name="xlistview_header_hint_name">名字</string>
     <string name="xlistview_header_hint_reply">回复</string>

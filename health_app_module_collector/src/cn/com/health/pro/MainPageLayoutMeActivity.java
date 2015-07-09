@@ -139,6 +139,11 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					MainPageLayoutMeCollectionActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
+		} else if (R.id.main_page_me_tucao == v.getId()) {// 吐槽产品
+			Intent intent = new Intent(MainPageLayoutMeActivity.this,
+					AppFeedbackActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
 		}
 	}
 
