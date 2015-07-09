@@ -93,6 +93,10 @@
             android:name=".AppLoginStartActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+        <activity
+            android:name=".AppLoginGetPwdActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
         <activity android:name=".AppLoginLoadingActivity" >
         </activity>
         <activity android:name=".AppLoginRegActivity" >

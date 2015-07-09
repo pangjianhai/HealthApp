@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import cn.com.health.pro.persist.SharedPreInto;
-import cn.com.health.pro.task.LoginAccountTask;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -161,5 +160,19 @@ public class AppLoginStartActivity extends BaseActivity {
 
 	public void login_back(View v) { // 标题栏 返回按钮
 		this.finish();
+	}
+
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年7月9日
+	 * @todo:找回密码
+	 * @return:void
+	 */
+	public void get_pw(View v) {
+		Intent intent = new Intent();
+		intent.setClass(AppLoginStartActivity.this,
+				AppLoginGetPwdActivity.class);
+		startActivity(intent);
 	}
 }

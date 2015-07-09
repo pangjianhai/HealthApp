@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/login_reg_logininput_login"
+            android:text="@string/login_reg_logininput_get_pwd"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -47,38 +47,11 @@
         android:textColor="#000"
         android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/login_passwd_edit"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/login_user_edit"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/login_editbox"
-        android:hint="@string/login_reg_logininput_password"
-        android:password="true"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15sp" />
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_passwd_edit"
+        android:layout_below="@+id/login_user_edit"
         android:layout_marginTop="20dp" >
-
-        <Button
-            android:id="@+id/forget_passwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="5dp"
-            android:background="#0000"
-            android:onClick="get_pw"
-            android:text="@string/login_reg_logininput_forget"
-            android:textColor="#00f"
-            android:textSize="16sp" />
 
         <Button
             android:id="@+id/login_login_btn"
@@ -87,8 +60,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/btn_style_green"
-            android:onClick="loginHealthApp"
-            android:text="@string/login_reg_logininput_login"
+            android:onClick="getPwd"
+            android:text="@string/login_reg_logininput_login_get_pwd_btn"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </RelativeLayout>

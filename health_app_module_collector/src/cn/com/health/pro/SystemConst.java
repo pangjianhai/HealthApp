@@ -26,7 +26,7 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.102:8080/IotApp/";
 
 	// public static final String server_url =
 	// "http://192.168.0.105:8080/IotApp/";
@@ -223,6 +223,11 @@ public class SystemConst {
 		 * 根据分享ID获取评论
 		 */
 		public static final String get_share_comment_by_id = "appSourceController/getPageShareCommentByShareId.do";
+
+		/**
+		 * 根据邮件找回密码
+		 */
+		public static final String login_get_pwd_by_email = "appSourceController/getPasswordSendEmal.do";
 	}
 
 	/**
