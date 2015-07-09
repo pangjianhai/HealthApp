@@ -120,10 +120,12 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 	 * @return:void
 	 */
 	private void account_msg(int type) {
+		String title = "找回错误";
 		String content = "";
 		if (type == 0) {
 			content = "该账号不存在！";
 		} else if (type == 1) {
+			title = "找回密码";
 			content = "找回成功，请登录！";
 		} else if (type == 2) {
 			content = "找回失败！";
@@ -131,6 +133,6 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 		new AlertDialog.Builder(AppLoginGetPwdActivity.this)
 				.setIcon(
 						getResources().getDrawable(R.drawable.login_error_icon))
-				.setTitle("找回错误").setMessage(content).create().show();
+				.setTitle(title).setMessage(content).create().show();
 	}
 }
