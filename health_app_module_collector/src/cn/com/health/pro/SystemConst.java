@@ -242,6 +242,11 @@ public class SystemConst {
 		 * 检测app版本
 		 */
 		public static final String scan_app_version_num = "appSourceController/onloadApp.do";
+
+		/**
+		 * 用户反馈意见
+		 */
+		public static final String user_add_view = "appSourceController/addViews.do";
 	}
 
 	/**

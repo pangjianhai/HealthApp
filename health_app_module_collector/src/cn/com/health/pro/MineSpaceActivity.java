@@ -129,7 +129,6 @@ public class MineSpaceActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	private void loadDataMore() {
-		System.out.println("loadDataMore");
 		try {
 			currentPage = currentPage + 1;
 			JSONObject d = new JSONObject();

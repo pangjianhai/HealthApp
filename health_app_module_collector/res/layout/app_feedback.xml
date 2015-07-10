@@ -41,6 +41,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/bg_edittext"
+        android:gravity="top"
         android:maxLines="6"
         android:singleLine="true"
         android:textColor="#000"
@@ -54,13 +55,12 @@
         android:layout_marginTop="20dp" >
 
         <Button
-            android:id="@+id/login_login_btn"
+            android:id="@+id/feedback_btn"
             android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/btn_style_green"
-            android:onClick="getPwd"
             android:text="@string/app_feed_back_btn"
             android:textColor="#ffffff"
             android:textSize="18sp" />

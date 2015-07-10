@@ -55,4 +55,29 @@ public class FileUtil {
 		}
 		return null;
 	}
+
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @user:pang
+	 * @data:2015年7月10日
+	 * @todo:判断意见反馈是否成功
+	 * @return:boolean
+	 */
+	public static boolean ifFeedbackSuccess(String data) {
+		try {
+			JSONObject or_obj = new JSONObject(data);
+			if (or_obj.has("flag")) {
+				String b = or_obj.getString("flag");
+				if ("true".equals(b)) {
+					return true;
+				}
+
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
