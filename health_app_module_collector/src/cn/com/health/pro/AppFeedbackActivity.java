@@ -76,9 +76,10 @@ public class AppFeedbackActivity extends BaseActivity {
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
+					System.out.println("---data:" + data);
 					boolean isc = FileUtil.ifFeedbackSuccess(data);
 					if (isc) {
-						afterFeedback("反馈成功，谢谢\n欢迎参与平台讨论组");
+						afterFeedback("反馈成功，谢谢\n欢迎参与平台讨论组\n一起打造您的专属体验");
 					} else {
 						afterFeedback("反馈失败\n请重新操作");
 					}
@@ -106,7 +107,8 @@ public class AppFeedbackActivity extends BaseActivity {
 	 */
 	private void afterFeedback(String content) {
 		new AlertDialog.Builder(AppFeedbackActivity.this).setTitle("反馈提示")
-				.setMessage(content).setPositiveButton("确定", null).show();
+				.setIcon(R.drawable.feedback0).setMessage(content)
+				.setPositiveButton("确定", null).show();
 	}
 
 	/**

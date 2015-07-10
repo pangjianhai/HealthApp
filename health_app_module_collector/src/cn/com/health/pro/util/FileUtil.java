@@ -1,6 +1,7 @@
 package cn.com.health.pro.util;
 
 import java.io.File;
+import java.util.Iterator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,13 +69,7 @@ public class FileUtil {
 	public static boolean ifFeedbackSuccess(String data) {
 		try {
 			JSONObject or_obj = new JSONObject(data);
-			if (or_obj.has("flag")) {
-				String b = or_obj.getString("flag");
-				if ("true".equals(b)) {
-					return true;
-				}
-
-			}
+			return or_obj.getBoolean("flag");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
