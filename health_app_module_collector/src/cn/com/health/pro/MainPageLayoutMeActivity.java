@@ -1,8 +1,11 @@
 package cn.com.health.pro;
 
+import java.io.File;
+
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -19,7 +22,13 @@ import cn.com.health.pro.persist.SharedPreInto;
 import cn.com.health.pro.task.GetSelfInfoAsyncTask;
 import cn.com.health.pro.task.GetSelfInfoNumAsyncTask;
 import cn.com.health.pro.util.ActivityCollector;
+import cn.com.health.pro.util.FileUtil;
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.HttpHandler;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -203,8 +212,63 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-
+						real_download();
 					}
 				}).setNegativeButton("取消", null).show();
+	}
+
+	/**
+	 * 关于真正的下载
+	 */
+	private ProgressDialog dialog = null;
+
+	private void real_download() {
+		dialog = new ProgressDialog(this);
+		dialog.setIcon(R.drawable.download_app1);
+		dialog.setTitle("下载");
+		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		dialog.setCancelable(true);
+		dialog.show();
+
+		HttpUtils http = new HttpUtils();
+		HttpHandler handler = http
+				.download(
+						"http://219.239.26.3/files/525100000672DA66/apache.dataguru.cn/poi/release/bin/poi-bin-3.12-20150511.tar.gz",
+						FileUtil.getDownloadFileDir()
+								+ "/poi-bin-3.12-20150511.tar.gz", true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
+						true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
+						new RequestCallBack<File>() {
+
+							@Override
+							public void onStart() {
+								dialog.setMessage("开始下载");
+							}
+
+							@Override
+							public void onLoading(long total, long current,
+									boolean isUploading) {
+								int x = (int) (current * 100 / total);
+								dialog.setProgress(x);
+							}
+
+							@Override
+							public void onSuccess(
+									ResponseInfo<File> responseInfo) {
+								System.out.println("--------0");
+								dialog.setMessage("下载成功");
+								dialog.dismiss();
+							}
+
+							@Override
+							public void onFailure(HttpException error,
+									String msg) {
+								System.out.println("--------1");
+								dialog.setMessage("下载失败");
+								dialog.dismiss();
+							}
+						});
+
+		// 调用cancel()方法停止下载
+		// handler.cancel();
 	}
 }

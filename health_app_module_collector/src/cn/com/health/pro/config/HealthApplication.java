@@ -57,8 +57,6 @@ public class HealthApplication extends Application {
 	 */
 	private static String userId;
 
-	
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -76,6 +74,15 @@ public class HealthApplication extends Application {
 				+ SystemConst.mobile_local_dir_for_pic);
 		if (!cacheDir.exists()) {
 			cacheDir.mkdirs();
+		}
+
+		/**
+		 * app下载存放路径
+		 */
+		File downDir = new File(parent + "/"
+				+ SystemConst.mobile_local_dir_for_download_app);
+		if (!downDir.exists()) {
+			downDir.mkdirs();
 		}
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				getContext())
@@ -233,7 +240,5 @@ public class HealthApplication extends Application {
 	public static void setUserId(String id) {
 		userId = id;
 	}
-
-	
 
 }

@@ -14,8 +14,17 @@ public class SystemConst {
 
 	public static final String mobile_local_dir = "G_HEALTH";
 
+	/**
+	 * 图片缓存地址
+	 */
 	public static final String mobile_local_dir_for_pic = mobile_local_dir
 			+ "/PIC_COLLECTION";
+
+	/**
+	 * app下载地址
+	 */
+	public static final String mobile_local_dir_for_download_app = mobile_local_dir
+			+ "/APP_DOWNLOAD";
 	/**
 	 * 本地文件的名字
 	 */
