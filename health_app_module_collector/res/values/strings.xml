@@ -1,5 +1,9 @@
 <resources>
 
+    <!-- 版本 -->
+    <string name="app_version_name">v1.1.0</string>
+    <string name="app_version_num">1</string>
+    <!-- 普通操作 -->
     <string name="app_name">健康在线</string>
     <string name="search">搜搜</string>
     <string name="can_input_search_key">关键词</string>
@@ -56,5 +60,15 @@
     <string name="xxxxxxxxxxxxxxx">测试</string>
     <string name="tag_input_search">标签匹配</string>
     <string name="tag_input_request">标签检索</string>
+
+    <!-- 页面“我” -->
+    <string name="page_layout_me_me">我</string>
+    <string name="page_layout_me_myfile">我的档案</string>
+    <string name="page_layout_me_my_focus">我的关注</string>
+    <string name="page_layout_me_focuseme">关注我的</string>
+    <string name="page_layout_me_mymsg">我的消息</string>
+    <string name="page_layout_me_myshoucang">我的收藏</string>
+    <string name="page_layout_me_versionscan">版本检测</string>
+    <string name="page_layout_me_feedback">吐槽产品</string>
 
 </resources>

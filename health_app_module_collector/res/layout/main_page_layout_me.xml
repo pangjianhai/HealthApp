@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我"
+            android:text="@string/page_layout_me_me"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_toRightOf="@+id/main_page_me_photo"
-                android:text="逄建海"
+                android:text=""
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_toRightOf="@+id/main_page_me_photo"
-                android:text="好好学习，天天向上"
+                android:text=""
                 android:textColor="#d0d0d0"
                 android:textSize="12sp" />
 
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="我的档案"
+                android:text="@string/page_layout_me_myfile"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -128,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="我的关注"
+                android:text="@string/page_layout_me_my_focus"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="关注我的"
+                android:text="@string/page_layout_me_focuseme"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -182,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="我的消息"
+                android:text="@string/page_layout_me_mymsg"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -209,7 +209,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="我的收藏"
+                android:text="@string/page_layout_me_myshoucang"
+                android:textColor="#000"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="matrix"
+                android:src="@drawable/mm_submenu" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/main_page_me_versionscan"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/preference_item"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:onClick="show_me_about" >
+
+            <TextView
+                android:id="@+id/me_my_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/page_layout_me_versionscan"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -236,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="show_me_about"
                 android:padding="8dp"
-                android:text="吐槽产品"
+                android:text="@string/page_layout_me_feedback"
                 android:textColor="#000"
                 android:textSize="17sp" />
 

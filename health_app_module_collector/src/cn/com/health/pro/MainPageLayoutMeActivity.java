@@ -2,6 +2,9 @@ package cn.com.health.pro;
 
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -144,11 +147,64 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					AppFeedbackActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
+		} else if (R.id.main_page_me_versionscan == v.getId()) {// 版本检测
+			versionScan();
 		}
 	}
 
 	public void backoff(View v) {
 		to_home_page();
 		finish();
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年7月10日
+	 * @todo:检测新版本
+	 * @return:void
+	 */
+	private void versionScan() {
+		String versionName = this.getString(R.string.app_version_name);
+		String versionNum = this.getString(R.string.app_version_num);
+		has_new_version(versionName, versionNum);
+
+	}
+
+	/**
+	 * 
+	 * @param versionName
+	 * @param versionNum
+	 * @user:pang
+	 * @data:2015年7月10日
+	 * @todo:没有最新版本的提示
+	 * @return:void
+	 */
+	private void no_new_version(String versionName, String versionNum) {
+		new AlertDialog.Builder(MainPageLayoutMeActivity.this).setTitle("版本提示")
+				.setMessage("当前版本已是最新 \n " + versionName)
+				.setPositiveButton("确定", null).show();
+	}
+
+	/**
+	 * 
+	 * @param versionName
+	 * @param versionNum
+	 * @user:pang
+	 * @data:2015年7月10日
+	 * @todo:拥有最新版本
+	 * @return:void
+	 */
+	private void has_new_version(String versionName, String versionNum) {
+		new AlertDialog.Builder(MainPageLayoutMeActivity.this).setTitle("版本提示")
+				.setMessage("有最新版本可供下载")
+				.setPositiveButton("下载", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+				}).setNegativeButton("取消", null).show();
 	}
 }
