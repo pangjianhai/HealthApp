@@ -99,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/feed_back_btn_into_tow"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/app_feed_back_into_scan_text"
             android:textColor="@color/black"
             android:textSize="12sp" />
