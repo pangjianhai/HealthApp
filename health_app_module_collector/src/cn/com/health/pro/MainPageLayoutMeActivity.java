@@ -192,7 +192,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 
 		try {
 			JSONObject d = new JSONObject();
-			d.put("versionNum", 4);
+			d.put("versionNum", versionNum);
 
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
