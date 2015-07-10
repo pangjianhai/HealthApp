@@ -1,6 +1,8 @@
 package cn.com.health.pro;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -14,10 +16,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.config.HealthApplication;
 import cn.com.health.pro.model.SelfNum;
 import cn.com.health.pro.model.UserItem;
+import cn.com.health.pro.model.VersionEntity;
 import cn.com.health.pro.persist.SharedPreInto;
 import cn.com.health.pro.task.GetSelfInfoAsyncTask;
 import cn.com.health.pro.task.GetSelfInfoNumAsyncTask;
@@ -166,6 +170,14 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		finish();
 	}
 
+	/************************************ 和版本检测和下载有关的代码 *****************************************/
+	/**
+	 * 关于真正的下载
+	 */
+	private ProgressDialog dialog = null;
+	private VersionEntity ve = null;
+	private String download_app_name = "g_health.apk";
+
 	/**
 	 * 
 	 * 
@@ -175,9 +187,39 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	private void versionScan() {
-		String versionName = this.getString(R.string.app_version_name);
-		String versionNum = this.getString(R.string.app_version_num);
-		has_new_version(versionName, versionNum);
+		final String versionName = this.getString(R.string.app_version_name);
+		final String versionNum = this.getString(R.string.app_version_num);
+
+		try {
+			JSONObject d = new JSONObject();
+			d.put("versionNum", 4);
+
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					System.out.println("data:" + data);
+					ve = FileUtil.parseVersionEntity(data);
+					if (ve == null) {// 说明当前版本是最新
+						no_new_version(versionName, versionNum);
+					} else {// 说明已经有最新版本了，提示可以下载
+						has_new_version();
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.scan_app_version_num, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -205,7 +247,21 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @todo:拥有最新版本
 	 * @return:void
 	 */
-	private void has_new_version(String versionName, String versionNum) {
+	private void has_new_version() {
+		/**
+		 * 清空旧的安装包
+		 */
+		String dirPath = FileUtil.getDownloadFileDir();
+		File f = new File(dirPath);
+		File[] fs = f.listFiles();
+		if (fs != null && fs.length > 0) {
+			for (File ff : fs) {
+				ff.delete();
+			}
+		}
+		/**
+		 * 提示可以下载新的安装包
+		 */
 		new AlertDialog.Builder(MainPageLayoutMeActivity.this).setTitle("版本提示")
 				.setMessage("有最新版本可供下载")
 				.setPositiveButton("下载", new OnClickListener() {
@@ -218,10 +274,11 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	}
 
 	/**
-	 * 关于真正的下载
+	 * @user:pang
+	 * @data:2015年7月10日
+	 * @todo:真正下载的地方
+	 * @return:void
 	 */
-	private ProgressDialog dialog = null;
-
 	private void real_download() {
 		dialog = new ProgressDialog(this);
 		dialog.setIcon(R.drawable.download_app1);
@@ -231,44 +288,37 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		dialog.show();
 
 		HttpUtils http = new HttpUtils();
-		HttpHandler handler = http
-				.download(
-						"http://219.239.26.3/files/525100000672DA66/apache.dataguru.cn/poi/release/bin/poi-bin-3.12-20150511.tar.gz",
-						FileUtil.getDownloadFileDir()
-								+ "/poi-bin-3.12-20150511.tar.gz", true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
-						true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
-						new RequestCallBack<File>() {
+		HttpHandler handler = http.download(ve.getDownLoadUrl(),
+				FileUtil.getDownloadFileDir() + "/" + download_app_name, true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
+				true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
+				new RequestCallBack<File>() {
 
-							@Override
-							public void onStart() {
-								dialog.setMessage("开始下载");
-							}
+					@Override
+					public void onStart() {
+						dialog.setMessage("开始下载");
+					}
 
-							@Override
-							public void onLoading(long total, long current,
-									boolean isUploading) {
-								int x = (int) (current * 100 / total);
-								dialog.setProgress(x);
-							}
+					@Override
+					public void onLoading(long total, long current,
+							boolean isUploading) {
+						int x = (int) (current * 100 / total);
+						dialog.setProgress(x);
+					}
 
-							@Override
-							public void onSuccess(
-									ResponseInfo<File> responseInfo) {
-								System.out.println("--------0");
-								dialog.setMessage("下载成功");
-								dialog.dismiss();
-							}
+					@Override
+					public void onSuccess(ResponseInfo<File> responseInfo) {
+						dialog.dismiss();
+						Toast.makeText(getApplicationContext(), "下载成功",
+								Toast.LENGTH_SHORT).show();
+					}
 
-							@Override
-							public void onFailure(HttpException error,
-									String msg) {
-								System.out.println("--------1");
-								dialog.setMessage("下载失败");
-								dialog.dismiss();
-							}
-						});
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						dialog.dismiss();
+						Toast.makeText(getApplicationContext(), "下载失败",
+								Toast.LENGTH_SHORT).show();
+					}
+				});
 
-		// 调用cancel()方法停止下载
-		// handler.cancel();
 	}
 }

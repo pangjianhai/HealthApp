@@ -2,7 +2,7 @@
 
     <!-- 版本 -->
     <string name="app_version_name">v1.1.0</string>
-    <string name="app_version_num">1</string>
+    <string name="app_version_num">0</string>
     <!-- 普通操作 -->
     <string name="app_name">健康在线</string>
     <string name="search">搜搜</string>
