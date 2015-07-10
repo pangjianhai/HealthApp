@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import cn.com.health.pro.util.FileUtil;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -34,6 +35,8 @@ public class AppFeedbackActivity extends BaseActivity {
 	 */
 	private Button feedback_btn;
 
+	private TextView feed_back_btn_into_tow;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +55,8 @@ public class AppFeedbackActivity extends BaseActivity {
 	 */
 	private void init() {
 		feed_back_text = (EditText) findViewById(R.id.feed_back_text);
+		feed_back_btn_into_tow = (TextView) findViewById(R.id.feed_back_btn_into_tow);
+		feed_back_btn_into_tow.setTextIsSelectable(true);
 		feedback_btn = (Button) findViewById(R.id.feedback_btn);
 		feedback_btn.setOnClickListener(new OnClickListener() {
 

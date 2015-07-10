@@ -91,7 +91,7 @@
             android:layout_marginTop="10dp"
             android:text="88888888888888"
             android:textColor="@color/blue"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/feed_back_btn_into_three"
