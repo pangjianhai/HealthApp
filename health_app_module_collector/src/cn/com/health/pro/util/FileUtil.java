@@ -48,6 +48,7 @@ public class FileUtil {
 				ve.setVersionName(vName);
 				ve.setVersionNum(vNum);
 				ve.setDownLoadUrl(vUrl);
+				return ve;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
