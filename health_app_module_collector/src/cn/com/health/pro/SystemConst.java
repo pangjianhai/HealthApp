@@ -247,6 +247,11 @@ public class SystemConst {
 		 * 用户反馈意见
 		 */
 		public static final String user_add_view = "appSourceController/addViews.do";
+
+		/**
+		 * 成功下载之后数量统计
+		 */
+		public static final String after_down_load_success = "appSourceController/onloadSuccess.do";
 	}
 
 	/**

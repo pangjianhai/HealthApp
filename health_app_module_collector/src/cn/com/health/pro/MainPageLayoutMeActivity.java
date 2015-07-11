@@ -307,6 +307,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 
 					@Override
 					public void onSuccess(ResponseInfo<File> responseInfo) {
+						after_download_success();
 						dialog.dismiss();
 						Toast.makeText(getApplicationContext(), "下载成功",
 								Toast.LENGTH_SHORT).show();
@@ -320,5 +321,36 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					}
 				});
 
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年7月11日
+	 * @todo:消息发送成功之后
+	 * @return:void
+	 */
+	private void after_download_success() {
+		System.out.println("after_download_success:;::::::::::::::::::::");
+		try {
+			JSONObject d = new JSONObject();
+			d.put("userUuid", userId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.after_down_load_success, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
