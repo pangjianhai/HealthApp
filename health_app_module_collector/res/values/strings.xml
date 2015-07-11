@@ -71,4 +71,7 @@
     <string name="page_layout_me_versionscan">版本检测</string>
     <string name="page_layout_me_feedback">吐槽产品</string>
 
+    <!-- 关于推荐 -->
+    <string name="friends_tj_pytj">朋友推荐</string>
+
 </resources>

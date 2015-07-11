@@ -36,6 +36,7 @@ public class FirstLoginTopUserListLayout extends BaseActivity {
 	private void initData() {
 		for (int i = 0; i < 8; i++) {
 			UserItem ui = new UserItem();
+			ui.setUuid("1sdf" + i);
 			ui.setUserId("pangjianhai" + i);
 			ui.setIfAddedInTopList(false);
 			userList.add(ui);

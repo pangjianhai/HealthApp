@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/find_search_result_header"
         android:padding="7dp"
-        android:text="姓名"
+        android:text=""
         android:textColor="#000" />
 
     <TextView

@@ -24,20 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="朋友推荐"
+            android:text="@string/friends_tj_pytj"
             android:textColor="@color/black"
             android:textSize="20sp" />
-
-        <Button
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:background="#00ffffff"
-            android:onClick="focus_all"
-            android:text="一键关注"
-            android:textSize="12sp" />
     </RelativeLayout>
 
     <LinearLayout

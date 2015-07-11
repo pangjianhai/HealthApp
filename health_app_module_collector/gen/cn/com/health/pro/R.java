@@ -661,6 +661,9 @@ public final class R {
         public static final int friends_add_search=0x7f07002e;
         public static final int friends_add_search_firends=0x7f070030;
         public static final int friends_add_search_firends_results=0x7f070031;
+        /**  关于推荐 
+         */
+        public static final int friends_tj_pytj=0x7f07003d;
         public static final int info_ops_bad=0x7f070009;
         public static final int info_ops_comment=0x7f070007;
         public static final int info_ops_good=0x7f070008;
