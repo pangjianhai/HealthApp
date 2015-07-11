@@ -330,7 +330,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	private void after_download_success() {
-		System.out.println("after_download_success:;::::::::::::::::::::");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userUuid", userId);
