@@ -252,6 +252,11 @@ public class SystemConst {
 		 * 成功下载之后数量统计
 		 */
 		public static final String after_down_load_success = "appSourceController/onloadSuccess.do";
+
+		/**
+		 * 获取给注册用户推荐的好友名单
+		 */
+		public static final String get_top_user_list = "appSourceController/getUsersRankinglstBySharelikeNum.do";
 	}
 
 	/**

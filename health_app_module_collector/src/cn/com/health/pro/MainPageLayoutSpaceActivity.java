@@ -219,9 +219,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			// System.out.println("刷新链接：" + SystemConst.server_url
-			// + SystemConst.FunctionUrl.get_refrish_share_sentencs
-			// + "?para=" + d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.FunctionUrl.get_refrish_share_sentencs, map,
 					rcb);
@@ -232,7 +229,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	private void freshData(List<ShareSentenceEntity> list) {
-		// System.out.println("list:" + list.size());
 		dataSourceList.addAll(0, list);
 		setLastestShareId();
 		itemAdapter.notifyDataSetChanged();
@@ -440,9 +436,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		// Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
-		// FirstLoginTopUserListLayout.class);
-		// startActivity(intent);
+		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
+				FirstLoginTopUserListLayout.class);
+		startActivity(intent);
 	}
 
 }

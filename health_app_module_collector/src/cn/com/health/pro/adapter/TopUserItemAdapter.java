@@ -21,7 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * 
  * @author pang
- * @todo 用户搜索时候的adapter
+ * @todo 用户推荐时候的adapter
  *
  */
 public class TopUserItemAdapter extends BaseAdapter {
@@ -69,11 +69,11 @@ public class TopUserItemAdapter extends BaseAdapter {
 		}
 		final UserItem ui = dataSourceList.get(position);
 		holder.find_search_result_username.setText(ui.getUserId());
-		holder.find_search_result_tags.setText("XXXXXXXXOOOOOOOOO");
+		holder.find_search_result_tags.setText(ui.getSentence());
 		String imgId = ui.getImg();
 		final String uuid = ui.getUuid();
-		boolean ifAdded = ui.isIfAddedInTopList();
-		if (ifAdded) {
+		final boolean ifAdded = ui.isIfAddedInTopList();
+		if (ifAdded) {// 如果没有添加用户过，则进行添加
 			holder.check_someone.setImageResource(R.drawable.add_ok);
 		}
 		if (imgId != null && !"".equals(imgId)) {
@@ -92,9 +92,12 @@ public class TopUserItemAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				ui.setIfAddedInTopList(true);
-				if (context instanceof FirstLoginTopUserListLayout) {
-					((FirstLoginTopUserListLayout) context).checkSomeOne(uuid);
+				if (!ifAdded) {// 如果没有添加过该人为好友则添加
+					ui.setIfAddedInTopList(true);
+					if (context instanceof FirstLoginTopUserListLayout) {
+						((FirstLoginTopUserListLayout) context)
+								.checkSomeOne(uuid);
+					}
 				}
 			}
 		});

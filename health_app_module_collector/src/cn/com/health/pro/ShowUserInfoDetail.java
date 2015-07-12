@@ -1,5 +1,8 @@
 package cn.com.health.pro;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -16,12 +19,15 @@ import cn.com.health.pro.task.FriendFocusCancelAsyncTask;
 import cn.com.health.pro.task.GetOneUsersAsyncTask;
 import cn.com.health.pro.task.IFOfFriendFocusAsyncTask;
 
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
  * @author pang
- * @todo 查看信息详情
+ * @todo 查看个人信息详情
  *
  */
 public class ShowUserInfoDetail extends BaseActivity {
@@ -206,12 +212,35 @@ public class ShowUserInfoDetail extends BaseActivity {
 	 * @author pang
 	 */
 	public void addFocus() {
+		// try {
+		// JSONObject data0 = new JSONObject();
+		// data0.put("currentId", loginUUID);
+		// data0.put("friendId", uuid);
+		// new FriendFocusAddAsyncTask(ShowUserInfoDetail.this).execute(data0
+		// .toString());
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+
 		try {
-			JSONObject data0 = new JSONObject();
-			data0.put("currentId", loginUUID);
-			data0.put("friendId", uuid);
-			new FriendFocusAddAsyncTask(ShowUserInfoDetail.this).execute(data0
-					.toString());
+			JSONObject d = new JSONObject();
+			d.put("currentId", loginUUID);
+			d.put("friendId", uuid);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.some_one_focus_another, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -13,6 +13,7 @@ import cn.com.health.pro.util.FocusUtil;
  * @todo 一个用户关注另一个用户task
  *
  */
+@Deprecated
 public class FriendFocusAddAsyncTask extends AsyncTask<String, Void, Boolean> {
 
 	private Context context;

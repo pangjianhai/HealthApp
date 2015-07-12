@@ -94,4 +94,49 @@ public class UserUtils {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @user:pang
+	 * @data:2015年7月12日
+	 * @todo:解析给注册用户推荐的好友
+	 * @return:List<UserItem>
+	 */
+	public static List<UserItem> parseJsonAddToTopList(String data) {
+		List<UserItem> dataSourceList = new ArrayList<UserItem>();
+		try {
+			if (data != null && !"".equals(data)) {
+				JSONObject or_obj = new JSONObject(data);
+				JSONArray jarray = or_obj.getJSONArray("users");
+				if (jarray != null && jarray.length() > 0) {
+					for (int i = 0; i < jarray.length(); i++) {
+						JSONObject obj = jarray.getJSONObject(i);
+						UserItem bean = new UserItem();
+						// 通用字段的处理
+						String id = obj.getString("id");
+						String userName = obj.getString("userName");
+						String userId = obj.getString("userId");
+						String img = obj.getString("headImg");
+						String sex = obj.getString("sex");
+						String sentence = obj.getString("sentence");
+
+						bean.setUuid(id);
+						bean.setUserId(userId);
+						bean.setUserName(userName);
+						bean.setImg(img);
+						bean.setSex(sex);
+						bean.setIfAddedInTopList(false);
+						bean.setSentence(sentence);
+
+						dataSourceList.add(bean);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dataSourceList;
+	}
+
 }
