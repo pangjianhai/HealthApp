@@ -87,6 +87,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 			Intent intent = new Intent(ParentMainActivity.this,
 					SharePrepareActivity.class);
 			startActivity(intent);
+			System.out.println("==========<><><>");
 		} else if (v.getId() == R.id.main_page_layout_me_btn) {
 			Intent intent = new Intent(ParentMainActivity.this,
 					MainPageLayoutMeActivity.class);
