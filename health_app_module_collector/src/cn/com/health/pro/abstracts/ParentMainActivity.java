@@ -87,7 +87,6 @@ public abstract class ParentMainActivity extends BaseActivity {
 			Intent intent = new Intent(ParentMainActivity.this,
 					SharePrepareActivity.class);
 			startActivity(intent);
-			System.out.println("==========<><><>");
 		} else if (v.getId() == R.id.main_page_layout_me_btn) {
 			Intent intent = new Intent(ParentMainActivity.this,
 					MainPageLayoutMeActivity.class);
@@ -106,7 +105,6 @@ public abstract class ParentMainActivity extends BaseActivity {
 			startActivity(intent);
 		}
 
-		// finish();
 	}
 
 	/**
@@ -118,9 +116,12 @@ public abstract class ParentMainActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void to_home_page() {
-		Intent intent = new Intent(getApplicationContext(),
-				MainPageLayoutSpaceActivity.class);
-		startActivity(intent);
+		/***
+		 * 如果放开注释则会进入首页的同时将排行榜重新刷新
+		 */
+		// Intent intent = new Intent(getApplicationContext(),
+		// MainPageLayoutSpaceActivity.class);
+		// startActivity(intent);
 	}
 
 }

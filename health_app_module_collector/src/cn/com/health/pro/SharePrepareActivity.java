@@ -61,9 +61,12 @@ public class SharePrepareActivity extends BaseActivity implements
 			startActivity(intent);
 			break;
 		case R.id.share_prepare_back:
-			Intent i = new Intent(SharePrepareActivity.this,
-					MainPageLayoutSpaceActivity.class);
-			startActivity(i);
+			/***
+			 * 如果放开注释则会进入首页的同时将排行榜重新刷新
+			 */
+			// Intent i = new Intent(SharePrepareActivity.this,
+			// MainPageLayoutSpaceActivity.class);
+			// startActivity(i);
 			finish();
 			break;
 		default:
