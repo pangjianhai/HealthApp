@@ -76,6 +76,19 @@ public class BaseActivity extends InstrumentedActivity {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param url
+	 *            地址
+	 * @param p
+	 *            参数
+	 * @param rcb
+	 *            回调函数
+	 * @user:pang
+	 * @data:2015年7月13日
+	 * @todo:发送普通的POST http请求
+	 * @return:void
+	 */
 	public void send_normal_request(String url, Map<String, String> p,
 			RequestCallBack<?> rcb) {
 		if (!isNetWorkConnected()) {
