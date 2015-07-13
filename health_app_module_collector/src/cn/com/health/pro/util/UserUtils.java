@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cn.com.health.pro.model.PushBean;
 import cn.com.health.pro.model.SelfNum;
 import cn.com.health.pro.model.UserItem;
 
@@ -137,6 +138,30 @@ public class UserUtils {
 			e.printStackTrace();
 		}
 		return dataSourceList;
+	}
+
+	public static PushBean parseJsonAddToPushBean(String data) {
+		PushBean bean = new PushBean();
+		try {
+			if (data != null && !"".equals(data)) {
+				JSONObject or_obj = new JSONObject(data);
+				JSONObject obj = or_obj.getJSONObject("User");
+
+				String loginNum = obj.getString("loginNum");
+				String loginDate = obj.getString("loginDate");
+				int loginTimes = 2;
+				if (loginNum != null && !"".equals(loginNum)
+						&& !"null".equals(loginNum)) {
+					loginTimes = Integer.parseInt(loginNum);
+				}
+				bean.setLoginTimes(loginTimes);
+				bean.setLastLoginDate(loginDate);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bean;
 	}
 
 }

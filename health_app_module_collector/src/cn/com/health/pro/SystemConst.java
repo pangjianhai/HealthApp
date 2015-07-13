@@ -257,6 +257,11 @@ public class SystemConst {
 		 * 获取给注册用户推荐的好友名单
 		 */
 		public static final String get_top_user_list = "appSourceController/getUsersRankinglstBySharelikeNum.do";
+
+		/**
+		 * 判断有没有必要推荐用户
+		 */
+		public static final String if_need_to_push_top_user = "appSourceController/getLoginNumAndLoginDateByUuId.do";
 	}
 
 	/**

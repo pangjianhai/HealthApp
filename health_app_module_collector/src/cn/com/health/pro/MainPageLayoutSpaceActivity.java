@@ -11,23 +11,17 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.ShareItemAdapter;
-import cn.com.health.pro.adapter.TopUserItemAdapter;
+import cn.com.health.pro.config.GlobalUserVariable;
+import cn.com.health.pro.model.PushBean;
 import cn.com.health.pro.model.ShareSentenceEntity;
-import cn.com.health.pro.model.UserItem;
 import cn.com.health.pro.part.XListView;
 import cn.com.health.pro.part.XListView.IXListViewListener;
 import cn.com.health.pro.service.ShareCommentService;
@@ -35,6 +29,7 @@ import cn.com.health.pro.service.ViewForInfoService;
 import cn.com.health.pro.util.CommonDateUtil;
 import cn.com.health.pro.util.IShareCallbackOperator;
 import cn.com.health.pro.util.ShareSentenceUtil;
+import cn.com.health.pro.util.UserUtils;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -436,9 +431,54 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
-				FirstLoginTopUserListLayout.class);
-		startActivity(intent);
+		if (GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
+			System.out.println("====<><><>");
+			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
+			if_need_to_push_top_user();
+		}
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年7月13日
+	 * @todo:判断有没有必要推荐用户
+	 * @return:void
+	 */
+	private void if_need_to_push_top_user() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("userUuid", userId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					System.out.println("data:" + data);
+					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
+					if (pb.getLoginTimes() <= 1) {
+						Intent intent = new Intent(
+								MainPageLayoutSpaceActivity.this,
+								FirstLoginTopUserListLayout.class);
+						startActivity(intent);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.if_need_to_push_top_user, map,
+					rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
