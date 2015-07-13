@@ -455,7 +455,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("data:" + data);
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
 					if (pb.getLoginTimes() <= 1) {
 						Intent intent = new Intent(
