@@ -432,7 +432,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		if (GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
-			System.out.println("====<><><>");
 			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
 			if_need_to_push_top_user();
 		}
