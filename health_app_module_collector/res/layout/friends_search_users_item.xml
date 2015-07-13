@@ -12,8 +12,7 @@
         android:layout_height="55dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:paddingLeft="5dp"
-        android:src="@drawable/xiaohei" />
+        android:paddingLeft="5dp" />
 
     <TextView
         android:id="@+id/find_search_result_username"

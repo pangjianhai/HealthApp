@@ -55,8 +55,7 @@
                     android:layout_marginLeft="8dp"
                     android:onClick="gointo_space"
                     android:padding="8dp"
-                    android:scaleType="matrix"
-                    android:src="@drawable/xiaohei" />
+                    android:scaleType="matrix" />
 
                 <TextView
                     android:id="@+id/show_user_detail_nickname"

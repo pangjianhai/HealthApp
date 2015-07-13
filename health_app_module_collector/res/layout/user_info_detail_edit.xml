@@ -56,8 +56,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:padding="8dp"
-                    android:scaleType="matrix"
-                    android:src="@drawable/xiaohei" />
+                    android:scaleType="matrix" />
 
                 <ImageView
                     android:layout_width="wrap_content"
