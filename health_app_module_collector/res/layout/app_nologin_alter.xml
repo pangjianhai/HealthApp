@@ -2,26 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/grey"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <!-- 提示用户登录界面 -->
 
-    <TextView
+    <RelativeLayout
         android:id="@+id/alert_title"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="请登录"
-        android:textColor="@color/gray"
-        android:textSize="16sp" />
+        android:layout_marginTop="10dp"
+        android:background="@color/white" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/close_page2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="请登录"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/login_reg_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:orientation="vertical" >
 
@@ -29,16 +40,23 @@
             android:id="@+id/alert_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/no_login_alert_btn"
             android:text="登录"
+            android:textColor="@color/black"
             android:textSize="13dp" />
 
         <Button
             android:id="@+id/alert_reg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/no_login_alert_btn"
             android:text="注册"
+            android:textColor="@color/black"
             android:textSize="13dp" />
     </LinearLayout>
 
