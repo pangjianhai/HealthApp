@@ -6,8 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.MainPageLayoutMeActivity;
 import cn.com.health.pro.MainPageLayoutOrderActivity;
@@ -94,7 +98,8 @@ public abstract class ParentMainActivity extends BaseActivity {
 					SharePrepareActivity.class);
 			startActivity(intent);
 		} else if (v.getId() == R.id.main_page_layout_me_btn) {// 查看关于我
-			if (!curent_activity_name.equals(MainPageLayoutMeActivity.class
+			no_login_alter(v);
+			if (curent_activity_name.equals(MainPageLayoutMeActivity.class
 					.getName())) {
 				Intent intent = new Intent(ParentMainActivity.this,
 						MainPageLayoutMeActivity.class);
@@ -140,6 +145,38 @@ public abstract class ParentMainActivity extends BaseActivity {
 		// Intent intent = new Intent(getApplicationContext(),
 		// MainPageLayoutSpaceActivity.class);
 		// startActivity(intent);
+	}
+
+	/************************************************************************************/
+
+	public void no_login_alter(View v) {
+		LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
+				null, false);
+		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
+				true);
+		// 点击空白处时，隐藏掉pop窗口
+		popWindow.setFocusable(true);
+		backgroundAlpha(1f);
+		// 添加pop窗口关闭事件
+		popWindow.setOnDismissListener(new PoponDismissListener());
+		popWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+	}
+
+	public void backgroundAlpha(float bgAlpha) {
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		lp.alpha = bgAlpha; // 0.0-1.0
+		getWindow().setAttributes(lp);
+	}
+
+	class PoponDismissListener implements PopupWindow.OnDismissListener {
+
+		@Override
+		public void onDismiss() {
+			backgroundAlpha(1f);
+		}
+
 	}
 
 }
