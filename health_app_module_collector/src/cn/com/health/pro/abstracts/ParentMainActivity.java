@@ -1,5 +1,8 @@
 package cn.com.health.pro.abstracts;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -80,29 +83,44 @@ public abstract class ParentMainActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void share_btn(View v) {
+		ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+		String curent_activity_name = cn.getClassName();
 		/**
 		 * 如果点击的是分享按钮
 		 */
-		if (v.getId() == R.id.main_page_layout_share_btn) {
+		if (v.getId() == R.id.main_page_layout_share_btn) {// 进入分享页面
 			Intent intent = new Intent(ParentMainActivity.this,
 					SharePrepareActivity.class);
 			startActivity(intent);
-		} else if (v.getId() == R.id.main_page_layout_me_btn) {
-			Intent intent = new Intent(ParentMainActivity.this,
-					MainPageLayoutMeActivity.class);
-			startActivity(intent);
-		} else if (v.getId() == R.id.main_page_layout_home_btn) {
-			Intent intent = new Intent(ParentMainActivity.this,
-					MainPageLayoutSpaceActivity.class);
-			startActivity(intent);
-		} else if (v.getId() == R.id.main_page_layout_info_btn) {
-			Intent intent = new Intent(ParentMainActivity.this,
-					MainPageLayoutTagActivity.class);
-			startActivity(intent);
-		} else if (v.getId() == R.id.main_page_layout_order_btn) {
-			Intent intent = new Intent(ParentMainActivity.this,
-					MainPageLayoutOrderActivity.class);
-			startActivity(intent);
+		} else if (v.getId() == R.id.main_page_layout_me_btn) {// 查看关于我
+			if (!curent_activity_name.equals(MainPageLayoutMeActivity.class
+					.getName())) {
+				Intent intent = new Intent(ParentMainActivity.this,
+						MainPageLayoutMeActivity.class);
+				startActivity(intent);
+			}
+		} else if (v.getId() == R.id.main_page_layout_home_btn) {// 查看首页
+			if (!curent_activity_name.equals(MainPageLayoutSpaceActivity.class
+					.getName())) {
+				Intent intent = new Intent(ParentMainActivity.this,
+						MainPageLayoutSpaceActivity.class);
+				startActivity(intent);
+			}
+		} else if (v.getId() == R.id.main_page_layout_info_btn) {// 查看标签
+			if (!curent_activity_name.equals(MainPageLayoutTagActivity.class
+					.getName())) {
+				Intent intent = new Intent(ParentMainActivity.this,
+						MainPageLayoutTagActivity.class);
+				startActivity(intent);
+			}
+		} else if (v.getId() == R.id.main_page_layout_order_btn) {// 查看排行
+			if (!curent_activity_name.equals(MainPageLayoutOrderActivity.class
+					.getName())) {
+				Intent intent = new Intent(ParentMainActivity.this,
+						MainPageLayoutOrderActivity.class);
+				startActivity(intent);
+			}
 		}
 
 	}
