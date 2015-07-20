@@ -96,6 +96,13 @@ public abstract class ParentMainActivity extends BaseActivity {
 		ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
 		String curent_activity_name = cn.getClassName();
 		/**
+		 * 如果用户没有登录，则提醒用户可以登录或者注册
+		 */
+		if (userId == null || "".equals(userId)) {
+			no_login_alter(v);
+			return;
+		}
+		/**
 		 * 如果点击的是分享按钮
 		 */
 		if (v.getId() == R.id.main_page_layout_share_btn) {// 进入分享页面
@@ -103,8 +110,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 					SharePrepareActivity.class);
 			startActivity(intent);
 		} else if (v.getId() == R.id.main_page_layout_me_btn) {// 查看关于我
-			no_login_alter(v);
-			if (curent_activity_name.equals(MainPageLayoutMeActivity.class
+			if (!curent_activity_name.equals(MainPageLayoutMeActivity.class
 					.getName())) {
 				Intent intent = new Intent(ParentMainActivity.this,
 						MainPageLayoutMeActivity.class);
@@ -161,7 +167,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 				null, false);
 		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
 				true);
-	//popWindow.setAnimationStyle(R.style);
+		// popWindow.setAnimationStyle(R.style);
 		/**
 		 * 子控件开始
 		 */

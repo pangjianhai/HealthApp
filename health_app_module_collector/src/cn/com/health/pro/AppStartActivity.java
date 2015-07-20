@@ -1,23 +1,19 @@
 package cn.com.health.pro;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
-
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
-import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.persist.SharedPreInto;
-import cn.com.health.pro.task.SkipLoginAccountTask;
-import cn.com.health.pro.util.ShareSentenceUtil;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * 
@@ -127,7 +123,7 @@ public class AppStartActivity extends BaseActivity {
 	 * 
 	 * @tags
 	 * @date 2015年5月12日
-	 * @todo 跳转到登陆界面
+	 * @todo 跳转到登陆界面（后台可以匿名登录，改为了主页面）
 	 * @author pang
 	 */
 	private void skipToLogin() {
@@ -135,8 +131,10 @@ public class AppStartActivity extends BaseActivity {
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
+				// Intent intent = new Intent(AppStartActivity.this,
+				// AppLoginRegActivity.class);
 				Intent intent = new Intent(AppStartActivity.this,
-						AppLoginRegActivity.class);
+						MainPageLayoutSpaceActivity.class);
 				startActivity(intent);
 				AppStartActivity.this.finish();
 			}
