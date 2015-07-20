@@ -161,9 +161,9 @@ public abstract class ParentMainActivity extends BaseActivity {
 				null, false);
 		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
 				true);
-
+		// popWindow.setAnimationStyle(R.style.PopDownMenu);
 		/**
-		 * 子控件
+		 * 子控件开始
 		 */
 		ImageView close_nologin_alert_image = (ImageView) noLoginAlter
 				.findViewById(R.id.close_nologin_alert_image);
@@ -201,9 +201,12 @@ public abstract class ParentMainActivity extends BaseActivity {
 			}
 
 		});
+		/**
+		 * 子控件结束
+		 */
 		// 点击空白处时，隐藏掉pop窗口
 		popWindow.setFocusable(true);
-		backgroundAlpha(1f);
+		backgroundAlpha(0.7f);
 		// 添加pop窗口关闭事件
 		popWindow.setOnDismissListener(new PoponDismissListener());
 		popWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
