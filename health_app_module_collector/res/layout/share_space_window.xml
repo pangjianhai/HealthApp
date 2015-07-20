@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_default"
         android:text="登录"
-        android:textColor="@color/orange" />
+        android:textColor="@color/orange"
+        android:textSize="13dp" />
 
     <Button
         android:id="@+id/space_win_reg"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_default"
         android:text="注册"
-        android:textColor="@color/orange" />
+        android:textColor="@color/orange"
+        android:textSize="13dp" />
 
 </LinearLayout>
