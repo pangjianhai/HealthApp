@@ -341,13 +341,14 @@ public final class R {
         public static final int toolbar_saysomething_icon_nor=0x7f020110;
         public static final int toolbar_saysomething_icon_res=0x7f020111;
         public static final int triangle0=0x7f020112;
-        public static final int welcome=0x7f020113;
-        public static final int widget_icon_write=0x7f020114;
-        public static final int widget_icon_write_highlighted=0x7f020115;
-        public static final int xiaohei=0x7f020116;
-        public static final int xiaohei_big=0x7f020117;
-        public static final int xinxi=0x7f020118;
-        public static final int xlistview_arrow=0x7f020119;
+        public static final int triangle1=0x7f020113;
+        public static final int welcome=0x7f020114;
+        public static final int widget_icon_write=0x7f020115;
+        public static final int widget_icon_write_highlighted=0x7f020116;
+        public static final int xiaohei=0x7f020117;
+        public static final int xiaohei_big=0x7f020118;
+        public static final int xinxi=0x7f020119;
+        public static final int xlistview_arrow=0x7f02011a;
     }
     public static final class id {
         public static final int action_settings=0x7f0a00e4;

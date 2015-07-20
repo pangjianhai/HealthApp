@@ -313,9 +313,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void onRefresh() {
-		// dataSourceList.clear();
-		// loadDataMore();
-		// System.out.println("------------------开始刷新");
 		freshData();
 	}
 
@@ -325,9 +322,13 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	public void add_friends(View v) {
-		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
-				FriendSeachOpsActivity.class);
-		startActivity(intent);
+		if (isLogin()) {
+			Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
+					FriendSeachOpsActivity.class);
+			startActivity(intent);
+		} else {
+			no_login_alter(v);
+		}
 	}
 
 	@Override

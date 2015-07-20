@@ -36,7 +36,7 @@
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
             android:onClick="showPopWin"
-            android:src="@drawable/triangle0" />
+            android:src="@drawable/triangle1" />
     </RelativeLayout>
 
     <LinearLayout
