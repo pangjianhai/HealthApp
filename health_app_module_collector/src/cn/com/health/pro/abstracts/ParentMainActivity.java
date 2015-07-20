@@ -88,6 +88,21 @@ public abstract class ParentMainActivity extends BaseActivity {
 
 	/**
 	 * 
+	 * @return
+	 * @user:pang
+	 * @data:2015年7月20日
+	 * @todo:是否登录使用APP
+	 * @return:boolean
+	 */
+	public boolean isLogin() {
+		if (userId == null || "".equals(userId)) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 
 	 * @tags @param v
 	 * @date 2015年5月15日
 	 * @todo 底部按钮点击事件
@@ -100,7 +115,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 		/**
 		 * 如果用户没有登录，则提醒用户可以登录或者注册
 		 */
-		if (userId == null || "".equals(userId)) {
+		if (!isLogin()) {
 			no_login_alter(v);
 			return;
 		}
