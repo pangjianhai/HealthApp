@@ -8,6 +8,7 @@
     android:showDividers="middle" >
 
     <Button
+        android:id="@+id/space_win_login"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@color/gray_default"
@@ -15,6 +16,7 @@
         android:textColor="@color/orange" />
 
     <Button
+        android:id="@+id/space_win_reg"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@color/gray_default"

@@ -269,9 +269,8 @@ public abstract class ParentMainActivity extends BaseActivity {
 	public void initNoLoginOption(View v) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.share_space_window, null);
-		// 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
-		PopupWindow window = new PopupWindow(view, 300,
+		PopupWindow window = new PopupWindow(view, 200,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 
 		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
@@ -283,9 +282,36 @@ public abstract class ParentMainActivity extends BaseActivity {
 		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
 		// 在底部显示
 		window.showAsDropDown(v);
-		// 这里检验popWindow里的button是否可以点击
-		// Button first = (Button) view.findViewById(R.id.first);
-		// popWindow消失监听方法
+		/**
+		 * popwindow按钮地方法
+		 */
+		Button space_win_login = (Button) view
+				.findViewById(R.id.space_win_login);
+		space_win_login.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(),
+						AppLoginStartActivity.class);
+				startActivity(intent);
+			}
+
+		});
+		Button space_win_reg = (Button) view.findViewById(R.id.space_win_reg);
+		space_win_reg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), AppRegActivity.class);
+				startActivity(intent);
+			}
+
+		});
+		/**
+		 * 让popwindow消失
+		 */
 		window.setOnDismissListener(new OnDismissListener() {
 
 			@Override
