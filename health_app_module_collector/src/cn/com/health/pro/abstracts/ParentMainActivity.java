@@ -147,15 +147,15 @@ public abstract class ParentMainActivity extends BaseActivity {
 		// startActivity(intent);
 	}
 
-	/************************************************************************************/
+	/**************************************** 关于匿名登录的提示 ********************************************/
+	PopupWindow popWindow = null;
 
 	public void no_login_alter(View v) {
 		LayoutInflater inflater = (LayoutInflater) getApplicationContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
 				null, false);
-		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
-				true);
+		popWindow = new PopupWindow(noLoginAlter, 500, 500, true);
 		// 点击空白处时，隐藏掉pop窗口
 		popWindow.setFocusable(true);
 		backgroundAlpha(1f);
@@ -177,6 +177,10 @@ public abstract class ParentMainActivity extends BaseActivity {
 			backgroundAlpha(1f);
 		}
 
+	}
+
+	public void closeAlert(View v) {
+		popWindow.dismiss();
 	}
 
 }
