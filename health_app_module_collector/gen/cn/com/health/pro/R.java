@@ -363,7 +363,7 @@ public final class R {
         public static final int check_someone=0x7f0a0035;
         public static final int choose=0x7f0a004a;
         public static final int choose_photo=0x7f0a0001;
-        public static final int close_nologin_alert=0x7f0a001d;
+        public static final int close_nologin_alert_image=0x7f0a001d;
         public static final int content=0x7f0a007e;
         public static final int content_layout=0x7f0a007d;
         public static final int cursor=0x7f0a0091;

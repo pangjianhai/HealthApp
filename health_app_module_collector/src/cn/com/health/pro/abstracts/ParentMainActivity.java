@@ -9,9 +9,14 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
+import cn.com.health.pro.AppLoginRegActivity;
+import cn.com.health.pro.AppLoginStartActivity;
+import cn.com.health.pro.AppRegActivity;
 import cn.com.health.pro.BaseActivity;
 import cn.com.health.pro.MainPageLayoutMeActivity;
 import cn.com.health.pro.MainPageLayoutOrderActivity;
@@ -147,15 +152,55 @@ public abstract class ParentMainActivity extends BaseActivity {
 		// startActivity(intent);
 	}
 
-	/**************************************** 关于匿名登录的提示 ********************************************/
-	PopupWindow popWindow = null;
+	/**************************************** 关于 ********************************************/
 
 	public void no_login_alter(View v) {
 		LayoutInflater inflater = (LayoutInflater) getApplicationContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
 				null, false);
-		popWindow = new PopupWindow(noLoginAlter, 500, 500, true);
+		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
+				true);
+
+		/**
+		 * 子控件
+		 */
+		ImageView close_nologin_alert_image = (ImageView) noLoginAlter
+				.findViewById(R.id.close_nologin_alert_image);
+		close_nologin_alert_image.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				popWindow.dismiss();
+			}
+		});
+
+		Button alert_login = (Button) noLoginAlter
+				.findViewById(R.id.alert_login);
+		alert_login.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				popWindow.dismiss();
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(),
+						AppLoginStartActivity.class);
+				startActivity(intent);
+			}
+
+		});
+		Button alert_reg = (Button) noLoginAlter.findViewById(R.id.alert_reg);
+		alert_reg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				popWindow.dismiss();
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), AppRegActivity.class);
+				startActivity(intent);
+			}
+
+		});
 		// 点击空白处时，隐藏掉pop窗口
 		popWindow.setFocusable(true);
 		backgroundAlpha(1f);
@@ -177,10 +222,6 @@ public abstract class ParentMainActivity extends BaseActivity {
 			backgroundAlpha(1f);
 		}
 
-	}
-
-	public void closeAlert(View v) {
-		popWindow.dismiss();
 	}
 
 }
