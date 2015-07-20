@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import cn.com.health.pro.AppLoginRegActivity;
 import cn.com.health.pro.AppLoginStartActivity;
 import cn.com.health.pro.AppRegActivity;
@@ -231,6 +233,36 @@ public abstract class ParentMainActivity extends BaseActivity {
 			backgroundAlpha(1f);
 		}
 
+	}
+
+	public void showPopWin(View v) {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.share_space_window, null);
+		// 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+		PopupWindow window = new PopupWindow(view, 300,
+				WindowManager.LayoutParams.WRAP_CONTENT);
+
+		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+		window.setFocusable(true);
+		// 实例化一个ColorDrawable颜色为半透明
+		ColorDrawable dw = new ColorDrawable(0xb0000000);
+		window.setBackgroundDrawable(dw);
+		// 设置popWindow的显示和消失动画
+		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
+		// 在底部显示
+		window.showAsDropDown(v);
+		// 这里检验popWindow里的button是否可以点击
+		// Button first = (Button) view.findViewById(R.id.first);
+		// popWindow消失监听方法
+		window.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				System.out.println("popWindow消失");
+
+			}
+		});
 	}
 
 }
