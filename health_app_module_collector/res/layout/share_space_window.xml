@@ -10,14 +10,14 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@color/gray_default"
         android:text="登录"
         android:textColor="@color/orange" />
 
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@color/gray_default"
         android:text="注册"
         android:textColor="@color/orange" />
 

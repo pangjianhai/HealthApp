@@ -321,8 +321,15 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		loadDataMore();
 	}
 
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年7月20日
+	 * @todo:搜索并添加好友
+	 * @return:void
+	 */
 	public void add_friends(View v) {
-		if (isLogin()) {
+		if (isLogin()) {// 只有登陆用户才能由此操作
 			Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 					FriendSeachOpsActivity.class);
 			startActivity(intent);
