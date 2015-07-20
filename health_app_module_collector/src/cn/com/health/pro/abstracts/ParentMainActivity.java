@@ -259,6 +259,14 @@ public abstract class ParentMainActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void showPopWin(View v) {
+		if (isLogin()) {
+
+		} else {
+			initNoLoginOption(v);
+		}
+	}
+
+	public void initNoLoginOption(View v) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.share_space_window, null);
 		// 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
