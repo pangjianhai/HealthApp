@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@drawable/no_login_alert_style"
     android:orientation="vertical" >
 
     <!-- 提示用户登录界面 -->
@@ -25,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:gravity="center_vertical"
             android:text="请登录"
             android:textColor="@color/black"
             android:textSize="19sp" />

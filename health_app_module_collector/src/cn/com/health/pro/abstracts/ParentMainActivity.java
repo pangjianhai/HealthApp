@@ -161,7 +161,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 				null, false);
 		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
 				true);
-		// popWindow.setAnimationStyle(R.style.PopDownMenu);
+	//popWindow.setAnimationStyle(R.style);
 		/**
 		 * 子控件开始
 		 */
