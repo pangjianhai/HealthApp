@@ -168,7 +168,10 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-
+					/**
+					 * 出错之后直接停止加载
+					 */
+					onLoadOver();
 				}
 			};
 			Map map = new HashMap();
