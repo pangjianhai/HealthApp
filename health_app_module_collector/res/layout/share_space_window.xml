@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:divider="@drawable/divider"
     android:orientation="vertical"
     android:showDividers="middle" >
@@ -9,17 +10,15 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableLeft="@drawable/edit_all"
-        android:text="编辑"
-        android:textColor="@color/white" />
+        android:background="@color/gray"
+        android:text="登录"
+        android:textColor="@color/orange" />
 
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableLeft="@drawable/share_all"
-        android:text="分享"
-        android:textColor="@color/white" />
+        android:background="@color/gray"
+        android:text="注册"
+        android:textColor="@color/orange" />
 
 </LinearLayout>

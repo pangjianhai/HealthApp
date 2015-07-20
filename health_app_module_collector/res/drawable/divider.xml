@@ -12,6 +12,6 @@
         android:height="@dimen/spacing_medium"
         android:width="@dimen/spacing_medium" />
 
-    <solid android:color="@color/green" />
+    <solid android:color="@color/gray_active" />
 
 </shape>

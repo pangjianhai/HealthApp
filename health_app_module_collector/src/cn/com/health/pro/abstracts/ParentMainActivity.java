@@ -235,6 +235,14 @@ public abstract class ParentMainActivity extends BaseActivity {
 
 	}
 
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年7月20日
+	 * @todo:右上角弹出框
+	 * @return:void
+	 */
 	public void showPopWin(View v) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.share_space_window, null);
