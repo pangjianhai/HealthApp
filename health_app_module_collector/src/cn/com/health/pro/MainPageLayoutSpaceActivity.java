@@ -448,9 +448,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void afterClickContent(String shareId) {
-		if (!isLogin()) {
-			return;
-		}
+		// if (!isLogin()) {
+		// return;
+		// }
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ShareSentenceAllDetailActivity.class);
 		intent.putExtra("share_sentence_id", shareId);
