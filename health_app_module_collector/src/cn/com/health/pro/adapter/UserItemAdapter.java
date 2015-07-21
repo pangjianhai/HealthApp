@@ -71,8 +71,8 @@ public class UserItemAdapter extends BaseAdapter {
 			convertView.setTag(holder);
 		}
 		UserItem ui = dataSourceList.get(position);
-		holder.find_search_result_username.setText(ui.getUserId());
-		holder.find_search_result_tags.setText(ui.getTags());
+		holder.find_search_result_username.setText(ui.getUserName());
+		holder.find_search_result_tags.setText(ui.getSentence());// 将本来要放标签的地方放入了个人简介
 		String imgId = ui.getImg();
 		final String uuid = ui.getUuid();
 		if (imgId != null && !"".equals(imgId)) {

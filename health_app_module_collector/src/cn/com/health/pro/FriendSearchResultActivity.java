@@ -42,7 +42,7 @@ public class FriendSearchResultActivity extends BaseActivity {
 	/**
 	 * 当前页
 	 */
-	private int currentPage = 0;
+	private int currentPage = 1;
 	/**
 	 * 一页多少行
 	 */
@@ -112,7 +112,6 @@ public class FriendSearchResultActivity extends BaseActivity {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-
 					String data = responseInfo.result;
 					List<UserItem> lst = UserUtils.parseJsonAddToList(data);
 					searchOver(lst);

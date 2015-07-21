@@ -18,6 +18,8 @@ import cn.com.health.pro.task.FriendFocusAddAsyncTask;
 import cn.com.health.pro.task.FriendFocusCancelAsyncTask;
 import cn.com.health.pro.task.GetOneUsersAsyncTask;
 import cn.com.health.pro.task.IFOfFriendFocusAsyncTask;
+import cn.com.health.pro.util.CommonHttpUtil;
+import cn.com.health.pro.util.FocusUtil;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -212,15 +214,6 @@ public class ShowUserInfoDetail extends BaseActivity {
 	 * @author pang
 	 */
 	public void addFocus() {
-		// try {
-		// JSONObject data0 = new JSONObject();
-		// data0.put("currentId", loginUUID);
-		// data0.put("friendId", uuid);
-		// new FriendFocusAddAsyncTask(ShowUserInfoDetail.this).execute(data0
-		// .toString());
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 
 		try {
 			JSONObject d = new JSONObject();
@@ -230,6 +223,9 @@ public class ShowUserInfoDetail extends BaseActivity {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					boolean b = FocusUtil.commonFocusResult(data);
+					addFocusOver(b);
 				}
 
 				@Override
@@ -270,11 +266,28 @@ public class ShowUserInfoDetail extends BaseActivity {
 	 */
 	public void cancelFocus() {
 		try {
-			JSONObject data0 = new JSONObject();
-			data0.put("currentId", loginUUID);
-			data0.put("friendId", uuid);
-			new FriendFocusCancelAsyncTask(ShowUserInfoDetail.this)
-					.execute(data0.toString());
+			JSONObject d = new JSONObject();
+			d.put("currentId", loginUUID);
+			d.put("friendId", uuid);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					boolean b = FocusUtil.commonFocusResult(data);
+					cancelFocusOver(b);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.cancel_some_one_focus_another,
+					map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

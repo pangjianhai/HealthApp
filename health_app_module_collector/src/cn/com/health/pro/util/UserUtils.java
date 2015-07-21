@@ -28,12 +28,14 @@ public class UserUtils {
 						String userId = obj.getString("userId");
 						String img = obj.getString("headImg");
 						String tags = "需要添加";
+						String sentence = obj.getString("sentence");
 
 						bean.setUuid(id);
 						bean.setUserId(userId);
 						bean.setUserName(userName);
 						bean.setImg(img);
 						bean.setTags(tags);
+						bean.setSentence(sentence);
 						dataSourceList.add(bean);
 					}
 				}

@@ -13,6 +13,7 @@ import cn.com.health.pro.util.FocusUtil;
  * @todo 取消一个用户关注另一个用户task
  *
  */
+@Deprecated
 public class FriendFocusCancelAsyncTask extends
 		AsyncTask<String, Void, Boolean> {
 
