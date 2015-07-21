@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <!-- 个人信息展示页面 -->
-
+    <!-- 匿名查看的东西 -->
     <RelativeLayout
         android:id="@+id/layout_space_title_bar"
         android:layout_width="fill_parent"
