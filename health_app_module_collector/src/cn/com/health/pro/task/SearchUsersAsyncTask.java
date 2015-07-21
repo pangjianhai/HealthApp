@@ -12,6 +12,12 @@ import cn.com.health.pro.model.UserItem;
 import cn.com.health.pro.util.CommonHttpUtil;
 import cn.com.health.pro.util.UserUtils;
 
+/**
+ * @todo 根据关键词搜索用户task
+ * @author pang
+ *
+ */
+@Deprecated
 public class SearchUsersAsyncTask extends
 		AsyncTask<String, Void, List<UserItem>> {
 

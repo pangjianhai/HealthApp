@@ -1,9 +1,15 @@
 package cn.com.health.pro;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +22,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import cn.com.health.pro.adapter.UserItemAdapter;
+import cn.com.health.pro.model.ShareSentenceEntity;
 import cn.com.health.pro.model.UserItem;
 import cn.com.health.pro.task.SearchUsersAsyncTask;
+import cn.com.health.pro.util.CommonHttpUtil;
+import cn.com.health.pro.util.ShareSentenceUtil;
+import cn.com.health.pro.util.UserUtils;
 
 public class FriendSearchResultActivity extends BaseActivity {
 
@@ -92,15 +102,32 @@ public class FriendSearchResultActivity extends BaseActivity {
 	private void loadMoreData() {
 		load_progress_bar.setVisibility(View.VISIBLE);
 		search_loadmore_btn.setVisibility(View.GONE);
+
 		try {
-			currentPage = currentPage + 1;
-			SearchUsersAsyncTask task = new SearchUsersAsyncTask(
-					FriendSearchResultActivity.this);
 			JSONObject map = new JSONObject();
-			map.put("UserId", key);
+			map.put("key", key);
 			map.put("begin", (currentPage - 1) * pageSize);
 			map.put("limit", pageSize);
-			task.execute(map.toString());
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+
+					String data = responseInfo.result;
+					List<UserItem> lst = UserUtils.parseJsonAddToList(data);
+					searchOver(lst);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					load_progress_bar.setVisibility(View.GONE);
+					search_loadmore_btn.setVisibility(View.VISIBLE);
+				}
+			};
+			Map param_map = new HashMap();
+			param_map.put("para", map.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.searchUserByName, param_map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
