@@ -99,7 +99,7 @@ public class BaseActivity extends InstrumentedActivity {
 		return true;
 	}
 
-	/**************************************** 关于 ********************************************/
+	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
 
 	public void no_login_alter(View v) {
 		LayoutInflater inflater = (LayoutInflater) getApplicationContext()

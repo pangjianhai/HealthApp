@@ -191,6 +191,15 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年7月21日
+	 * @todo:右上角点击展开分享按钮
+	 * @return:void
+	 */
+	@Deprecated
 	public void showPopWin(View v) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.share_pop_window, null);
@@ -199,20 +208,11 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		PopupWindow window = new PopupWindow(view, 300,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 
-		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
 		window.setFocusable(true);
-		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0xb0000000);
 		window.setBackgroundDrawable(dw);
-		// 设置popWindow的显示和消失动画
-		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
-		// 在底部显示
 		window.showAsDropDown(v);
-		// 这里检验popWindow里的button是否可以点击
-		// Button first = (Button) view.findViewById(R.id.first);
-		// popWindow消失监听方法
 		window.setOnDismissListener(new OnDismissListener() {
-
 			@Override
 			public void onDismiss() {
 				System.out.println("popWindow消失");
@@ -239,6 +239,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	public void share_ops_bar(View v) {
+		if (!isLogin()) {
+			no_login_alter(v);
+			return;
+		}
 		// 点击收藏
 		if (v.getId() == R.id.single_share_bottom_ops_sc) {
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
