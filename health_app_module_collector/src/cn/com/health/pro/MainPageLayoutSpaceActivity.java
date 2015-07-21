@@ -125,6 +125,12 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		mListView.setAdapter(itemAdapter);
 	}
 
+	private void loadDataMore() {
+		if (isLogin()) {
+			loadDataMoreForLogin();
+		}
+	}
+
 	/**
 	 * 
 	 * @tags
@@ -132,7 +138,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @todo 同步初始化最初的几条数据
 	 * @author pang
 	 */
-	private void loadDataMore() {
+	private void loadDataMoreForLogin() {
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentId", userId);
@@ -147,14 +153,14 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					Map<String, Object> map = ShareSentenceUtil
 							.parseJsonCondition(responseInfo.result);
-					String searchDay = map.get("searchDay") + "";
-					String b = map.get("begin") + "";
+					String searchDay = map.get("searchDay") + "";// 可以继续搜索的日期
+					String b = map.get("begin") + "";// 可以继续搜索的页数
 					List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
-							.get("lst");
+							.get("lst");// 当前页的内容
 					/**
 					 * 服务器端告诉移动端已经不需要翻页了，没有更多的数据了
 					 */
-					String nomore = map.get("nomore") + "";
+					String nomore = map.get("nomore") + "";// 是否当前日期能继续再取
 					boolean if_has_nomore_field = true;
 					/**
 					 * 如果存在nomore提示則不需要继续进行加载
@@ -162,6 +168,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 					if ("nomore".equals(nomore.trim())) {
 						if_has_nomore_field = false;
 					}
+					/**
+					 * 异步请求数据
+					 */
 					asyncAddNewData(searchDay, b, list, if_has_nomore_field);
 
 				}
@@ -201,8 +210,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					System.out.println("responseInfo.result:"
-							+ responseInfo.result);
 					List<ShareSentenceEntity> list = ShareSentenceUtil
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
@@ -262,10 +269,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	public void asyncAddNewData(String searchDay, String begin,
 			List<ShareSentenceEntity> lst, boolean if_has_nomore_field) {
 		/**
-		 * 重置一些字段的值，为下一次分页做准备
+		 * 重置一些字段的值，为下一次分页做准备 重置日期，获取前一日期的数据
 		 */
-		if (!if_has_nomore_field) {
-			// 如果no_more==true则表明，服务器端已经没有更早的消息用来进行分页了
+		if (!if_has_nomore_field) {// 如果no_more==true则表明，服务器端已经没有更早的消息用来进行分页了
 			no_more = if_has_nomore_field;
 			Date sd = CommonDateUtil
 					.preDate(CommonDateUtil.getDate(search_day));
@@ -274,6 +280,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			Toast.makeText(getApplicationContext(), "已经没有数据了",
 					Toast.LENGTH_SHORT).show();
 		} else {
+			/**
+			 * 如果当天没有下一页了，后台会返回需要查询的下一天的日期和页数（肯定是第一页“1”）
+			 */
 			this.search_day = searchDay;
 			this.begin = Integer.parseInt(begin);
 		}
@@ -289,7 +298,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	/**
 	 * 
 	 * @tags
-	 * @todo 刷新完毕或加载完毕
+	 * @todo 刷新完毕或加载完毕，及时取数据网络出错也需要继续调用这个方法
 	 * @author pang
 	 */
 	private void onLoadOver() {
