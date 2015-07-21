@@ -65,6 +65,11 @@ public class SystemConst {
 		public static final String getFriendsShareByUserId = "appSourceController/getAttentionUserShare.do";
 
 		/**
+		 * 非登录用户看到的信息
+		 */
+		public static final String noLoginReadSpace = "appSourceController/getRankinglistBycurrentDate.do";
+
+		/**
 		 * 根据图片ID获取分享图片
 		 */
 		public static final String getShareImgById = "appSourceController/getSentenceInfoImg.do";

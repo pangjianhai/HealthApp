@@ -88,7 +88,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 */
 	private String n_search_day = CommonDateUtil.formatDate(CommonDateUtil
 			.getNowTimeDate());// 查询的日期
-	private boolean n_no_more = true;// 能否继续加载的标志
+	private boolean n_more = true;// 能否继续加载的标志
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -201,8 +201,65 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @return:void
 	 */
 	private void loadDataMoreForNoLogin() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("currentDate", n_search_day);
+			System.out.println("->>>>>>>>>>>>>>>>>>>>>" + n_search_day);
 
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					Map<String, Object> map = ShareSentenceUtil
+							.parseJsonConditionForNoLogin(responseInfo.result);
+					/**
+					 * 服务器端告诉移动端已经不需要翻页了，没有更多的数据了
+					 */
+					String nomore = map.get("nomore") + "";// 是否当前日期能继续再取
+					if ("nomore".equals(nomore.trim())) {
+						n_more = false;// 不可以继续加载
+						onLoadOver();
+					} else {
+						String searchDay = map.get("searchDay") + "";// 可以继续搜索的日期
+						List<ShareSentenceEntity> list = (List<ShareSentenceEntity>) map
+								.get("lst");// 当前页的内容
+						asyncAddNewDataForNoLogin(searchDay, list);
+
+					}
+
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					/**
+					 * 出错之后直接停止加载
+					 */
+					onLoadOver();
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.noLoginReadSpace, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
+	public void asyncAddNewDataForNoLogin(String searchDay,
+			List<ShareSentenceEntity> lst) {
+		// n_search_day
+		Date sd = CommonDateUtil.getDate(searchDay);
+		Date pre_sd = CommonDateUtil.preDate(sd);
+		n_search_day = CommonDateUtil.formatDate(pre_sd);
+		// 添加数据
+		dataSourceList.addAll(lst);
+		// 设置最新的ID
+		setLastestShareId();
+		// 更新UI
+		itemAdapter.notifyDataSetChanged();
+		onLoadOver();
+	};
 
 	/**
 	 * 

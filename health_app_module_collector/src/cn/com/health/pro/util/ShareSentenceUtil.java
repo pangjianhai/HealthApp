@@ -35,7 +35,7 @@ public class ShareSentenceUtil {
 			String commentNum = obj.has("commentNum") ? obj
 					.getString("commentNum") : "0";
 			String createDate = obj.getString("createDate");
-			String tags = obj.has("tags")?obj.getString("tags"):"";
+			String tags = obj.has("tags") ? obj.getString("tags") : "";
 			bean.setType(type);
 			bean.setContent(content);
 			bean.setUserId(userId);
@@ -117,7 +117,7 @@ public class ShareSentenceUtil {
 				String disLikeNum = obj.getString("disLikeNum");
 				String createDate = obj.getString("createDateStr");
 				String commentNum = obj.getString("commentNum");
-				String tags = obj.has("tags")?obj.getString("tags"):"";
+				String tags = obj.has("tags") ? obj.getString("tags") : "";
 				bean.setId(id);
 				bean.setType(type);
 				bean.setContent(content);
@@ -207,6 +207,41 @@ public class ShareSentenceUtil {
 		 */
 		map.put("searchDay", "");
 		map.put("begin", "");
+		map.put("lst", new ArrayList<ShareSentenceEntity>());
+		map.put("nomore", "nomore");
+		try {
+			if (data != null && !"".equals(data)) {
+				JSONObject or_obj = new JSONObject(data);
+				if (or_obj.has("nomore")) {// 是否有更多的信息
+					map.put("nomore", "nomore");
+				} else {
+					map.put("nomore", "");
+				}
+				if (or_obj.has("searchDay")) {// 下一次搜索的日期
+					map.put("searchDay", or_obj.get("searchDay") + "");
+				}
+				if (or_obj.has("begin")) {// 下一次搜索的开始行
+					map.put("begin", or_obj.get("begin") + "");
+				}
+				if (or_obj.has("SentenceInfoHashLst")) {
+					List<ShareSentenceEntity> lst = parseJsonAddToList(data);// 解析上一次搜索出来的结果
+					if (lst != null && lst.size() > 0) {
+						map.put("lst", lst);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	public static Map<String, Object> parseJsonConditionForNoLogin(String data) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		/**
+		 * 先放空值
+		 */
+		map.put("searchDay", "");
 		map.put("lst", new ArrayList<ShareSentenceEntity>());
 		map.put("nomore", "nomore");
 		try {
