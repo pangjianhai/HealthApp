@@ -396,19 +396,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickContent(String shareId) {
-		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
-				ShareSentenceAllDetailActivity.class);
-		intent.putExtra("share_sentence_id", shareId);
-		startActivity(intent);
-	}
-
-	@Override
-	public void afterClickAuthor(String shareId) {
-		Toast.makeText(context, "您要评论的分享作", Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
 	public void onRefresh() {
 		freshData();
 	}
@@ -435,8 +422,20 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		}
 	}
 
+	/**************************** 信息交互操作begin ***********************************/
+	@Override
+	public void afterClickAuthor(String shareId) {
+		if (!isLogin()) {
+			return;
+		}
+		Toast.makeText(context, "您要评论的分享作", Toast.LENGTH_SHORT).show();
+	}
+
 	@Override
 	public void afterClickOk(String shareId) {
+		if (!isLogin()) {
+			return;
+		}
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ViewForInfoService.class);
@@ -448,7 +447,21 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	@Override
+	public void afterClickContent(String shareId) {
+		if (!isLogin()) {
+			return;
+		}
+		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
+				ShareSentenceAllDetailActivity.class);
+		intent.putExtra("share_sentence_id", shareId);
+		startActivity(intent);
+	}
+
+	@Override
 	public void afterClickNook(String shareId) {
+		if (!isLogin()) {
+			return;
+		}
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ViewForInfoService.class);
@@ -460,10 +473,14 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void afterClickReply(String shareId) {
+		if (!isLogin()) {
+			return;
+		}
 		commentShareId = shareId;
 		showInput();
 	}
 
+	/**************************** 信息交互操作end ***********************************/
 	/**
 	 * 
 	 * @tags
