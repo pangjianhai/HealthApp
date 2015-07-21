@@ -201,11 +201,13 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @return:void
 	 */
 	private void loadDataMoreForNoLogin() {
+		if (!n_more) {
+			onLoadOver();
+			return;
+		}
 		try {
 			JSONObject d = new JSONObject();
-			d.put("currentDate", n_search_day);
-			System.out.println("->>>>>>>>>>>>>>>>>>>>>" + n_search_day);
-
+			d.put("searchDay", n_search_day);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
@@ -266,10 +268,20 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * 
 	 * @user:pang
 	 * @data:2015年6月15日
-	 * @todo:更新今天的最新的分享信息
+	 * @todo:刷新最新数据
 	 * @return:void
 	 */
 	private void freshData() {
+		/**
+		 * 如果未登录直接返回
+		 */
+		if (!isLogin()) {
+			onLoadOver();
+			return;
+		}
+		/**
+		 * 如果登陆了则继续
+		 */
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentId", userId);
@@ -301,6 +313,14 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	}
 
+	/**
+	 * 
+	 * @param list
+	 * @user:pang
+	 * @data:2015年7月21日
+	 * @todo:登录用户刷新数据
+	 * @return:void
+	 */
 	private void freshData(List<ShareSentenceEntity> list) {
 		dataSourceList.addAll(0, list);
 		setLastestShareId();
@@ -521,7 +541,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		super.onWindowFocusChanged(hasFocus);
 		if (GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
 			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
-			if_need_to_push_top_user();
+			if (isLogin()) {
+				if_need_to_push_top_user();
+			}
 		}
 
 	}

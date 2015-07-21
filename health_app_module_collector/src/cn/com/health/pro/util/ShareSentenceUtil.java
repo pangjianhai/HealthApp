@@ -248,6 +248,7 @@ public class ShareSentenceUtil {
 			if (data != null && !"".equals(data)) {
 				JSONObject or_obj = new JSONObject(data);
 				if (or_obj.has("nomore")) {// 是否有更多的信息
+					System.out.println("-------------存在弄nomore");
 					map.put("nomore", "nomore");
 				} else {
 					map.put("nomore", "");
