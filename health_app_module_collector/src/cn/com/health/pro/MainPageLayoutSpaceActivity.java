@@ -75,23 +75,20 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	private XListView mListView;
 
 	/**
-	 * 查询的日期
+	 * 登录用户需要的分页参数
 	 */
 	private String search_day = CommonDateUtil.formatDate(CommonDateUtil
-			.getNowTimeDate());
-	/**
-	 * 当前页
-	 */
-	private int begin = 0;
-	/**
-	 * 一页多少行
-	 */
-	private int limit = 5;
+			.getNowTimeDate());// 查询的日期
+	private int begin = 0;// 当前页
+	private int limit = 5;// 一页多少行
+	private boolean no_more = true;// 能否继续加载的标志
 
 	/**
-	 * 能否继续加载的标志
+	 * 非登录用户需要的分页参数
 	 */
-	private boolean no_more = true;
+	private String n_search_day = CommonDateUtil.formatDate(CommonDateUtil
+			.getNowTimeDate());// 查询的日期
+	private boolean n_no_more = true;// 能否继续加载的标志
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -128,6 +125,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	private void loadDataMore() {
 		if (isLogin()) {
 			loadDataMoreForLogin();
+		} else {
+			loadDataMoreForNoLogin();
 		}
 	}
 
@@ -190,6 +189,18 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年7月21日
+	 * @todo:TODO
+	 * @return:void
+	 */
+	private void loadDataMoreForNoLogin() {
 
 	}
 
