@@ -164,4 +164,26 @@ public class UserUtils {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @user:pang
+	 * @data:2015年7月21日
+	 * @todo:将用户的ID解析出来
+	 * @return:String
+	 */
+	public static String parseUserId(String data) {
+		try {
+			if (data != null && !"".equals(data)) {
+				JSONObject or_obj = new JSONObject(data);
+				if (or_obj.has("userId")) {
+					return or_obj.getString("userId");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 }

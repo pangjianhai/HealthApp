@@ -267,6 +267,11 @@ public class SystemConst {
 		 * 判断有没有必要推荐用户
 		 */
 		public static final String if_need_to_push_top_user = "appSourceController/getLoginNumAndLoginDateByUuId.do";
+
+		/**
+		 * 根据分享ID获取发布人ID
+		 */
+		public static final String getUserIdByShareId = "appSourceController/getUserIdByShareId.do";
 	}
 
 	/**
