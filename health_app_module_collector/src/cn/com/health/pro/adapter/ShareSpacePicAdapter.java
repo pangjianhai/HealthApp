@@ -99,14 +99,22 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 			wm.getDefaultDisplay().getMetrics(metric);
 			int screenWidth = metric.widthPixels;
 			int screenHeight = metric.heightPixels;
+
+			float density = metric.density; // 屏幕密度（像素比例：0.75/1.0/1.5/2.0）
+			int width = (int) (metric.widthPixels * density + 0.5f); // 屏幕宽（px，如：480px）
+			int height = (int) (metric.heightPixels * density + 0.5f); // 屏幕高（px，如：800px）
+
 			int use_scree_width = screenWidth - 40 - 30;// 布局文件用去了40，图片gridview的space用去了30
 			System.out.println(screenWidth + "-----" + screenHeight);
+			System.out.println(width + "<----->" + height);
 			ImageView iv = (ImageView) convertView;
 			LayoutParams para;
 			para = iv.getLayoutParams();
 			para.height = use_scree_width / 3;
 			para.width = use_scree_width / 3;
 			iv.setLayoutParams(para);
+			iv.setScaleType(ScaleType.MATRIX);
+			iv.setAdjustViewBounds(true);
 			/**
 			 * 添加option参数，cache到disk
 			 */
