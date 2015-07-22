@@ -31,5 +31,5 @@
     <color name="orange">#FFA500</color>
     <color name="sliver">#C0C0C0</color>
     <color name="bottomgray">#F5F5F5</color>
-
-</resources>
+    <color name="comment_gray">#dedede</color>
+</resources>

@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#dedede"
+        android:background="@drawable/comment_layout_shape"
         android:orientation="horizontal" >
 
         <EditText
@@ -36,6 +36,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:background="@color/comment_gray"
             android:onClick="comment_share"
             android:src="@drawable/send0" />
     </LinearLayout>
