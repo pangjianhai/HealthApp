@@ -545,11 +545,18 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @author pang
 	 */
 	public void comment_share(View v) {
+		String comment_str = et_pop.getText().toString();
+		if (comment_str == null || "".equals(comment_str.trim())) {
+			Toast.makeText(getApplicationContext(), "评论内容不得为空",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ShareCommentService.class);
 		intent.putExtra("userId", userId);
 		intent.putExtra("sentenceId", commentShareId);
-		intent.putExtra("content", et_pop.getText().toString());
+		intent.putExtra("content", comment_str);
 		startService(intent);
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
