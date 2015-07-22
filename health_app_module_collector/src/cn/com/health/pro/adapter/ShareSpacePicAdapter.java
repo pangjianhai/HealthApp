@@ -7,7 +7,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -84,18 +83,29 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getShareImgById
 					+ "?para={imgId:'" + imgIdList.get(position) + "'}";
+
+			// WindowManager wm = (WindowManager) HealthApplication.getContext()
+			// .getSystemService(Context.WINDOW_SERVICE);
+			// Display display = wm.getDefaultDisplay();
+			// System.out.println(display.getWidth() + "<=====================>"
+			// + display.getHeight());
+			// Point size = new Point();
+			// display.getSize(size);
+			// int screenWidth = size.x;
+			// int screenHeight = size.y;
 			DisplayMetrics metric = new DisplayMetrics();
 			WindowManager wm = (WindowManager) HealthApplication.getContext()
 					.getSystemService(Context.WINDOW_SERVICE);
 			wm.getDefaultDisplay().getMetrics(metric);
 			int screenWidth = metric.widthPixels;
 			int screenHeight = metric.heightPixels;
+			int use_scree_width = screenWidth - 40 - 30;// 布局文件用去了40，图片gridview的space用去了30
 			System.out.println(screenWidth + "-----" + screenHeight);
 			ImageView iv = (ImageView) convertView;
 			LayoutParams para;
 			para = iv.getLayoutParams();
-			para.height = screenWidth / 3 - 20;
-			para.width = screenWidth / 3 - 20;
+			para.height = use_scree_width / 3;
+			para.width = use_scree_width / 3;
 			iv.setLayoutParams(para);
 			/**
 			 * 添加option参数，cache到disk
