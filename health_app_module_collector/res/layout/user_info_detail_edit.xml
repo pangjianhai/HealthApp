@@ -50,8 +50,8 @@
 
                 <ImageView
                     android:id="@+id/edit_user_header"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"

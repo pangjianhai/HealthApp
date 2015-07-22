@@ -48,8 +48,8 @@
 
                 <ImageView
                     android:id="@+id/show_user_detail_head"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
@@ -65,7 +65,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="95dp"
                     android:padding="15dp"
-                    android:text="昵称：逄建海"
+                    android:text="昵称"
                     android:textColor="#000"
                     android:textSize="18sp" />
 
@@ -77,7 +77,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="95dp"
                     android:padding="15dp"
-                    android:text="账号：heianyouxia"
+                    android:text="登录账号"
                     android:textColor="#333"
                     android:textSize="15sp" />
             </RelativeLayout>
