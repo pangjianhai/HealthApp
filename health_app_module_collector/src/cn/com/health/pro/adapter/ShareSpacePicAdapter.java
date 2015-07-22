@@ -6,15 +6,17 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.Toast;
 import cn.com.health.pro.CommonPicJazzActivity;
 import cn.com.health.pro.SystemConst;
 import cn.com.health.pro.config.HealthApplication;
@@ -82,7 +84,19 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getShareImgById
 					+ "?para={imgId:'" + imgIdList.get(position) + "'}";
+			DisplayMetrics metric = new DisplayMetrics();
+			WindowManager wm = (WindowManager) HealthApplication.getContext()
+					.getSystemService(Context.WINDOW_SERVICE);
+			wm.getDefaultDisplay().getMetrics(metric);
+			int screenWidth = metric.widthPixels;
+			int screenHeight = metric.heightPixels;
+			System.out.println(screenWidth + "-----" + screenHeight);
 			ImageView iv = (ImageView) convertView;
+			LayoutParams para;
+			para = iv.getLayoutParams();
+			para.height = screenWidth / 3 - 20;
+			para.width = screenWidth / 3 - 20;
+			iv.setLayoutParams(para);
 			/**
 			 * 添加option参数，cache到disk
 			 */
