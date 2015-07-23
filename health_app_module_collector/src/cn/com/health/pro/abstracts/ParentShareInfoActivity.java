@@ -70,7 +70,7 @@ public abstract class ParentShareInfoActivity extends
 		/**
 		 * 参数
 		 */
-		LayoutParams params = new AbsListView.LayoutParams(220, 250);
+		LayoutParams params = new AbsListView.LayoutParams(120, 160);
 
 		@Override
 		public int getCount() {
