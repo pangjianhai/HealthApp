@@ -430,7 +430,7 @@ public class ShareSelectPicActivity extends BaseActivity {
 			ImageFloder item = mDirPaths.get(position);
 			loader.displayImage("file://" + item.getFirstImagePath(),
 					holder.id_dir_item_image, options);
-			holder.id_dir_item_count.setText(item.images.size() + "��");
+			holder.id_dir_item_count.setText(item.images.size() + "张");
 			holder.id_dir_item_name.setText(item.getName());
 			holder.choose.setVisibility(currentImageFolder == item ? 0 : 8);
 			return convertView;
