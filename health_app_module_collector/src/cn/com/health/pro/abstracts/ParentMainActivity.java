@@ -180,7 +180,8 @@ public abstract class ParentMainActivity extends BaseActivity {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.share_space_window, null);
 
-		PopupWindow window = new PopupWindow(view, 300,
+		PopupWindow window = new PopupWindow(view,
+				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 
 		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
