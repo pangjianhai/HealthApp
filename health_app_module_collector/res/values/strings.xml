@@ -4,7 +4,7 @@
     <string name="app_version_name">v1.1.0</string>
     <string name="app_version_num">0</string>
     <!-- 普通操作 -->
-    <string name="app_name">健康在线</string>
+    <string name="app_name">康兮</string>
     <string name="search">搜搜</string>
     <string name="can_input_search_key">关键词</string>
     <string name="load_more_data">加载更多数据</string>
