@@ -6,26 +6,26 @@ import java.util.List;
 /**
  * 
  * @author pang
- * @todo ÎÄ¼ş¼Ğ
+ * @todo æ‰‹æœºå›¾ç‰‡æ–‡ä»¶å¤¹
  *
  */
 public class ImageFloder {
 	/**
-	 * Í¼Æ¬µÄÎÄ¼ş¼ĞÂ·¾¶
+	 * æ–‡ä»¶å¤¹è·¯å¾„
 	 */
 	private String dir;
 	/**
-	 * ÎÄ¼ş¼ĞµÄÃû³Æ£¬Í¨¹ı½ØÈ¡Â·¾¶DIR»ñÈ¡
+	 * æ–‡ä»¶å¤¹åå­—
 	 */
 	private String name;
 
 	/**
-	 * µÚÒ»ÕÅÍ¼Æ¬µÄÂ·¾¶
+	 * ç¬¬ä¸€ç« å›¾ç‰‡çš„è·¯å¾„
 	 */
 	private String firstImagePath;
 
 	/**
-	 * ÎÄ¼ş¼ĞÏÂÃæÍ¼Æ¬ÏêÇéµÄÂ·¾¶ £¬Ò»¸öÎÄ¼ş¼ĞÓĞ¶à¸öÍ¼Æ¬
+	 * æ‰€æœ‰å›¾ç‰‡
 	 */
 	public List<ImageItem> images = new ArrayList<ImageItem>();
 
