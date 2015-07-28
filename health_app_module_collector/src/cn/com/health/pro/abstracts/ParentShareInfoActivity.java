@@ -194,6 +194,7 @@ public abstract class ParentShareInfoActivity extends
 	}
 
 	public void initSinglePhotoShow() {
+		// share_sentence_addimg_window
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
