@@ -73,62 +73,7 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 		this.leftViewId = R.layout.share_send_health;
 	}
 
-	public void init() {
-		gridview.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-
-				ImageView showImg = new ImageView(ShareHealthActivity.this);
-				showImg.setScaleType(ImageView.ScaleType.CENTER);
-				showImg.setLayoutParams(new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
-				File mediaFile = new File(selectedPicture.get(position));
-				Uri uri = Uri.fromFile(mediaFile);
-				showImg.setImageURI(uri);
-				Dialog dialog = new AlertDialog.Builder(
-						ShareHealthActivity.this)
-						.setIcon(R.drawable.ic_back_light)
-						.setTitle("查看图片")
-						.setView(showImg)
-						.setNegativeButton("删除",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										selectedPicture.remove(selectedPicture
-												.get(position));
-										adapter.notifyDataSetChanged();
-									}
-								})
-						.setPositiveButton("关闭",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-
-									}
-								}).create();
-				// dialog.setContentView(R.layout.picture_dialog_layout);
-				Window dialogWindow = dialog.getWindow();
-				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-				dialogWindow.setGravity(Gravity.LEFT | Gravity.TOP);
-				lp.x = 100; // 新位置X坐标
-				lp.y = 100; // 新位置Y坐标
-				lp.width = 300; // 宽度
-				lp.height = 500; // 高度
-				lp.alpha = 0.7f; // 透明度
-				dialogWindow.setAttributes(lp);
-				dialog.show();
-
-			}
-		});
-	}
-
+	
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
 		try {

@@ -1,20 +1,33 @@
 package cn.com.health.pro.abstracts;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView.ScaleType;
 import cn.com.health.pro.MainPageLayoutSpaceActivity;
+import cn.com.health.pro.R;
 import cn.com.health.pro.ShareSelectPicActivity;
+import cn.com.health.pro.ShareSportsActivity;
 import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.persist.SharedPreInto;
 
@@ -178,6 +191,61 @@ public abstract class ParentShareInfoActivity extends
 			tags = sb.substring(0, sb.length() - 1);
 		}
 		return tags;
+	}
+
+	public void init() {
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+
+				ImageView showImg = new ImageView(ParentShareInfoActivity.this);
+				showImg.setScaleType(ImageView.ScaleType.CENTER);
+				showImg.setLayoutParams(new LinearLayout.LayoutParams(
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
+				File mediaFile = new File(selectedPicture.get(position));
+				Uri uri = Uri.fromFile(mediaFile);
+				showImg.setImageURI(uri);
+				Dialog dialog = new AlertDialog.Builder(ParentShareInfoActivity.this)
+						.setIcon(R.drawable.ic_back_light)
+						.setTitle("查看图片")
+						.setView(showImg)
+						.setNegativeButton("删除",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										selectedPicture.remove(selectedPicture
+												.get(position));
+										adapter.notifyDataSetChanged();
+									}
+								})
+						.setPositiveButton("关闭",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+
+									}
+								}).create();
+				// dialog.setContentView(R.layout.picture_dialog_layout);
+				Window dialogWindow = dialog.getWindow();
+				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+				dialogWindow.setGravity(Gravity.LEFT | Gravity.TOP);
+				lp.x = 100; // 新位置X坐标
+				lp.y = 100; // 新位置Y坐标
+				lp.width = 300; // 宽度
+				lp.height = 500; // 高度
+				lp.alpha = 0.7f; // 透明度
+				dialogWindow.setAttributes(lp);
+				dialog.show();
+
+			}
+		});
 	}
 
 }
