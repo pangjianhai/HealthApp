@@ -193,7 +193,7 @@ public abstract class ParentShareInfoActivity extends
 		return tags;
 	}
 
-	public void init() {
+	public void initSinglePhotoShow() {
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -208,7 +208,8 @@ public abstract class ParentShareInfoActivity extends
 				File mediaFile = new File(selectedPicture.get(position));
 				Uri uri = Uri.fromFile(mediaFile);
 				showImg.setImageURI(uri);
-				Dialog dialog = new AlertDialog.Builder(ParentShareInfoActivity.this)
+				Dialog dialog = new AlertDialog.Builder(
+						ParentShareInfoActivity.this)
 						.setIcon(R.drawable.ic_back_light)
 						.setTitle("查看图片")
 						.setView(showImg)

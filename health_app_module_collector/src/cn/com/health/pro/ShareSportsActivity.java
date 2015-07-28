@@ -52,7 +52,7 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 
 		share_health_bar = (ProgressBar) leftView
 				.findViewById(R.id.share_sport_bar);
-		init();
+		initSinglePhotoShow();
 	}
 
 	/**
@@ -66,8 +66,6 @@ public class ShareSportsActivity extends ParentShareInfoActivity {
 	public void setLeftViewId(int id) {
 		this.leftViewId = R.layout.share_send_sport;
 	}
-
-	
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
