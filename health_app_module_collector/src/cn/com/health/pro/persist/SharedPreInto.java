@@ -7,7 +7,7 @@ import cn.com.health.pro.SystemConst;
 /**
  * 
  * @author pang
- * @todo 关于key-value持久化工具
+ * @todo 关于key-value持久化工具 主要是用户名和密码
  *
  */
 public class SharedPreInto {
