@@ -64,7 +64,7 @@ public abstract class ParentShareInfoActivity extends
 	/**
 	 * 
 	 * @author pang
-	 * @todo 适配器类
+	 * @todo 添加分享图片适配器类
 	 *
 	 */
 	public class GridAdapter extends BaseAdapter {
@@ -73,7 +73,8 @@ public abstract class ParentShareInfoActivity extends
 		/**
 		 * 参数
 		 */
-		LayoutParams params = new AbsListView.LayoutParams(120, 160);
+		LayoutParams params = new AbsListView.LayoutParams(
+				AbsListView.LayoutParams.WRAP_CONTENT, 300);
 
 		@Override
 		public int getCount() {
