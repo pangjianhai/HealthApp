@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,8 +16,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.view.WindowManager;
+import cn.com.health.pro.config.HealthApplication;
 
 /**
  * 
@@ -63,7 +69,7 @@ public class FileUploadUtil {
 					conn.getOutputStream());
 			if (params != null && !params.isEmpty()) {
 				StringBuilder textEntity = new StringBuilder("\r\n");
-				for (Map.Entry<String, String> entry : params.entrySet()) {// �����ı����Ͳ����ʵ�����
+				for (Map.Entry<String, String> entry : params.entrySet()) {//
 					textEntity.append("--");
 					textEntity.append(BOUNDARY);
 					textEntity.append("\r\n");
@@ -155,7 +161,7 @@ public class FileUploadUtil {
 					conn.getOutputStream());
 			if (params != null && !params.isEmpty()) {
 				StringBuilder textEntity = new StringBuilder("\r\n");
-				for (Map.Entry<String, String> entry : params.entrySet()) {// �����ı����Ͳ����ʵ�����
+				for (Map.Entry<String, String> entry : params.entrySet()) {//
 					textEntity.append("--");
 					textEntity.append(BOUNDARY);
 					textEntity.append("\r\n");
@@ -267,10 +273,13 @@ public class FileUploadUtil {
 					outStream.write(sb1.toString().getBytes());
 					// *************处理文件开
 					String filePath = f.getPath();
+
 					// 尺寸压缩
 					Bitmap bm = thumbnailImg(filePath);
+					saveMyBitmap("aaaa", bm);
 					// 质量压缩
 					Bitmap bm2 = compressImage(bm);
+					saveMyBitmap("bbb", bm);
 					// 上传压缩信息
 					ByteArrayOutputStream stream = new ByteArrayOutputStream();
 					bm2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -310,6 +319,27 @@ public class FileUploadUtil {
 
 	/**
 	 * 
+	 * @tags @param pathName
+	 * @tags @return
+	 * @date 2015年5月6日
+	 * @todo 尺寸压缩
+	 * @author pang
+	 */
+	public static Bitmap thumbnailImg(String pathName) {
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inPurgeable = true;
+		// 将inJustDecodeBounds设置为true确定压缩比例，不会分配内存空间
+		options.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(pathName, options);
+		// 根据需要压缩的尺寸和真是的尺寸确定压缩的比例
+		options.inSampleSize = calculateInSampleSize(options, 480, 800);
+		options.inJustDecodeBounds = false;
+		Bitmap bm = BitmapFactory.decodeFile(pathName, options);
+		return bm;
+	}
+
+	/**
+	 * 
 	 * @tags @param options
 	 * @tags @param reqWidth
 	 * @tags @param reqHeight
@@ -338,26 +368,6 @@ public class FileUploadUtil {
 
 	/**
 	 * 
-	 * @tags @param pathName
-	 * @tags @return
-	 * @date 2015年5月6日
-	 * @todo 尺寸压缩
-	 * @author pang
-	 */
-	public static Bitmap thumbnailImg(String pathName) {
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		// 将inJustDecodeBounds设置为true确定压缩比例，不会分配内存空间
-		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(pathName, options);
-		// 根据需要压缩的尺寸和真是的尺寸确定压缩的比例
-		options.inSampleSize = calculateInSampleSize(options, 480, 800);
-		options.inJustDecodeBounds = false;
-		Bitmap bm = BitmapFactory.decodeFile(pathName, options);
-		return bm;
-	}
-
-	/**
-	 * 
 	 * @tags @param image
 	 * @tags @return
 	 * @date 2015年5月6日
@@ -381,5 +391,29 @@ public class FileUploadUtil {
 		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
 		Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);
 		return bitmap;
+	}
+
+	public static void saveMyBitmap(String bitName, Bitmap mBitmap)
+			throws IOException {
+		System.out.println("00000000000000000000000000000");
+		File f = new File("/sdcard/" + bitName + ".png");
+		f.createNewFile();
+		FileOutputStream fOut = null;
+		try {
+			fOut = new FileOutputStream(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+		try {
+			fOut.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			fOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
