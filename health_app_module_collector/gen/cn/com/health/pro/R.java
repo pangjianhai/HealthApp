@@ -363,7 +363,7 @@ public final class R {
         public static final int xlistview_arrow=0x7f020125;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a00ea;
+        public static final int action_settings=0x7f0a00eb;
         public static final int add_pic_cancel_btn=0x7f0a00ab;
         public static final int add_pic_close_btn=0x7f0a00aa;
         public static final int add_pic_iv=0x7f0a00a9;
@@ -372,13 +372,14 @@ public final class R {
         public static final int alert_title=0x7f0a001c;
         public static final int bottom=0x7f0a0006;
         public static final int bottom_layout=0x7f0a0081;
+        public static final int btn=0x7f0a00da;
         public static final int btn_back=0x7f0a0003;
         public static final int c_content=0x7f0a002b;
         public static final int c_id=0x7f0a002c;
         public static final int c_username=0x7f0a002a;
         public static final int cancel=0x7f0a0075;
         public static final int check=0x7f0a000a;
-        public static final int check_list_by_type=0x7f0a00dc;
+        public static final int check_list_by_type=0x7f0a00dd;
         public static final int check_someone=0x7f0a0035;
         public static final int choose=0x7f0a004b;
         public static final int choose_photo=0x7f0a0001;
@@ -390,12 +391,12 @@ public final class R {
         public static final int date_next=0x7f0a0067;
         public static final int date_pre=0x7f0a0069;
         public static final int doc_bottom=0x7f0a003f;
-        public static final int edit_user_birthday=0x7f0a00e1;
-        public static final int edit_user_header=0x7f0a00dd;
-        public static final int edit_user_id=0x7f0a00de;
-        public static final int edit_user_nickname=0x7f0a00df;
-        public static final int edit_user_sex=0x7f0a00e0;
-        public static final int edit_user_signiture=0x7f0a00e2;
+        public static final int edit_user_birthday=0x7f0a00e2;
+        public static final int edit_user_header=0x7f0a00de;
+        public static final int edit_user_id=0x7f0a00df;
+        public static final int edit_user_nickname=0x7f0a00e0;
+        public static final int edit_user_sex=0x7f0a00e1;
+        public static final int edit_user_signiture=0x7f0a00e3;
         public static final int feed_back_btn_into=0x7f0a000f;
         public static final int feed_back_btn_into_four=0x7f0a0013;
         public static final int feed_back_btn_into_one=0x7f0a0010;
@@ -417,7 +418,7 @@ public final class R {
         public static final int id_dir_item_image=0x7f0a0048;
         public static final int id_dir_item_name=0x7f0a0049;
         public static final int id_viewPager=0x7f0a0073;
-        public static final int if_focus=0x7f0a00db;
+        public static final int if_focus=0x7f0a00dc;
         public static final int image=0x7f0a0077;
         public static final int info_content=0x7f0a003d;
         public static final int info_detail_author=0x7f0a0039;
@@ -553,14 +554,14 @@ public final class R {
         public static final int share_time=0x7f0a00bb;
         public static final int share_type=0x7f0a00b8;
         public static final int share_username=0x7f0a00b7;
-        public static final int showUserBtu=0x7f0a00e9;
+        public static final int showUserBtu=0x7f0a00ea;
         public static final int show_pic_viewpager_title=0x7f0a0071;
-        public static final int show_user_detail_account=0x7f0a00e5;
-        public static final int show_user_detail_birthday=0x7f0a00e7;
-        public static final int show_user_detail_email=0x7f0a00e8;
-        public static final int show_user_detail_head=0x7f0a00e3;
-        public static final int show_user_detail_nickname=0x7f0a00e4;
-        public static final int show_user_detail_sex=0x7f0a00e6;
+        public static final int show_user_detail_account=0x7f0a00e6;
+        public static final int show_user_detail_birthday=0x7f0a00e8;
+        public static final int show_user_detail_email=0x7f0a00e9;
+        public static final int show_user_detail_head=0x7f0a00e4;
+        public static final int show_user_detail_nickname=0x7f0a00e5;
+        public static final int show_user_detail_sex=0x7f0a00e7;
         public static final int single_share_bottom_ops_comment=0x7f0a00d3;
         public static final int single_share_bottom_ops_nook=0x7f0a00d5;
         public static final int single_share_bottom_ops_ok=0x7f0a00d4;
@@ -587,7 +588,7 @@ public final class R {
         public static final int title=0x7f0a003c;
         public static final int top_layout=0x7f0a007b;
         public static final int tv_pop=0x7f0a008e;
-        public static final int typename=0x7f0a00da;
+        public static final int typename=0x7f0a00db;
         public static final int viewpage=0x7f0a0093;
         public static final int xlistview_footer_content=0x7f0a008b;
         public static final int xlistview_footer_hint_textview=0x7f0a008d;
@@ -665,10 +666,11 @@ public final class R {
         public static final int single_share_common_bottom=0x7f03003e;
         public static final int tag_item=0x7f03003f;
         public static final int tags_for_users=0x7f030040;
-        public static final int top_users_item=0x7f030041;
-        public static final int type_item=0x7f030042;
-        public static final int user_info_detail_edit=0x7f030043;
-        public static final int user_info_detail_show=0x7f030044;
+        public static final int task_tips_dialog_layout=0x7f030041;
+        public static final int top_users_item=0x7f030042;
+        public static final int type_item=0x7f030043;
+        public static final int user_info_detail_edit=0x7f030044;
+        public static final int user_info_detail_show=0x7f030045;
     }
     public static final class menu {
         public static final int d=0x7f090000;
