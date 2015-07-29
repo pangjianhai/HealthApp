@@ -17,34 +17,38 @@ import android.widget.ImageView;
 import cn.com.health.pro.abstracts.ParentShareInfoActivity.AfterDelPicListener;
 
 /**
- * Created by hjhrq1991 on 15/6/16.
+ * 
+ * @todo 删除图片
+ * @author pang
+ *
  */
-public class TaskTipsDialog extends AlertDialog {
+public class ShareAddPicSingleDialog extends AlertDialog {
 
 	private static Context mContext;
-	private static TaskTipsDialog mDialog;
+	private static ShareAddPicSingleDialog mDialog;
 
-	public TaskTipsDialog(Context context) {
+	public ShareAddPicSingleDialog(Context context) {
 		super(context);
 		mContext = context;
 	}
 
-	public TaskTipsDialog(Context context, int theme) {
+	public ShareAddPicSingleDialog(Context context, int theme) {
 		super(context, theme);
 		mContext = context;
 	}
 
-	public static TaskTipsDialog show(Activity context, String content) {
+	public static ShareAddPicSingleDialog show(Activity context, String content) {
 		mContext = context;
 		return show(context, true, true, null, content, 0, null);
 	}
 
-	public static TaskTipsDialog show(Activity context, boolean indeterminate,
-			boolean cancelable, OnCancelListener cancelListener, String disk,
-			final int position, final AfterDelPicListener l) {
+	public static ShareAddPicSingleDialog show(Activity context,
+			boolean indeterminate, boolean cancelable,
+			OnCancelListener cancelListener, String disk, final int position,
+			final AfterDelPicListener l) {
 		mContext = context;
 
-		mDialog = new TaskTipsDialog(context);
+		mDialog = new ShareAddPicSingleDialog(context);
 		mDialog.show();
 		mDialog.setCancelable(cancelable);
 		mDialog.setOnCancelListener(cancelListener);

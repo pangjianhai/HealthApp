@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import cn.com.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.health.pro.ShareSelectPicActivity;
-import cn.com.health.pro.TaskTipsDialog;
+import cn.com.health.pro.ShareAddPicSingleDialog;
 import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.persist.SharedPreInto;
 
@@ -210,7 +210,7 @@ public abstract class ParentShareInfoActivity extends
 						return 0;
 					}
 				};
-				TaskTipsDialog dialog = TaskTipsDialog.show(
+				ShareAddPicSingleDialog dialog = ShareAddPicSingleDialog.show(
 						ParentShareInfoActivity.this, false, true, null,
 						selectedPicture.get(position), position, l);
 
@@ -218,6 +218,11 @@ public abstract class ParentShareInfoActivity extends
 		});
 	}
 
+	/**
+	 * @todo 删除图片事件接口
+	 * @author pang
+	 *
+	 */
 	public interface AfterDelPicListener {
 		public int afterDelPic(int position);
 	}
