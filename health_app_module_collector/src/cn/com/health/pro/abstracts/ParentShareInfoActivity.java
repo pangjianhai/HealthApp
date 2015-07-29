@@ -3,8 +3,6 @@ package cn.com.health.pro.abstracts;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +16,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import cn.com.health.pro.MainPageLayoutSpaceActivity;
-import cn.com.health.pro.ShareSelectPicActivity;
 import cn.com.health.pro.ShareAddPicSingleDialog;
+import cn.com.health.pro.ShareSelectPicActivity;
 import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.persist.SharedPreInto;
 
@@ -204,7 +202,6 @@ public abstract class ParentShareInfoActivity extends
 
 					@Override
 					public int afterDelPic(int position) {
-						System.out.println("================" + position);
 						selectedPicture.remove(selectedPicture.get(position));
 						adapter.notifyDataSetChanged();
 						return 0;

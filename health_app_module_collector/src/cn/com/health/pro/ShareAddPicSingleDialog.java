@@ -22,7 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
- * @todo 删除图片
+ * @todo 健康分享添加图片之后可以单击查看图片
  * @author pang
  *
  */
