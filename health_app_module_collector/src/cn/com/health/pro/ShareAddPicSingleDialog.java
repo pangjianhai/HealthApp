@@ -5,6 +5,7 @@ import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.Display;
 import android.view.Gravity;
@@ -15,6 +16,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import cn.com.health.pro.abstracts.ParentShareInfoActivity.AfterDelPicListener;
+import cn.com.health.pro.config.HealthApplication;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -71,8 +75,9 @@ public class ShareAddPicSingleDialog extends AlertDialog {
 		ImageView showImg = (ImageView) view.findViewById(R.id.add_pic_iv);
 		File mediaFile = new File(disk);
 		Uri uri = Uri.fromFile(mediaFile);
-		showImg.setImageURI(uri);
 
+		Bitmap bm = ImageLoader.getInstance().loadImageSync(uri.toString());
+		showImg.setImageBitmap(bm);
 		mDialog.setContentView(view);
 
 		Button cbtn = (Button) view.findViewById(R.id.add_pic_close_btn);
