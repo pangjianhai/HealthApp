@@ -74,8 +74,7 @@ public class CommonPicJazzActivity extends BaseActivity {
 				String pic_url = SystemConst.server_url
 						+ SystemConst.FunctionUrl.getShareImgById
 						+ "?para={imgId:'" + ls.get(position) + "'}";
-				ImageLoader.getInstance().displayImage(pic_url, imageView,
-						HealthApplication.getDisplayImageOption());
+				ImageLoader.getInstance().displayImage(pic_url, imageView);
 
 				imageView.setScaleType(ScaleType.CENTER_CROP);
 				container.addView(imageView);
