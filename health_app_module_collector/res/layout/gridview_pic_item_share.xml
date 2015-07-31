@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/gridview_pic_item_iv"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerInside" />
 
 </RelativeLayout>
