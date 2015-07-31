@@ -190,7 +190,7 @@ public class HealthApplication extends Application {
 				// 设置图片以如何的编码方式显示、
 				.imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 				.bitmapConfig(Bitmap.Config.RGB_565) // default 设置图片的解码类型
-				.displayer(new RoundedBitmapDisplayer(5)) // 设置成圆角图片
+				// .displayer(new RoundedBitmapDisplayer(5)) // 设置成圆角图片
 				.considerExifParams(true).handler(new Handler()) // default
 				.build();
 		return options;
