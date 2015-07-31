@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@color/white" >
 
     <RelativeLayout
@@ -32,8 +32,8 @@
 
     <RelativeLayout
         android:id="@+id/share_all_detail_content_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/layout_space_title_bar"
         android:padding="10dp" >
 
@@ -92,8 +92,8 @@
 
         <cn.com.health.pro.part.XListView
             android:id="@+id/share_comment_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/share_comment_listview_notice"
             android:layout_marginTop="15dp"
             android:divider="@drawable/divider_share_comments"
