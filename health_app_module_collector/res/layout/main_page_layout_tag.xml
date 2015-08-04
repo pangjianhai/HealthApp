@@ -72,18 +72,44 @@
             android:showDividers="middle"
             android:visibility="gone" >
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/search_tags_listview"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/white"
-            android:dividerHeight="3dp"
-            android:footerDividersEnabled="true"
-            android:paddingTop="4dp"
-            android:visibility="gone" >
-        </ListView>
     </LinearLayout>
+
+    <cn.com.health.pro.part.MyScrollView
+        android:id="@+id/my_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_space_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/first_column"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/second_column"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/third_column"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </LinearLayout>
+    </cn.com.health.pro.part.MyScrollView>
 
     <RelativeLayout
         android:id="@+id/items_ops_rlayout"
