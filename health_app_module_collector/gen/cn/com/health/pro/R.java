@@ -42,6 +42,7 @@ public final class R {
         public static final int gray_default=0x7f050015;
         public static final int green=0x7f050012;
         public static final int grey=0x7f050014;
+        public static final int half_trans=0x7f05001f;
         public static final int lightgray=0x7f050003;
         public static final int orange=0x7f05001b;
         public static final int qianblue=0x7f05000d;
@@ -788,11 +789,15 @@ public final class R {
 
 
 
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
 
 
 

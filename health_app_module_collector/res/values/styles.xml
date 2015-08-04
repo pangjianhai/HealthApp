@@ -46,7 +46,7 @@
     <style name="MyDialogStyleBottom">
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/half_trans</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
