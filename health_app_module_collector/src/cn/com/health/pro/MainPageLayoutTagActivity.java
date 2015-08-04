@@ -23,6 +23,7 @@ import cn.com.health.pro.abstracts.ParentMainActivity;
 import cn.com.health.pro.adapter.TagAdapter;
 import cn.com.health.pro.model.Tag;
 import cn.com.health.pro.part.MyScrollView;
+import cn.com.health.pro.part.MyScrollView.BtnOps;
 import cn.com.health.pro.util.TagUtils;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -58,8 +59,8 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.main_page_layout_tag);
-		initListView();
 		initTagInput();
+		initListView();
 		initSelfTag();
 
 	}
@@ -73,18 +74,21 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	private void initListView() {
-		my_scroll_view = (MyScrollView) findViewById(R.id.my_scroll_view);
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		if (imm.isActive()) {
-			// 如果开启
-			imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
-					InputMethodManager.HIDE_NOT_ALWAYS);
-		}
+		BtnOps bo = new BtnOps() {
 
-		// ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-		// .hideSoftInputFromWindow(MainPageLayoutTagActivity.this
-		// .getCurrentFocus().getWindowToken(),
-		// InputMethodManager.HIDE_NOT_ALWAYS);
+			@Override
+			public void afterClick(String tId) {
+				Intent it = new Intent(MainPageLayoutTagActivity.this,
+						ShareByTagActivity.class);
+				it.putExtra("tagId", tId);
+				startActivity(it);
+			}
+		};
+		my_scroll_view = (MyScrollView) findViewById(R.id.my_scroll_view);
+		my_scroll_view.setBtnOps(bo);
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(
+				share_send_commont_tags_input.getWindowToken(), 0);
 	}
 
 	/**
@@ -117,32 +121,15 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 			 */
 			@Override
 			public void afterTextChanged(Editable edit) {
-				clearListView();// 清空listview重新生成
 				key = edit.toString();// 关键词
 				page = 0;// 重新搜索
-				// dataSource.clear();// 关键词换了，列表清空
 				if (key != null && !"".equals(key.trim())) {
-					// freshDataForListView();
 					my_scroll_view.restartNewKeySearch(key);
 				}
 
 			}
 		});
 
-	}
-
-	/**
-	 * 
-	 * 
-	 * @user:pang
-	 * @data:2015年6月23日
-	 * @todo:进行新的关键词搜索之前清空之前的搜索
-	 * @return:void
-	 */
-	public void clearListView() {
-		// search_tags_listview.setVisibility(View.GONE);
-		// dataSource.clear();
-		// adapter.notifyDataSetChanged();
 	}
 
 	/**
@@ -258,4 +245,5 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		to_home_page();
 		finish();
 	}
+
 }

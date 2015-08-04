@@ -107,8 +107,9 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 	/********************** 和搜索相关 *********************************/
 	private String data_key = "";
 	private int data_begin = 1;
-	private int data_limit = 30;
+	private int data_limit = 20;
 	private boolean hasData = true;
+	private BtnOps btnOps;
 
 	/**
 	 * 在Handler中进行图片可见性检查的判断，以及加载更多图片的操作。
@@ -222,7 +223,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
 						for (Tag tag : list) {
-							addImage(tag);
+							addTag(tag);
 						}
 					}
 					if (list == null || list.size() < data_limit) {
@@ -248,17 +249,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 		}
 	}
 
-	/**
-	 * 向ImageView中添加一张图片
-	 * 
-	 * @param bitmap
-	 *            待添加的图片
-	 * @param imageWidth
-	 *            图片的宽度
-	 * @param imageHeight
-	 *            图片的高度
-	 */
-	private void addImage(Tag tag) {
+	private void addTag(final Tag tag) {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, 80);
 		params.height = 77 * (new Random().nextInt(2) + 1);
@@ -267,6 +258,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 		btn.setLayoutParams(params);
 		btn.setText(tag.getDisplayName());
 		btn.setBackgroundResource(getRandomPic());
+		btn.setTextSize(14);
 		//
 		android.view.ViewGroup.LayoutParams btnPara = btn.getLayoutParams();
 		findColumnToAdd(btnPara.height).addView(btn);
@@ -274,7 +266,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 
 			@Override
 			public void onClick(View v) {
-
+				btnOps.afterClick(tag.getId());
 			}
 		});
 	}
@@ -282,7 +274,6 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 	/**
 	 * 找到此时应该添加图片的一列。原则就是对三列的高度进行判断，当前高度最小的一列就是应该添加的一列。
 	 * 
-	 * @param imageView
 	 * @param imageHeight
 	 * @return 应该添加图片的一列
 	 */
@@ -362,6 +353,18 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 		secondColumn.removeAllViews();
 		thirdColumn.removeAllViews();
 		loadMoreImages();
+	}
+
+	public BtnOps getBtnOps() {
+		return btnOps;
+	}
+
+	public void setBtnOps(BtnOps btnOps) {
+		this.btnOps = btnOps;
+	}
+
+	public interface BtnOps {
+		public void afterClick(String id);
 	}
 
 }
