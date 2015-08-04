@@ -297,7 +297,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/main_page_layout_common_bottom"
+        layout="@layout/main_page_layout_common_bottom_me"
         android:background="@drawable/common_bottom_shape" />
 
 </RelativeLayout>

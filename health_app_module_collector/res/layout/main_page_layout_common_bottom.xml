@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:drawableTop="@drawable/tabbar_home"
+            android:drawableTop="@drawable/tabbar_home_highlighted"
             android:onClick="share_btn"
             android:text="首页"
             android:textColor="#000000"
