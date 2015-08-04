@@ -75,7 +75,9 @@
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <!-- 进入分享信息的入口页面 -->
-        <activity android:name=".SharePrepareActivity" >
+        <activity
+            android:name=".SharePrepareActivity"
+            android:theme="@style/MyDialogStyleBottom" >
         </activity>
         <activity android:name=".ShareMineActivity" >
         </activity>
@@ -121,52 +123,92 @@
             android:name=".FriendSearchResultActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-        <activity android:name=".FriendSeachOpsActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".FriendSeachOpsActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".ShowUserInfoDetail" android:theme="@style/AppTheme">
+        <activity
+            android:name=".ShowUserInfoDetail"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".EditUserInfoDetail" android:theme="@style/AppTheme">
+        <activity
+            android:name=".EditUserInfoDetail"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme" >
         </activity>
 
         <!-- 关于登陆后的主页面 -->
-        <activity android:name=".MainPageLayoutSpaceActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutSpaceActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutMeActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutMeActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutInfoActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutInfoActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".CommonPicJazzActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".CommonPicJazzActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutMeFocusMeActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutMeFocusMeActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutMeMyFocusActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutMeMyFocusActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutMeCollectionActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutMeCollectionActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutOrderActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainPageLayoutOrderActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MainPageLayoutTagActivity" android:windowSoftInputMode="adjustUnspecified|stateHidden">
+        <activity
+            android:name=".MainPageLayoutTagActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
-        <activity android:name=".ShareByTagActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".ShareByTagActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".FirstLoginTopUserListLayout" android:theme="@style/AppTheme">
+        <activity
+            android:name=".FirstLoginTopUserListLayout"
+            android:theme="@style/AppTheme" >
         </activity>
 
         <!-- 关于信息分类 -->
-        <activity android:name=".InfoTypeListviewActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".InfoTypeListviewActivity"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".ListDocByTypeActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".ListDocByTypeActivity"
+            android:theme="@style/AppTheme" >
         </activity>
         <!-- 关于标签 -->
-        <activity android:name=".TagsForUserActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".TagsForUserActivity"
+            android:theme="@style/AppTheme" >
         </activity>
         <!-- 关于反馈 -->
-        <activity android:name=".AppFeedbackActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".AppFeedbackActivity"
+            android:theme="@style/AppTheme" >
         </activity>
         <!-- 测试activity -->
-        <activity android:name=".TestActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".TestActivity"
+            android:theme="@style/AppTheme" >
         </activity>
 
         <!-- 推送相关begin -->
