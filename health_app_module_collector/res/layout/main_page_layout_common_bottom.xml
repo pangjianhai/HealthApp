@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:drawableTop="@drawable/message_add_background_highlighted"
+            android:drawableTop="@drawable/message_add_background"
             android:onClick="share_btn"
             android:text="分享"
             android:textColor="#000000"

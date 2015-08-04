@@ -1,22 +1,20 @@
 package cn.com.health.pro.abstracts;
 
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
-import cn.com.health.pro.AppLoginRegActivity;
 import cn.com.health.pro.AppLoginStartActivity;
 import cn.com.health.pro.AppRegActivity;
 import cn.com.health.pro.BaseActivity;
@@ -66,6 +64,9 @@ public abstract class ParentMainActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void initBottom() {
+		ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		RunningTaskInfo info = manager.getRunningTasks(1).get(0);
+		String className = info.topActivity.getClassName(); // 完整类名
 		main_page_layout_home_btn = (Button) bottom
 				.findViewById(R.id.main_page_layout_home_btn);
 		main_page_layout_info_btn = (Button) bottom
@@ -81,8 +82,8 @@ public abstract class ParentMainActivity extends BaseActivity {
 				R.drawable.tabbar_home_highlighted);
 		topDrawable.setBounds(0, 0, topDrawable.getMinimumWidth(),
 				topDrawable.getMinimumHeight());
-		main_page_layout_home_btn.setCompoundDrawables(topDrawable,
-				topDrawable, topDrawable, topDrawable);
+		main_page_layout_home_btn.setCompoundDrawables(null, null, null,
+				topDrawable);
 
 	}
 
