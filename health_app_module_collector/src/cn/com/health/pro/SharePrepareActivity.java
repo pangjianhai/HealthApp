@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * 
@@ -20,7 +21,8 @@ public class SharePrepareActivity extends BaseActivity implements
 	 * 所有按钮
 	 */
 	private Button share_prepare_eating_btn, share_prepare_go_btn,
-			share_prepare_info_btn, share_prepare_back_btn;
+			share_prepare_info_btn;
+	private ImageView share_prepare_back_btn;
 
 	@Override
 	public void onCreate(Bundle b) {
@@ -34,7 +36,7 @@ public class SharePrepareActivity extends BaseActivity implements
 		share_prepare_eating_btn = (Button) findViewById(R.id.share_prepare_eating);
 		share_prepare_go_btn = (Button) findViewById(R.id.share_prepare_go);
 		share_prepare_info_btn = (Button) findViewById(R.id.share_prepare_info);
-		share_prepare_back_btn = (Button) findViewById(R.id.share_prepare_back);
+		share_prepare_back_btn = (ImageView) findViewById(R.id.share_prepare_back);
 
 		share_prepare_eating_btn.setOnClickListener(this);
 		share_prepare_go_btn.setOnClickListener(this);

@@ -42,15 +42,13 @@
             android:text="@string/share_prepare_info" />
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/share_prepare_back"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/grey_shape"
-        android:gravity="center_horizontal"
-        android:paddingBottom="1dp"
-        android:text="@string/share_prepare_back" />
+        android:scaleType="matrix"
+        android:src="@drawable/close_share" />
 
 </LinearLayout>
