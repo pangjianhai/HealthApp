@@ -147,7 +147,7 @@
         </activity>
         <activity android:name=".MainPageLayoutOrderActivity" >
         </activity>
-        <activity android:name=".MainPageLayoutTagActivity" >
+        <activity android:name=".MainPageLayoutTagActivity" android:windowSoftInputMode="adjustUnspecified|stateHidden">
         </activity>
         <activity android:name=".ShareByTagActivity" >
         </activity>

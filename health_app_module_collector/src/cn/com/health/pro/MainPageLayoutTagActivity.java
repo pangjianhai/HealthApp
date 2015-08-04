@@ -86,9 +86,6 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		};
 		my_scroll_view = (MyScrollView) findViewById(R.id.my_scroll_view);
 		my_scroll_view.setBtnOps(bo);
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(
-				share_send_commont_tags_input.getWindowToken(), 0);
 	}
 
 	/**
@@ -102,6 +99,7 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	public void initTagInput() {
 		selected_tag_linearlayout = (LinearLayout) findViewById(R.id.selected_tag_linearlayout);
 		share_send_commont_tags_input = (EditText) findViewById(R.id.share_send_commont_tags_input);
+		
 		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
 
 			@Override
