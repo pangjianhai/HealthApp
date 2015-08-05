@@ -266,7 +266,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 
 			@Override
 			public void onClick(View v) {
-				btnOps.afterClick(tag.getId());
+				btnOps.afterClick(tag);
 			}
 		});
 	}
@@ -364,7 +364,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 	}
 
 	public interface BtnOps {
-		public void afterClick(String id);
+		public void afterClick(Tag tag);
 	}
 
 }

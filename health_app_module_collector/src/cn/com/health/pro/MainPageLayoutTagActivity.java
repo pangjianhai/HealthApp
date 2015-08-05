@@ -77,10 +77,10 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 		BtnOps bo = new BtnOps() {
 
 			@Override
-			public void afterClick(String tId) {
+			public void afterClick(Tag tag) {
 				Intent it = new Intent(MainPageLayoutTagActivity.this,
 						ShareByTagActivity.class);
-				it.putExtra("tagId", tId);
+				it.putExtra("tagId", tag.getId());
 				startActivity(it);
 			}
 		};
@@ -99,7 +99,7 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	public void initTagInput() {
 		selected_tag_linearlayout = (LinearLayout) findViewById(R.id.selected_tag_linearlayout);
 		share_send_commont_tags_input = (EditText) findViewById(R.id.share_send_commont_tags_input);
-		
+
 		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
 
 			@Override
