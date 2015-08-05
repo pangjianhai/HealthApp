@@ -63,7 +63,7 @@
 
     <!-- 页面“我” -->
     <string name="page_layout_me_me">我</string>
-    <string name="page_layout_me_myfile">我的档案</string>
+    <string name="page_layout_me_myfile">我的分享</string>
     <string name="page_layout_me_my_focus">我的关注</string>
     <string name="page_layout_me_focuseme">关注我的</string>
     <string name="page_layout_me_mymsg">我的消息</string>

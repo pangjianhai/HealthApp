@@ -24,19 +24,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="健康匹配"
+            android:text="标签匹配"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:layout_width="67dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:background="#00ffffff"
             android:onClick="add_my_tag"
-            android:src="@drawable/addtag1" />
+            android:clickable="true"
+            android:text="自定义标签"
+            android:textSize="13dp" />
     </RelativeLayout>
 
     <LinearLayout

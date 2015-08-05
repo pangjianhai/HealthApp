@@ -104,6 +104,9 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 		setContentView(R.layout.share_send_common);
 
 		setLeftViewId(leftViewId);
+		/**
+		 * 初始化页签动画
+		 */
 		InitImageView();
 		initTextView();
 		initPagerViewer();
@@ -121,6 +124,14 @@ public abstract class ParentShareInfoViewPaperActivity extends BaseActivity {
 
 	public abstract void setLeftViewId(int id);
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年8月5日
+	 * @todo:初始化页签文字，点击事件（点击切换页面）
+	 * @return:void
+	 */
 	private void initTextView() {
 		t1 = (TextView) findViewById(R.id.text1);
 		t2 = (TextView) findViewById(R.id.text2);
