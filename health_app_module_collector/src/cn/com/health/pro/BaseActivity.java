@@ -106,9 +106,8 @@ public class BaseActivity extends InstrumentedActivity {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
 				null, false);
-		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 500, 500,
-				true);
-		// popWindow.setAnimationStyle(R.style);
+		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 400,
+				WindowManager.LayoutParams.WRAP_CONTENT, true);
 		/**
 		 * 子控件开始
 		 */
