@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@color/common_title_bar_color"
-        android:drawableLeft="@drawable/surprise_picturebutton_highlighted"
+        android:drawableLeft="@drawable/compose_photo_photograph_highlighted"
         android:onClick="selectPicture"
         android:text="上图片"
         android:textSize="15sp" />
