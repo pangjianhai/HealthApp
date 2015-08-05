@@ -73,5 +73,8 @@
 
     <!-- 关于推荐 -->
     <string name="friends_tj_pytj">朋友推荐</string>
+    <string name="app_nologin_alerter_tip">提示</string>
+    <string name="app_nologin_alerter_login">登        陆</string>
+    <string name="app_nologin_alerter_reg">注        册</string>
 
 </resources>

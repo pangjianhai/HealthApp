@@ -713,6 +713,9 @@ public final class R {
         /**  普通操作 
          */
         public static final int app_name=0x7f070002;
+        public static final int app_nologin_alerter_login=0x7f07003f;
+        public static final int app_nologin_alerter_reg=0x7f070040;
+        public static final int app_nologin_alerter_tip=0x7f07003e;
         /**  版本 
          */
         public static final int app_version_name=0x7f070000;

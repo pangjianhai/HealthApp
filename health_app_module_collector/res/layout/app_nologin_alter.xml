@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center_vertical"
-            android:text="请登录"
+            android:text="@string/app_nologin_alerter_tip"
             android:textColor="@color/black"
             android:textSize="19sp" />
     </RelativeLayout>
@@ -47,7 +47,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/no_login_alert_btn"
-            android:text="登录"
+            android:text="@string/app_nologin_alerter_login"
             android:textColor="@color/black"
             android:textSize="13dp" />
 
@@ -59,7 +59,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/no_login_alert_btn"
-            android:text="注册"
+            android:text="@string/app_nologin_alerter_reg"
             android:textColor="@color/black"
             android:textSize="13dp" />
     </LinearLayout>
