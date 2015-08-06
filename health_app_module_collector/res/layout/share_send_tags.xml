@@ -23,7 +23,7 @@
         android:hint="@string/tag_input_request"
         android:textSize="13sp" />
 
-    <cn.com.health.pro.part.MyScrollView
+    <cn.com.hzzc.health.pro.part.MyScrollView
         android:id="@+id/my_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,6 +58,6 @@
                 android:orientation="vertical" >
             </LinearLayout>
         </LinearLayout>
-    </cn.com.health.pro.part.MyScrollView>
+    </cn.com.hzzc.health.pro.part.MyScrollView>
 
 </LinearLayout>

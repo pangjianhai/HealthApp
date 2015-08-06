@@ -85,7 +85,7 @@
                 android:background="#FFFFFF"
                 android:orientation="vertical" >
 
-                <cn.com.health.pro.part.NoScrollGridView
+                <cn.com.hzzc.health.pro.part.NoScrollGridView
                     android:id="@+id/share_space_gridview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

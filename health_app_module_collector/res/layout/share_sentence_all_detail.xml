@@ -100,7 +100,7 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-        <cn.com.health.pro.part.XListView
+        <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/share_comment_listview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -108,7 +108,7 @@
             android:layout_marginTop="15dp"
             android:divider="@drawable/divider_share_comments"
             android:showDividers="middle" >
-        </cn.com.health.pro.part.XListView>
+        </cn.com.hzzc.health.pro.part.XListView>
     </RelativeLayout>
 
     <RelativeLayout

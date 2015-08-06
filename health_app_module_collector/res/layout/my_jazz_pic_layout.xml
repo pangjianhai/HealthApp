@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <cn.com.health.pro.MyJazzyViewPager
+        <cn.com.hzzc.health.pro.MyJazzyViewPager
             android:id="@+id/id_viewPager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.com.health.pro"
+    package="cn.com.hzzc.health.pro"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -60,42 +60,42 @@
     </uses-permission>
 
     <application
-        android:name="cn.com.health.pro.config.HealthApplication"
+        android:name="cn.com.hzzc.health.pro.config.HealthApplication"
         android:allowBackup="true"
         android:icon="@drawable/life0"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".InfoSearchActivity"
+            android:name="cn.com.hzzc.health.pro.InfoSearchActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".InfoDetailActivity"
+            android:name="cn.com.hzzc.health.pro.InfoDetailActivity"
             android:theme="@android:style/Theme.Holo.Light"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <!-- 进入分享信息的入口页面 -->
         <activity
-            android:name=".SharePrepareActivity"
+            android:name="cn.com.hzzc.health.pro.SharePrepareActivity"
             android:theme="@style/MyDialogStyleBottom" >
         </activity>
-        <activity android:name=".ShareMineActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.ShareMineActivity" >
         </activity>
-        <activity android:name=".ShareHealthActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.ShareHealthActivity" >
         </activity>
-        <activity android:name=".ShareSportsActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.ShareSportsActivity" >
         </activity>
-        <activity android:name=".ShareEatActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.ShareEatActivity" >
         </activity>
-        <activity android:name=".ShareSelectPicActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.ShareSelectPicActivity" >
         </activity>
         <!-- 关于空间分页 -->
-        <activity android:name=".MineSpaceActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.MineSpaceActivity" >
         </activity>
-        <activity android:name=".ShareSentenceAllDetailActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity" >
         </activity>
         <!-- 关于登陆 -->
-        <activity android:name=".AppStartActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.AppStartActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -103,111 +103,111 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AppLoginStartActivity"
+            android:name="cn.com.hzzc.health.pro.AppLoginStartActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".AppLoginGetPwdActivity"
+            android:name="cn.com.hzzc.health.pro.AppLoginGetPwdActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-        <activity android:name=".AppLoginLoadingActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.AppLoginLoadingActivity" >
         </activity>
-        <activity android:name=".AppLoginRegActivity" >
+        <activity android:name="cn.com.hzzc.health.pro.AppLoginRegActivity" >
         </activity>
         <activity
-            android:name=".AppRegActivity"
+            android:name="cn.com.hzzc.health.pro.AppRegActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <!-- 关于搜索添加好友 -->
         <activity
-            android:name=".FriendSearchResultActivity"
+            android:name="cn.com.hzzc.health.pro.FriendSearchResultActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".FriendSeachOpsActivity"
+            android:name="cn.com.hzzc.health.pro.FriendSeachOpsActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".ShowUserInfoDetail"
+            android:name="cn.com.hzzc.health.pro.ShowUserInfoDetail"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".EditUserInfoDetail"
+            android:name="cn.com.hzzc.health.pro.EditUserInfoDetail"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="cn.com.hzzc.health.pro.MainActivity"
             android:theme="@style/AppTheme" >
         </activity>
 
         <!-- 关于登陆后的主页面 -->
         <activity
-            android:name=".MainPageLayoutSpaceActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutMeActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutMeActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutInfoActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutInfoActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".CommonPicJazzActivity"
+            android:name="cn.com.hzzc.health.pro.CommonPicJazzActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutMeFocusMeActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutMeFocusMeActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutMeMyFocusActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutMeMyFocusActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutMeCollectionActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutMeCollectionActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutOrderActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutOrderActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".MainPageLayoutTagActivity"
+            android:name="cn.com.hzzc.health.pro.MainPageLayoutTagActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
-            android:name=".ShareByTagActivity"
+            android:name="cn.com.hzzc.health.pro.ShareByTagActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".FirstLoginTopUserListLayout"
+            android:name="cn.com.hzzc.health.pro.FirstLoginTopUserListLayout"
             android:theme="@style/AppTheme" >
         </activity>
 
         <!-- 关于信息分类 -->
         <activity
-            android:name=".InfoTypeListviewActivity"
+            android:name="cn.com.hzzc.health.pro.InfoTypeListviewActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".ListDocByTypeActivity"
+            android:name="cn.com.hzzc.health.pro.ListDocByTypeActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <!-- 关于标签 -->
         <activity
-            android:name=".TagsForUserActivity"
+            android:name="cn.com.hzzc.health.pro.TagsForUserActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <!-- 关于反馈 -->
         <activity
-            android:name=".AppFeedbackActivity"
+            android:name="cn.com.hzzc.health.pro.AppFeedbackActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <!-- 测试activity -->
         <activity
-            android:name=".TestActivity"
+            android:name="cn.com.hzzc.health.pro.TestActivity"
             android:theme="@style/AppTheme" >
         </activity>
 
@@ -270,7 +270,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
-            android:name="cn.com.health.pro.receiver.MyReceiver"
+            android:name="cn.com.hzzc.health.pro.receiver.MyReceiver"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
@@ -290,13 +290,13 @@
             </intent-filter>
         </receiver>
         <!-- 推送相关end -->
-        <service android:name="cn.com.health.pro.service.ViewForInfoService" >
+        <service android:name="cn.com.hzzc.health.pro.service.ViewForInfoService" >
         </service>
-        <service android:name="cn.com.health.pro.service.ShareCommentService" >
+        <service android:name="cn.com.hzzc.health.pro.service.ShareCommentService" >
         </service>
-        <service android:name="cn.com.health.pro.service.CollectionForInfoService" >
+        <service android:name="cn.com.hzzc.health.pro.service.CollectionForInfoService" >
         </service>
-        <service android:name="cn.com.health.pro.service.DocCommentService" >
+        <service android:name="cn.com.hzzc.health.pro.service.DocCommentService" >
         </service>
         <!-- 定位相关 -->
         <service

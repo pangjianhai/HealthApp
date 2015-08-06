@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_space_title_bar" >
 
-        <cn.com.health.pro.part.XListView
+        <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:layout_alignParentTop="true"
             android:divider="#dedede"
             android:dividerHeight="5dp" >
-        </cn.com.health.pro.part.XListView>
+        </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
 
     <LinearLayout

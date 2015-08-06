@@ -39,13 +39,13 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical" >
 
-        <cn.com.health.pro.part.XListView
+        <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/notice_user_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="#dedede"
             android:dividerHeight="5dp" >
-        </cn.com.health.pro.part.XListView>
+        </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
 
 </LinearLayout>
