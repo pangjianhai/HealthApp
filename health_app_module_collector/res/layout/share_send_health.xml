@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_below="@+id/share_send_health_layout"
-        android:background="@drawable/bg_edittext"
+        android:background="@drawable/bg_share_edittext"
         android:gravity="top"
         android:hint="@string/share_health_input"
         android:maxLines="6" />
