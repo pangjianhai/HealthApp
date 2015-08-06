@@ -15,16 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.health.pro.adapter.CommentAdapter;
@@ -403,6 +399,62 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	@Override
 	public void onLoadMore() {
 		loadCommentData();
+	}
+
+	/*******************************************************/
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年8月6日
+	 * @todo:分享
+	 * @return:void
+	 */
+	public void detail_ops(View v) {
+		if (isLogin()) {
+			//show_ops(v);
+		}
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年8月6日
+	 * @todo:TODO
+	 * @return:void
+	 */
+	public void show_ops(View v) {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.share_detail_ops_window, null);
+
+		PopupWindow window = new PopupWindow(view,
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.WRAP_CONTENT);
+
+		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+		window.setFocusable(true);
+		// 实例化一个ColorDrawable颜色为半透明
+		ColorDrawable dw = new ColorDrawable(0xb0000000);
+		window.setBackgroundDrawable(dw);
+		// 设置popWindow的显示和消失动画
+		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
+		// 在底部显示
+		window.showAsDropDown(v);
+		/**
+		 * popwindow按钮地方法
+		 */
+		/**
+		 * 让popwindow消失
+		 */
+		window.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				System.out.println("popWindow消失");
+
+			}
+		});
 	}
 
 }
