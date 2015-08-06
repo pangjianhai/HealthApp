@@ -30,6 +30,9 @@ public class ListDocByTypeActivity extends BaseActivity {
 	 * 搜索关键词
 	 */
 	private String tId = "";
+	/**
+	 * 分页信息
+	 */
 	private int page = 0;
 	private int rows = SystemConst.page_size;
 	ListView listview = null;

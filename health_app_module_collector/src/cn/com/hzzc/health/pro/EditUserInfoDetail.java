@@ -40,7 +40,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * 
  * @author pang
- * @todo 编辑个人信息
+ * @todo 编辑个人信息 
  *
  */
 public class EditUserInfoDetail extends BaseActivity {

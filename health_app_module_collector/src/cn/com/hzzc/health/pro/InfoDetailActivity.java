@@ -31,6 +31,7 @@ import cn.com.hzzc.health.pro.util.HttpCallbackListener;
  * @author pang
  * 
  * @TODO 信息详情
+ * 
  *
  */
 public class InfoDetailActivity extends BaseActivity {
