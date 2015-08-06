@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/bg_edittext" />
+                android:background="@drawable/eat_bg_style" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/bg_edittext" />
+                android:background="@drawable/eat_bg_style" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +72,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/bg_edittext"
+                android:background="@drawable/eat_bg_style"
                 android:gravity="top"
                 android:hint="@string/share_health_input"
                 android:maxLines="6" />
