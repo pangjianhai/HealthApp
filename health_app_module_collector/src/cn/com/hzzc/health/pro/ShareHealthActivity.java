@@ -60,10 +60,10 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 			cntent_no_alert();
 			return;
 		}
-		if (tags_selected == null || tags_selected.isEmpty()) {
-			select_no_tag_alert();
-			return;
-		}
+		// if (tags_selected == null || tags_selected.isEmpty()) {
+		// select_no_tag_alert();
+		// return;
+		// }
 		try {
 			Map map = new HashMap();
 
