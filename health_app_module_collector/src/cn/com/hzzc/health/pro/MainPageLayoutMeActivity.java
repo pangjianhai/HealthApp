@@ -260,7 +260,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @param versionNum
 	 * @user:pang
 	 * @data:2015年7月10日
-	 * @todo:拥有最新版本
+	 * @todo:拥有最新版本，删除旧文件，提示可以进行下载了
 	 * @return:void
 	 */
 	private void has_new_version() {
@@ -385,15 +385,17 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	protected void installApk() {
-		String apk_path = FileUtil.getDownloadFileDir() + "/"
-				+ download_app_name;
-		File apk_file = new File(apk_path);
+		String dirPath = FileUtil.getDownloadFileDir();
+		File f = new File(dirPath);
+		File[] fs = f.listFiles();
+		File apk_file = fs[0];
 		Intent intent = new Intent();
 		// 执行动作
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setAction(Intent.ACTION_VIEW);
 		// 执行的数据类型
 		intent.setDataAndType(Uri.fromFile(apk_file),
-				"application/vnd.Android.package-archive");
+				"application/vnd.android.package-archive");
 		startActivity(intent);
 	}
 
