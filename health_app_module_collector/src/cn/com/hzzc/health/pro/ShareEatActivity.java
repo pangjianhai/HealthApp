@@ -62,6 +62,11 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
+		String content = share_send_health_content.getText().toString();
+		if (content == null || "".equals(content.trim())) {
+			cntent_no_alert();
+			return;
+		}
 		if (tags_selected == null || tags_selected.isEmpty()) {
 			select_no_tag_alert();
 			return;

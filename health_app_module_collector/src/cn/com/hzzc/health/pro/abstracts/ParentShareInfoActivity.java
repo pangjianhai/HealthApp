@@ -237,6 +237,17 @@ public abstract class ParentShareInfoActivity extends
 	 */
 	public void select_no_tag_alert() {
 		new AlertDialog.Builder(ParentShareInfoActivity.this).setTitle("保存提示")
-				.setMessage("没有选择标签 \n ").setPositiveButton("确定", null).show();
+				.setMessage("没有选择标签  ").setPositiveButton("确定", null).show();
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月9日
+	 * @todo:保存到时候，内容不得为空的提示
+	 * @return:void
+	 */
+	public void cntent_no_alert() {
+		new AlertDialog.Builder(ParentShareInfoActivity.this).setTitle("保存提示")
+				.setMessage("内容不得为空  ").setPositiveButton("确定", null).show();
 	}
 }
