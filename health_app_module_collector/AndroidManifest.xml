@@ -73,7 +73,7 @@
     <application
         android:name="cn.com.hzzc.health.pro.config.HealthApplication"
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/icon2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
