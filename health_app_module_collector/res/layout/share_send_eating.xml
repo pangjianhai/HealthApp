@@ -9,7 +9,6 @@
         android:id="@+id/share_eat_layouts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/share_send_eating_layout"
         android:orientation="vertical" >
 
         <LinearLayout

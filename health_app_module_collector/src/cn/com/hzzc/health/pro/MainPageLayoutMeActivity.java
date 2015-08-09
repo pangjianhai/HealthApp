@@ -11,13 +11,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.SelfNum;
@@ -321,6 +321,17 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					}
 				});
 
+	}
+
+	// 安装apk
+	protected void installApk(File file) {
+		Intent intent = new Intent();
+		// 执行动作
+		intent.setAction(Intent.ACTION_VIEW);
+		// 执行的数据类型
+		intent.setDataAndType(Uri.fromFile(file),
+				"application/vnd.Android.package-archive");// 编者按：此处Android应为android，否则造成安装不了
+		startActivity(intent);
 	}
 
 	/**
