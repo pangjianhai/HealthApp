@@ -200,7 +200,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("data:" + data);
 					ve = FileUtil.parseVersionEntity(data);
 					if (ve == null) {// 说明当前版本是最新
 						no_new_version(versionName, versionNum);
@@ -327,7 +326,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	/**
 	 * @user:pang
 	 * @data:2015年7月11日
-	 * @todo:消息发送成功之后
+	 * @todo:下载成功后，发送消息到后台
 	 * @return:void
 	 */
 	private void after_download_success() {
