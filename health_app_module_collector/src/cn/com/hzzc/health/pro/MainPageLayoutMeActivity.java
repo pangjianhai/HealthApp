@@ -149,7 +149,9 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	}
 
 	public void show_me_about(View v) {
-		if (R.id.main_page_me_dangan == v.getId()) {
+		if (R.id.userdetail == v.getId()) {// 查看个人信息
+			showUserDetail(userId);
+		} else if (R.id.main_page_me_dangan == v.getId()) {
 			Intent intent = new Intent(MainPageLayoutMeActivity.this,
 					MineSpaceActivity.class);
 			intent.putExtra("uuid", userId);
@@ -427,5 +429,19 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @param id
+	 * @user:pang
+	 * @data:2015年8月9日
+	 * @todo:查看用户信息
+	 * @return:void
+	 */
+	public void showUserDetail(String id) {
+		Intent intent = new Intent(MainPageLayoutMeActivity.this,
+				ShowUserInfoDetail.class);
+		intent.putExtra("uuid", id);
+		startActivity(intent);
 	}
 }

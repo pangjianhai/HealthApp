@@ -40,10 +40,12 @@
         <!-- 个人信息 -->
 
         <RelativeLayout
+            android:id="@+id/userdetail"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@drawable/preference_single_item"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical"
+            android:onClick="show_me_about" >
 
             <ImageView
                 android:id="@+id/main_page_me_photo"
