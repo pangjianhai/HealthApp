@@ -25,6 +25,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @author pang
  *
  */
+@Deprecated
 public class InstallAppActivity extends BaseActivity {
 
 	/**

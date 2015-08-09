@@ -2,6 +2,7 @@ package cn.com.hzzc.health.pro.abstracts;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.ShareAddPicSingleDialog;
+import cn.com.hzzc.health.pro.ShareEatActivity;
 import cn.com.hzzc.health.pro.ShareSelectPicActivity;
 import cn.com.hzzc.health.pro.model.Tag;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
@@ -223,5 +225,18 @@ public abstract class ParentShareInfoActivity extends
 	 */
 	public interface AfterDelPicListener {
 		public int afterDelPic(int position);
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年8月9日
+	 * @todo:保存的时候，没有选择标签，进行提示
+	 * @return:void
+	 */
+	public void select_no_tag_alert() {
+		new AlertDialog.Builder(ParentShareInfoActivity.this).setTitle("保存提示")
+				.setMessage("没有选择标签 \n ").setPositiveButton("确定", null).show();
 	}
 }

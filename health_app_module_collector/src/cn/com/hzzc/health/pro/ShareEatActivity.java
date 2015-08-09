@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -61,8 +62,11 @@ public class ShareEatActivity extends ParentShareInfoActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
+		if (tags_selected == null || tags_selected.isEmpty()) {
+			select_no_tag_alert();
+			return;
+		}
 		try {
-			// share_health_bar.setVisibility(View.VISIBLE);
 			Map map = new HashMap();
 
 			Map textPram = new HashMap();

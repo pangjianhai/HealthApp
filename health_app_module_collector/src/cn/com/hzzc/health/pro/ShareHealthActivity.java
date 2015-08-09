@@ -55,6 +55,10 @@ public class ShareHealthActivity extends ParentShareInfoActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
+		if (tags_selected == null || tags_selected.isEmpty()) {
+			select_no_tag_alert();
+			return;
+		}
 		try {
 			Map map = new HashMap();
 
