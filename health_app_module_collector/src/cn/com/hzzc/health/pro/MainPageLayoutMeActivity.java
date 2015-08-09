@@ -302,9 +302,8 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setCancelable(true);
 		dialog.show();
-
 		HttpUtils http = new HttpUtils();
-		HttpHandler handler = http.download(ve.getDownLoadUrl(),
+		HttpHandler handler = http.download(ve.getDownLoadUrl().trim(),
 				FileUtil.getDownloadFileDir() + "/" + download_app_name, true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
 				true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
 				new RequestCallBack<File>() {
