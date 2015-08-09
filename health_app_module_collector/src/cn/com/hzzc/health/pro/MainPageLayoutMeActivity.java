@@ -7,12 +7,17 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -69,6 +74,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	}
 
 	public void initData() {
+
 		try {
 			//
 			JSONObject data = new JSONObject();
@@ -89,6 +95,13 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					HealthApplication.getDisplayImageOption());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		/**
+		 * 如果这里是下载完最新apk之后，点击消息，重新进入此activity则安装apk文件
+		 */
+		String install_flag = getIntent().getStringExtra("install");
+		if (install_flag != null && !"".equals(install_flag)) {
+			installApk();
 		}
 	}
 
@@ -176,15 +189,18 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * 关于真正的下载
 	 */
 	private ProgressDialog dialog = null;
+	/**
+	 * 封装从服务端返回的最新版本的信息
+	 */
 	private VersionEntity ve = null;
-	private String download_app_name = "g_health.apk";
+	private String download_app_name = "health_app_module_collector.apk";
 
 	/**
 	 * 
 	 * 
 	 * @user:pang
 	 * @data:2015年7月10日
-	 * @todo:检测新版本
+	 * @todo:检测新版本，根据当前版本去服务器查看，如果有新版本服务器会返回信息，否则返回为空
 	 * @return:void
 	 */
 	private void versionScan() {
@@ -276,7 +292,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	/**
 	 * @user:pang
 	 * @data:2015年7月10日
-	 * @todo:真正下载的地方
+	 * @todo:真正下载新版本apk的地方
 	 * @return:void
 	 */
 	private void real_download() {
@@ -305,9 +321,13 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 						dialog.setProgress(x);
 					}
 
+					/**
+					 * 下载成功之后给后台发送消息通知，同时移动端提醒下载完毕，最后对话框消失
+					 */
 					@Override
 					public void onSuccess(ResponseInfo<File> responseInfo) {
 						after_download_success();
+						sendMsgForDownloadSuccess();
 						dialog.dismiss();
 						Toast.makeText(getApplicationContext(), "下载成功",
 								Toast.LENGTH_SHORT).show();
@@ -323,14 +343,58 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 
 	}
 
-	// 安装apk
-	protected void installApk(File file) {
+	/**
+	 * @user:pang
+	 * @data:2015年8月9日
+	 * @todo:下载成功后手机消息收到通知
+	 * @return:void
+	 */
+	public void sendMsgForDownloadSuccess() {
+		NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+				this).setSmallIcon(R.drawable.download_app0)// 设置图标
+				.setContentTitle("通知")// 设置标题
+				.setContentText("最新[康兮]下载成功");// 设置内容
+
+		// 构建一个Intent
+		Intent resultIntent = new Intent(MainPageLayoutMeActivity.this,
+				MainPageLayoutMeActivity.class);
+		resultIntent.putExtra("install", "install");
+		// 封装一个Intent
+		PendingIntent resultPendingIntent = PendingIntent.getActivity(
+				MainPageLayoutMeActivity.this, 0, resultIntent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(resultPendingIntent);
+
+		Notification n = mBuilder.build();
+		n.flags = Notification.FLAG_AUTO_CANCEL;// 点击后自动关闭通知
+		// 设定默认震动
+		n.defaults |= Notification.DEFAULT_VIBRATE;
+		// 设定默认LED灯提醒
+		n.defaults |= Notification.DEFAULT_LIGHTS;
+		// 设置点击后通知自动清除
+		n.defaults |= Notification.FLAG_AUTO_CANCEL;
+
+		nm.notify(0, n);
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月9日
+	 * @todo:安装apk文件
+	 * @return:void
+	 */
+	protected void installApk() {
+		String apk_path = FileUtil.getDownloadFileDir() + "/"
+				+ download_app_name;
+		File apk_file = new File(apk_path);
 		Intent intent = new Intent();
 		// 执行动作
 		intent.setAction(Intent.ACTION_VIEW);
 		// 执行的数据类型
-		intent.setDataAndType(Uri.fromFile(file),
-				"application/vnd.Android.package-archive");// 编者按：此处Android应为android，否则造成安装不了
+		intent.setDataAndType(Uri.fromFile(apk_file),
+				"application/vnd.Android.package-archive");
 		startActivity(intent);
 	}
 
