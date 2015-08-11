@@ -298,7 +298,10 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	}
 
 	public void to_self_def(View v) {
-
+		Intent it = new Intent(getApplicationContext(),
+				TagsForUserDefActivity.class);
+		startActivity(it);
+		finish();
 	}
 
 	/**

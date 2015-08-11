@@ -211,12 +211,17 @@
             android:name="cn.com.hzzc.health.pro.TagsForUserActivity"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".TagsForUserDefActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
         <!-- 关于反馈 -->
         <activity
             android:name="cn.com.hzzc.health.pro.AppFeedbackActivity"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".InstallAppActivity"></activity>
+        <activity android:name=".InstallAppActivity" >
+        </activity>
         <!-- 测试activity -->
         <activity
             android:name="cn.com.hzzc.health.pro.TestActivity"
