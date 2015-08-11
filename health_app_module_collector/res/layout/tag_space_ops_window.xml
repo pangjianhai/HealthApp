@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+    android:background="@color/blue"
+    android:divider="@drawable/divider"
+    android:orientation="vertical"
+    android:showDividers="middle" >
+
+    <Button
+        android:id="@+id/tag_space_ops_self_def"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_default"
+        android:text="自定义标签"
+        android:textColor="@color/orange"
+        android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/tag_space_ops_share_tag"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_default"
+        android:text="贡献标签"
+        android:textColor="@color/orange"
+        android:textSize="13dp" />
+
+</LinearLayout>

@@ -7,16 +7,23 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.PopupWindow.OnDismissListener;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.adapter.TagAdapter;
 import cn.com.hzzc.health.pro.model.Tag;
@@ -218,6 +225,67 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 	 * 
 	 * @param v
 	 * @user:pang
+	 * @data:2015年8月11日
+	 * @todo:点击弹出框和标签的操作有关
+	 * @return:void
+	 */
+	public void tag_ops_pop(View v) {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.tag_space_ops_window, null);
+
+		PopupWindow window = new PopupWindow(view,
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.WRAP_CONTENT);
+
+		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+		window.setFocusable(true);
+		// 实例化一个ColorDrawable颜色为半透明
+		ColorDrawable dw = new ColorDrawable(0xb0000000);
+		window.setBackgroundDrawable(dw);
+		// 设置popWindow的显示和消失动画
+		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
+		// 在底部显示
+		window.showAsDropDown(v);
+		/**
+		 * popwindow按钮地方法
+		 */
+		Button tag_space_ops_share_tag = (Button) view
+				.findViewById(R.id.tag_space_ops_share_tag);
+		tag_space_ops_share_tag.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				to_self_def(v);
+			}
+
+		});
+		Button tag_space_ops_self_def = (Button) view
+				.findViewById(R.id.tag_space_ops_self_def);
+		tag_space_ops_self_def.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				add_my_tag(v);
+			}
+
+		});
+		/**
+		 * 让popwindow消失
+		 */
+		window.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				System.out.println("popWindow消失");
+
+			}
+		});
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
 	 * @data:2015年6月23日
 	 * @todo:添加自定义标签
 	 * @return:void
@@ -227,6 +295,10 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 				TagsForUserActivity.class);
 		startActivity(it);
 		finish();
+	}
+
+	public void to_self_def(View v) {
+
 	}
 
 	/**

@@ -28,16 +28,15 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:onClick="add_my_tag"
-            android:clickable="true"
-            android:text="自定义标签"
-            android:textSize="13dp" />
+            android:background="#00ffffff"
+            android:onClick="tag_ops_pop"
+            android:src="@drawable/triangle1" />
     </RelativeLayout>
 
     <LinearLayout
