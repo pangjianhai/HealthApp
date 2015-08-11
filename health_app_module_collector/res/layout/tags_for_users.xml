@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="自定义标签"
+            android:text="我的标签"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="已经选择的标签："
+            android:text="我的标签标签："
             android:textSize="12sp" />
     </LinearLayout>
 

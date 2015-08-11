@@ -36,7 +36,7 @@
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
             android:onClick="tag_ops_pop"
-            android:src="@drawable/triangle1" />
+            android:src="@drawable/preview_tag_icon_selected" />
     </RelativeLayout>
 
     <LinearLayout
