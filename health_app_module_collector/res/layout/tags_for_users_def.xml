@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
-            android:onClick="add_tag_to_user"
+            android:onClick="share_tag"
             android:src="@drawable/save4" />
     </RelativeLayout>
 
@@ -65,31 +65,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="我的标签："
+            android:text="标签库已经存在的标签："
             android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/selected_tag_linearlayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/selected_tag_linearlayout_hint"
         android:divider="@drawable/divider2"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingTop="4dp"
         android:showDividers="middle"
         android:visibility="gone" >
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/search_tags_listview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/selected_tag_linearlayout"
-        android:divider="@color/white"
-        android:dividerHeight="3dp"
-        android:footerDividersEnabled="true"
-        android:visibility="gone" >
-    </ListView>
 
 </RelativeLayout>
