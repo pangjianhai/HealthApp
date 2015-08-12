@@ -292,9 +292,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void share_tag(View v) {
-		System.out.println("share_tag");
 		String tag = share_send_commont_tags_input.getText().toString();
-		System.out.println("tag:"+tag);
 		if (tag == null || "".equals(tag.trim())) {
 			can_not_empty_alert();
 			return;
