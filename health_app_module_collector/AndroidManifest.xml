@@ -101,9 +101,7 @@
         <activity android:name="cn.com.hzzc.health.pro.ShareSelectPicActivity" >
         </activity>
         <!-- 关于空间分页 -->
-        <activity
-            android:name="cn.com.hzzc.health.pro.MineSpaceActivity"
-            android:launchMode="singleTask" >
+        <activity android:name="cn.com.hzzc.health.pro.MineSpaceActivity" >
         </activity>
         <activity android:name="cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity" >
         </activity>
@@ -156,6 +154,7 @@
         <!-- 关于登陆后的主页面 -->
         <activity
             android:name="cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

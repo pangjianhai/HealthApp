@@ -120,4 +120,21 @@ public class SharedPreInto {
 		return sn;
 	}
 
+	/**
+	 * @user:pang
+	 * @data:2015年8月12日
+	 * @todo:个人的收藏数据等信息置为无效
+	 * @return:void
+	 */
+	public void unvalidSelfNum() {
+		SharedPreferences sp = this.getSharedPreferences();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putBoolean(SharePreIntoConst.MainMeConst.if_need_reload, true);// 不需要重新取，直接可以用
+		editor.putString(SharePreIntoConst.MainMeConst.last_set_reload_date, "");
+		editor.putString(SharePreIntoConst.MainMeConst.my_share_num, "");//
+		editor.putString(SharePreIntoConst.MainMeConst.my_myfocus_num, "");//
+		editor.putString(SharePreIntoConst.MainMeConst.my_focusme_num, "");//
+		editor.commit();
+	}
+
 }

@@ -666,13 +666,13 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		System.out.println("======================onResume");
+		System.out.println("======================onResume space");
 	}
 
 	@Override
 	public void onRestart() {
 		super.onRestart();
-		System.out.println("======================onRestart");
+		System.out.println("======================onRestart space");
 	}
 
 }
