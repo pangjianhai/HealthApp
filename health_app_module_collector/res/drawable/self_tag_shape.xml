@@ -8,13 +8,13 @@
         android:width="0.5dp"
         android:color="@color/blue" />
     <!-- 圆角 -->
-    <corners android:radius="3dp" />
+    <corners android:radius="1dp" />
     <!-- 边距 -->
     <padding
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp"
-        android:top="2dp" />
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp" />
     <!-- 渐变 -->
 
 </shape>

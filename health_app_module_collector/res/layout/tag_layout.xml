@@ -2,10 +2,12 @@
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:background="@drawable/self_tag_shape"
+    android:gravity="center"
     android:paddingBottom="1dp"
     android:paddingLeft="11dp"
     android:paddingRight="1dp"
     android:paddingTop="1dp"
-    android:textSize="14sp"
-    android:singleLine="true" />
+    android:singleLine="true"
+    android:textSize="14sp" />

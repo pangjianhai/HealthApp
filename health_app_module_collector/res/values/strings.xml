@@ -24,6 +24,7 @@
     <string name="share_mine_detail_edit">编辑</string>
     <string name="share_mine_detail_back">返回</string>
     <string name="share_health_input">请输入内容</string>
+    <string name="share_tag_input">请输入您要分享的标签</string>
     <string name="share_health_addpic">添加图片</string>
     <string name="share_health_addtag">添加标签</string>
     <string name="app_feed_back">我要吐槽</string>
@@ -76,5 +77,8 @@
     <string name="app_nologin_alerter_tip">提示</string>
     <string name="app_nologin_alerter_login">登        陆</string>
     <string name="app_nologin_alerter_reg">注        册</string>
-
+    
+    <!-- 关于标签 -->
+	<string name="tag_share_exist">标签库已经存在的标签：</string>
+	<string name="tag_will_share_to_prove">贡献标签</string>
 </resources>

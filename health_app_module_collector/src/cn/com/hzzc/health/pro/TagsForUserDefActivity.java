@@ -45,9 +45,11 @@ public class TagsForUserDefActivity extends BaseActivity {
 	private ViewGroup container = null;
 	public List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
 	/** 标签之间的间距 px */
-	final int itemMargins = 2;
+	final int itemMargins = 4;
 	/** 标签的行间距 px */
-	final int lineMargins = 2;
+	final int lineMargins = 10;
+	// 标签高度
+	final int tag_btn_height = 30;
 	/*
 	 * 标签分页
 	 */
@@ -167,8 +169,8 @@ public class TagsForUserDefActivity extends BaseActivity {
 			final int itemPadding = button.getCompoundPaddingLeft()
 					+ button.getCompoundPaddingRight();
 			final LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			tvParams.setMargins(0, 0, 0, 0);
+					LayoutParams.WRAP_CONTENT, tag_btn_height);
+			tvParams.setMargins(0, 0, 4, 0);
 
 			paint.setTextSize(button.getTextSize());
 
@@ -213,7 +215,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 		final Button bt = (Button) viewGroup.getChildAt(viewGroup
 				.getChildCount() - 1);
 		bt.setLayoutParams(new LinearLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				LayoutParams.WRAP_CONTENT, tag_btn_height));
 	}
 
 	private void addItemView(LayoutInflater inflater, ViewGroup viewGroup,
@@ -223,7 +225,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 		viewGroup.addView(btn, tvParams);
 	}
 
-
+	// btn2.setBackgroundResource(R.drawable.self_tag_shape);
 	/**
 	 * @param v
 	 * @user:pang

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我的标签"
+            android:text="@string/tag_will_share_to_prove"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -51,7 +51,7 @@
             android:layout_height="30dp"
             android:background="@drawable/bg_edittext"
             android:gravity="left"
-            android:hint="@string/share_health_input"
+            android:hint="@string/share_tag_input"
             android:textSize="13sp" />
     </LinearLayout>
 
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="标签库已经存在的标签："
+            android:text="@string/tag_share_exist"
             android:textSize="12sp" />
     </LinearLayout>
 
