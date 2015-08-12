@@ -19,7 +19,8 @@ import java.util.Map;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
+import android.graphics.BitmapFactory.Options;
+import android.view.Display;
 import android.view.WindowManager;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 
@@ -273,13 +274,12 @@ public class FileUploadUtil {
 					outStream.write(sb1.toString().getBytes());
 					// *************处理文件开
 					String filePath = f.getPath();
-
-					// 尺寸压缩
-					Bitmap bm = thumbnailImg(filePath);
-					saveMyBitmap("aaaa", bm);
+					//
+					// // 尺寸压缩
+					// Bitmap bm = thumbnailImg(filePath);
+					// saveMyBitmap("aaaa", bm);
 					// 质量压缩
-					Bitmap bm2 = compressImage(bm);
-					saveMyBitmap("bbb", bm);
+					Bitmap bm2 = scaleLoad(filePath);
 					// 上传压缩信息
 					ByteArrayOutputStream stream = new ByteArrayOutputStream();
 					bm2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -415,5 +415,37 @@ public class FileUploadUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static Bitmap scaleLoad(String path) {
+
+		// 2. 根据路径指向的图片去获取这张图片的宽和高
+		Options opts = new Options();
+		opts.inJustDecodeBounds = true; // 指定为true, 加载器就不会获得图片,
+										// 但是opts里边的out开头的字段会设置.
+		BitmapFactory.decodeFile(path, opts);
+		int imageWidth = opts.outWidth;
+		int imageHeight = opts.outHeight;
+		// System.out.println("图片的宽和高: " + imageWidth + " * " + imageHeight);
+
+		// 3. 获得屏幕的宽和高
+		Display display = ((WindowManager) HealthApplication.getContext()
+				.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		int screenWidth = display.getWidth();
+		int screenHeight = display.getHeight();
+		// System.out.println("屏幕的宽和高: " + screenWidth + " * " + screenHeight);
+
+		// 4. 计算缩放比例
+		int widthScale = imageWidth / screenWidth;
+		int heightScale = imageHeight / screenHeight;
+		int scale = widthScale > heightScale ? widthScale : heightScale;
+		// System.out.println("缩放比例为: " + scale);
+
+		// 5. 根据缩放比例进行对图片的缩放.
+		opts.inJustDecodeBounds = false;
+		opts.inSampleSize = scale; // 指定加载器以scale比例进行缩放加载
+		Bitmap bitmap = BitmapFactory.decodeFile(path, opts);
+
+		return bitmap;
 	}
 }

@@ -7,17 +7,14 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.model.Tag;
@@ -40,9 +37,8 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 */
 	private EditText share_send_commont_tags_input;// 搜索框
 
-	private LinearLayout selected_tag_linearlayout = null;
+	private ViewGroup selected_tag_linearlayout = null;
 	public List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
-	private String will_del_tag_id = "";
 
 	/*
 	 * 标签分页
@@ -67,7 +63,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void initTagInput() {
-		selected_tag_linearlayout = (LinearLayout) findViewById(R.id.selected_tag_linearlayout);
+		selected_tag_linearlayout = (ViewGroup) findViewById(R.id.selected_tag_linearlayout);
 		share_send_commont_tags_input = (EditText) findViewById(R.id.share_send_commont_tags_input);
 		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
 
@@ -167,24 +163,6 @@ public class TagsForUserDefActivity extends BaseActivity {
 		btn2.setPadding(0, 0, 2, 0);
 		btn2.setBackgroundResource(R.drawable.self_tag_shape);
 		return btn2;
-	}
-
-	public void repaintUI(String willDelId) {
-		List<Tag> new_selected_list = new ArrayList<Tag>();
-		if (tags_selected != null && !tags_selected.isEmpty()) {
-			selected_tag_linearlayout.removeAllViews();// 请控所有的
-			for (Tag tag : tags_selected) {
-				final String tId = tag.getId();
-				if (!tId.equals(willDelId)) {// 把选中的排除在外
-					new_selected_list.add(tag);// 把留下来的tag放入新的list
-					View btn2 = createButton(tag);
-					selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
-				}
-			}
-			tags_selected.clear();
-			tags_selected.addAll(new_selected_list);
-		}
-
 	}
 
 	/**
