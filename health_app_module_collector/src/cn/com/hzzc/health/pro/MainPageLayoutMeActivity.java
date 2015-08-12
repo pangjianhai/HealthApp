@@ -85,20 +85,35 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	public void initUserData() {
 
 		try {
-			//
-			JSONObject data = new JSONObject();
-			data.put("Id", userId);
-			new GetSelfInfoAsyncTask(MainPageLayoutMeActivity.this)
-					.execute(data.toString());
+			JSONObject d = new JSONObject();
+			d.put("Id", userId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
-			String pic_url = SystemConst.server_url
-					+ SystemConst.FunctionUrl.getHeadImgByUserId
-					+ "?para={userId:'" + userId + "'}";
-			ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo,
-					HealthApplication.getDisplayImageOption());
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					UserItem ui = UserUtils.parseUserItemFromJSON(data);
+					getOver(ui);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getUserById, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		String pic_url = SystemConst.server_url
+				+ SystemConst.FunctionUrl.getHeadImgByUserId
+				+ "?para={userId:'" + userId + "'}";
+		ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo,
+				HealthApplication.getDisplayImageOption());
 		/**
 		 * 如果这里是下载完最新apk之后，点击消息，重新进入此activity则安装apk文件
 		 */
