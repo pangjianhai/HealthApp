@@ -1,5 +1,6 @@
 package cn.com.hzzc.health.pro;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,10 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.model.Tag;
+import cn.com.hzzc.health.pro.util.FileUtil;
 import cn.com.hzzc.health.pro.util.TagUtils;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -211,6 +216,13 @@ public class TagsForUserDefActivity extends BaseActivity {
 
 	}
 
+	/**
+	 * @param viewGroup
+	 * @user:pang
+	 * @data:2015年8月12日
+	 * @todo:对每一行的最后一个button元素做宽度上的处理
+	 * @return:void
+	 */
 	private void resetTextViewMarginsRight(ViewGroup viewGroup) {
 		final Button bt = (Button) viewGroup.getChildAt(viewGroup
 				.getChildCount() - 1);
@@ -218,6 +230,17 @@ public class TagsForUserDefActivity extends BaseActivity {
 				LayoutParams.WRAP_CONTENT, tag_btn_height));
 	}
 
+	/**
+	 * 
+	 * @param inflater
+	 * @param viewGroup
+	 * @param tvParams
+	 * @param text
+	 * @user:往每一行linearlayout中添加button元素
+	 * @data:2015年8月12日
+	 * @todo:TODO
+	 * @return:void
+	 */
 	private void addItemView(LayoutInflater inflater, ViewGroup viewGroup,
 			android.widget.LinearLayout.LayoutParams tvParams, String text) {
 		final Button btn = (Button) inflater.inflate(R.layout.tag_layout, null);
@@ -225,30 +248,28 @@ public class TagsForUserDefActivity extends BaseActivity {
 		viewGroup.addView(btn, tvParams);
 	}
 
-	// btn2.setBackgroundResource(R.drawable.self_tag_shape);
 	/**
+	 * 
 	 * @param v
 	 * @user:pang
-	 * @data:2015年8月11日
-	 * @todo:分享标签
+	 * @data:2015年8月12日
+	 * @todo:确定进行标签贡献的http请求方法
 	 * @return:void
 	 */
-	public void share_tag(View v) {
+	public void real_share_tag() {
 		try {
+			String tag = share_send_commont_tags_input.getText().toString();
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
-			d.put("tagsId", "");
+			d.put("tagName", tag);
 
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					Toast.makeText(getApplicationContext(), "添加成功",
+					Toast.makeText(getApplicationContext(), "分享成功，等待审核哦",
 							Toast.LENGTH_SHORT).show();
-					Intent it = new Intent(getApplicationContext(),
-							MainPageLayoutTagActivity.class);
-					startActivity(it);
-					finish();
+					backoff(null);
 				}
 
 				@Override
@@ -258,9 +279,44 @@ public class TagsForUserDefActivity extends BaseActivity {
 			Map map = new HashMap();
 			map.put("para", d.toString());
 			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.add_tag_to_user, map, rcb);
+					+ SystemConst.FunctionUrl.shareTagToPlatform, map, rcb);
 		} catch (Exception e) {
 		}
+	}
+
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年8月12日
+	 * @todo:用户点击“保存”按钮的时候进行最后的提示
+	 * @return:void
+	 */
+	private void share_tag(View v) {
+		String tag = share_send_commont_tags_input.getText().toString();
+		if (tag == null || "".equals(tag.trim())) {
+			can_not_empty_alert();
+			return;
+		}
+		new AlertDialog.Builder(TagsForUserDefActivity.this).setTitle("保存提示")
+				.setMessage("确定贡献标[" + tag + "]")
+				.setPositiveButton("贡献", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						real_share_tag();
+					}
+				}).setNegativeButton("取消", null).show();
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月12日
+	 * @todo:贡献内容不得为空提示
+	 * @return:void
+	 */
+	private void can_not_empty_alert() {
+		new AlertDialog.Builder(TagsForUserDefActivity.this).setTitle("保存提示")
+				.setMessage("内容不得为空").setPositiveButton("确定", null).show();
 	}
 
 	/**

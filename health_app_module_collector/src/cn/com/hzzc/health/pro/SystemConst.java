@@ -35,7 +35,8 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-///public static final String server_url = "http://101.200.2.143:9001/iotapp/";
+	// /public static final String server_url =
+	// "http://101.200.2.143:9001/iotapp/";
 
 	public static final String server_url = "http://192.168.0.102:8080/IotApp/";
 
@@ -271,6 +272,21 @@ public class SystemConst {
 		 * 根据分享ID获取发布人ID
 		 */
 		public static final String getUserIdByShareId = "appSourceController/getUserIdByShareId.do";
+
+		/**
+		 * 判断登录ID是否存在
+		 */
+		public static final String ifUserLoginIdExist = "appSourceController/valiUser.do";
+
+		/**
+		 * 判断注册邮箱是否存在
+		 */
+		public static final String ifUserEmailExist = "appSourceController/valiUserEmail.do";
+
+		/**
+		 * 贡献标签
+		 */
+		public static final String shareTagToPlatform = "appSourceController/addTagByUserId.do";
 	}
 
 	/**
