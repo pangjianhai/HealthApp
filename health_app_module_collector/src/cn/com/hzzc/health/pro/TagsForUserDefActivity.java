@@ -1,6 +1,5 @@
 package cn.com.hzzc.health.pro;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +9,6 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -24,10 +22,8 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.model.Tag;
-import cn.com.hzzc.health.pro.util.FileUtil;
 import cn.com.hzzc.health.pro.util.TagUtils;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -54,7 +50,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 	/** 标签的行间距 px */
 	final int lineMargins = 10;
 	// 标签高度
-	final int tag_btn_height = 30;
+	final int tag_btn_height = 45;
 	/*
 	 * 标签分页
 	 */
@@ -123,10 +119,13 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 */
 	public void repaintLinearLayout() {
 		try {
+			/**
+			 * 模糊查询只需要取三十个就可以了，没有必要分页
+			 */
 			JSONObject d = new JSONObject();
 			d.put("tagName", key);
 			d.put("page", 1);
-			d.put("rows", 50);
+			d.put("rows", 30);
 
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
