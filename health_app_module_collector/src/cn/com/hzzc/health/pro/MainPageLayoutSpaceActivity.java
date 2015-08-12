@@ -93,6 +93,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		System.out
+				.println("==========================================onCreate");
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.main_page_layout_space);
@@ -653,6 +655,24 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		System.out.println("------------------destroy space");
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		System.out.println("======================onResume");
+	}
+
+	@Override
+	public void onRestart() {
+		super.onRestart();
+		System.out.println("======================onRestart");
 	}
 
 }

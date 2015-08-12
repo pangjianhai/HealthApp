@@ -142,6 +142,11 @@ public abstract class ParentMainActivity extends BaseActivity {
 			}
 		}
 
+//		if (!curent_activity_name.equals(MainPageLayoutSpaceActivity.class
+//				.getName())) {
+//			finish();
+//		}
+
 	}
 
 	/**

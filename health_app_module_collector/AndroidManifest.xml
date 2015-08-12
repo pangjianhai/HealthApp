@@ -101,7 +101,9 @@
         <activity android:name="cn.com.hzzc.health.pro.ShareSelectPicActivity" >
         </activity>
         <!-- 关于空间分页 -->
-        <activity android:name="cn.com.hzzc.health.pro.MineSpaceActivity" >
+        <activity
+            android:name="cn.com.hzzc.health.pro.MineSpaceActivity"
+            android:launchMode="singleTask" >
         </activity>
         <activity android:name="cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity" >
         </activity>

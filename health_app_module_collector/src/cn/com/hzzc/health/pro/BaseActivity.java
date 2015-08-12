@@ -207,6 +207,7 @@ public class BaseActivity extends InstrumentedActivity {
 		}
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
+		Toast.makeText(this, "【测试代码】刚进行了http请求", Toast.LENGTH_SHORT).show();
 	}
 
 	/**

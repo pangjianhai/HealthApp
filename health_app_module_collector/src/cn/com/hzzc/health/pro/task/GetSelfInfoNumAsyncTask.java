@@ -14,6 +14,7 @@ import cn.com.hzzc.health.pro.util.UserUtils;
  * @todo 根据用户UUID取用户数据task
  *
  */
+@Deprecated
 public class GetSelfInfoNumAsyncTask extends AsyncTask<String, Void, SelfNum> {
 
 	private Context context;

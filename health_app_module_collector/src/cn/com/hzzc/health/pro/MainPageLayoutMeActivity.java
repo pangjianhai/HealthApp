@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
+import cn.com.hzzc.health.pro.model.PushBean;
 import cn.com.hzzc.health.pro.model.SelfNum;
 import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.model.VersionEntity;
@@ -33,6 +34,7 @@ import cn.com.hzzc.health.pro.task.GetSelfInfoAsyncTask;
 import cn.com.hzzc.health.pro.task.GetSelfInfoNumAsyncTask;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.FileUtil;
+import cn.com.hzzc.health.pro.util.UserUtils;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -59,7 +61,8 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.main_page_layout_me);
 		initPart();
-		initData();
+		initUserData();
+		initMyNum();
 	}
 
 	public void initPart() {
@@ -73,7 +76,13 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		me_my_shoucang = (TextView) findViewById(R.id.me_my_shoucang);
 	}
 
-	public void initData() {
+	/**
+	 * @user:pang
+	 * @data:2015年8月12日
+	 * @todo:获取用户数据
+	 * @return:void
+	 */
+	public void initUserData() {
 
 		try {
 			//
@@ -81,12 +90,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 			data.put("Id", userId);
 			new GetSelfInfoAsyncTask(MainPageLayoutMeActivity.this)
 					.execute(data.toString());
-
-			//
-			JSONObject data2 = new JSONObject();
-			data2.put("userId", userId);
-			new GetSelfInfoNumAsyncTask(MainPageLayoutMeActivity.this)
-					.execute(data2.toString());
 
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getHeadImgByUserId
@@ -102,6 +105,46 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		String install_flag = getIntent().getStringExtra("install");
 		if (install_flag != null && !"".equals(install_flag)) {
 			installApk();
+		}
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月12日
+	 * @todo:获取关注数字等信息
+	 * @return:void
+	 */
+	public void initMyNum() {
+		final SharedPreInto spi = new SharedPreInto(this);
+		SelfNum sn = spi.getSelfNum();
+		if (sn != null) {
+			getNum(sn);
+			return;
+		}
+		try {
+			JSONObject d = new JSONObject();
+			d.put("userId", userId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					SelfNum d = UserUtils.parsUserResult(data);
+					getNum(d);
+					spi.setSelfNum(d);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getResultNumberUserById, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -163,7 +163,7 @@ public abstract class ParentShareInfoActivity extends
 		Intent intent = new Intent(ParentShareInfoActivity.this,
 				MainPageLayoutSpaceActivity.class);
 		startActivity(intent);
-		finish();
+		//finish();
 	}
 
 	/**
