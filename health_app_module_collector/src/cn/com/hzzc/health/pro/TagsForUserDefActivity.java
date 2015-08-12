@@ -8,13 +8,18 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager.LayoutParams;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.model.Tag;
@@ -37,9 +42,12 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 */
 	private EditText share_send_commont_tags_input;// 搜索框
 
-	private ViewGroup selected_tag_linearlayout = null;
+	private ViewGroup container = null;
 	public List<Tag> tags_selected = new ArrayList<Tag>();// 已经选中的标签
-
+	/** 标签之间的间距 px */
+	final int itemMargins = 2;
+	/** 标签的行间距 px */
+	final int lineMargins = 2;
 	/*
 	 * 标签分页
 	 */
@@ -63,7 +71,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void initTagInput() {
-		selected_tag_linearlayout = (ViewGroup) findViewById(R.id.selected_tag_linearlayout);
+		container = (ViewGroup) findViewById(R.id.selected_tag_linearlayout);
 		share_send_commont_tags_input = (EditText) findViewById(R.id.share_send_commont_tags_input);
 		share_send_commont_tags_input.addTextChangedListener(new TextWatcher() {
 
@@ -89,7 +97,7 @@ public class TagsForUserDefActivity extends BaseActivity {
 					/**
 					 * 根据关键词搜索标签绘制出来
 					 */
-					selected_tag_linearlayout.removeAllViews();// 清空所有的
+					container.removeAllViews();// 清空所有的
 					repaintLinearLayout();
 				}
 
@@ -144,26 +152,77 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 */
 	public void repaintUI() {
 		if (tags_selected != null && !tags_selected.isEmpty()) {
-			selected_tag_linearlayout.removeAllViews();// 请控所有的
+			System.out.println(tags_selected.size());
+			container.removeAllViews();// 请控所有的
+
+			int containerWidth = container.getMeasuredWidth()
+					- container.getPaddingRight() - container.getPaddingLeft();
+
+			final LayoutInflater inflater = getLayoutInflater();
+
+			/** 用来测量字符的宽度 */
+			final Paint paint = new Paint();
+			final Button button = (Button) inflater.inflate(
+					R.layout.tag_layout, null);
+			final int itemPadding = button.getCompoundPaddingLeft()
+					+ button.getCompoundPaddingRight();
+			final LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			tvParams.setMargins(0, 0, 0, 0);
+
+			paint.setTextSize(button.getTextSize());
+
+			LinearLayout layout = new LinearLayout(this);
+			layout.setLayoutParams(new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			layout.setOrientation(LinearLayout.HORIZONTAL);
+			container.addView(layout);
+
+			final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			params.setMargins(0, lineMargins, 0, 0);
+
+			/** 一行剩下的空间 **/
+			int remainWidth = containerWidth;
+
 			for (Tag tag : tags_selected) {
-				View btn2 = createButton(tag);
-				selected_tag_linearlayout.addView(btn2);// 重绘linearlayout
+				String tagName = tag.getDisplayName();
+				final float itemWidth = paint.measureText(tagName)
+						+ itemPadding;
+				if (remainWidth > itemWidth) {
+					addItemView(inflater, layout, tvParams, tagName);
+				} else {
+					resetTextViewMarginsRight(layout);
+					layout = new LinearLayout(this);
+					layout.setLayoutParams(params);
+					layout.setOrientation(LinearLayout.HORIZONTAL);
+
+					/** 将前面那一个textview加入新的一行 */
+					addItemView(inflater, layout, tvParams, tagName);
+					container.addView(layout);
+					remainWidth = containerWidth;
+				}
+				remainWidth = (int) (remainWidth - itemWidth + 0.5f)
+						- itemMargins;
 			}
-			selected_tag_linearlayout.setVisibility(View.VISIBLE);
 		}
 
 	}
 
-	private View createButton(Tag tag) {
-		final String tId = tag.getId();
-		String tName = tag.getDisplayName();
-		TextView btn2 = new TextView(this);
-		btn2.setText(tName);
-		btn2.setTextSize(14);
-		btn2.setPadding(0, 0, 2, 0);
-		btn2.setBackgroundResource(R.drawable.self_tag_shape);
-		return btn2;
+	private void resetTextViewMarginsRight(ViewGroup viewGroup) {
+		final Button bt = (Button) viewGroup.getChildAt(viewGroup
+				.getChildCount() - 1);
+		bt.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	}
+
+	private void addItemView(LayoutInflater inflater, ViewGroup viewGroup,
+			android.widget.LinearLayout.LayoutParams tvParams, String text) {
+		final Button btn = (Button) inflater.inflate(R.layout.tag_layout, null);
+		btn.setText(text);
+		viewGroup.addView(btn, tvParams);
+	}
+
 
 	/**
 	 * @param v

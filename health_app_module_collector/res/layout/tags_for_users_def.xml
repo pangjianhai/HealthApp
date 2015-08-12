@@ -74,11 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selected_tag_linearlayout_hint"
-        android:divider="@drawable/divider2"
-        android:orientation="horizontal"
-        android:paddingTop="4dp"
-        android:showDividers="middle"
-        android:visibility="gone" >
+        android:orientation="vertical"
+        android:paddingTop="4dp" >
     </LinearLayout>
 
 </RelativeLayout>
