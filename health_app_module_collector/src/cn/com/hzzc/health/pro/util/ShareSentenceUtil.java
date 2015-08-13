@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.com.hzzc.health.pro.SystemConst;
+import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 
 /**
@@ -248,7 +250,6 @@ public class ShareSentenceUtil {
 			if (data != null && !"".equals(data)) {
 				JSONObject or_obj = new JSONObject(data);
 				if (or_obj.has("nomore")) {// 是否有更多的信息
-					System.out.println("-------------存在弄nomore");
 					map.put("nomore", "nomore");
 				} else {
 					map.put("nomore", "");
@@ -283,5 +284,134 @@ public class ShareSentenceUtil {
 			dataSourceList.add(e);
 		}
 
+	}
+
+	/**
+	 * 
+	 * @param lst
+	 * @param top_date
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:将服务器端的对象转换成本地数据库存储对象
+	 * @return:List<ShareInOrderEntity>
+	 */
+	public static List<ShareInOrderEntity> convertServerShareToLocalTopShare(
+			List<ShareSentenceEntity> lst, String top_date) {
+		if (lst != null && !lst.isEmpty()) {
+			List<ShareInOrderEntity> l = new ArrayList<ShareInOrderEntity>();
+			for (ShareSentenceEntity remote : lst) {
+				ShareInOrderEntity localEntity = new ShareInOrderEntity();
+				/**
+				 * 本地字段
+				 */
+				localEntity.setLocalCacheId(UUID.randomUUID().toString());
+				localEntity.setLocalCacheBelongTopDate(top_date);
+				/**
+				 * 原生字段
+				 */
+				localEntity.setId(remote.getId());
+				localEntity.setType(remote.getType());
+				localEntity.setUserId(remote.getUserId());
+				localEntity.setAuthor(remote.getAuthor());
+				localEntity.setContent(remote.getContent());
+				localEntity.setReadNum(remote.getReadNum());
+				localEntity.setGoodNum(remote.getGoodNum());
+				localEntity.setBadNum(remote.getBadNum());
+				localEntity.setCommentNum(remote.getCommentNum());
+				localEntity.setMaterial(remote.getMaterial());
+				localEntity.setFunction(remote.getFunction());
+				localEntity.setImg0(remote.getImg0());
+				localEntity.setImg1(remote.getImg1());
+				localEntity.setImg2(remote.getImg2());
+				localEntity.setImg3(remote.getImg3());
+				localEntity.setImg4(remote.getImg4());
+				localEntity.setImg5(remote.getImg5());
+				localEntity.setImg6(remote.getImg6());
+				localEntity.setImg7(remote.getImg7());
+				localEntity.setcDate(remote.getcDate());
+				// localEntity.setCreateDate(null);
+				l.add(localEntity);
+			}
+			return l;
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param lst
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:将本地数据库存储的排行榜数据转换成http中间值
+	 * @return:List<ShareSentenceEntity>
+	 */
+	public static List<ShareSentenceEntity> convertLocalTopShareToServerShare(
+			List<ShareInOrderEntity> lst) {
+		if (lst != null && !lst.isEmpty()) {
+			List<ShareSentenceEntity> l = new ArrayList<ShareSentenceEntity>();
+			for (ShareInOrderEntity localdb : lst) {
+				ShareSentenceEntity serverEntity = new ShareSentenceEntity();
+				serverEntity.setId(localdb.getId());
+				serverEntity.setType(localdb.getType());
+				serverEntity.setUserId(localdb.getUserId());
+				serverEntity.setAuthor(localdb.getAuthor());
+				serverEntity.setContent(localdb.getContent());
+				serverEntity.setReadNum(localdb.getReadNum());
+				serverEntity.setGoodNum(localdb.getGoodNum());
+				serverEntity.setBadNum(localdb.getBadNum());
+				serverEntity.setCommentNum(localdb.getCommentNum());
+				serverEntity.setMaterial(localdb.getMaterial());
+				serverEntity.setFunction(localdb.getFunction());
+				String img0 = localdb.getImg0();
+				String img1 = localdb.getImg1();
+				String img2 = localdb.getImg2();
+				String img3 = localdb.getImg3();
+				String img4 = localdb.getImg4();
+				String img5 = localdb.getImg5();
+				String img6 = localdb.getImg6();
+				String img7 = localdb.getImg7();
+				serverEntity.setImg0(img0);
+				serverEntity.setImg1(img1);
+				serverEntity.setImg2(img2);
+				serverEntity.setImg3(img3);
+				serverEntity.setImg4(img4);
+				serverEntity.setImg5(img5);
+				serverEntity.setImg6(img6);
+				serverEntity.setImg7(img7);
+				serverEntity.setcDate(localdb.getcDate());
+
+				List<String> imgs = new ArrayList<String>();
+				if (img0 != null && !"".equals(img0) && !"null".equals(img0)) {
+					imgs.add(img0);
+				}
+				if (img1 != null && !"".equals(img1) && !"null".equals(img1)) {
+					imgs.add(img1);
+				}
+				if (img2 != null && !"".equals(img2) && !"null".equals(img2)) {
+					imgs.add(img2);
+				}
+				if (img3 != null && !"".equals(img3) && !"null".equals(img3)) {
+					imgs.add(img3);
+				}
+				if (img4 != null && !"".equals(img4) && !"null".equals(img4)) {
+					imgs.add(img4);
+				}
+				if (img5 != null && !"".equals(img5) && !"null".equals(img5)) {
+					imgs.add(img5);
+				}
+				if (img6 != null && !"".equals(img6) && !"null".equals(img6)) {
+					imgs.add(img6);
+				}
+				if (img7 != null && !"".equals(img7) && !"null".equals(img7)) {
+					imgs.add(img7);
+				}
+				serverEntity.setImgsIds(imgs);
+				l.add(serverEntity);
+			}
+			return l;
+		}
+		return null;
 	}
 }

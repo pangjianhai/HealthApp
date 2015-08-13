@@ -20,9 +20,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
+import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
@@ -32,6 +32,9 @@ import cn.com.hzzc.health.pro.util.CommonDateUtil;
 import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
 import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
 
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -160,6 +163,26 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * @author pang
 	 */
 	private void loadDataMore() {
+		/**
+		 * 判断本地数据库是否已经存储，如果已经存储则取出来显示
+		 */
+		final DbUtils dbUtils = DbUtils.create(this);
+		try {
+			List<ShareInOrderEntity> lst = dbUtils.findAll(Selector.from(
+					ShareInOrderEntity.class).where("localCacheBelongTopDate",
+					"=", df_date));
+			if (lst != null && !lst.isEmpty()) {
+				List<ShareSentenceEntity> sseList = ShareSentenceUtil
+						.convertLocalTopShareToServerShare(lst);
+				afterGetOrder(sseList);
+				return;
+			}
+		} catch (DbException e1) {
+			e1.printStackTrace();
+		}
+		/**
+		 * 如果本地不存在则远程获取，获取完后渲染，并且存到本地
+		 */
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentDate", df_date);
@@ -172,6 +195,16 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 							.parseJsonAddToList(responseInfo.result);
 					afterGetOrder(list);
 
+					List<ShareInOrderEntity> sioeList = ShareSentenceUtil
+							.convertServerShareToLocalTopShare(list, df_date);
+					try {
+						if (sioeList != null && !sioeList.isEmpty()) {
+							/**** 存储到本地 ***/
+							dbUtils.saveAll(sioeList);
+						}
+					} catch (DbException e) {
+						e.printStackTrace();
+					}
 				}
 
 				@Override

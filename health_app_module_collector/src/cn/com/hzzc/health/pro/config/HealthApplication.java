@@ -12,6 +12,7 @@ import android.os.Vibrator;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.listener.MyLocationListener;
+import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.jpush.android.api.JPushInterface;
 
@@ -19,6 +20,8 @@ import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -115,6 +118,7 @@ public class HealthApplication extends Application {
 		initLocation();
 		startMap();
 		initJPush();
+		initTable();
 	}
 
 	public void initJPush() {
@@ -240,6 +244,22 @@ public class HealthApplication extends Application {
 	 */
 	public static void setUserId(String id) {
 		userId = id;
+	}
+	
+	/**
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:初始化相关表格
+	 * @return:void
+	 */
+	public void initTable(){
+		try {
+			System.out.println("-----------initTable");
+			DbUtils.create(this).createTableIfNotExist(ShareInOrderEntity.class);
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 }
