@@ -33,8 +33,6 @@ import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
 import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
 
 import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -170,7 +168,6 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		List<ShareInOrderEntity> lst = ShareSentenceUtil.getDbTopShareByDate(
 				df_date, dbUtils);
 		if (lst != null && !lst.isEmpty()) {
-			System.out.println("-------------从本地数据库去除数据来了");
 			List<ShareSentenceEntity> sseList = ShareSentenceUtil
 					.convertLocalTopShareToServerShare(lst);
 			afterGetOrder(sseList);

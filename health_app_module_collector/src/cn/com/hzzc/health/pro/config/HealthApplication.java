@@ -245,19 +245,18 @@ public class HealthApplication extends Application {
 	public static void setUserId(String id) {
 		userId = id;
 	}
-	
+
 	/**
 	 * @user:pang
 	 * @data:2015年8月13日
 	 * @todo:初始化相关表格
 	 * @return:void
 	 */
-	public void initTable(){
+	public void initTable() {
 		try {
-			System.out.println("----------------------------initTable");
-			DbUtils.create(this).createTableIfNotExist(ShareInOrderEntity.class);
+			DbUtils.create(this)
+					.createTableIfNotExist(ShareInOrderEntity.class);
 		} catch (DbException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

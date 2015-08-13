@@ -317,6 +317,7 @@ public class ShareSentenceUtil {
 				 */
 				localEntity.setId(remote.getId());
 				localEntity.setType(remote.getType());
+				localEntity.setTags(remote.getTags());
 				localEntity.setUserId(remote.getUserId());
 				localEntity.setAuthor(remote.getAuthor());
 				localEntity.setContent(remote.getContent());
@@ -363,6 +364,7 @@ public class ShareSentenceUtil {
 				ShareSentenceEntity serverEntity = new ShareSentenceEntity();
 				serverEntity.setId(localdb.getId());
 				serverEntity.setType(localdb.getType());
+				serverEntity.setTags(localdb.getTags());
 				serverEntity.setUserId(localdb.getUserId());
 				serverEntity.setAuthor(localdb.getAuthor());
 				serverEntity.setContent(localdb.getContent());
@@ -441,8 +443,6 @@ public class ShareSentenceUtil {
 		/*** 如果距离当前时间相差五天以上就不予缓存 **/
 		if (num <= 5) {
 			try {
-				System.out
-						.println("*************cacheShareTopToDB************");
 				long total = db.count(Selector.from(ShareInOrderEntity.class)
 						.where("localCacheBelongTopDate", "=", topDate));
 				/*** 如果某一日的排行榜没有被存储过则进行存储，否则不需要进行存储 ***/
@@ -474,8 +474,6 @@ public class ShareSentenceUtil {
 		/*** 如果距离当前时间相差五天以上就从服务器端获取 **/
 		if (num <= 5) {
 			try {
-				System.out
-						.println("*************getDbTopShareByDate************");
 				lst = db.findAll(Selector.from(ShareInOrderEntity.class).where(
 						"localCacheBelongTopDate", "=", topDate));
 			} catch (DbException e) {
