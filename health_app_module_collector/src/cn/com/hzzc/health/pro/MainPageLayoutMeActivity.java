@@ -94,10 +94,10 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 			getUserInfo();
 		}
 
-		String pic_url = SystemConst.server_url
-				+ SystemConst.FunctionUrl.getHeadImgByUserId
-				+ "?para={userId:'" + userId + "'}";
-		ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo,
+		String pic_url2 = SystemConst.server_url
+				+ SystemConst.FunctionUrl.getHeadImgById + "?para={headImg:'"
+				+ ui.getImg() + "'}";
+		ImageLoader.getInstance().displayImage(pic_url2, main_page_me_photo,
 				HealthApplication.getDisplayImageOption());
 		/**
 		 * 如果这里是下载完最新apk之后，点击消息，重新进入此activity则安装apk文件

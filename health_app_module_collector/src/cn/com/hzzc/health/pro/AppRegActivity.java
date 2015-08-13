@@ -62,7 +62,8 @@ public class AppRegActivity extends BaseActivity {
 		new AlertDialog.Builder(AppRegActivity.this)
 				.setIcon(
 						getResources().getDrawable(R.drawable.login_error_icon))
-				.setTitle("注册错误").setMessage(content).create().show();
+				.setTitle("注册错误").setMessage(content)
+				.setPositiveButton("关闭", null).create().show();
 	}
 
 	/**
