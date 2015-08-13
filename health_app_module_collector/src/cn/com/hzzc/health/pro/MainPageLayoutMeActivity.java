@@ -85,15 +85,38 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	public void initUserData() {
 		final SharedPreInto spi = new SharedPreInto(this);
 		UserItem ui = spi.getUserItem();
-		System.out.println("ui:"+ui);
 		/**
 		 * 先判断本地文件是否存在用户信息
 		 */
 		if (ui != null) {
 			getOver(ui);
-			return;
+		} else {// http请求最新用户信息
+			getUserInfo();
 		}
+
+		String pic_url = SystemConst.server_url
+				+ SystemConst.FunctionUrl.getHeadImgByUserId
+				+ "?para={userId:'" + userId + "'}";
+		ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo,
+				HealthApplication.getDisplayImageOption());
+		/**
+		 * 如果这里是下载完最新apk之后，点击消息，重新进入此activity则安装apk文件
+		 */
+		String install_flag = getIntent().getStringExtra("install");
+		if (install_flag != null && !"".equals(install_flag)) {
+			installApk();
+		}
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:http请求最新用户西悉尼
+	 * @return:void
+	 */
+	private void getUserInfo() {
 		try {
+			final SharedPreInto spi = new SharedPreInto(this);
 			JSONObject d = new JSONObject();
 			d.put("Id", userId);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
@@ -120,19 +143,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					+ SystemConst.FunctionUrl.getUserById, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		String pic_url = SystemConst.server_url
-				+ SystemConst.FunctionUrl.getHeadImgByUserId
-				+ "?para={userId:'" + userId + "'}";
-		ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo,
-				HealthApplication.getDisplayImageOption());
-		/**
-		 * 如果这里是下载完最新apk之后，点击消息，重新进入此activity则安装apk文件
-		 */
-		String install_flag = getIntent().getStringExtra("install");
-		if (install_flag != null && !"".equals(install_flag)) {
-			installApk();
 		}
 	}
 

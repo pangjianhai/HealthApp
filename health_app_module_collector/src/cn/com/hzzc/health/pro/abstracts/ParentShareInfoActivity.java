@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.ShareAddPicSingleDialog;
-import cn.com.hzzc.health.pro.ShareEatActivity;
 import cn.com.hzzc.health.pro.ShareSelectPicActivity;
 import cn.com.hzzc.health.pro.model.Tag;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
@@ -160,10 +159,22 @@ public abstract class ParentShareInfoActivity extends
 	 * @author pang
 	 */
 	public void sendSuccess() {
+		resetCacheNum();
 		Intent intent = new Intent(ParentShareInfoActivity.this,
 				MainPageLayoutSpaceActivity.class);
 		startActivity(intent);
-		//finish();
+		// finish();
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:分享完后将还存在本地的各种数目对象进行重置
+	 * @return:void
+	 */
+	private void resetCacheNum() {
+		SharedPreInto spi = new SharedPreInto(this);
+		spi.unvalidUserItem();
 	}
 
 	/**
