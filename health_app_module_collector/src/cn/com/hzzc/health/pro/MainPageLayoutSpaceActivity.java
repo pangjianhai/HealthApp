@@ -21,6 +21,7 @@ import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
 import cn.com.hzzc.health.pro.config.GlobalUserVariable;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.PushBean;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.part.XListView;
@@ -93,8 +94,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		System.out
-				.println("==========================================onCreate");
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.main_page_layout_space);
@@ -660,19 +659,28 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		System.out.println("------------------destroy space");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		System.out.println("======================onResume space");
 	}
 
 	@Override
 	public void onRestart() {
 		super.onRestart();
-		System.out.println("======================onRestart space");
+		/**
+		 * 如果是属于onRestart时间，而且没有登录，应该判断现在是否已经登录，如果已经登录则刷新数据
+		 */
+		if (!isLogin()) {
+			userId = HealthApplication.getUserId();// 从全局变量当中获取userId
+			if (isLogin()) {
+				dataSourceList.clear();// 清空未登陆时候展示的数据
+				itemAdapter.notifyDataSetChanged();// 更新UI
+				begin = 0;// 重新设置初始化页数
+				loadDataMore();// 登陆后的第一次加载
+			}
+		}
 	}
 
 }

@@ -61,6 +61,25 @@ public class SharedPreInto {
 
 	/**
 	 * 
+	 * @param id
+	 * @param name
+	 * @param password
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:退出后清空数据
+	 * @return:boolean
+	 */
+	public boolean clearAccountAfterLoginOut() {
+		SharedPreferences sp = this.getSharedPreferences();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.commit();
+		return true;
+	}
+
+	/**
+	 * 
 	 * @tags @param fieldName
 	 * @tags @return
 	 * @date 2015年5月11日

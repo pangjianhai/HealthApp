@@ -42,16 +42,9 @@ public abstract class ParentMainActivity extends BaseActivity {
 			main_page_layout_share_btn, main_page_layout_order_btn,
 			main_page_layout_me_btn;
 
-	/**
-	 * 用户ID
-	 */
-	public String userId;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		userId = new SharedPreInto(ParentMainActivity.this)
-				.getSharedFieldValue("id");
 		bottom = getLayoutInflater().inflate(
 				R.layout.main_page_layout_common_bottom, null);
 		initBottom();
@@ -141,12 +134,6 @@ public abstract class ParentMainActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		}
-
-//		if (!curent_activity_name.equals(MainPageLayoutSpaceActivity.class
-//				.getName())) {
-//			finish();
-//		}
-
 	}
 
 	/**
