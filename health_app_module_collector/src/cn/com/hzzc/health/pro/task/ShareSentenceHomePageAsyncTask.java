@@ -74,8 +74,8 @@ public class ShareSentenceHomePageAsyncTask extends
 		if ("nomore".equals(nomore.trim())) {
 			if_has_nomore_field = false;
 		}
-		((MainPageLayoutSpaceActivity) context).asyncAddNewData(searchDay,
-				begin, list, if_has_nomore_field);
+		((MainPageLayoutSpaceActivity) context).asyncAddNewDataForLogin(
+				searchDay, begin, list, if_has_nomore_field);
 
 	}
 

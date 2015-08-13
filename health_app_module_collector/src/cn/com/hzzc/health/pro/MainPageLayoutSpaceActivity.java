@@ -124,10 +124,16 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		mListView.setAdapter(itemAdapter);
 	}
 
+	/**
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:加载数据的入口，无论是否登录都是从此开始加载
+	 * @return:void
+	 */
 	private void loadDataMore() {
-		if (isLogin()) {
+		if (isLogin()) {// 如果已经登录
 			loadDataMoreForLogin();
-		} else {
+		} else {// 如果没有登录
 			loadDataMoreForNoLogin();
 		}
 	}
@@ -172,7 +178,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 					/**
 					 * 异步请求数据
 					 */
-					asyncAddNewData(searchDay, b, list, if_has_nomore_field);
+					asyncAddNewDataForLogin(searchDay, b, list,
+							if_has_nomore_field);
 
 				}
 
@@ -193,6 +200,40 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		}
 
 	}
+
+	/**
+	 * 
+	 * @tags @param lst
+	 * @date 2015年5月18日
+	 * @todo 异步请求获取数据
+	 * @author pang
+	 */
+	public void asyncAddNewDataForLogin(String searchDay, String begin,
+			List<ShareSentenceEntity> lst, boolean if_has_nomore_field) {
+		/**
+		 * 重置一些字段的值，为下一次分页做准备 重置日期，获取前一日期的数据
+		 */
+		if (!if_has_nomore_field) {// 如果no_more==false则表明，服务器端已经没有更早的消息用来进行分页了
+			no_more = if_has_nomore_field;
+			Date sd = CommonDateUtil
+					.preDate(CommonDateUtil.getDate(search_day));
+			this.search_day = CommonDateUtil.formatDate(sd);
+			this.begin = 1;
+		} else {
+			/**
+			 * 如果当天没有下一页了，后台会返回需要查询的下一天的日期和页数（肯定是第一页“1”）
+			 */
+			this.search_day = searchDay;
+			this.begin = Integer.parseInt(begin);
+		}
+		// 添加数据
+		dataSourceList.addAll(lst);
+		// 设置最新的ID
+		setLastestShareId();
+		// 更新UI
+		itemAdapter.notifyDataSetChanged();
+		onLoadOver();
+	};
 
 	/**
 	 * 
@@ -325,6 +366,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 */
 	private void freshData(List<ShareSentenceEntity> list) {
 		dataSourceList.addAll(0, list);
+		/******** 刷新加载在数据源的头部添加了数据，需要更新最新的ID，以便再次刷新 *********/
 		setLastestShareId();
 		itemAdapter.notifyDataSetChanged();
 		onLoadOver();
@@ -348,42 +390,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			lastestShareId = dataSourceList.get(0).getId();
 		}
 	}
-
-	/**
-	 * 
-	 * @tags @param lst
-	 * @date 2015年5月18日
-	 * @todo 异步请求获取数据
-	 * @author pang
-	 */
-	public void asyncAddNewData(String searchDay, String begin,
-			List<ShareSentenceEntity> lst, boolean if_has_nomore_field) {
-		/**
-		 * 重置一些字段的值，为下一次分页做准备 重置日期，获取前一日期的数据
-		 */
-		if (!if_has_nomore_field) {// 如果no_more==true则表明，服务器端已经没有更早的消息用来进行分页了
-			no_more = if_has_nomore_field;
-			Date sd = CommonDateUtil
-					.preDate(CommonDateUtil.getDate(search_day));
-			this.search_day = CommonDateUtil.formatDate(sd);
-			this.begin = 1;
-			Toast.makeText(getApplicationContext(), "已经没有数据了",
-					Toast.LENGTH_SHORT).show();
-		} else {
-			/**
-			 * 如果当天没有下一页了，后台会返回需要查询的下一天的日期和页数（肯定是第一页“1”）
-			 */
-			this.search_day = searchDay;
-			this.begin = Integer.parseInt(begin);
-		}
-		// 添加数据
-		dataSourceList.addAll(lst);
-		// 设置最新的ID
-		setLastestShareId();
-		// 更新UI
-		itemAdapter.notifyDataSetChanged();
-		onLoadOver();
-	};
 
 	/**
 	 * 
@@ -491,9 +497,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	@Override
 	public void afterClickContent(String shareId) {
-		// if (!isLogin()) {
-		// return;
-		// }
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ShareSentenceAllDetailActivity.class);
 		intent.putExtra("share_sentence_id", shareId);
