@@ -438,6 +438,10 @@ public class ShareSentenceUtil {
 	public static void cacheShareTopToDB(String topDate, DbUtils db,
 			List<ShareInOrderEntity> sioeList) {
 		Date start = CommonDateUtil.getDate(topDate);
+		/****** 不存储当天的数据 ***********/
+		if (CommonDateUtil.isToday(start)) {
+			return;
+		}
 		Date end = new Date();
 		int num = CommonDateUtil.between(start, end);
 		/*** 如果距离当前时间相差五天以上就不予缓存 **/
@@ -469,6 +473,10 @@ public class ShareSentenceUtil {
 			DbUtils db) {
 		List<ShareInOrderEntity> lst = null;
 		Date start = CommonDateUtil.getDate(topDate);
+		/******* 如果查询的日期是当天则直接返回，远程获取服务器数据 ******************/
+		if (CommonDateUtil.isToday(start)) {
+			return lst;
+		}
 		Date end = new Date();
 		int num = CommonDateUtil.between(start, end);
 		/*** 如果距离当前时间相差五天以上就从服务器端获取 **/
