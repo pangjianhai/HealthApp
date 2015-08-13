@@ -254,7 +254,7 @@ public class HealthApplication extends Application {
 	 */
 	public void initTable(){
 		try {
-			System.out.println("-----------initTable");
+			System.out.println("----------------------------initTable");
 			DbUtils.create(this).createTableIfNotExist(ShareInOrderEntity.class);
 		} catch (DbException e1) {
 			// TODO Auto-generated catch block

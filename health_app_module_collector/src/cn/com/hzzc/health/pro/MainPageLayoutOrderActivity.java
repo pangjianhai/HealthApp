@@ -167,18 +167,14 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 		 * 判断本地数据库是否已经存储，如果已经存储则取出来显示
 		 */
 		final DbUtils dbUtils = DbUtils.create(this);
-		try {
-			List<ShareInOrderEntity> lst = dbUtils.findAll(Selector.from(
-					ShareInOrderEntity.class).where("localCacheBelongTopDate",
-					"=", df_date));
-			if (lst != null && !lst.isEmpty()) {
-				List<ShareSentenceEntity> sseList = ShareSentenceUtil
-						.convertLocalTopShareToServerShare(lst);
-				afterGetOrder(sseList);
-				return;
-			}
-		} catch (DbException e1) {
-			e1.printStackTrace();
+		List<ShareInOrderEntity> lst = ShareSentenceUtil.getDbTopShareByDate(
+				df_date, dbUtils);
+		if (lst != null && !lst.isEmpty()) {
+			System.out.println("-------------从本地数据库去除数据来了");
+			List<ShareSentenceEntity> sseList = ShareSentenceUtil
+					.convertLocalTopShareToServerShare(lst);
+			afterGetOrder(sseList);
+			return;
 		}
 		/**
 		 * 如果本地不存在则远程获取，获取完后渲染，并且存到本地
@@ -197,13 +193,10 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 
 					List<ShareInOrderEntity> sioeList = ShareSentenceUtil
 							.convertServerShareToLocalTopShare(list, df_date);
-					try {
-						if (sioeList != null && !sioeList.isEmpty()) {
-							/**** 存储到本地 ***/
-							dbUtils.saveAll(sioeList);
-						}
-					} catch (DbException e) {
-						e.printStackTrace();
+					if (sioeList != null && !sioeList.isEmpty()) {
+						/**** 存储到本地 ***/
+						ShareSentenceUtil.cacheShareTopToDB(df_date, dbUtils,
+								sioeList);
 					}
 				}
 

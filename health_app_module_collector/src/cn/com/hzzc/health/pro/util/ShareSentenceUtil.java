@@ -1,6 +1,7 @@
 package cn.com.hzzc.health.pro.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,10 @@ import org.json.JSONObject;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
+
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
 
 /**
  * 
@@ -329,8 +334,11 @@ public class ShareSentenceUtil {
 				localEntity.setImg5(remote.getImg5());
 				localEntity.setImg6(remote.getImg6());
 				localEntity.setImg7(remote.getImg7());
-				localEntity.setcDate(remote.getcDate());
-				// localEntity.setCreateDate(null);
+				String cDate = remote.getcDate();
+				localEntity.setcDate(cDate);
+				if (cDate != null && !"".equals(cDate)) {
+					localEntity.setCreateDate(CommonDateUtil.getDate(cDate));
+				}
 				l.add(localEntity);
 			}
 			return l;
@@ -413,5 +421,67 @@ public class ShareSentenceUtil {
 			return l;
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param topDate
+	 * @param db
+	 * @param sioeList
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:将服务端排行榜数据缓存到本地
+	 * @return:void
+	 */
+	public static void cacheShareTopToDB(String topDate, DbUtils db,
+			List<ShareInOrderEntity> sioeList) {
+		Date start = CommonDateUtil.getDate(topDate);
+		Date end = new Date();
+		int num = CommonDateUtil.between(start, end);
+		/*** 如果距离当前时间相差五天以上就不予缓存 **/
+		if (num <= 5) {
+			try {
+				System.out
+						.println("*************cacheShareTopToDB************");
+				long total = db.count(Selector.from(ShareInOrderEntity.class)
+						.where("localCacheBelongTopDate", "=", topDate));
+				/*** 如果某一日的排行榜没有被存储过则进行存储，否则不需要进行存储 ***/
+				if (total <= 0) {
+					db.saveAll(sioeList);
+				}
+			} catch (DbException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param topDate
+	 * @param db
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:将缓存到本地的排行榜根据日期取出来
+	 * @return:List<ShareInOrderEntity>
+	 */
+	public static List<ShareInOrderEntity> getDbTopShareByDate(String topDate,
+			DbUtils db) {
+		List<ShareInOrderEntity> lst = null;
+		Date start = CommonDateUtil.getDate(topDate);
+		Date end = new Date();
+		int num = CommonDateUtil.between(start, end);
+		/*** 如果距离当前时间相差五天以上就从服务器端获取 **/
+		if (num <= 5) {
+			try {
+				System.out
+						.println("*************getDbTopShareByDate************");
+				lst = db.findAll(Selector.from(ShareInOrderEntity.class).where(
+						"localCacheBelongTopDate", "=", topDate));
+			} catch (DbException e) {
+				e.printStackTrace();
+			}
+		}
+		return lst;
 	}
 }
