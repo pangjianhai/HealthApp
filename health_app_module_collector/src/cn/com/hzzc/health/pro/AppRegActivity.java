@@ -161,7 +161,7 @@ public class AppRegActivity extends BaseActivity {
 			/**
 			 * 解析出新的用户的ID
 			 */
-			String flag = data.get("flag") + "";
+			String flag = data.get("flag") + "";// 成功的话flag返回是的用户的ID，否则则是其他三种提示
 			if (flag == null || "".equals(flag) || "fail".equals(flag)) {
 				regFail();
 				return;
