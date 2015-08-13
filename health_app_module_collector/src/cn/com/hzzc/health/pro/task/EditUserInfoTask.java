@@ -15,7 +15,7 @@ import cn.com.hzzc.health.pro.util.UploadUtils;
 
 /**
  * @author pang
- * @todo 上传图片task
+ * @todo 编辑用户信息task
  *
  */
 public class EditUserInfoTask extends
@@ -57,7 +57,7 @@ public class EditUserInfoTask extends
 		pdialog.dismiss();
 		if (UploadUtils.SUCCESS.equalsIgnoreCase(result)) {
 			Toast.makeText(context, "上传成功!", Toast.LENGTH_LONG).show();
-			((EditUserInfoDetail) context).btn_back(null);
+			((EditUserInfoDetail) context).afterSaveInfoSuccess();
 		} else {
 			Toast.makeText(context, "上传失败!", Toast.LENGTH_LONG).show();
 		}

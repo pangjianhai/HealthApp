@@ -83,7 +83,16 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	public void initUserData() {
-
+		final SharedPreInto spi = new SharedPreInto(this);
+		UserItem ui = spi.getUserItem();
+		System.out.println("ui:"+ui);
+		/**
+		 * 先判断本地文件是否存在用户信息
+		 */
+		if (ui != null) {
+			getOver(ui);
+			return;
+		}
 		try {
 			JSONObject d = new JSONObject();
 			d.put("Id", userId);
@@ -94,6 +103,10 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					String data = responseInfo.result;
 					UserItem ui = UserUtils.parseUserItemFromJSON(data);
 					getOver(ui);
+					/**
+					 * 将最新的数据缓存到本地文件
+					 */
+					spi.setLoginUser(ui);
 				}
 
 				@Override

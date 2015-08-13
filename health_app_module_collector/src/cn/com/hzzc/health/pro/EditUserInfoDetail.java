@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.model.UserItem;
+import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.com.hzzc.health.pro.task.EditUserInfoTask;
 import cn.com.hzzc.health.pro.task.GetOneUserForEditAsyncTask;
 import cn.com.hzzc.health.pro.task.UploadFileTask;
@@ -40,7 +41,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * 
  * @author pang
- * @todo 编辑个人信息 
+ * @todo 编辑个人信息
  *
  */
 public class EditUserInfoDetail extends BaseActivity {
@@ -311,6 +312,21 @@ public class EditUserInfoDetail extends BaseActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:保存成功
+	 * @return:void
+	 */
+	public void afterSaveInfoSuccess() {
+		final SharedPreInto spi = new SharedPreInto(this);
+		/**
+		 * 保存成功后，清空本地缓存的用户信息
+		 */
+		spi.unvalidUserItem();
+		btn_back(null);
 	}
 
 	public void btn_back(View view) {
