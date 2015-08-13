@@ -69,14 +69,6 @@ public class HealthApplication extends Application {
 		File p = Environment
 				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 		String parent = p.getParent();
-		/**
-		 * 手机图片缓存路径
-		 */
-		File cacheDir = new File(parent + "/"
-				+ SystemConst.mobile_local_dir_for_pic);
-		if (!cacheDir.exists()) {
-			cacheDir.mkdirs();
-		}
 
 		/**
 		 * app下载存放路径
@@ -104,7 +96,7 @@ public class HealthApplication extends Application {
 				// default为使用HASHCODE对UIL进行加密命名， 还可以用MD5(new
 				// Md5FileNameGenerator())加密
 				.diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
-				.diskCache(new UnlimitedDiscCache(cacheDir))
+				.diskCache(getImageDiskCache())
 				.diskCacheSize(50 * 1024 * 1024)
 				.defaultDisplayImageOptions(getDisplayImageOption())
 				.defaultDisplayImageOptions(DisplayImageOptions.createSimple())
@@ -119,6 +111,29 @@ public class HealthApplication extends Application {
 		startMap();
 		initJPush();
 		initTable();
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:实例化imageloader硬盘缓存具体类
+	 * @return:UnlimitedDiscCache
+	 */
+	public static UnlimitedDiscCache getImageDiskCache() {
+		File p = Environment
+				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+		String parent = p.getParent();
+		/**
+		 * 手机图片缓存路径
+		 */
+		File cacheDir = new File(parent + "/"
+				+ SystemConst.mobile_local_dir_for_pic);
+		if (!cacheDir.exists()) {
+			cacheDir.mkdirs();
+		}
+		return new UnlimitedDiscCache(cacheDir);
 	}
 
 	public void initJPush() {

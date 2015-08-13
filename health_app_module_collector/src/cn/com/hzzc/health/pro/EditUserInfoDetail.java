@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.com.hzzc.health.pro.task.EditUserInfoTask;
@@ -37,6 +38,7 @@ import cn.com.hzzc.health.pro.task.GetOneUserForEditAsyncTask;
 import cn.com.hzzc.health.pro.task.UploadFileTask;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.utils.DiskCacheUtils;
 
 /**
  * 
@@ -322,10 +324,14 @@ public class EditUserInfoDetail extends BaseActivity {
 	 */
 	public void afterSaveInfoSuccess() {
 		final SharedPreInto spi = new SharedPreInto(this);
-		/**
-		 * 保存成功后，清空本地缓存的用户信息
-		 */
+		/*** 保存成功后，清空本地缓存的用户信息 ***/
 		spi.unvalidUserItem();
+		String pic_url = SystemConst.server_url
+				+ SystemConst.FunctionUrl.getHeadImgByUserId
+				+ "?para={userId:'" + userId + "'}";
+		/*** 保存成功后，清空本地缓存的用户图片 ***/
+		DiskCacheUtils.removeFromCache(pic_url,
+				HealthApplication.getImageDiskCache());
 		btn_back(null);
 	}
 
