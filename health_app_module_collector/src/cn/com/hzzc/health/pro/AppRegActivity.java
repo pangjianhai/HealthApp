@@ -1,9 +1,14 @@
 package cn.com.hzzc.health.pro;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -14,8 +19,10 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.com.hzzc.health.pro.task.RegisterAccountTask;
+import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
 
 /**
  * @author pang
@@ -58,7 +65,15 @@ public class AppRegActivity extends BaseActivity {
 				.setTitle("注册错误").setMessage(content).create().show();
 	}
 
-	private boolean validate() {
+	/**
+	 * 
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月13日
+	 * @todo:验证格式
+	 * @return:boolean
+	 */
+	private boolean validateFormat() {
 		Drawable dr = getResources().getDrawable(R.drawable.input_error);
 		dr.setBounds(0, 0, 35, 35); // 必须设置大小，否则不显示
 		str_reg_username = reg_username.getText().toString();
@@ -101,8 +116,8 @@ public class AppRegActivity extends BaseActivity {
 	 * @todo 注册账号
 	 * @author pang
 	 */
-	public void getAccount(View v) {
-		if (validate()) {
+	public void regAccount(View v) {
+		if (validateFormat()) {
 			try {
 				JSONObject j = new JSONObject();
 				j.put("userid", str_reg_username);
@@ -110,10 +125,23 @@ public class AppRegActivity extends BaseActivity {
 				j.put("email", str_reg_password_email);
 				String url = SystemConst.server_url
 						+ SystemConst.FunctionUrl.addUser;
-				Map<String, String> map = new HashMap<String, String>();
+				Map map = new HashMap();
 				map.put("para", j.toString());
-				new RegisterAccountTask(AppRegActivity.this).execute(j
-						.toString());
+				RequestCallBack<String> rcb = new RequestCallBack<String>() {
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						/**
+						 * 四种返回值 成功：userId，失败：fail，或者提示用户名邮箱重复
+						 */
+						regOver(responseInfo.result);
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+					}
+				};
+				/**** 正式开始注册 ****/
+				send_normal_request(url, map, rcb);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -133,16 +161,22 @@ public class AppRegActivity extends BaseActivity {
 			/**
 			 * 解析出新的用户的ID
 			 */
-			String uuid = data.get("flag") + "";
-			if (uuid == null || "".equals(uuid) || "fail".equals(uuid)) {
+			String flag = data.get("flag") + "";
+			if (flag == null || "".equals(flag) || "fail".equals(flag)) {
 				regFail();
+				return;
+			} else if ("user".equals(flag)) {
+				error("账号已被注册\n请重新填写");
+				return;
+			} else if ("email".equals(flag)) {
+				error("邮箱已被注册\n请重新填写");
 				return;
 			}
 			/**
 			 * 保存到本地空间
 			 */
 			boolean is = new SharedPreInto(AppRegActivity.this)
-					.initAccountAfterReg(userId, str_reg_username,
+					.initAccountAfterReg(flag, str_reg_username,
 							str_reg_password);
 			/**
 			 * 保存失败

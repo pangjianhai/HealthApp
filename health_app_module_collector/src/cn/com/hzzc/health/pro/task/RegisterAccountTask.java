@@ -13,6 +13,7 @@ import cn.com.hzzc.health.pro.util.CommonHttpUtil;
  * @todo 注册task
  *
  */
+@Deprecated
 public class RegisterAccountTask extends AsyncTask<String, Void, String> {
 
 	private Context context;
