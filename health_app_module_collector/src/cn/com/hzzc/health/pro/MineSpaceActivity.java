@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
@@ -42,6 +43,9 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  */
 public class MineSpaceActivity extends BaseActivity implements
 		IXListViewListener, IShareCallbackOperator {
+
+	private TextView share_space_mine_title;
+	private String uuid;
 	/**
 	 * 适配器需要的数据结构
 	 */
@@ -86,7 +90,9 @@ public class MineSpaceActivity extends BaseActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.share_space_mine);
 		userId = HealthApplication.getUserId();
+		uuid = getIntent().getStringExtra("uuid");
 		findView();
+		initTitle();
 		/**
 		 * 先后顺序
 		 */
@@ -103,6 +109,7 @@ public class MineSpaceActivity extends BaseActivity implements
 	}
 
 	private void findView() {
+		share_space_mine_title = (TextView) findViewById(R.id.share_space_mine_title);
 		context = this;
 		dataSourceList = new ArrayList<ShareSentenceEntity>();
 		mListView = (XListView) findViewById(R.id.lv);
@@ -112,6 +119,14 @@ public class MineSpaceActivity extends BaseActivity implements
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 
+	}
+
+	private void initTitle() {
+		if (userId.equals(uuid)) {
+			share_space_mine_title.setText("我的健康分享");
+		} else {
+			share_space_mine_title.setText("Ta的健康分享");
+		}
 	}
 
 	private void addPop() {
@@ -137,7 +152,7 @@ public class MineSpaceActivity extends BaseActivity implements
 		try {
 			currentPage = currentPage + 1;
 			JSONObject d = new JSONObject();
-			d.put("userId", userId);
+			d.put("userId", uuid);
 			d.put("begin", currentPage + "");
 			d.put("limit", 10);
 
