@@ -197,10 +197,14 @@ public class ShareItemAdapter extends BaseAdapter {
 		/**
 		 * 挨个属性赋值
 		 */
-		holder.share_id.setText(entity.getId());
-		holder.share_name.setText(entity.getAuthor());
-
 		String userId = entity.getUserId();
+		holder.share_id.setText(entity.getId());
+		if (userId != null && userId.equals(HealthApplication.getUserId())) {
+			holder.share_name.setText("我");
+		} else {
+			holder.share_name.setText(entity.getAuthor());
+		}
+
 		String typeCode = entity.getType();
 		String typeName = "";
 		String function_field = "", material_filed = "";
