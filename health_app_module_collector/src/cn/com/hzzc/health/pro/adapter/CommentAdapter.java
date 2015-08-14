@@ -66,10 +66,13 @@ public class CommentAdapter extends BaseAdapter {
 		}
 		CommentEntity ce = dataSourceList.get(position);
 		holder.tag_id.setText(ce.getId());
-		System.out.println("==================================="+ce.getContent());
 		holder.c_content.setText(ce.getContent());
-		holder.c_username.setText(ce.getUserName());
 		String userId = ce.getUserId();
+		if (HealthApplication.getUserId().equals(userId)) {
+			holder.c_username.setText("我");
+		} else {
+			holder.c_username.setText(ce.getUserName());
+		}
 		if (userId != null && !"".equals(userId)) {
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getHeadImgByUserId

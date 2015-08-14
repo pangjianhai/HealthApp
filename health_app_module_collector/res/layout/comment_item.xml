@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/share_c_photo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="top"
             android:layout_marginLeft="5dp" />
     </LinearLayout>

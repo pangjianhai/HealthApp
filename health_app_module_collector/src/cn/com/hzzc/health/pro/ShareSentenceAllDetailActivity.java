@@ -316,6 +316,22 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 				.hideSoftInputFromWindow(ShareSentenceAllDetailActivity.this
 						.getCurrentFocus().getWindowToken(),
 						InputMethodManager.HIDE_NOT_ALWAYS);
+		after_comment_share(comment_str);
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月14日
+	 * @todo:评论之后
+	 * @return:void
+	 */
+	private void after_comment_share(String comment_str) {
+		CommentEntity ce = new CommentEntity();
+		ce.setUserId(userId);
+		ce.setUserName("我");
+		ce.setContent(comment_str);
+		ds.add(0, ce);
+		ad.notifyDataSetChanged();
 	}
 
 	/**
