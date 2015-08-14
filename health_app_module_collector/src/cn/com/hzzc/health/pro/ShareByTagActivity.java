@@ -20,14 +20,17 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
 import cn.com.hzzc.health.pro.service.ShareCommentService;
+import cn.com.hzzc.health.pro.service.ViewForInfoService;
 import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
 import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
+import cn.com.hzzc.health.pro.util.UserUtils;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -231,17 +234,32 @@ public class ShareByTagActivity extends BaseActivity implements
 
 	@Override
 	public void afterClickAuthor(String shareId, int position) {
-		Toast.makeText(context, "您要评论的分享作", Toast.LENGTH_SHORT).show();
+		showUserByShareId(shareId);
 	}
 
 	@Override
 	public void afterClickOk(String shareId, int position) {
+		dataSourceList.get(position).setOps(ParentShareSentenceEntity.OK);
 		itemAdapter.notifyDataSetChanged();
+		Intent intent = new Intent(ShareByTagActivity.this,
+				ViewForInfoService.class);
+		intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+		intent.putExtra("id", shareId);
+		intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_OK);
+		startService(intent);
+
 	}
 
 	@Override
 	public void afterClickNook(String shareId, int position) {
+		dataSourceList.get(position).setOps(ParentShareSentenceEntity.NO_OK);
 		itemAdapter.notifyDataSetChanged();
+		Intent intent = new Intent(ShareByTagActivity.this,
+				ViewForInfoService.class);
+		intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+		intent.putExtra("id", shareId);
+		intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_NO);
+		startService(intent);
 	}
 
 	/**
@@ -295,5 +313,45 @@ public class ShareByTagActivity extends BaseActivity implements
 
 	public void backoff(View v) {
 		finish();
+	}
+
+	/**
+	 * 
+	 * @param shareId
+	 * @user:pang
+	 * @data:2015年7月21日
+	 * @todo:根据分享信息查看人的信息
+	 * @return:void
+	 */
+	private void showUserByShareId(String shareId) {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("shareId", shareId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					String userId = UserUtils.parseUserId(data);
+					if (userId != null && !"".equals(userId)) {
+						Intent intent = new Intent(getApplicationContext(),
+								ShowUserInfoDetail.class);
+						intent.putExtra("uuid", userId);
+						startActivity(intent);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getUserIdByShareId, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

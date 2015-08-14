@@ -440,47 +440,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		showUserByShareId(shareId);
 	}
 
-	/**
-	 * 
-	 * @param shareId
-	 * @user:pang
-	 * @data:2015年7月21日
-	 * @todo:根据分享信息查看人的信息
-	 * @return:void
-	 */
-	private void showUserByShareId(String shareId) {
-		try {
-			JSONObject d = new JSONObject();
-			d.put("shareId", shareId);
-			RequestCallBack<String> rcb = new RequestCallBack<String>() {
-
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo) {
-					String data = responseInfo.result;
-					String userId = UserUtils.parseUserId(data);
-					if (userId != null && !"".equals(userId)) {
-						Intent intent = new Intent(
-								MainPageLayoutSpaceActivity.this,
-								ShowUserInfoDetail.class);
-						intent.putExtra("uuid", userId);
-						startActivity(intent);
-					}
-				}
-
-				@Override
-				public void onFailure(HttpException error, String msg) {
-
-				}
-			};
-			Map map = new HashMap();
-			map.put("para", d.toString());
-			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.getUserIdByShareId, map, rcb);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void afterClickContent(String shareId, int position) {
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
@@ -494,9 +453,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		if (!isLogin()) {
 			return;
 		}
-		
-		dataSourceList.get(position).setOps(
-				ParentShareSentenceEntity.OK);
+
+		dataSourceList.get(position).setOps(ParentShareSentenceEntity.OK);
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ViewForInfoService.class);
@@ -511,8 +469,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		if (!isLogin()) {
 			return;
 		}
-		dataSourceList.get(position).setOps(
-				ParentShareSentenceEntity.NO_OK);
+		dataSourceList.get(position).setOps(ParentShareSentenceEntity.NO_OK);
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ViewForInfoService.class);
@@ -527,6 +484,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * 需要评论的分享信息在队列当中的位置
 	 */
 	int comment_share_num = -1;
+
 	@Override
 	public void afterClickReply(String shareId, int position) {
 		if (!isLogin()) {
@@ -701,6 +659,47 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				begin = 0;// 重新设置初始化页数
 				loadDataMore();// 登陆后的第一次加载
 			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param shareId
+	 * @user:pang
+	 * @data:2015年7月21日
+	 * @todo:根据分享信息查看人的信息
+	 * @return:void
+	 */
+	private void showUserByShareId(String shareId) {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("shareId", shareId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					String userId = UserUtils.parseUserId(data);
+					if (userId != null && !"".equals(userId)) {
+						Intent intent = new Intent(
+								MainPageLayoutSpaceActivity.this,
+								ShowUserInfoDetail.class);
+						intent.putExtra("uuid", userId);
+						startActivity(intent);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getUserIdByShareId, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
