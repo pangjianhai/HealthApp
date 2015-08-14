@@ -42,15 +42,15 @@
         <RelativeLayout
             android:id="@+id/userdetail"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="90dp"
             android:background="@drawable/preference_single_item"
             android:gravity="center_vertical"
             android:onClick="show_me_about" >
 
             <ImageView
                 android:id="@+id/main_page_me_photo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:scaleType="matrix" />

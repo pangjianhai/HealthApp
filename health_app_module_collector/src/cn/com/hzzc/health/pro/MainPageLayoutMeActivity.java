@@ -204,14 +204,30 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @author pang
 	 */
 	public void getOver(UserItem ui) {
-		main_page_me_name.setText(ui.getUserName());
-		main_page_me_sentence.setText(ui.getSentence());
+		System.out.println("ui:" + ui.getUuid());
+		String userName = ui.getUserName();
+		String sentence = ui.getSentence();
+		if (userName == null || "".equals(userName)) {
+			userName = "未设置昵称";
+		}
+		if (sentence == null || "".equals(sentence)) {
+			sentence = "点击可以设置个性签名";
+		}
+		main_page_me_name.setText(userName);
+		main_page_me_sentence.setText(sentence);
 
-		String pic_url2 = SystemConst.server_url
-				+ SystemConst.FunctionUrl.getHeadImgById + "?para={headImg:'"
-				+ ui.getImg() + "'}";
-		ImageLoader.getInstance().displayImage(pic_url2, main_page_me_photo,
-				HealthApplication.getDisplayImageOption());
+		String imgId = ui.getImg();
+		if (imgId != null && !"".equals(imgId)) {
+			String pic_url = SystemConst.server_url
+					+ SystemConst.FunctionUrl.getHeadImgById
+					+ "?para={headImg:'" + imgId + "'}";
+			ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo);
+		} else {
+			String imageUri = "drawable://" + R.drawable.default_head1;
+			ImageLoader.getInstance()
+					.displayImage(imageUri, main_page_me_photo);
+		}
+
 	}
 
 	/**
