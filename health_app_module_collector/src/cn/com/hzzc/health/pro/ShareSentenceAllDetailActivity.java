@@ -27,7 +27,7 @@ import cn.com.hzzc.health.pro.adapter.CommentAdapter;
 import cn.com.hzzc.health.pro.adapter.ShareSinglePicAdapter;
 import cn.com.hzzc.health.pro.model.CommentEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
-import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
+import cn.com.hzzc.health.pro.part.SentenceListView.SentenceListViewListener;
 import cn.com.hzzc.health.pro.service.CollectionForInfoService;
 import cn.com.hzzc.health.pro.service.ShareCommentService;
 import cn.com.hzzc.health.pro.service.ViewForInfoService;
@@ -48,7 +48,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  *
  */
 public class ShareSentenceAllDetailActivity extends BaseActivity implements
-		IXListViewListener {
+		SentenceListViewListener {
 
 	private TextView share_all_detail_content, share_all_detail_tag;
 
@@ -68,11 +68,11 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	/**
 	 * 关于评论的东西
 	 */
-	private cn.com.hzzc.health.pro.part.XListView share_comment_listview;
+	private cn.com.hzzc.health.pro.part.SentenceListView share_comment_listview;
 	private CommentAdapter ad = null;
 	List<CommentEntity> ds = new ArrayList<CommentEntity>();
 	private int page = 0;
-	private int size = SystemConst.page_size;
+	private int size = 7;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	private void initListView() {
-		share_comment_listview = (cn.com.hzzc.health.pro.part.XListView) findViewById(R.id.share_comment_listview);
+		share_comment_listview = (cn.com.hzzc.health.pro.part.SentenceListView) findViewById(R.id.share_comment_listview);
 		share_comment_listview.setPullLoadEnable(true);
 		share_comment_listview.setXListViewListener(this);
 		ad = new CommentAdapter(getApplicationContext(), ds);
@@ -316,7 +316,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 				.hideSoftInputFromWindow(ShareSentenceAllDetailActivity.this
 						.getCurrentFocus().getWindowToken(),
 						InputMethodManager.HIDE_NOT_ALWAYS);
-		after_comment_share(comment_str);
 	}
 
 	/**
@@ -377,7 +376,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 					String data = responseInfo.result;
 					List<CommentEntity> list = CommentUtil.parseInfo(data);
 					if (list != null && !list.isEmpty()) {
-						System.out.println("list:" + list.size());
 						ds.addAll(list);
 						ad.notifyDataSetChanged();
 					}
