@@ -250,9 +250,9 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 
 	private void addTag(final Tag tag) {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, 80);
+				LinearLayout.LayoutParams.MATCH_PARENT, 100);
 		params.height = 77 * (new Random().nextInt(2) + 1);
-		params.setMargins(2, 2, 2, 2);
+		params.setMargins(1, 1, 1, 1);
 		Button btn = new Button(getContext());
 		btn.setLayoutParams(params);
 		btn.setText(tag.getDisplayName());

@@ -43,7 +43,7 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
 
     <!-- 关于注册登陆 -->
-    <string name="login_reg_logininput_account">请输入账号</string>
+    <string name="login_reg_logininput_account">请输入账号，用来登录</string>
     <string name="login_reg_logininput_password">请输入密码</string>
     <string name="login_reg_logininput_password_again">请再次输入密码</string>
     <string name="login_reg_logininput_email">请再次输入邮箱</string>
