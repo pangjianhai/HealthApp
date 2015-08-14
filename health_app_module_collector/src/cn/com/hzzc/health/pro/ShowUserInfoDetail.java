@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.UserItem;
+import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.com.hzzc.health.pro.task.GetOneUsersAsyncTask;
 import cn.com.hzzc.health.pro.task.IFOfFriendFocusAsyncTask;
 import cn.com.hzzc.health.pro.util.FocusUtil;
@@ -250,6 +251,8 @@ public class ShowUserInfoDetail extends BaseActivity {
 		// 关注成功
 		if (b) {
 			ifAdd = true;
+			/***个人手收藏信息变得无效**/
+			new SharedPreInto(getApplicationContext()).unvalidSelfNum();
 			showUserBtu.setText("取消关注");
 		}
 	}
