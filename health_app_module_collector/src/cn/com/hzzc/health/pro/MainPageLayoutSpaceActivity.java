@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
+import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
 import cn.com.hzzc.health.pro.config.GlobalUserVariable;
 import cn.com.hzzc.health.pro.config.HealthApplication;
@@ -493,6 +494,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		if (!isLogin()) {
 			return;
 		}
+		
+		dataSourceList.get(position).setOps(
+				ParentShareSentenceEntity.OK);
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ViewForInfoService.class);
@@ -507,6 +511,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		if (!isLogin()) {
 			return;
 		}
+		dataSourceList.get(position).setOps(
+				ParentShareSentenceEntity.NO_OK);
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ViewForInfoService.class);

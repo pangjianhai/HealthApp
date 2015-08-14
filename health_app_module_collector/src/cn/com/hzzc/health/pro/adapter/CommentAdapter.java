@@ -66,6 +66,7 @@ public class CommentAdapter extends BaseAdapter {
 		}
 		CommentEntity ce = dataSourceList.get(position);
 		holder.tag_id.setText(ce.getId());
+		System.out.println("==================================="+ce.getContent());
 		holder.c_content.setText(ce.getContent());
 		holder.c_username.setText(ce.getUserName());
 		String userId = ce.getUserId();
