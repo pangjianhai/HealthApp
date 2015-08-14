@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
+import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
 import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
@@ -59,6 +60,11 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	 * 空间分享信息适配器
 	 */
 	private ShareItemAdapter itemAdapter;
+
+	/**
+	 * 需要评论的分享信息在队列当中的位置
+	 */
+	int comment_share_num = -1;
 
 	/**
 	 * 弹出框
@@ -254,7 +260,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickContent(String shareId) {
+	public void afterClickContent(String shareId, int position) {
 		Intent intent = new Intent(MainPageLayoutOrderActivity.this,
 				ShareSentenceAllDetailActivity.class);
 		intent.putExtra("share_sentence_id", shareId);
@@ -262,7 +268,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickAuthor(String shareId) {
+	public void afterClickAuthor(String shareId, int position) {
 		Toast.makeText(context, "您要评论的分享作", Toast.LENGTH_SHORT).show();
 	}
 
@@ -277,7 +283,8 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickOk(String shareId) {
+	public void afterClickOk(String shareId, int position) {
+		dataSourceList.get(position).setOps(ParentShareSentenceEntity.OK);
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutOrderActivity.this,
 				ViewForInfoService.class);
@@ -289,7 +296,8 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickNook(String shareId) {
+	public void afterClickNook(String shareId, int position) {
+		dataSourceList.get(position).setOps(ParentShareSentenceEntity.NO_OK);
 		itemAdapter.notifyDataSetChanged();
 		Intent intent = new Intent(MainPageLayoutOrderActivity.this,
 				ViewForInfoService.class);
@@ -300,8 +308,9 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickReply(String shareId) {
+	public void afterClickReply(String shareId, int position) {
 		commentShareId = shareId;
+		comment_share_num = position;
 		showInput();
 	}
 
@@ -335,7 +344,14 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-
+		/** 关于刷新页面begin **/
+		ShareSentenceEntity sse = dataSourceList.get(comment_share_num);
+		String oldCommentNum = sse.getCommentNum();
+		int newCommentNum = Integer.parseInt(oldCommentNum) + 1;
+		sse.setCommentNum(newCommentNum + "");
+		itemAdapter.notifyDataSetChanged();
+		comment_share_num = -1;
+		/** 关于刷新页面end **/
 		Intent intent = new Intent(MainPageLayoutOrderActivity.this,
 				ShareCommentService.class);
 		intent.putExtra("userId", userId);

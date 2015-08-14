@@ -432,7 +432,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 	/**************************** 信息交互操作begin ***********************************/
 	@Override
-	public void afterClickAuthor(String shareId) {
+	public void afterClickAuthor(String shareId, int position) {
 		if (!isLogin()) {
 			return;
 		}
@@ -481,22 +481,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickOk(String shareId) {
-		if (!isLogin()) {
-			return;
-		}
-		itemAdapter.notifyDataSetChanged();
-		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
-				ViewForInfoService.class);
-		intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
-		intent.putExtra("id", shareId);
-		intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_OK);
-		startService(intent);
-
-	}
-
-	@Override
-	public void afterClickContent(String shareId) {
+	public void afterClickContent(String shareId, int position) {
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ShareSentenceAllDetailActivity.class);
 		intent.putExtra("share_sentence_id", shareId);
@@ -504,7 +489,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickNook(String shareId) {
+	public void afterClickNook(String shareId, int position) {
 		if (!isLogin()) {
 			return;
 		}
@@ -518,11 +503,31 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	}
 
 	@Override
-	public void afterClickReply(String shareId) {
+	public void afterClickOk(String shareId, int position) {
+		if (!isLogin()) {
+			return;
+		}
+		itemAdapter.notifyDataSetChanged();
+		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
+				ViewForInfoService.class);
+		intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+		intent.putExtra("id", shareId);
+		intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_OK);
+		startService(intent);
+
+	}
+
+	/**
+	 * 需要评论的分享信息在队列当中的位置
+	 */
+	int comment_share_num = -1;
+	@Override
+	public void afterClickReply(String shareId, int position) {
 		if (!isLogin()) {
 			return;
 		}
 		commentShareId = shareId;
+		comment_share_num = position;
 		showInput();
 	}
 
@@ -556,7 +561,14 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-
+		/** 关于刷新页面begin **/
+		ShareSentenceEntity sse = dataSourceList.get(comment_share_num);
+		String oldCommentNum = sse.getCommentNum();
+		int newCommentNum = Integer.parseInt(oldCommentNum) + 1;
+		sse.setCommentNum(newCommentNum + "");
+		itemAdapter.notifyDataSetChanged();
+		comment_share_num = -1;
+		/** 关于刷新页面end **/
 		Intent intent = new Intent(MainPageLayoutSpaceActivity.this,
 				ShareCommentService.class);
 		intent.putExtra("userId", userId);

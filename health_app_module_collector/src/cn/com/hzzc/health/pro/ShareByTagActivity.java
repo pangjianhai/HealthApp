@@ -211,13 +211,13 @@ public class ShareByTagActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void afterClickReply(String shareId) {
+	public void afterClickReply(String shareId, int position) {
 		commentShareId = shareId;
 		showInput();
 	}
 
 	@Override
-	public void afterClickContent(String shareId) {
+	public void afterClickContent(String shareId, int position) {
 		Intent intent = new Intent(ShareByTagActivity.this,
 				ShareSentenceAllDetailActivity.class);
 		intent.putExtra("share_sentence_id", shareId);
@@ -225,17 +225,17 @@ public class ShareByTagActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void afterClickAuthor(String shareId) {
+	public void afterClickAuthor(String shareId, int position) {
 		Toast.makeText(context, "您要评论的分享作", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
-	public void afterClickOk(String shareId) {
+	public void afterClickOk(String shareId, int position) {
 		itemAdapter.notifyDataSetChanged();
 	}
 
 	@Override
-	public void afterClickNook(String shareId) {
+	public void afterClickNook(String shareId, int position) {
 		itemAdapter.notifyDataSetChanged();
 	}
 

@@ -11,29 +11,29 @@ public interface IShareCallbackOperator {
 	/**
 	 * 
 	 * @tags @param shareId
-	 * @date 2015�?�?�?
+	 * @date 2015年4月14日
 	 * @todo 点击回复之后
 	 * @author pang
 	 */
-	public void afterClickReply(String shareId);
+	public void afterClickReply(String shareId, int index);
 
 	/**
 	 * 
 	 * @tags @param shareId
-	 * @date 2015�?�?�?
+	 * @date 2015年4月14日
 	 * @todo 点击内容事件
 	 * @author pang
 	 */
-	public void afterClickContent(String shareId);
+	public void afterClickContent(String shareId, int index);
 
 	/**
 	 * 
 	 * @tags @param shareId
-	 * @date 2015�?�?�?
-	 * @todo 点击作�?事件
+	 * @date 2015年4月14日
+	 * @todo 点击作者事件
 	 * @author pang
 	 */
-	public void afterClickAuthor(String shareId);
+	public void afterClickAuthor(String shareId, int index);
 
 	/**
 	 * ]
@@ -43,7 +43,7 @@ public interface IShareCallbackOperator {
 	 * @todo 点击OK
 	 * @author pang
 	 */
-	public void afterClickOk(String shareId);
+	public void afterClickOk(String shareId, int index);
 
 	/**
 	 * 
@@ -52,6 +52,6 @@ public interface IShareCallbackOperator {
 	 * @todo 点击NOOK
 	 * @author pang
 	 */
-	public void afterClickNook(String shareId);
+	public void afterClickNook(String shareId, int index);
 
 }

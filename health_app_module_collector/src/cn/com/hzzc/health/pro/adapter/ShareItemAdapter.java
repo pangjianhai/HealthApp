@@ -276,7 +276,8 @@ public class ShareItemAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				callback.afterClickContent(dataSourceList.get(position).getId());
+				callback.afterClickContent(
+						dataSourceList.get(position).getId(), position);
 			}
 		});
 		// 点击用户名
@@ -284,7 +285,8 @@ public class ShareItemAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				callback.afterClickAuthor(dataSourceList.get(position).getId());
+				callback.afterClickAuthor(dataSourceList.get(position).getId(),
+						position);
 			}
 		});
 
@@ -293,7 +295,8 @@ public class ShareItemAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				callback.afterClickReply(dataSourceList.get(position).getId());
+				callback.afterClickReply(dataSourceList.get(position).getId(),
+						position);
 			}
 		});
 		// 点击OK
@@ -304,9 +307,10 @@ public class ShareItemAdapter extends BaseAdapter {
 				if (ifClickOk(position) || ifClickNoOk(position)) {
 					return;
 				}
-				dataSourceList.get(position).setOps(
-						ParentShareSentenceEntity.OK);
-				callback.afterClickOk(dataSourceList.get(position).getId());
+				// dataSourceList.get(position).setOps(
+				// ParentShareSentenceEntity.OK);
+				callback.afterClickOk(dataSourceList.get(position).getId(),
+						position);
 			}
 		});
 		// 点击NOOK
@@ -317,9 +321,10 @@ public class ShareItemAdapter extends BaseAdapter {
 				if (ifClickOk(position) || ifClickNoOk(position)) {
 					return;
 				}
-				dataSourceList.get(position).setOps(
-						ParentShareSentenceEntity.NO_OK);
-				callback.afterClickNook(dataSourceList.get(position).getId());
+				// dataSourceList.get(position).setOps(
+				// ParentShareSentenceEntity.NO_OK);
+				callback.afterClickNook(dataSourceList.get(position).getId(),
+						position);
 			}
 		});
 	}
