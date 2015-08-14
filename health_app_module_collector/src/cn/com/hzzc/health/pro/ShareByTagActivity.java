@@ -57,6 +57,11 @@ public class ShareByTagActivity extends BaseActivity implements
 	private PopupWindow pw;
 	private RelativeLayout rl;
 	private EditText et_pop;
+
+	/**
+	 * 需要评论的分享信息在队列当中的位置
+	 */
+	int comment_share_num = -1;
 	/**
 	 * 空间分享信息适配器
 	 */
@@ -247,6 +252,21 @@ public class ShareByTagActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	public void comment_share(View v) {
+		String comment_str = et_pop.getText().toString();
+		if (comment_str == null || "".equals(comment_str.trim())) {
+			Toast.makeText(getApplicationContext(), "评论内容不得为空",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+		/** 关于刷新页面begin **/
+		ShareSentenceEntity sse = dataSourceList.get(comment_share_num);
+		String oldCommentNum = sse.getCommentNum();
+		int newCommentNum = Integer.parseInt(oldCommentNum) + 1;
+		sse.setCommentNum(newCommentNum + "");
+		itemAdapter.notifyDataSetChanged();
+		comment_share_num = -1;
+		/** 关于刷新页面end **/
+
 		Intent intent = new Intent(ShareByTagActivity.this,
 				ShareCommentService.class);
 		intent.putExtra("userId", userId);
