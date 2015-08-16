@@ -1,14 +1,11 @@
 package cn.com.hzzc.health.pro;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
-
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -18,11 +15,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
-import cn.com.hzzc.health.pro.R;
-import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
-import cn.com.hzzc.health.pro.task.RegisterAccountTask;
-import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * @author pang
@@ -62,8 +59,8 @@ public class AppRegActivity extends BaseActivity {
 		new AlertDialog.Builder(AppRegActivity.this)
 				.setIcon(
 						getResources().getDrawable(R.drawable.login_error_icon))
-				.setTitle("注册错误").setMessage(content)
-				.setPositiveButton("关闭", null).create().show();
+				.setTitle("注册错误").setMessage(content).create().show();
+		// .setPositiveButton("关闭", null)
 	}
 
 	/**
@@ -89,6 +86,19 @@ public class AppRegActivity extends BaseActivity {
 			reg_username.clearFocus(); // 清除焦点
 			return false;
 		}
+		String pt = "^[A-Za-z0-9]+$";
+		Pattern pattern = Pattern.compile(pt, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(str_reg_username);
+		if (!matcher.matches()) {
+			// error("登陆账号只能是英文或者数字");
+			reg_username.setError("登陆账号只能是英文或者数字", dr);
+			reg_username.setCursorVisible(false);
+			reg_username.setSelectAllOnFocus(true);
+			reg_username.requestFocus(); // 请求获取焦点
+			reg_username.clearFocus(); // 清除焦点
+			return false;
+		}
+
 		if (str_reg_password == null || "".equals(str_reg_password.trim())) {
 			reg_password.setError("密码不能为空", dr);
 			return false;
