@@ -485,8 +485,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	private void initGoodState(String userId, String shareId) {
-		System.out
-				.println("=========================================================initGoodState");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentId", userId);
@@ -498,8 +496,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 					String data = responseInfo.result;
 					like_or_dis_state = ShareSentenceUtil
 							.paseLikeShareOrDis(data);
-					System.out.println(data+"------------------------like_or_dis_state:"
-							+ like_or_dis_state);
 					if ("like".equals(like_or_dis_state)) {
 						changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_ok);
 					} else if ("dislike".equals(like_or_dis_state)) {
@@ -546,6 +542,14 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		if (like_or_dis_state == null || "more".equals(like_or_dis_state)) {
 			return true;
 		} else {
+			if ("like".equals(like_or_dis_state)) {
+				Toast.makeText(getApplicationContext(), "您已经顶过",
+						Toast.LENGTH_SHORT).show();
+			} else if ("dislike".equals(like_or_dis_state)) {
+				Toast.makeText(getApplicationContext(), "您已经踩过",
+						Toast.LENGTH_SHORT).show();
+			}
+
 			return false;
 		}
 	}
