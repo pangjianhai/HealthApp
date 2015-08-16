@@ -201,7 +201,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @author pang
 	 */
 	public void getOver(UserItem ui) {
-		System.out.println("ui:" + ui.getUuid());
 		String userName = ui.getUserName();
 		String sentence = ui.getSentence();
 		if (userName == null || "".equals(userName)) {

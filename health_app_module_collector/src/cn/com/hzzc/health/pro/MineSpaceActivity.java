@@ -169,7 +169,7 @@ public class MineSpaceActivity extends BaseActivity implements
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					System.out.println("msg:" + msg);
+					onLoadOver();
 				}
 			};
 			Map map = new HashMap();

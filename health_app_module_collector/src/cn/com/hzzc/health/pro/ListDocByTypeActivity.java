@@ -101,7 +101,6 @@ public class ListDocByTypeActivity extends BaseActivity {
 			j.put("rows", rows);
 			Map map = new HashMap();
 			map.put("para", j.toString());
-			System.out.println("j.toString()：" + j.toString());
 			loadData(map);
 		} catch (Exception e) {
 			e.printStackTrace();

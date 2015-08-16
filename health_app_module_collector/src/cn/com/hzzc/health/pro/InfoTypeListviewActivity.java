@@ -102,7 +102,6 @@ public class InfoTypeListviewActivity extends BaseActivity {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				String rs = responseInfo.result;
-				System.out.println("rs:" + rs);
 				List<InfoTypeEntity> lst = ModelUtil.parseInfo(rs);
 				infoList.addAll(lst);
 				adapter.notifyDataSetChanged();

@@ -107,7 +107,6 @@ public class MainPageLayoutMeCollectionActivity extends BaseActivity {
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			System.out.println("d.toString():" + d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.FunctionUrl.get_collection_by_id, map, rcb);
 		} catch (Exception e) {

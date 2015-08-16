@@ -606,6 +606,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
+		System.out
+				.println("---------------------------------------onWindowFocusChanged"
+						+ GlobalUserVariable.if_need_to_push_top_user);
 		if (GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
 			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
 			if (isLogin()) {
@@ -624,6 +627,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @return:void
 	 */
 	private void if_need_to_push_top_user() {
+		System.out
+				.println("------------------------->>>>>>>>>>>>>>>if_need_to_push_top_user");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userUuid", userId);
@@ -633,6 +638,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
+					System.out.println("pb:" + pb);
+					System.out.println("pb.getLoginTimes():"
+							+ pb.getLoginTimes());
 					if (pb != null && pb.getLoginTimes() <= 1) {
 						Intent intent = new Intent(
 								MainPageLayoutSpaceActivity.this,
@@ -685,6 +693,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			 * 如果是已登陆的状态，重新进入该activity，如果lastestId为空则没有加载过任何数据，需要reload，
 			 * 如果不为空则每次过来刷新，因为有了刷新的基准
 			 *********/
+			System.out.println("lastestShareId::::::::::::::::::::::::::::"
+					+ lastestShareId);
 			if (lastestShareId == null || "".equals(lastestShareId)) {
 				loadDataMoreForLogin();
 			} else {

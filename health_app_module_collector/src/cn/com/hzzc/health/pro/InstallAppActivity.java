@@ -83,7 +83,6 @@ public class InstallAppActivity extends BaseActivity {
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("---data:" + data);
 					boolean isc = FileUtil.ifFeedbackSuccess(data);
 					if (isc) {
 						afterFeedback("反馈成功，谢谢\n欢迎参与平台讨论组\n一起打造您的专属体验");

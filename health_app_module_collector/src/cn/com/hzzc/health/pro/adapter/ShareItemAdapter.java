@@ -145,8 +145,6 @@ public class ShareItemAdapter extends BaseAdapter {
 		holder.share_bottom_nook.setTextColor(Color.parseColor("#999999"));
 		int ops = entity.getOps();// 用户点赞的三个状态，顶，踩，未操作
 
-		System.out.println(entity.getId()
-				+ "====================================>>>>>>>>>>>>ops:" + ops);
 		if (ParentShareSentenceEntity.OK == ops) {
 			holder.share_bottom_ok.setTextColor(Color.parseColor("#FFA500"));
 		} else if (ParentShareSentenceEntity.NO_OK == ops) {
@@ -269,7 +267,6 @@ public class ShareItemAdapter extends BaseAdapter {
 		holder.share_bottom_ok.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				System.out.println("------------------------share_bottom_ok");
 				// 如果已经有过操作，就不允许再次操作
 				if (ifClickOk(position) || ifClickNoOk(position)) {
 					return;
@@ -282,7 +279,6 @@ public class ShareItemAdapter extends BaseAdapter {
 		holder.share_bottom_nook.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				System.out.println("------------------------share_bottom_nook");
 				// 如果已经有过操作，就不允许再次操作
 				if (ifClickOk(position) || ifClickNoOk(position)) {
 					return;

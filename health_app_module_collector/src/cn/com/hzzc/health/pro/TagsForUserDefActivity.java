@@ -158,7 +158,6 @@ public class TagsForUserDefActivity extends BaseActivity {
 	 */
 	public void repaintUI() {
 		if (tags_selected != null && !tags_selected.isEmpty()) {
-			System.out.println(tags_selected.size());
 			container.removeAllViews();// 请控所有的
 
 			int containerWidth = container.getMeasuredWidth()
