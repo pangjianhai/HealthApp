@@ -1,8 +1,10 @@
 <resources>
 
     <!-- 版本 -->
-    <string name="app_version_name">v1.1.0</string>
-    <string name="app_version_num">0</string>
+    <string name="app_version_name">v1.2.0</string>
+    <string name="last_app_version_num">1</string>
+    <string name="app_version_num">2</string>
+    <string name="db_version_num">3</string>
     <!-- 普通操作 -->
     <string name="app_name">康兮</string>
     <string name="search">搜搜</string>
