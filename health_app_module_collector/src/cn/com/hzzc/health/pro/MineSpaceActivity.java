@@ -154,6 +154,7 @@ public class MineSpaceActivity extends BaseActivity implements
 		try {
 			currentPage = currentPage + 1;
 			JSONObject d = new JSONObject();
+			d.put("currentUserId", userId);
 			d.put("userId", uuid);
 			d.put("begin", currentPage + "");
 			d.put("limit", 10);
