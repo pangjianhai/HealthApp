@@ -61,7 +61,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <ImageView
+                <cn.com.hzzc.health.pro.part.CircularImage
                     android:id="@+id/share_all_detail_author_photo"
                     android:layout_width="20dp"
                     android:layout_height="20dp"

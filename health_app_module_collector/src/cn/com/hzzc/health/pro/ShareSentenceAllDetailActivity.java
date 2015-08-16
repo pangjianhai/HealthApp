@@ -1,6 +1,7 @@
 package cn.com.hzzc.health.pro;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
@@ -32,6 +32,7 @@ import cn.com.hzzc.health.pro.adapter.ShareSinglePicAdapter;
 import cn.com.hzzc.health.pro.model.CommentEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.model.UserItem;
+import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.part.SentenceListView.SentenceListViewListener;
 import cn.com.hzzc.health.pro.service.CollectionForInfoService;
 import cn.com.hzzc.health.pro.service.ShareCommentService;
@@ -86,7 +87,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * 作者信息
 	 */
 	private UserItem author;
-	private ImageView share_all_detail_author_photo;
+	private CircularImage share_all_detail_author_photo;
 	private TextView share_all_detail_author_name;
 	private Button share_all_detail_author_focus;
 
@@ -124,7 +125,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
 
-		share_all_detail_author_photo = (ImageView) findViewById(R.id.share_all_detail_author_photo);
+		share_all_detail_author_photo = (CircularImage) findViewById(R.id.share_all_detail_author_photo);
 		share_all_detail_author_name = (TextView) findViewById(R.id.share_all_detail_author_name);
 		share_all_detail_author_focus = (Button) findViewById(R.id.share_all_detail_author_focus);
 
@@ -666,6 +667,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		ce.setUserId(userId);
 		ce.setUserName("我");
 		ce.setContent(comment_str);
+		ce.setCommentDate(new Date());
 		ds.add(0, ce);
 		ad.notifyDataSetChanged();
 	}
@@ -711,7 +713,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("====================data:"+data);
 					List<CommentEntity> list = CommentUtil.parseInfo(data);
 					if (list != null && !list.isEmpty()) {
 						ds.addAll(list);

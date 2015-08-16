@@ -47,7 +47,7 @@
             android:gravity="center_vertical"
             android:onClick="show_me_about" >
 
-            <ImageView
+            <cn.com.hzzc.health.pro.part.CircularImage
                 android:id="@+id/main_page_me_photo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

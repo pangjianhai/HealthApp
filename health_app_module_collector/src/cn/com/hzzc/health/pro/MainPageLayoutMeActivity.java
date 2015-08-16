@@ -20,18 +20,15 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
-import cn.com.hzzc.health.pro.model.PushBean;
 import cn.com.hzzc.health.pro.model.SelfNum;
 import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.model.VersionEntity;
+import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
-import cn.com.hzzc.health.pro.task.GetSelfInfoAsyncTask;
-import cn.com.hzzc.health.pro.task.GetSelfInfoNumAsyncTask;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.FileUtil;
 import cn.com.hzzc.health.pro.util.UserUtils;
@@ -51,7 +48,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 public class MainPageLayoutMeActivity extends ParentMainActivity {
 
-	private ImageView main_page_me_photo;
+	private CircularImage main_page_me_photo;
 	private TextView main_page_me_name, main_page_me_sentence, me_my_dangan,
 			me_my_focus, me_my_focusme, me_my_msg, me_my_shoucang;
 
@@ -66,7 +63,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	}
 
 	public void initPart() {
-		main_page_me_photo = (ImageView) findViewById(R.id.main_page_me_photo);
+		main_page_me_photo = (CircularImage) findViewById(R.id.main_page_me_photo);
 		main_page_me_name = (TextView) findViewById(R.id.main_page_me_name);
 		main_page_me_sentence = (TextView) findViewById(R.id.main_page_me_sentence);
 		me_my_dangan = (TextView) findViewById(R.id.me_my_dangan);

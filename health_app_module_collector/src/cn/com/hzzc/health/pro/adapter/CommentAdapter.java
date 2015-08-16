@@ -1,6 +1,7 @@
 package cn.com.hzzc.health.pro.adapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -13,6 +14,7 @@ import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.CommentEntity;
 import cn.com.hzzc.health.pro.part.CircularImage;
+import cn.com.hzzc.health.pro.util.CommonDateUtil;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -62,11 +64,14 @@ public class CommentAdapter extends BaseAdapter {
 					.findViewById(R.id.c_username);
 			holder.share_c_photo = (CircularImage) convertView
 					.findViewById(R.id.share_c_photo);
+			holder.c_date = (TextView) convertView.findViewById(R.id.c_date);
 			convertView.setTag(holder);
 		}
 		CommentEntity ce = dataSourceList.get(position);
 		holder.tag_id.setText(ce.getId());
 		holder.c_content.setText(ce.getContent());
+		Date cd = ce.getCommentDate();
+		holder.c_date.setText(getDate(cd));
 		String userId = ce.getUserId();
 		if (HealthApplication.getUserId().equals(userId)) {
 			holder.c_username.setText("我");
@@ -90,8 +95,20 @@ public class CommentAdapter extends BaseAdapter {
 	}
 
 	private class HolderView {
-		private TextView tag_id, c_content, c_username;
+		private TextView tag_id, c_content, c_username, c_date;
 		private CircularImage share_c_photo;
+	}
+
+	private String getDate(Date cd) {
+		int c_month = CommonDateUtil.getMonth(cd);
+		int c_day = CommonDateUtil.getDay(cd);
+		if (!CommonDateUtil.isToday(cd)) {// 如果是同一天
+			int hour = CommonDateUtil.getHour(cd);
+			int minut = CommonDateUtil.getMinut(cd);
+			return hour + ":" + minut;
+		} else {// 如果不是同一天
+			return c_month + "-" + c_day;
+		}
 	}
 
 }

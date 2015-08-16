@@ -379,6 +379,17 @@ public class CommonDateUtil {
 		return b;
 	}
 
+	/***
+	 * @description 获取 小时 整数型
+	 * @param date
+	 * @return
+	 */
+	public static int getMinut(Date date) {
+		String a = formatDate(date, "mm");
+		int b = Integer.parseInt(a);
+		return b;
+	}
+
 	/**
 	 * @description 获取 月 字符串
 	 * @param date
