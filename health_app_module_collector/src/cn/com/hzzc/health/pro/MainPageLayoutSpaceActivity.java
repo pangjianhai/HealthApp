@@ -680,6 +680,16 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				begin = 0;// 重新设置初始化页数
 				loadDataMore();// 登陆后的第一次加载
 			}
+		} else {
+			/******
+			 * 如果是已登陆的状态，重新进入该activity，如果lastestId为空则没有加载过任何数据，需要reload，
+			 * 如果不为空则每次过来刷新，因为有了刷新的基准
+			 *********/
+			if (lastestShareId == null || "".equals(lastestShareId)) {
+				loadDataMoreForLogin();
+			} else {
+				freshData();
+			}
 		}
 	}
 
