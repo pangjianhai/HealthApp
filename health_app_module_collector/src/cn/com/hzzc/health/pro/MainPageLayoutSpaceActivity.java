@@ -389,6 +389,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		 */
 		if (dataSourceList != null && !dataSourceList.isEmpty()) {//
 			lastestShareId = dataSourceList.get(0).getId();
+		} else {
+			lastestShareId = null;
 		}
 	}
 
@@ -606,14 +608,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		System.out
-				.println("---------------------------------------onWindowFocusChanged"
-						+ GlobalUserVariable.if_need_to_push_top_user);
-		if (GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
+		if (isLogin() && GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
 			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
-			if (isLogin()) {
-				if_need_to_push_top_user();
-			}
+			if_need_to_push_top_user();
 		}
 
 	}
@@ -627,8 +624,6 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	 * @return:void
 	 */
 	private void if_need_to_push_top_user() {
-		System.out
-				.println("------------------------->>>>>>>>>>>>>>>if_need_to_push_top_user");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userUuid", userId);
@@ -638,10 +633,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
-					System.out.println("pb:" + pb);
-					System.out.println("pb.getLoginTimes():"
-							+ pb.getLoginTimes());
-					if (pb != null && pb.getLoginTimes() <= 1) {
+					if (pb != null && pb.getLoginTimes() < 1) {
 						Intent intent = new Intent(
 								MainPageLayoutSpaceActivity.this,
 								FirstLoginTopUserListLayout.class);
@@ -679,12 +671,18 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		super.onRestart();
 		/**
 		 * 如果是属于onRestart时间，而且没有登录，应该判断现在是否已经登录，如果已经登录则刷新数据
+		 * 
+		 * 因为在未登录的时候全局变量已经初始化了userId(因为没有登陆初始化值为空)，如果此时登录了，全局变量有值了，
+		 * 但是当前activity的userID变量依然是空置，所以需要再次初始化
 		 */
 		if (!isLogin()) {
 			userId = HealthApplication.getUserId();// 从全局变量当中获取userId
 			if (isLogin()) {
 				dataSourceList.clear();// 清空未登陆时候展示的数据
 				itemAdapter.notifyDataSetChanged();// 更新UI
+				setLastestShareId();// 重置未登录查询出来结果的最分型的ID
+				search_day = CommonDateUtil.formatDate(CommonDateUtil
+						.getNowTimeDate());// 重置未登陆时候的查询的日期
 				begin = 0;// 重新设置初始化页数
 				loadDataMore();// 登陆后的第一次加载
 			}
@@ -693,9 +691,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 			 * 如果是已登陆的状态，重新进入该activity，如果lastestId为空则没有加载过任何数据，需要reload，
 			 * 如果不为空则每次过来刷新，因为有了刷新的基准
 			 *********/
-			System.out.println("lastestShareId::::::::::::::::::::::::::::"
-					+ lastestShareId);
 			if (lastestShareId == null || "".equals(lastestShareId)) {
+				search_day = CommonDateUtil.formatDate(CommonDateUtil
+						.getNowTimeDate());// 重置未登陆时候的查询的日期
 				loadDataMoreForLogin();
 			} else {
 				freshData();
