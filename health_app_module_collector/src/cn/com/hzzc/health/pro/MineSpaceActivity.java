@@ -204,8 +204,9 @@ public class MineSpaceActivity extends BaseActivity implements
 	 */
 	@Override
 	public void onRefresh() {
-		dataSourceList.clear();
-		loadDataMore();
+		// dataSourceList.clear();
+		// loadDataMore();
+		
 
 	}
 
