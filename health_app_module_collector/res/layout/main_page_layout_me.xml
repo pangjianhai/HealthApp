@@ -53,7 +53,7 @@
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:scaleType="matrix" />
+                android:scaleType="centerInside" />
 
             <TextView
                 android:id="@+id/main_page_me_name"

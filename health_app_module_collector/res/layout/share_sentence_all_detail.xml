@@ -49,14 +49,56 @@
 
         <RelativeLayout
             android:id="@+id/share_all_detail_content_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/share_all_detail_user_info"
+                android:layout_width="fill_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/share_all_detail_author_photo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/head_default" />
+
+                <TextView
+                    android:id="@+id/share_all_detail_author_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="逄建海"
+                    android:textColor="@color/deepgray"
+                    android:textSize="12sp" >
+                </TextView>
+
+                <Button
+                    android:id="@+id/share_all_detail_author_focus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/self_tag_shape"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="我要关注"
+                    android:textColor="@color/deepgray"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/share_all_detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/share_all_detail_user_info"
+                android:layout_marginTop="10dp"
                 android:textSize="16sp" />
 
             <LinearLayout
