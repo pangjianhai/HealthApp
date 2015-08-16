@@ -645,6 +645,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		intent.putExtra("userId", userId);
 		intent.putExtra("sentenceId", share_sentence_id);
 		intent.putExtra("content", comment_str);
+		after_comment_share(comment_str);
 		startService(intent);
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
@@ -710,6 +711,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
+					System.out.println("====================data:"+data);
 					List<CommentEntity> list = CommentUtil.parseInfo(data);
 					if (list != null && !list.isEmpty()) {
 						ds.addAll(list);
@@ -720,6 +722,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
+					onLoadOver();
 				}
 			};
 			Map map = new HashMap();

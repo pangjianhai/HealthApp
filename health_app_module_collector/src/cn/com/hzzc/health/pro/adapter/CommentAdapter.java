@@ -7,12 +7,12 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.CommentEntity;
+import cn.com.hzzc.health.pro.part.CircularImage;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -60,7 +60,7 @@ public class CommentAdapter extends BaseAdapter {
 					.findViewById(R.id.c_content);
 			holder.c_username = (TextView) convertView
 					.findViewById(R.id.c_username);
-			holder.share_c_photo = (ImageView) convertView
+			holder.share_c_photo = (CircularImage) convertView
 					.findViewById(R.id.share_c_photo);
 			convertView.setTag(holder);
 		}
@@ -91,7 +91,7 @@ public class CommentAdapter extends BaseAdapter {
 
 	private class HolderView {
 		private TextView tag_id, c_content, c_username;
-		private ImageView share_c_photo;
+		private CircularImage share_c_photo;
 	}
 
 }

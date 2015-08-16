@@ -1,5 +1,7 @@
 package cn.com.hzzc.health.pro.model;
 
+import java.util.Date;
+
 /**
  * @todo 评论entity
  * @author pang
@@ -9,6 +11,7 @@ public class CommentEntity {
 
 	private String id;
 	private String content;
+	private Date commentDate;
 
 	/**
 	 * 评论者信息
@@ -46,6 +49,14 @@ public class CommentEntity {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Date getCommentDate() {
+		return commentDate;
+	}
+
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
 	}
 
 }

@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <ImageView
+        <cn.com.hzzc.health.pro.part.CircularImage
             android:id="@+id/share_c_photo"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_centerInParent="true"
             android:layout_gravity="top"
             android:layout_marginLeft="5dp" />
     </LinearLayout>

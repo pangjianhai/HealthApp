@@ -1,6 +1,7 @@
 package cn.com.hzzc.health.pro.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -36,11 +37,14 @@ public class CommentUtil {
 					String userId = obj.getString("userId");
 					String content = obj.getString("content");
 					String userName = obj.getString("userName");
+					String currentDate = obj.getString("currentDate");
+					Date cDate = CommonDateUtil.getTime(currentDate);
 
 					CommentEntity ci = new CommentEntity();
 					ci.setUserId(userId);
 					ci.setContent(content);
 					ci.setUserName(userName);
+					ci.setCommentDate(cDate);
 					ciList.add(ci);
 				}
 			}

@@ -12,6 +12,6 @@
         android:height="@dimen/bottom_comment_spacing_medium"
         android:width="@dimen/bottom_comment_spacing_medium" />
 
-    <solid android:color="@color/gray" />
+    <solid android:color="@color/lightgray" />
 
 </shape>
