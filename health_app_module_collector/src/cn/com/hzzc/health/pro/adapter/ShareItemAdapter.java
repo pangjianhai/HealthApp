@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
@@ -132,38 +133,6 @@ public class ShareItemAdapter extends BaseAdapter {
 
 	/**
 	 * 
-	 * @tags @param position
-	 * @tags @return
-	 * @date 2015年5月20日
-	 * @todo 当前用户是否点击过了OK
-	 * @author pang
-	 */
-	public boolean ifClickOk(int position) {
-		int if_ok = dataSourceList.get(position).getOps();
-		if (if_ok == ParentShareSentenceEntity.OK) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * 
-	 * @tags @param position
-	 * @tags @return
-	 * @date 2015年5月20日
-	 * @todo 当前用户是否点击过了NOOK
-	 * @author pang
-	 */
-	public boolean ifClickNoOk(int position) {
-		int if_nook = dataSourceList.get(position).getOps();
-		if (if_nook == ParentShareSentenceEntity.NO_OK) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * 
 	 * @tags @param entity
 	 * @date 2015年5月22日
 	 * @todo 重新绘制UI
@@ -172,23 +141,16 @@ public class ShareItemAdapter extends BaseAdapter {
 	public void renderOps(ShareSentenceEntity entity) {
 		holder.share_bottom_ok.setText(entity.getGoodNum());
 		holder.share_bottom_nook.setText(entity.getBadNum());
-		int ops = entity.getOps();
+		holder.share_bottom_ok.setTextColor(Color.parseColor("#999999"));
+		holder.share_bottom_nook.setTextColor(Color.parseColor("#999999"));
+		int ops = entity.getOps();// 用户点赞的三个状态，顶，踩，未操作
+
+		System.out.println(entity.getId()
+				+ "====================================>>>>>>>>>>>>ops:" + ops);
 		if (ParentShareSentenceEntity.OK == ops) {
-			String num_str = holder.share_bottom_ok.getText().toString();
-			if (num_str == null || "".equals(num_str)) {
-				num_str = "0";
-			}
-			String num = (Integer.parseInt(num_str) + 1) + "";
-			holder.share_bottom_ok.setText(num);
-			holder.share_bottom_ok.setTextColor(Color.parseColor("#FF9D6F"));
+			holder.share_bottom_ok.setTextColor(Color.parseColor("#FFA500"));
 		} else if (ParentShareSentenceEntity.NO_OK == ops) {
-			String num_str = holder.share_bottom_nook.getText().toString();
-			if (num_str == null || "".equals(num_str)) {
-				num_str = "0";
-			}
-			String num = (Integer.parseInt(num_str) + 1) + "";
-			holder.share_bottom_nook.setText(num);
-			holder.share_bottom_nook.setTextColor(Color.parseColor("#FF9D6F"));
+			holder.share_bottom_nook.setTextColor(Color.parseColor("#FFA500"));
 		}
 	}
 
@@ -307,12 +269,11 @@ public class ShareItemAdapter extends BaseAdapter {
 		holder.share_bottom_ok.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				System.out.println("------------------------share_bottom_ok");
 				// 如果已经有过操作，就不允许再次操作
 				if (ifClickOk(position) || ifClickNoOk(position)) {
 					return;
 				}
-				// dataSourceList.get(position).setOps(
-				// ParentShareSentenceEntity.OK);
 				callback.afterClickOk(dataSourceList.get(position).getId(),
 						position);
 			}
@@ -321,16 +282,49 @@ public class ShareItemAdapter extends BaseAdapter {
 		holder.share_bottom_nook.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				System.out.println("------------------------share_bottom_nook");
 				// 如果已经有过操作，就不允许再次操作
 				if (ifClickOk(position) || ifClickNoOk(position)) {
 					return;
 				}
-				// dataSourceList.get(position).setOps(
-				// ParentShareSentenceEntity.NO_OK);
 				callback.afterClickNook(dataSourceList.get(position).getId(),
 						position);
 			}
 		});
+	}
+
+	/**
+	 * 
+	 * @tags @param position
+	 * @tags @return
+	 * @date 2015年5月20日
+	 * @todo 当前用户是否点击过了OK
+	 * @author pang
+	 */
+	public boolean ifClickOk(int position) {
+		int if_ok = dataSourceList.get(position).getOps();
+		if (if_ok == ParentShareSentenceEntity.OK) {
+			Toast.makeText(context, "已经顶过了哦", Toast.LENGTH_SHORT).show();
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @tags @param position
+	 * @tags @return
+	 * @date 2015年5月20日
+	 * @todo 当前用户是否点击过了NOOK
+	 * @author pang
+	 */
+	public boolean ifClickNoOk(int position) {
+		int if_nook = dataSourceList.get(position).getOps();
+		if (if_nook == ParentShareSentenceEntity.NO_OK) {
+			Toast.makeText(context, "已经踩过了哦", Toast.LENGTH_SHORT).show();
+			return true;
+		}
+		return false;
 	}
 
 }

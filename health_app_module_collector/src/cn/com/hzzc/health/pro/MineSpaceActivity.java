@@ -28,6 +28,7 @@ import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
 import cn.com.hzzc.health.pro.service.ShareCommentService;
+import cn.com.hzzc.health.pro.service.ViewForInfoService;
 import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
 import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
 import cn.com.hzzc.health.pro.util.UserUtils;
@@ -206,7 +207,6 @@ public class MineSpaceActivity extends BaseActivity implements
 	public void onRefresh() {
 		// dataSourceList.clear();
 		// loadDataMore();
-		
 
 	}
 
@@ -255,12 +255,50 @@ public class MineSpaceActivity extends BaseActivity implements
 	public void afterClickOk(String shareId, int position) {
 		dataSourceList.get(position).setOps(ParentShareSentenceEntity.OK);
 		itemAdapter.notifyDataSetChanged();
+		likeOrDislikeShare(true, position, shareId);
 	}
 
 	@Override
 	public void afterClickNook(String shareId, int position) {
 		dataSourceList.get(position).setOps(ParentShareSentenceEntity.NO_OK);
 		itemAdapter.notifyDataSetChanged();
+		likeOrDislikeShare(false, position, shareId);
+	}
+
+	/**
+	 * 
+	 * @param like
+	 * @param position
+	 * @param shareId
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:顶还是踩
+	 * @return:void
+	 */
+	private void likeOrDislikeShare(boolean like, int position, String shareId) {
+		ShareSentenceEntity entity = dataSourceList.get(position);
+		if (like) {
+			entity.setOps(ParentShareSentenceEntity.OK);
+			entity.setGoodNum((Integer.parseInt(entity.getGoodNum()) + 1) + "");
+			itemAdapter.notifyDataSetChanged();
+			Intent intent = new Intent(getApplicationContext(),
+					ViewForInfoService.class);
+			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+			intent.putExtra("id", shareId);
+			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_OK);
+			startService(intent);
+		} else {
+			entity.setOps(ParentShareSentenceEntity.NO_OK);
+			entity.setBadNum((Integer.parseInt(entity.getBadNum()) + 1) + "");
+			itemAdapter.notifyDataSetChanged();
+			Intent intent = new Intent(getApplicationContext(),
+					ViewForInfoService.class);
+			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+			intent.putExtra("id", shareId);
+			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_NO);
+			startService(intent);
+		}
+
 	}
 
 	/**

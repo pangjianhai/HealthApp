@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.com.hzzc.health.pro.SystemConst;
+import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 
@@ -125,6 +126,7 @@ public class ShareSentenceUtil {
 				String createDate = obj.getString("createDateStr");
 				String commentNum = obj.getString("commentNum");
 				String tags = obj.has("tags") ? obj.getString("tags") : "";
+				String state = obj.has("state") ? obj.getString("state") : "";
 				bean.setId(id);
 				bean.setType(type);
 				bean.setContent(content);
@@ -136,6 +138,16 @@ public class ShareSentenceUtil {
 				bean.setcDate(createDate);
 				bean.setCommentNum(commentNum);
 				bean.setTags(tags);
+				int ops = ParentShareSentenceEntity.NO_OPS;
+				if ("like".equals(state)) {
+					ops = ParentShareSentenceEntity.OK;
+				} else if ("dislike".equals(state)) {
+					ops = ParentShareSentenceEntity.NO_OK;
+				} else {
+					ops = ParentShareSentenceEntity.NO_OPS;
+				}
+				System.out
+						.println("解析的时候-----------------------state>" + state);
 				// 图片的处理
 				List<String> imgs = new ArrayList<String>();
 				String img0 = obj.getString("img0");
@@ -190,7 +202,7 @@ public class ShareSentenceUtil {
 					bean.setMaterial(material);
 					bean.setFunction(function);
 				}
-
+				bean.setOps(ops);
 				dataSourceList.add(bean);
 			}
 		} catch (Exception e) {
