@@ -38,7 +38,7 @@ public class SystemConst {
 	// public static final String server_url =
 	// "http://101.200.2.143:9001/iotapp/";
 
-	public static final String server_url = "http://192.168.0.102:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
 
 	/**
 	 * 
@@ -287,6 +287,12 @@ public class SystemConst {
 		 * 贡献标签
 		 */
 		public static final String shareTagToPlatform = "appSourceController/addTagByUserId.do";
+
+		/**
+		 * 判断一个人对某个分享信息是否好评或者差评
+		 */
+		public static final String judgeIflikeNumOrdislikeNum = "appSourceController/judgeIflikeNumOrdislikeNum.do";
+
 	}
 
 	/**

@@ -490,4 +490,17 @@ public class ShareSentenceUtil {
 		}
 		return lst;
 	}
+
+	public static String paseLikeShareOrDis(String data) {
+		JSONObject or_obj;
+		try {
+			or_obj = new JSONObject(data);
+			String state = or_obj.getString("state");
+			return state;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 }

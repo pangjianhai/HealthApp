@@ -9,15 +9,19 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
@@ -27,19 +31,23 @@ import cn.com.hzzc.health.pro.adapter.CommentAdapter;
 import cn.com.hzzc.health.pro.adapter.ShareSinglePicAdapter;
 import cn.com.hzzc.health.pro.model.CommentEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
+import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.part.SentenceListView.SentenceListViewListener;
 import cn.com.hzzc.health.pro.service.CollectionForInfoService;
 import cn.com.hzzc.health.pro.service.ShareCommentService;
 import cn.com.hzzc.health.pro.service.ViewForInfoService;
 import cn.com.hzzc.health.pro.util.CommentUtil;
+import cn.com.hzzc.health.pro.util.FocusUtil;
 import cn.com.hzzc.health.pro.util.PicUtil;
 import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
+import cn.com.hzzc.health.pro.util.UserUtils;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -74,6 +82,19 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	private int page = 0;
 	private int size = 7;
 
+	/**
+	 * 作者信息
+	 */
+	private UserItem author;
+	private ImageView share_all_detail_author_photo;
+	private TextView share_all_detail_author_name;
+	private Button share_all_detail_author_focus;
+
+	/**
+	 * 点赞状态
+	 */
+	private String like_or_dis_state = "more";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +104,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		share_sentence_id = intent.getStringExtra("share_sentence_id");
 		init();
 		initListView();
+		initGoodState(userId, share_sentence_id);
 	}
 
 	/**
@@ -101,6 +123,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
+
+		share_all_detail_author_photo = (ImageView) findViewById(R.id.share_all_detail_author_photo);
+		share_all_detail_author_name = (TextView) findViewById(R.id.share_all_detail_author_name);
+		share_all_detail_author_focus = (Button) findViewById(R.id.share_all_detail_author_focus);
 
 	}
 
@@ -159,6 +185,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	public void renderText(ShareSentenceEntity entity) {
 		if (entity != null) {
+			String authorId = entity.getUserId();
+			renderAuthorInfo(authorId);
+			renderFriendRel(authorId);
 			String type = entity.getType();
 			String material = entity.getMaterial();
 			String function = entity.getFunction();
@@ -186,6 +215,225 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 			} else {
 				share_detail_imgs_gridview.setVisibility(View.GONE);
 			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param authorId
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:初始化作者信息
+	 * @return:void
+	 */
+	private void renderAuthorInfo(String authorId) {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("Id", authorId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					author = UserUtils.parseUserItemFromJSON(data);
+
+					share_all_detail_author_name.setText(author.getUserName());
+					String imgId = author.getImg();
+					if (imgId != null && !"".equals(imgId)) {
+						String pic_url = SystemConst.server_url
+								+ SystemConst.FunctionUrl.getHeadImgById
+								+ "?para={headImg:'" + imgId + "'}";
+						ImageLoader.getInstance().displayImage(pic_url,
+								share_all_detail_author_photo);
+					} else {
+						String imageUri = "drawable://"
+								+ R.drawable.default_head1;
+						ImageLoader.getInstance().displayImage(imageUri,
+								share_all_detail_author_photo);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getUserById, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param authorId
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:判断用户和作者的关系，是否是同一个人，是否可以添加关注
+	 * @return:void
+	 */
+	private void renderFriendRel(final String authorId) {
+		if (userId.equals(authorId)) {
+			share_all_detail_author_focus.setVisibility(View.GONE);
+			return;
+		}
+		try {
+			JSONObject d = new JSONObject();
+			d.put("currentId", userId);
+			d.put("friendId", authorId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					Boolean flag = FocusUtil.commonFocusResult(data);
+					if (flag) {
+						share_all_detail_author_focus.setText("关注此人");
+						share_all_detail_author_focus
+								.setOnClickListener(new OnClickListener() {
+
+									@Override
+									public void onClick(View v) {
+										addFocus(authorId);
+									}
+								});
+						changeStyle(false);
+					} else {
+						share_all_detail_author_focus.setText("取消关注");
+						share_all_detail_author_focus
+								.setOnClickListener(new OnClickListener() {
+
+									@Override
+									public void onClick(View v) {
+										cancelFocus(authorId);
+									}
+								});
+						changeStyle(true);
+
+					}
+					share_all_detail_author_focus.setVisibility(View.VISIBLE);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.if_some_one_focus_another, map,
+					rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:添加关注
+	 * @return:void
+	 */
+	public void addFocus(final String authorId) {
+
+		try {
+			JSONObject d = new JSONObject();
+			d.put("currentId", userId);
+			d.put("friendId", authorId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					boolean b = FocusUtil.commonFocusResult(data);
+					share_all_detail_author_focus.setText("取消关注");
+					share_all_detail_author_focus
+							.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									cancelFocus(authorId);
+								}
+							});
+					changeStyle(true);
+
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.some_one_focus_another, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:取消关注
+	 * @return:void
+	 */
+	public void cancelFocus(final String authorId) {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("currentId", userId);
+			d.put("friendId", authorId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					boolean b = FocusUtil.commonFocusResult(data);
+					share_all_detail_author_focus.setText("关注此人");
+					share_all_detail_author_focus
+							.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									addFocus(authorId);
+								}
+							});
+					changeStyle(false);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.cancel_some_one_focus_another,
+					map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void changeStyle(boolean ifFocus) {
+		if (ifFocus) {
+			int gray_color = Color.parseColor("#BEBEBE");
+			share_all_detail_author_focus.setTextColor(gray_color);
+			share_all_detail_author_focus
+					.setBackgroundResource(R.drawable.share_info_focus_yet_shape);
+		} else {
+			int gray_color = Color.parseColor("#FFA500");
+			share_all_detail_author_focus.setTextColor(gray_color);
+			share_all_detail_author_focus
+					.setBackgroundResource(R.drawable.share_info_focus_shape);
 		}
 	}
 
@@ -231,6 +479,78 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	}
 
 	/**
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:初始化操作状态
+	 * @return:void
+	 */
+	private void initGoodState(String userId, String shareId) {
+		System.out
+				.println("=========================================================initGoodState");
+		try {
+			JSONObject d = new JSONObject();
+			d.put("currentId", userId);
+			d.put("shareId", shareId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					like_or_dis_state = ShareSentenceUtil
+							.paseLikeShareOrDis(data);
+					System.out.println(data+"------------------------like_or_dis_state:"
+							+ like_or_dis_state);
+					if ("like".equals(like_or_dis_state)) {
+						changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_ok);
+					} else if ("dislike".equals(like_or_dis_state)) {
+						changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_nook);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.judgeIflikeNumOrdislikeNum, map,
+					rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param id
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:点击好评或者差评之后改变颜色
+	 * @return:void
+	 */
+	private void changeColorAfterClickLikeOr(int id) {
+		int gray_color = Color.parseColor("#FFA500");
+		share_all_detail_author_focus.setTextColor(gray_color);
+		((Button) findViewById(id)).setTextColor(gray_color);
+	}
+
+	/**
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:是否可以点赞或者差评，因为之前可能已经操作过了
+	 * @return:boolean
+	 */
+	public boolean ifCanClickLikeOrDislike() {
+		if (like_or_dis_state == null || "more".equals(like_or_dis_state)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * @tags @param v
 	 * @date 2015年5月26日
 	 * @todo 点击操作栏
@@ -254,7 +574,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 					Toast.LENGTH_SHORT).show();
 		} else if (v.getId() == R.id.single_share_bottom_ops_comment) {
 			showInput();
-		} else if (v.getId() == R.id.single_share_bottom_ops_ok) {
+		} else if (v.getId() == R.id.single_share_bottom_ops_ok) {// 好评
+			if (!ifCanClickLikeOrDislike()) {
+				return;
+			}
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
 					ViewForInfoService.class);
 			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
@@ -263,7 +586,13 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 			startService(intent);
 			Toast.makeText(ShareSentenceAllDetailActivity.this, "操作成功",
 					Toast.LENGTH_SHORT).show();
-		} else if (v.getId() == R.id.single_share_bottom_ops_nook) {
+
+			like_or_dis_state = "like";
+			changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_ok);
+		} else if (v.getId() == R.id.single_share_bottom_ops_nook) {// 差评
+			if (!ifCanClickLikeOrDislike()) {
+				return;
+			}
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
 					ViewForInfoService.class);
 			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
@@ -272,6 +601,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 			startService(intent);
 			Toast.makeText(ShareSentenceAllDetailActivity.this, "操作成功",
 					Toast.LENGTH_SHORT).show();
+
+			like_or_dis_state = "dislike";
+			changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_nook);
 		}
 	}
 

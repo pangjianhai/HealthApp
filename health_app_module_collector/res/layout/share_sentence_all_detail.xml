@@ -83,14 +83,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="100dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/self_tag_shape"
+                    android:background="@drawable/share_info_focus_shape"
                     android:gravity="center"
                     android:padding="2dp"
-                    android:text="我要关注"
-                    android:textColor="@color/deepgray"
-                    android:textSize="12sp" />
+                    android:text="关注此人"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <TextView
