@@ -11,13 +11,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
+import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.util.CommonDateUtil;
 import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
 
@@ -81,7 +81,7 @@ public class ShareItemAdapter extends BaseAdapter {
 		if (convertview == null) {
 			convertview = View.inflate(context, R.layout.share_sentence_item,
 					null);
-			holder.share_photo = (ImageView) convertview
+			holder.share_photo = (CircularImage) convertview
 					.findViewById(R.id.share_photo);
 			holder.share_id = (TextView) convertview
 					.findViewById(R.id.share_id);
@@ -127,7 +127,7 @@ public class ShareItemAdapter extends BaseAdapter {
 				share_content, share_bottom_ok, share_bottom_nook, share_time;
 		private GridView picGridView;
 
-		private ImageView share_photo;
+		private CircularImage share_photo;
 	}
 
 	/**

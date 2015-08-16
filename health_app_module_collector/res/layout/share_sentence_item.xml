@@ -14,7 +14,7 @@
         android:gravity="top"
         android:orientation="horizontal" >
 
-        <ImageView
+        <cn.com.hzzc.health.pro.part.CircularImage
             android:id="@+id/share_photo"
             android:layout_width="20dp"
             android:layout_height="20dp"
