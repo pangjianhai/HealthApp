@@ -110,16 +110,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@drawable/ok4"
+                    android:drawableRight="@drawable/ok4"
                     android:text="4"
                     android:textColor="@color/bgray" />
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="1dp"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/share_to" />
             </RelativeLayout>
         </LinearLayout>
