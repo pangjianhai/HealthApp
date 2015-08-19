@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/cn/com/hzzc/health/pro/MineSpaceActivity.java=UTF-8
 encoding//src/cn/com/hzzc/health/pro/MyJazzyViewPager.java=UTF-8
 encoding//src/cn/com/hzzc/health/pro/ShareByTagActivity.java=UTF-8
+encoding//src/cn/com/hzzc/health/pro/adapter/OrderShareItemAdapter.java=UTF-8
 encoding//src/cn/com/hzzc/health/pro/adapter/ShareItemAdapter.java=UTF-8
 encoding//src/cn/com/hzzc/health/pro/model/ShareSentenceEntity.java=UTF-8
 encoding//src/cn/com/hzzc/health/pro/part/SharePullDownHeader.java=UTF-8

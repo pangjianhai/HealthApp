@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
+import cn.com.hzzc.health.pro.adapter.OrderShareItemAdapter;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
 import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
@@ -60,7 +61,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	/**
 	 * 空间分享信息适配器
 	 */
-	private ShareItemAdapter itemAdapter;
+	private OrderShareItemAdapter itemAdapter;
 
 	/**
 	 * 需要评论的分享信息在队列当中的位置
@@ -154,7 +155,8 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	}
 
 	private void initListView() {
-		itemAdapter = new ShareItemAdapter(MainPageLayoutOrderActivity.this,
+		itemAdapter = new OrderShareItemAdapter(
+				MainPageLayoutOrderActivity.this,
 				MainPageLayoutOrderActivity.this, dataSourceList);
 
 		mListView.setAdapter(itemAdapter);
