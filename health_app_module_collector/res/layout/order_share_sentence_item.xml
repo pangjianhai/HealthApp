@@ -95,23 +95,21 @@
                     android:verticalSpacing="3dip" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="2dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"
-                android:divider="@drawable/divider2"
-                android:gravity="bottom"
-                android:orientation="horizontal"
-                android:showDividers="middle" >
+                android:layout_marginTop="6dp"
+                android:gravity="bottom" >
 
                 <TextView
                     android:id="@+id/share_bottom_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
                     android:drawableLeft="@drawable/ok4"
                     android:text="4"
                     android:textColor="@color/bgray" />
@@ -119,10 +117,11 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginRight="1dp"
                     android:src="@drawable/share_to" />
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

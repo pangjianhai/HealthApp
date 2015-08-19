@@ -225,18 +225,6 @@ public class OrderShareItemAdapter extends BaseAdapter {
 			}
 		});
 
-		// 点击OK
-		holder.share_bottom_ok.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// 如果已经有过操作，就不允许再次操作
-				if (ifClickOk(position) || ifClickNoOk(position)) {
-					return;
-				}
-				callback.afterClickOk(dataSourceList.get(position).getId(),
-						position);
-			}
-		});
 	}
 
 	/**
