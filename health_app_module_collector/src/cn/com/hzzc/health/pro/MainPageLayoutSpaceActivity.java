@@ -668,6 +668,9 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		super.onResume();
 	}
 
+	/**
+	 * 该发发主要处理两方面的事情，一方面是由非登录到已登录进行相关的初始化，另一方是是处理从其他页面转到此页面的情况
+	 */
 	@Override
 	public void onRestart() {
 		super.onRestart();
