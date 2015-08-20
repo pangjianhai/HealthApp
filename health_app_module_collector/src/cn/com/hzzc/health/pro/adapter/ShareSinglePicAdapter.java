@@ -47,7 +47,7 @@ public class ShareSinglePicAdapter extends BaseAdapter {
 	/**
 	 * 每张图片默认的尺寸
 	 */
-	LayoutParams params = new AbsListView.LayoutParams(120, 250);
+	LayoutParams params = new AbsListView.LayoutParams(220, 220);
 
 	@Override
 	public int getCount() {
@@ -71,7 +71,7 @@ public class ShareSinglePicAdapter extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = new ImageView(context);
-			((ImageView) convertView).setScaleType(ScaleType.CENTER_CROP);
+			((ImageView) convertView).setScaleType(ScaleType.MATRIX);
 			convertView.setLayoutParams(params);
 		}
 		if (imgIdList.get(position) != null
