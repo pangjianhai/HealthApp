@@ -80,6 +80,10 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 		}
 		inner_image = (ImageView) convertView
 				.findViewById(R.id.gridview_pic_item_iv);
+		LayoutParams params = inner_image.getLayoutParams();
+		params.height = 100;
+		params.width = 100;
+		inner_image.setLayoutParams(params);
 		/**
 		 * 构造连接加载图片
 		 */
