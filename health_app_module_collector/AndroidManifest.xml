@@ -227,7 +227,10 @@
             android:name="cn.com.hzzc.health.pro.TestActivity"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name="cn.com.hzzc.health.pro.ImagePagerActivity"></activity>
+        <activity
+            android:name="cn.com.hzzc.health.pro.ImagePagerActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
         <!-- 关于sharesdk  begin -->
         <activity
             android:name="com.mob.tools.MobUIShell"
