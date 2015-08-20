@@ -207,7 +207,6 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 	}
 
 	public void freshDataForListView() {
-		Toast.makeText(getContext(), "正在加载...", Toast.LENGTH_SHORT).show();
 		try {
 			JSONObject d = new JSONObject();
 			d.put("tagName", data_key);
@@ -221,6 +220,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 					List<Tag> list = TagUtils
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
+						System.out.println("::::" + list.size());
 						for (Tag tag : list) {
 							addTag(tag);
 						}
@@ -251,7 +251,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 	private void addTag(final Tag tag) {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, 100);
-		params.height = 77 * (new Random().nextInt(2) + 1);
+		params.height = 150;
 		params.setMargins(1, 1, 1, 1);
 		Button btn = new Button(getContext());
 		btn.setLayoutParams(params);
