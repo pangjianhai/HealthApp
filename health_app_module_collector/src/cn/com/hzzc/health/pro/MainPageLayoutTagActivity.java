@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.Toast;
 import cn.com.hzzc.health.pro.abstracts.ParentMainActivity;
 import cn.com.hzzc.health.pro.adapter.TagAdapter;
 import cn.com.hzzc.health.pro.model.Tag;
@@ -156,6 +157,9 @@ public class MainPageLayoutTagActivity extends ParentMainActivity {
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
 						repaintUI(list);
+					} else {
+						Toast.makeText(getApplicationContext(),
+								"点击右上角可以为自己设置标签", Toast.LENGTH_LONG).show();
 					}
 				}
 
