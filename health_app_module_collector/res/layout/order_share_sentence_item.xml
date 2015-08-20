@@ -41,14 +41,30 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/share_username"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/xlistview_header_hint_name"
-                    android:textColor="@color/bgray"
-                    android:textSize="18sp" />
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:id="@+id/share_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/xlistview_header_hint_name"
+                        android:textColor="@color/bgray"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/share_top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_activity_top1" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/share_type"

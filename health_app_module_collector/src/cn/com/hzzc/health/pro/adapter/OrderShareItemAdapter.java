@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
@@ -95,6 +96,8 @@ public class OrderShareItemAdapter extends BaseAdapter {
 					.findViewById(R.id.share_space_gridview);
 			holder.share_type = (TextView) convertview
 					.findViewById(R.id.share_type);
+			holder.share_top = (ImageView) convertview
+					.findViewById(R.id.share_top);
 
 			holder.share_bottom_ok = (TextView) convertview
 					.findViewById(R.id.share_bottom_ok);
@@ -122,7 +125,7 @@ public class OrderShareItemAdapter extends BaseAdapter {
 		private TextView share_id, share_name, share_type, share_content,
 				share_bottom_ok;
 		private GridView picGridView;
-
+		private ImageView share_top;
 		private CircularImage share_photo;
 	}
 
@@ -203,6 +206,19 @@ public class OrderShareItemAdapter extends BaseAdapter {
 		 */
 		holder.picGridView.setOnScrollListener(new PauseOnScrollListener(
 				ImageLoader.getInstance(), true, false));
+
+		if (position == 0) {
+			holder.share_top.setImageResource(R.drawable.ic_activity_top1);
+			holder.share_top.setVisibility(View.VISIBLE);
+		} else if (position == 1) {
+			holder.share_top.setImageResource(R.drawable.ic_activity_top2);
+			holder.share_top.setVisibility(View.VISIBLE);
+		} else if (position == 2) {
+			holder.share_top.setImageResource(R.drawable.ic_activity_top3);
+			holder.share_top.setVisibility(View.VISIBLE);
+		} else {
+			holder.share_top.setVisibility(View.GONE);
+		}
 	}
 
 	private void addListener(final int position) {

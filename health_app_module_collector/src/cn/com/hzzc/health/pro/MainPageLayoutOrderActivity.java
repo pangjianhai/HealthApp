@@ -208,7 +208,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-
+					onLoadOver();
 				}
 			};
 			Map map = new HashMap();
@@ -257,7 +257,7 @@ public class MainPageLayoutOrderActivity extends ParentMainActivity implements
 	private void onLoadOver() {
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
-		mListView.setRefreshTime("刚才");
+		mListView.setRefreshTime("刚刚");
 		Toast.makeText(getApplicationContext(),
 				"总共" + dataSourceList.size() + "条", Toast.LENGTH_SHORT).show();
 	}

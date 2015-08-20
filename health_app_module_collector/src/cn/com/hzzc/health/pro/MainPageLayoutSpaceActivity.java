@@ -343,7 +343,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-
+					onLoadOver();
 				}
 			};
 			Map map = new HashMap();
@@ -633,7 +633,8 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
-					System.out.println("--------------------"+pb.getLoginTimes());
+					System.out.println("--------------------"
+							+ pb.getLoginTimes());
 					if (pb != null && pb.getLoginTimes() < 1) {
 						Intent intent = new Intent(
 								MainPageLayoutSpaceActivity.this,
