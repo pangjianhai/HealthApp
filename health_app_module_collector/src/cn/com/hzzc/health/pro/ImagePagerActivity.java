@@ -8,8 +8,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Window;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.imgview.HackyViewPager;
+import cn.com.hzzc.health.pro.util.ActivityCollector;
 
 /**
  * 图片查看器
@@ -26,8 +28,9 @@ public class ImagePagerActivity extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.image_detail_pager);
-
+		ActivityCollector.addActivity(this);
 		pagerPosition = getIntent().getIntExtra(EXTRA_IMAGE_INDEX, 0);
 		ArrayList<String> urls = getIntent().getStringArrayListExtra(
 				EXTRA_IMAGE_URLS);
