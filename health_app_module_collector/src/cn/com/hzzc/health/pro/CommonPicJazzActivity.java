@@ -75,7 +75,7 @@ public class CommonPicJazzActivity extends BaseActivity {
 						+ "?para={imgId:'" + ls.get(position) + "'}";
 				ImageLoader.getInstance().displayImage(pic_url, imageView);
 
-				imageView.setScaleType(ScaleType.CENTER_INSIDE);
+				imageView.setScaleType(ScaleType.CENTER_CROP);
 				container.addView(imageView);
 				mViewPager.setObjectForPosition(imageView, position);
 

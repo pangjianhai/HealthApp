@@ -15,6 +15,7 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import cn.com.hzzc.health.pro.CommonPicJazzActivity;
+import cn.com.hzzc.health.pro.ImagePagerActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
@@ -106,12 +107,26 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				Intent it = new Intent(context, CommonPicJazzActivity.class);
-				it.putExtra("imgIdList", (Serializable) imgIdList);
-				it.putExtra("clickImg", imgIdList.get(position));
-				context.startActivity(it);
+				// Intent it = new Intent(context, CommonPicJazzActivity.class);
+				// it.putExtra("imgIdList", (Serializable) imgIdList);
+				// it.putExtra("clickImg", imgIdList.get(position));
+				// context.startActivity(it);
+
+				ArrayList urls = new ArrayList();
+				for (String id : imgIdList) {
+					urls.add(id);
+				}
+				imageBrower(context, position, urls);
 			}
 		});
 		return convertView;
+	}
+
+	protected void imageBrower(Context mContext, int position,
+			ArrayList<String> urls2) {
+		Intent intent = new Intent(mContext, ImagePagerActivity.class);
+		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
+		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+		mContext.startActivity(intent);
 	}
 }

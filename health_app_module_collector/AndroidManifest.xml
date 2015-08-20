@@ -4,8 +4,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -82,7 +82,6 @@
         </activity>
         <activity
             android:name="cn.com.hzzc.health.pro.InfoDetailActivity"
-            android:theme="@android:style/Theme.Holo.Light"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <!-- 进入分享信息的入口页面 -->
@@ -228,6 +227,7 @@
             android:name="cn.com.hzzc.health.pro.TestActivity"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity android:name="cn.com.hzzc.health.pro.ImagePagerActivity"></activity>
         <!-- 关于sharesdk  begin -->
         <activity
             android:name="com.mob.tools.MobUIShell"
