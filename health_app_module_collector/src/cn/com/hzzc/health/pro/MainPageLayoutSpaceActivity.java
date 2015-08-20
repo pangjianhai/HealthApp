@@ -403,7 +403,7 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 	private void onLoadOver() {
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
-		mListView.setRefreshTime("刚才");
+		mListView.setRefreshTime("刚刚");
 	}
 
 	@Override
