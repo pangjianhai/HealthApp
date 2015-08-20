@@ -146,8 +146,6 @@ public class ShareSentenceUtil {
 				} else {
 					ops = ParentShareSentenceEntity.NO_OPS;
 				}
-				System.out
-						.println("解析的时候-----------------------state>" + state);
 				// 图片的处理
 				List<String> imgs = new ArrayList<String>();
 				String img0 = obj.getString("img0");
