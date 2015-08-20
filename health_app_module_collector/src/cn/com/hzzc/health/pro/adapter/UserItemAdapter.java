@@ -17,6 +17,7 @@ import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.UserItem;
+import cn.com.hzzc.health.pro.part.CircularImage;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -60,7 +61,7 @@ public class UserItemAdapter extends BaseAdapter {
 		} else {
 			convertView = View.inflate(context,
 					R.layout.friends_search_users_item, null);
-			holder.find_search_result_header = (ImageView) convertView
+			holder.find_search_result_header = (CircularImage) convertView
 					.findViewById(R.id.find_search_result_header);
 			holder.check_someone = (ImageView) convertView
 					.findViewById(R.id.check_someone);
@@ -83,7 +84,7 @@ public class UserItemAdapter extends BaseAdapter {
 					holder.find_search_result_header,
 					HealthApplication.getDisplayImageOption());
 		} else {
-			String imageUri = "drawable://" + R.drawable.default_head0;
+			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
 			ImageLoader.getInstance().displayImage(imageUri,
 					holder.find_search_result_header);
 		}
@@ -107,7 +108,8 @@ public class UserItemAdapter extends BaseAdapter {
 	}
 
 	private class HolderView {
-		private ImageView find_search_result_header, check_someone;
+		private ImageView check_someone;
+		private CircularImage find_search_result_header;
 		private TextView find_search_result_username;
 		private TextView find_search_result_tags;
 	}
