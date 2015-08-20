@@ -220,7 +220,6 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 					List<Tag> list = TagUtils
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
-						System.out.println("::::" + list.size());
 						for (Tag tag : list) {
 							addTag(tag);
 						}
