@@ -36,6 +36,10 @@ public class ActivityCollector {
 		 */
 		new SharedPreInto(HealthApplication.getContext())
 				.clearAccountAfterLoginOut();
+		/**
+		 * 推出后因为返回一个特定页面，所以将application的全局用户ID置为空
+		 */
+		HealthApplication.setUserId("");
 		for (Activity activity : activities) {
 			if (activity != null && !activity.isFinishing()) {
 				activity.finish();

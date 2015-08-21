@@ -40,6 +40,17 @@ public class SharedPreInto {
 	}
 
 	/**
+	 * @user:pang
+	 * @data:2015年8月21日
+	 * @todo:删除所有数据
+	 * @return:void
+	 */
+	public void deleteAllData() {
+		context.getSharedPreferences(SystemConst.share_doc_name,
+				Context.MODE_PRIVATE).edit().clear().commit();
+	}
+
+	/**
 	 * 
 	 * @tags @param id
 	 * @tags @param name

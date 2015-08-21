@@ -193,11 +193,12 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				/******** 正式推出 ******/
-				new SharedPreInto(MainPageLayoutMeActivity.this)
-						.initAccountAfterReg("", "", "");
-				HealthApplication.setUserId("");
+				/******** 正式退出 ******/
 				ActivityCollector.finishAll();
+				/******** 返回首页 *********/
+				Intent intent = new Intent(HealthApplication.getContext(),
+						MainPageLayoutSpaceActivity.class);
+				startActivity(intent);
 			}
 		});
 
