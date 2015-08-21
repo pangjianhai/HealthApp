@@ -100,7 +100,7 @@
             android:id="@+id/reg_save"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_style_green"
+            android:background="@drawable/btn_ok_selector"
             android:onClick="regAccount"
             android:text="@string/login_reg_logininput_reg"
             android:textColor="#ffffff"

@@ -41,7 +41,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
-        android:hint="@string/login_reg_logininput_account"
+        android:hint="@string/login_reg_logininput_account_for_forget"
         android:singleLine="true"
         android:textColor="#000"
         android:textSize="15sp" />
@@ -58,7 +58,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/btn_style_green"
+            android:background="@drawable/btn_ok_selector"
             android:onClick="getPwd"
             android:text="@string/login_reg_logininput_login_get_pwd_btn"
             android:textColor="#ffffff"

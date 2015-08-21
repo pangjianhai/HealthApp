@@ -72,7 +72,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/btn_style_green"
+            android:background="@drawable/btn_ok_selector"
             android:onClick="loginHealthApp"
             android:text="@string/login_reg_logininput_login"
             android:textColor="#ffffff"

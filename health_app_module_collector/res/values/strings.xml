@@ -47,6 +47,7 @@
 
     <!-- 关于注册登陆 -->
     <string name="login_reg_logininput_account">请输由字母和数字组成的账号，用来登录</string>
+    <string name="login_reg_logininput_account_for_forget">请输登录账号</string>
     <string name="login_reg_logininput_password">请输入密码</string>
     <string name="login_reg_logininput_password_again">请再次输入密码</string>
     <string name="login_reg_logininput_email">请输入邮箱以便找回密码</string>
