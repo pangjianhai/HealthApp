@@ -2,10 +2,11 @@ package cn.com.hzzc.health.pro.util;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
+import android.content.ClipboardManager;
+import android.content.Context;
 import cn.com.hzzc.health.pro.model.PushBean;
 import cn.com.hzzc.health.pro.model.SelfNum;
 import cn.com.hzzc.health.pro.model.UserItem;
@@ -187,5 +188,13 @@ public class UserUtils {
 			e.printStackTrace();
 		}
 		return "";
+	}
+
+	@SuppressLint("NewApi")
+	public static void copy(String content, Context context) {
+		// 得到剪贴板管理器
+		ClipboardManager cmb = (ClipboardManager) context
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+		cmb.setText(content.trim());
 	}
 }

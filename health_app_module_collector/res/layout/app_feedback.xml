@@ -60,7 +60,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/btn_style_green"
+            android:background="@drawable/btn_ok_selector"
             android:text="@string/app_feed_back_btn"
             android:textColor="#ffffff"
             android:textSize="18sp" />
@@ -89,7 +89,7 @@
             android:layout_below="@+id/feed_back_btn_into_one"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="88888888888888"
+            android:text="PF88664411"
             android:textColor="@color/blue"
             android:textSize="18sp" />
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/feed_back_btn_into_three"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/erweima" />
+            android:src="@drawable/erweima2" />
     </RelativeLayout>
 
 </RelativeLayout>
