@@ -7,13 +7,14 @@ import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
+import cn.com.hzzc.health.pro.part.CustomDialog;
 import cn.com.hzzc.health.pro.part.LineEditText;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 
@@ -56,11 +57,24 @@ public class AppRegActivity extends BaseActivity {
 	}
 
 	private void error(String content) {
-		new AlertDialog.Builder(AppRegActivity.this)
-				.setIcon(
-						getResources().getDrawable(R.drawable.login_error_icon))
-				.setTitle("注册错误").setMessage(content).create().show();
-		// .setPositiveButton("关闭", null)
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);
+		builder.setMessage("注册错误！");
+		builder.setTitle("提示");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				// 设置你的操作事项
+			}
+		});
+
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builder.create().show();
 	}
 
 	/**

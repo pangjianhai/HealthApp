@@ -6,10 +6,12 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import cn.com.hzzc.health.pro.part.CustomDialog;
 import cn.com.hzzc.health.pro.part.LineEditText;
 import cn.com.hzzc.health.pro.util.LoginUtil;
 
@@ -57,11 +59,26 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 	public void getPwd(View v) {
 		String account = login_user_edit.getText().toString();
 		if (account == null || "".equals(account)) {
-			new AlertDialog.Builder(AppLoginGetPwdActivity.this)
-					.setIcon(
-							getResources().getDrawable(
-									R.drawable.login_error_icon))
-					.setTitle("找回错误").setMessage("请先输入账号！").create().show();
+			CustomDialog.Builder builder = new CustomDialog.Builder(this);
+			builder.setMessage("请先输入账号！");
+			builder.setTitle("找回错误");
+			builder.setPositiveButton("确定",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							// 设置你的操作事项
+						}
+					});
+
+			builder.setNegativeButton("取消",
+					new android.content.DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+
+			builder.create().show();
+
 			return;
 		} else {
 			getPwd(account);

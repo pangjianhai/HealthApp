@@ -6,10 +6,12 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import cn.com.hzzc.health.pro.part.CustomDialog;
 import cn.com.hzzc.health.pro.part.LineEditText;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 
@@ -151,11 +153,25 @@ public class AppLoginStartActivity extends BaseActivity {
 	 * @author pang
 	 */
 	private void loginFail() {
-		new AlertDialog.Builder(AppLoginStartActivity.this)
-				.setIcon(
-						getResources().getDrawable(R.drawable.login_error_icon))
-				.setTitle("登录错误").setMessage("输入有误，\n请重新输入后再登录！").create()
-				.show();
+
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);
+		builder.setMessage("输入有误，\n请重新输入后再登录！");
+		builder.setTitle("登录错误");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				// 设置你的操作事项
+			}
+		});
+
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builder.create().show();
 	}
 
 	public void login_back(View v) { // 标题栏 返回按钮
