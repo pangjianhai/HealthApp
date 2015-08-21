@@ -92,14 +92,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/reg_password_email"
-        android:layout_marginTop="20dp" >
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp" >
 
         <Button
             android:id="@+id/reg_save"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/btn_style_green"
             android:onClick="regAccount"
             android:text="@string/login_reg_logininput_reg"
