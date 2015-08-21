@@ -36,7 +36,7 @@ public class SystemConst {
 	public static final String json_param_name = "para";
 
 	// public static final String server_url =
-	// "http://101.200.2.143:9001/iotapp/";
+	// "http://www.kx360.com.cn/iotapp/";
 
 	public static final String server_url = "http://192.168.0.102:8080/IotApp/";
 

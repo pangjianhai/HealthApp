@@ -301,7 +301,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 */
 	private void versionScan() {
 		final String versionName = this.getString(R.string.app_version_name);
-		final String versionNum = this.getString(R.string.app_version_num);
+		final String versionNum = this.getString(R.string.app_version_num);// 当前APP的版本
 
 		try {
 			JSONObject d = new JSONObject();
