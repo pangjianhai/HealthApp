@@ -33,7 +33,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <EditText
+    <cn.com.hzzc.health.pro.part.LineEditText
         android:id="@+id/reg_username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -41,13 +41,12 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/login_editbox"
         android:hint="@string/login_reg_logininput_account"
         android:singleLine="true"
         android:textColor="#000"
         android:textSize="15sp" />
 
-    <EditText
+    <cn.com.hzzc.health.pro.part.LineEditText
         android:id="@+id/reg_password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -55,14 +54,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/login_editbox"
         android:hint="@string/login_reg_logininput_password"
         android:inputType="textPassword"
         android:singleLine="true"
         android:textColor="#000"
         android:textSize="15sp" />
 
-    <EditText
+    <cn.com.hzzc.health.pro.part.LineEditText
         android:id="@+id/reg_password_again"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -70,14 +68,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/login_editbox"
         android:hint="@string/login_reg_logininput_password_again"
         android:inputType="textPassword"
         android:singleLine="true"
         android:textColor="#000"
         android:textSize="15sp" />
 
-    <EditText
+    <cn.com.hzzc.health.pro.part.LineEditText
         android:id="@+id/reg_password_email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -85,7 +82,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/login_editbox"
         android:hint="@string/login_reg_logininput_email"
         android:inputType="textEmailAddress"
         android:singleLine="true"

@@ -5,19 +5,17 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import cn.com.hzzc.health.pro.R;
-import cn.com.hzzc.health.pro.util.LoginUtil;
-
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
+import cn.com.hzzc.health.pro.part.LineEditText;
+import cn.com.hzzc.health.pro.util.LoginUtil;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * @todo 找回密码
@@ -26,7 +24,7 @@ import android.widget.EditText;
  */
 public class AppLoginGetPwdActivity extends BaseActivity {
 
-	private EditText login_user_edit;
+	private LineEditText login_user_edit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,7 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 	 * @return:void
 	 */
 	private void init() {
-		login_user_edit = (EditText) findViewById(R.id.login_user_edit);
+		login_user_edit = (LineEditText) findViewById(R.id.login_user_edit);
 	}
 
 	/**

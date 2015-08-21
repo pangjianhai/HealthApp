@@ -10,8 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
-import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.part.LineEditText;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -25,8 +24,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  */
 public class AppLoginStartActivity extends BaseActivity {
 
-	private EditText mUser; // 帐号编辑框
-	private EditText mPassword; // 密码编辑框
+	private LineEditText mUser; // 帐号编辑框
+	private LineEditText mPassword; // 密码编辑框
 
 	/**
 	 * 保存到手机本地的账号信息
@@ -38,8 +37,8 @@ public class AppLoginStartActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.app_login);
-		mUser = (EditText) findViewById(R.id.login_user_edit);
-		mPassword = (EditText) findViewById(R.id.login_passwd_edit);
+		mUser = (LineEditText) findViewById(R.id.login_user_edit);
+		mPassword = (LineEditText) findViewById(R.id.login_passwd_edit);
 
 	}
 

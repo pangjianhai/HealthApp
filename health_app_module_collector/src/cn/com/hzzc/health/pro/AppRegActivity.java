@@ -13,8 +13,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.Toast;
+import cn.com.hzzc.health.pro.part.LineEditText;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -30,7 +30,7 @@ public class AppRegActivity extends BaseActivity {
 	/**
 	 * 注册选项
 	 */
-	private EditText reg_username, reg_password, reg_password_again,
+	private LineEditText reg_username, reg_password, reg_password_again,
 			reg_password_email;
 
 	String str_reg_username;
@@ -48,10 +48,10 @@ public class AppRegActivity extends BaseActivity {
 	}
 
 	private void init() {
-		reg_username = (EditText) findViewById(R.id.reg_username);
-		reg_password = (EditText) findViewById(R.id.reg_password);
-		reg_password_again = (EditText) findViewById(R.id.reg_password_again);
-		reg_password_email = (EditText) findViewById(R.id.reg_password_email);
+		reg_username = (LineEditText) findViewById(R.id.reg_username);
+		reg_password = (LineEditText) findViewById(R.id.reg_password);
+		reg_password_again = (LineEditText) findViewById(R.id.reg_password_again);
+		reg_password_email = (LineEditText) findViewById(R.id.reg_password_email);
 
 	}
 

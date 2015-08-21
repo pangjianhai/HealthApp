@@ -112,21 +112,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="cn.com.hzzc.health.pro.AppLoginStartActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+        <activity android:name="cn.com.hzzc.health.pro.AppLoginStartActivity" >
         </activity>
-        <activity
-            android:name="cn.com.hzzc.health.pro.AppLoginGetPwdActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+        <activity android:name="cn.com.hzzc.health.pro.AppLoginGetPwdActivity" >
         </activity>
         <activity android:name="cn.com.hzzc.health.pro.AppLoginLoadingActivity" >
         </activity>
         <activity android:name="cn.com.hzzc.health.pro.AppLoginRegActivity" >
         </activity>
-        <activity
-            android:name="cn.com.hzzc.health.pro.AppRegActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+        <activity android:name="cn.com.hzzc.health.pro.AppRegActivity" >
         </activity>
         <!-- 关于搜索添加好友 -->
         <activity
