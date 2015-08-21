@@ -28,6 +28,7 @@ import cn.com.hzzc.health.pro.model.SelfNum;
 import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.model.VersionEntity;
 import cn.com.hzzc.health.pro.part.CircularImage;
+import cn.com.hzzc.health.pro.part.CustomDialog;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.FileUtil;
@@ -186,10 +187,28 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @author pang
 	 */
 	public void logout(View v) {
-		new SharedPreInto(MainPageLayoutMeActivity.this).initAccountAfterReg(
-				"", "", "");
-		HealthApplication.setUserId("");
-		ActivityCollector.finishAll();
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);
+		builder.setTitle("提示");
+		builder.setMessage("确定要退出吗？");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				/******** 正式推出 ******/
+				new SharedPreInto(MainPageLayoutMeActivity.this)
+						.initAccountAfterReg("", "", "");
+				HealthApplication.setUserId("");
+				ActivityCollector.finishAll();
+			}
+		});
+
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builder.create().show();
 
 	}
 
@@ -345,9 +364,16 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	private void no_new_version(String versionName, String versionNum) {
-		new AlertDialog.Builder(MainPageLayoutMeActivity.this).setTitle("版本提示")
-				.setMessage("当前版本已是最新 \n " + versionName)
-				.setPositiveButton("确定", null).show();
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);
+		builder.setTitle("提示");
+		builder.setMessage("当前版本已是最新 \n " + versionName);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+
+		builder.create().show();
 	}
 
 	/**
@@ -374,15 +400,25 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		/**
 		 * 提示可以下载新的安装包
 		 */
-		new AlertDialog.Builder(MainPageLayoutMeActivity.this).setTitle("版本提示")
-				.setMessage("有最新版本可供下载")
-				.setPositiveButton("下载", new OnClickListener() {
 
-					@Override
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);
+		builder.setTitle("提示");
+		builder.setMessage("有最新版本可供下载\n确定下载吗？");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				real_download();
+			}
+		});
+
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						real_download();
+						dialog.dismiss();
 					}
-				}).setNegativeButton("取消", null).show();
+				});
+
+		builder.create().show();
 	}
 
 	/**
