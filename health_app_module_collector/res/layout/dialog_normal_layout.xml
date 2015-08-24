@@ -57,12 +57,22 @@
 
             <Button
                 android:id="@+id/positiveButton"
+                style="@style/text_15_666666_sdw"
+                android:layout_width="114.0dip"
+                android:layout_height="40.0dip"
+                android:background="@drawable/btn_cancel_selector"
+                android:gravity="center"
+                android:text="确定" />
+            <!-- 
+            <Button
+                android:id="@+id/positiveButton"
                 style="@style/text_15_ffffff_sdw"
                 android:layout_width="114.0dip"
                 android:layout_height="40.0dip"
                 android:background="@drawable/btn_ok_selector"
                 android:gravity="center"
                 android:text="确定" />
+             -->
 
             <Button
                 android:id="@+id/negativeButton"
