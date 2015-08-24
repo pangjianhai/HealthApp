@@ -183,6 +183,7 @@ public class AppRegActivity extends BaseActivity {
 	public void regOver(String result) {
 		try {
 			JSONObject data = new JSONObject(result);
+			//System.out.println("result-------------------->>>" + result);
 			/**
 			 * 解析出新的用户的ID
 			 */

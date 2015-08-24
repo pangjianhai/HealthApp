@@ -77,8 +77,8 @@
     <QZone
         Id="3"
         SortId="3"
-        AppId="100371282"
-        AppKey="aed9b0303e3ed1e27bae87c33761161d"
+        AppId="1104728593"
+        AppKey="5rhdtxI9wC5UkHGH"
         ShareByAppClient="false"
         Enable="true" />
     
@@ -97,8 +97,8 @@
     <Wechat
         Id="4"
         SortId="4"
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
+        AppId="wxa90cc4cee680b535"
+        AppSecret="b4b170f7149dac49cb4b7324c95a23dd"
         BypassApproval="false"
         Enable="true" />
     
