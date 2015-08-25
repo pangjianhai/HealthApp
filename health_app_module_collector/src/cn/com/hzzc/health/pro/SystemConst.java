@@ -37,7 +37,8 @@ public class SystemConst {
 
 	public static final String server_url = "http://www.kx360.com.cn/iotapp/";
 
-	//public static final String server_url = "http://192.168.0.105:8080/IotApp/";
+	// public static final String server_url =
+	// "http://192.168.0.105:8080/IotApp/";
 
 	/**
 	 * 
@@ -291,6 +292,16 @@ public class SystemConst {
 		 * 判断一个人对某个分享信息是否好评或者差评
 		 */
 		public static final String judgeIflikeNumOrdislikeNum = "appSourceController/judgeIflikeNumOrdislikeNum.do";
+
+		/**
+		 * 微信分享根据图片ID获取分享图片
+		 */
+		public static final String weixin_getShareImgById = "appSourceController/getSentenceInfoImgForWeixin.do";
+
+		/**
+		 * 微信分享根据分享ID获取分享内容
+		 */
+		public static final String weixin_getShareById = "appSourceController/queryShareByShareIdIndexWeixin.do";
 
 	}
 

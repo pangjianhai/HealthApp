@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.adapter.CommentAdapter;
 import cn.com.hzzc.health.pro.adapter.ShareSinglePicAdapter;
+import cn.com.hzzc.health.pro.config.ShareConst;
 import cn.com.hzzc.health.pro.model.CommentEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.model.UserItem;
@@ -67,6 +68,11 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * 分享ID
 	 */
 	private String share_sentence_id;
+
+	/**
+	 * 获取的分享信息实例
+	 */
+	private ShareSentenceEntity entity;
 
 	/**
 	 * 弹出框
@@ -157,8 +163,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					ShareSentenceEntity entity = ShareSentenceUtil
-							.parseJsonAddToEntity(data);
+					entity = ShareSentenceUtil.parseJsonAddToEntity(data);
 					renderText(entity);
 				}
 
@@ -773,6 +778,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	}
 
 	private void showShare() {
+		// entity
 		ShareSDK.initSDK(this);
 		OnekeyShare oks = new OnekeyShare();
 		// 关闭sso授权
@@ -782,22 +788,39 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		// oks.setNotification(R.drawable.ic_launcher,
 		// getString(R.string.app_name));
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-		oks.setTitle(getString(R.string.share));
-		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://sharesdk.cn");
+		oks.setTitle(ShareConst.share_title);
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText("我是分享文本");
+		String content = entity.getContent();
+		if (content.length() > 100) {
+			content = content.substring(0, 90) + "...";
+		}
+		System.out.println("content:" + content);
+		oks.setText(content);
+		// url仅在微信（包括好友和朋友圈）中使用，查看分享信息的详情
+		String info_url = SystemConst.server_url
+				+ SystemConst.FunctionUrl.weixin_getShareById + "?id="
+				+ share_sentence_id;
+		oks.setUrl(info_url);
+		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+		oks.setTitleUrl("http://www.kx360.com.cn/");
+		String image = entity.getImg0();
+		if (image == null || "".equals(image.trim())) {
+			image = "";
+		}
+		String pic_url = SystemConst.server_url
+				+ SystemConst.FunctionUrl.weixin_getShareImgById + "?id="
+				+ image;
+		oks.setImageUrl(pic_url);
+
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-		//oks.setImagePath("/sdcard/test.jpg");// 确保SDcard下面存在此张图片
-		// url仅在微信（包括好友和朋友圈）中使用
-		oks.setUrl("http://sharesdk.cn");
+		// oks.setImagePath("/sdcard/test.jpg");// 确保SDcard下面存在此张图片
+
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
 		oks.setComment("我是测试评论文本");
 		// site是分享此内容的网站名称，仅在QQ空间使用
 		oks.setSite(getString(R.string.app_name));
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
-		oks.setSiteUrl("http://sharesdk.cn");
-		oks.setImageUrl("http://demo.mob.com/wiki/wp-content/uploads/2014/09/072.png");
+		oks.setSiteUrl("http://www.kx360.com.cn/");
 
 		// 启动分享GUI
 		oks.show(this);
