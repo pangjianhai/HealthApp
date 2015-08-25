@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.com.hzzc.health.pro"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.2.4" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -233,22 +233,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" >
             <intent-filter>
-                <data android:scheme="tencent100371282" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="cn.sharesdk.framework.ShareSDKUIShell"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-            <intent-filter>
-                <data android:scheme="tencent100371282" />
+                <data android:scheme="tencent1104663391" />
 
                 <action android:name="android.intent.action.VIEW" />
 

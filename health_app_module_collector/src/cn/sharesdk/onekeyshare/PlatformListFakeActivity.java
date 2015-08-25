@@ -182,6 +182,9 @@ public class PlatformListFakeActivity extends FakeActivity {
 	}
 
 	protected void showEditPage(Context context, List<Platform> platforms) {
+		// 编辑分享内容的统计
+		ShareSDK.logDemoEvent(3, null);
+
 		EditPageFakeActivity editPageFakeActivity;
 		String editPageClass = ((Object)this).getClass().getPackage().getName()+".EditPage";
 		try {

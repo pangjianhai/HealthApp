@@ -146,12 +146,12 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 	 * @return:void
 	 */
 	public void initMyNum() {
-		final SharedPreInto spi = new SharedPreInto(this);
-		SelfNum sn = spi.getSelfNum();
-		if (sn != null) {
-			getNum(sn);
-			return;
-		}
+		// final SharedPreInto spi = new SharedPreInto(this);
+		// SelfNum sn = spi.getSelfNum();
+		// if (sn != null) {
+		// getNum(sn);
+		// return;
+		// }
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
@@ -162,7 +162,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					String data = responseInfo.result;
 					SelfNum d = UserUtils.parsUserResult(data);
 					getNum(d);
-					spi.setSelfNum(d);
+					// spi.setSelfNum(d);
 				}
 
 				@Override
