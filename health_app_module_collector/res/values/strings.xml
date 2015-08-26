@@ -3,9 +3,9 @@
     <!-- 当前版本版本 -->
     <string name="app_version_name">v1.2.3</string>
     <!-- 当前版本，和服务器数据库的一致 -->
-    <string name="app_version_num">4</string>
+    <string name="app_version_num">3</string>
     <!-- 上一次的版本号 -->
-    <string name="last_app_version_num">3</string>
+    <string name="last_app_version_num">2</string>
     <!-- 普通操作 -->
     <string name="app_name">康兮</string>
     <string name="search">搜搜</string>

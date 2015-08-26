@@ -155,6 +155,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
+			System.out.println("==========================userId:"+userId);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
@@ -468,6 +469,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					@Override
 					public void onFailure(HttpException error, String msg) {
 						dialog.dismiss();
+						System.out.println("msg:" + msg);
 						Toast.makeText(getApplicationContext(), "下载失败",
 								Toast.LENGTH_SHORT).show();
 					}

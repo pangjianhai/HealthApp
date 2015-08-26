@@ -16,6 +16,7 @@ import cn.com.hzzc.health.pro.util.UserUtils;
  * @todo 获取“关注我的”人员分页
  *
  */
+@Deprecated
 public class FocusMeAsyncTask extends AsyncTask<String, Void, List<UserItem>> {
 
 	private Context context;

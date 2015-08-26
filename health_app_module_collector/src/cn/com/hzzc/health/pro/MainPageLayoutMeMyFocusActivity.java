@@ -1,9 +1,15 @@
 package cn.com.hzzc.health.pro;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +24,11 @@ import android.widget.ProgressBar;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.adapter.UserItemAdapter;
 import cn.com.hzzc.health.pro.config.HealthApplication;
+import cn.com.hzzc.health.pro.model.SelfNum;
 import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.task.MyFocusAsyncTask;
+import cn.com.hzzc.health.pro.util.CommonHttpUtil;
+import cn.com.hzzc.health.pro.util.UserUtils;
 
 /**
  * 
@@ -39,7 +48,7 @@ public class MainPageLayoutMeMyFocusActivity extends BaseActivity {
 	/**
 	 * 当前页
 	 */
-	private int currentPage = 0;
+	private int currentPage = 1;
 	/**
 	 * 一页多少行
 	 */
@@ -94,18 +103,34 @@ public class MainPageLayoutMeMyFocusActivity extends BaseActivity {
 		loadMoreData();
 	}
 
-	private void loadMoreData() {
-		load_progress_bar.setVisibility(View.VISIBLE);
-		search_loadmore_btn.setVisibility(View.GONE);
+	public void loadMoreData() {
 		try {
+			load_progress_bar.setVisibility(View.VISIBLE);
+			search_loadmore_btn.setVisibility(View.GONE);
+			JSONObject d = new JSONObject();
+			d.put("currentId", HealthApplication.getUserId());
+			d.put("begin", (currentPage - 1) * pageSize);
+			d.put("limit", pageSize);
 			currentPage = currentPage + 1;
-			MyFocusAsyncTask task = new MyFocusAsyncTask(
-					MainPageLayoutMeMyFocusActivity.this);
-			JSONObject map = new JSONObject();
-			map.put("currentId", HealthApplication.getUserId());
-			map.put("begin", (currentPage - 1) * pageSize);
-			map.put("limit", pageSize);
-			task.execute(map.toString());
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					List<UserItem> uis = UserUtils.parseJsonAddToList(data);
+					searchOver(uis);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					load_progress_bar.setVisibility(View.GONE);
+					search_loadmore_btn.setVisibility(View.VISIBLE);
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.getMyFocusUser, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

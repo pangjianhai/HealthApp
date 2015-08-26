@@ -104,6 +104,8 @@ public class FriendSearchResultActivity extends BaseActivity {
 			map.put("key", key);
 			map.put("begin", (currentPage - 1) * pageSize);
 			map.put("limit", pageSize);
+
+			currentPage = currentPage + 1;
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
