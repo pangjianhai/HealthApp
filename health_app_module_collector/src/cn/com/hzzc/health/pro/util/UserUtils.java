@@ -148,7 +148,10 @@ public class UserUtils {
 		try {
 			if (data != null && !"".equals(data)) {
 				JSONObject or_obj = new JSONObject(data);
-				JSONObject obj = or_obj.getJSONObject("User");
+				if (!or_obj.has("user")) {
+					return bean;
+				}
+				JSONObject obj = or_obj.getJSONObject("user");
 
 				String loginNum = obj.getString("loginNum");
 				String loginDate = obj.getString("loginDate");

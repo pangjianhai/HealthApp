@@ -155,7 +155,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
-			System.out.println("==========================userId:"+userId);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
