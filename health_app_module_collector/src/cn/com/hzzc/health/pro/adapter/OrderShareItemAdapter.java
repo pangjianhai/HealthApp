@@ -98,6 +98,8 @@ public class OrderShareItemAdapter extends BaseAdapter {
 					.findViewById(R.id.share_type);
 			holder.share_top = (ImageView) convertview
 					.findViewById(R.id.share_top);
+			holder.share_to_platform = (ImageView) convertview
+					.findViewById(R.id.share_to_platform);
 
 			holder.share_bottom_ok = (TextView) convertview
 					.findViewById(R.id.share_bottom_ok);
@@ -125,7 +127,7 @@ public class OrderShareItemAdapter extends BaseAdapter {
 		private TextView share_id, share_name, share_type, share_content,
 				share_bottom_ok;
 		private GridView picGridView;
-		private ImageView share_top;
+		private ImageView share_top, share_to_platform;
 		private CircularImage share_photo;
 	}
 
@@ -233,6 +235,16 @@ public class OrderShareItemAdapter extends BaseAdapter {
 		});
 		// 点击用户名
 		holder.share_name.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				callback.afterClickAuthor(dataSourceList.get(position).getId(),
+						position);
+			}
+		});
+
+		// 分享到第三方平台点击事件
+		holder.share_to_platform.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
