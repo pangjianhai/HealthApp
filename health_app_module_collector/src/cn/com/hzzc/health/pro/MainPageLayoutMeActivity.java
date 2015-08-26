@@ -154,12 +154,14 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 		// }
 		try {
 			JSONObject d = new JSONObject();
+			System.out.println("userId::::::::::::::"+userId);
 			d.put("userId", userId);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
+					System.out.println("---------------data"+data);
 					SelfNum d = UserUtils.parsUserResult(data);
 					getNum(d);
 					// spi.setSelfNum(d);
