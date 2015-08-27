@@ -72,7 +72,11 @@ public class UserItemAdapter extends BaseAdapter {
 			convertView.setTag(holder);
 		}
 		UserItem ui = dataSourceList.get(position);
-		holder.find_search_result_username.setText(ui.getUserName());
+		String userName = ui.getUserName();
+		if (userName == null || "".equals(userName)) {
+			userName = "匿名者";
+		}
+		holder.find_search_result_username.setText(userName);
 		holder.find_search_result_tags.setText(ui.getSentence());// 将本来要放标签的地方放入了个人简介
 		String imgId = ui.getImg();
 		final String uuid = ui.getUuid();
