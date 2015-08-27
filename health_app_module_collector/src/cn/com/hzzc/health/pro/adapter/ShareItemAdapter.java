@@ -158,11 +158,15 @@ public class ShareItemAdapter extends BaseAdapter {
 		 * 挨个属性赋值
 		 */
 		String userId = entity.getUserId();
+		String author = entity.getAuthor();
 		holder.share_id.setText(entity.getId());
 		if (userId != null && userId.equals(HealthApplication.getUserId())) {
 			holder.share_name.setText("我");
 		} else {
-			holder.share_name.setText(entity.getAuthor());
+			if (author == null || "".equals(author) || "null".equals(author)) {
+				author = "匿名者";
+			}
+			holder.share_name.setText(author);
 		}
 
 		String typeCode = entity.getType();
