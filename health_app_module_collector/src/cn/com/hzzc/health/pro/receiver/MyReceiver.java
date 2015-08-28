@@ -25,46 +25,38 @@ public class MyReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Bundle bundle = intent.getExtras();
-		System.out.println("[MyReceiver] onReceive - " + intent.getAction()
-				+ ", extras: " + printBundle(bundle));
+		System.out.println("进入接收器[MyReceiver] onReceive - "
+				+ intent.getAction() + ", extras: " + printBundle(bundle));
 		if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-			System.out
-					.println("============================JPushInterface.ACTION_REGISTRATION_ID");
+			System.out.println("============================注册");
 			String regId = bundle
 					.getString(JPushInterface.EXTRA_REGISTRATION_ID);
 
 		} else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent
 				.getAction())) {// 接收自定义消息
-			System.out
-					.println("============================JPushInterface.ACTION_MESSAGE_RECEIVED");
-			processCustomMessage(context, bundle);
+			System.out.println("============================消息");
 
 		} else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent
 				.getAction())) {// 获取消息通知的时候进入此分支
-			System.out
-					.println("============================JPushInterface.ACTION_NOTIFICATION_RECEIVED");
+			System.out.println("============================通知");
 			int notifactionId = bundle
 					.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
 
 		} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
 				.getAction())) {// 打开消息的时候进入此分支
-			System.out
-					.println("============================JPushInterface.ACTION_NOTIFICATION_OPENED");
+			System.out.println("============================通知打开");
 			String str = bundle.getString(EXTRAS_KEY);
 
 		} else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent
 				.getAction())) {
-			System.out
-					.println("============================JPushInterface.ACTION_RICHPUSH_CALLBACK");
+			System.out.println("============================毁掉");
 		} else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent
 				.getAction())) {
-			System.out
-					.println("============================JPushInterface.ACTION_CONNECTION_CHANGE");
+			System.out.println("============================通信改变");
 			boolean connected = intent.getBooleanExtra(
 					JPushInterface.EXTRA_CONNECTION_CHANGE, false);
 		} else {
-			System.out
-					.println("============================JPushInterface.otheras");
+			System.out.println("============================其他");
 			System.out.println("[MyReceiver] Unhandled intent - "
 					+ intent.getAction());
 		}
