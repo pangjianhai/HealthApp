@@ -215,6 +215,7 @@ public class BaseActivity extends InstrumentedActivity {
 	 */
 
 	public void initAlis() {
+		System.out.println("=====================================initAlis");
 		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, userId));
 	}
 
@@ -226,12 +227,13 @@ public class BaseActivity extends InstrumentedActivity {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case MSG_SET_ALIAS:// 设置alias
-				System.out.println("设置alias");
+				System.out.println("设置alias" + (String) msg.obj);
 				JPushInterface.setAliasAndTags(getApplicationContext(),
 						(String) msg.obj, null, mAliasCallback);
 				break;
 
 			case MSG_SET_TAGS:// 设置tags
+				System.out.println("设置tags");
 				JPushInterface.setAliasAndTags(getApplicationContext(), null,
 						(Set<String>) msg.obj, mTagsCallback);
 				break;
@@ -265,7 +267,7 @@ public class BaseActivity extends InstrumentedActivity {
 				logs = "Failed with errorCode = " + code;
 			}
 
-			// ExampleUtil.showToast(logs, getApplicationContext());
+			ExampleUtil.showToast(logs, getApplicationContext());
 		}
 
 	};
