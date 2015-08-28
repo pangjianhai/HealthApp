@@ -136,6 +136,12 @@ public class HealthApplication extends Application {
 		return new UnlimitedDiscCache(cacheDir);
 	}
 
+	/**
+	 * @user:pang
+	 * @data:2015年8月28日
+	 * @todo:初始化极光推送，只需要在这里初始化就可以
+	 * @return:void
+	 */
 	public void initJPush() {
 		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
 		JPushInterface.init(this); // 初始化 JPush
