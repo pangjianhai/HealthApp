@@ -106,7 +106,7 @@ public class MyScrollView extends ScrollView implements OnTouchListener {
 	/********************** 和搜索相关 *********************************/
 	private String data_key = "";
 	private int data_begin = 1;
-	private int data_limit = 20;
+	private int data_limit = 35;
 	private boolean hasData = true;
 	private BtnOps btnOps;
 
