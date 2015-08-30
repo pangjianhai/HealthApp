@@ -10,7 +10,9 @@ import java.util.Date;
 public class CommentEntity {
 
 	private String id;
+	// 评论内容
 	private String content;
+	// 评论日期
 	private Date commentDate;
 
 	/**
@@ -18,6 +20,10 @@ public class CommentEntity {
 	 */
 	private String userId;
 	private String userName;
+
+	// 回复某人的评论
+	private String atUserId;
+	private String atUserName;
 
 	public String getId() {
 		return id;
@@ -57,6 +63,22 @@ public class CommentEntity {
 
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
+	}
+
+	public String getAtUserId() {
+		return atUserId;
+	}
+
+	public void setAtUserId(String atUserId) {
+		this.atUserId = atUserId;
+	}
+
+	public String getAtUserName() {
+		return atUserName;
+	}
+
+	public void setAtUserName(String atUserName) {
+		this.atUserName = atUserName;
 	}
 
 }

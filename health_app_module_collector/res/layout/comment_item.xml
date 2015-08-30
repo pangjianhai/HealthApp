@@ -44,7 +44,7 @@
                 android:layout_marginRight="5dp"
                 android:background="#00ffffff"
                 android:text="回复Ta"
-                android:textColor="@color/black"
+                android:textColor="@color/orange"
                 android:textSize="12sp" />
         </RelativeLayout>
 
