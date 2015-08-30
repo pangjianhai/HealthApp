@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import cn.com.hzzc.health.pro.InfoDetailActivity;
 import cn.com.hzzc.health.pro.MainActivity;
+import cn.com.hzzc.health.pro.MineSpaceActivity;
+import cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity;
+import cn.com.hzzc.health.pro.config.PushTypeConst;
 import cn.com.hzzc.health.pro.util.ExampleUtil;
 import cn.jpush.android.api.JPushInterface;
 
@@ -28,17 +31,14 @@ public class MyReceiver extends BroadcastReceiver {
 		System.out.println("进入接收器[MyReceiver] onReceive - "
 				+ intent.getAction() + ", extras: " + printBundle(bundle));
 		if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-			System.out.println("============================注册");
 			String regId = bundle
 					.getString(JPushInterface.EXTRA_REGISTRATION_ID);
 
 		} else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent
 				.getAction())) {// 接收自定义消息
-			System.out.println("============================消息");
 
 		} else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent
 				.getAction())) {// 获取消息通知的时候进入此分支
-			System.out.println("============================通知");
 			int notifactionId = bundle
 					.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
 
@@ -46,19 +46,13 @@ public class MyReceiver extends BroadcastReceiver {
 				.getAction())) {// 打开消息的时候进入此分支
 			System.out.println("============================通知打开");
 			String str = bundle.getString(EXTRAS_KEY);
+			processCommonNotice(context, bundle.getString(EXTRAS_KEY));
 
 		} else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent
 				.getAction())) {
-			System.out.println("============================毁掉");
 		} else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent
 				.getAction())) {
-			System.out.println("============================通信改变");
-			boolean connected = intent.getBooleanExtra(
-					JPushInterface.EXTRA_CONNECTION_CHANGE, false);
 		} else {
-			System.out.println("============================其他");
-			System.out.println("[MyReceiver] Unhandled intent - "
-					+ intent.getAction());
 		}
 	}
 
@@ -77,8 +71,39 @@ public class MyReceiver extends BroadcastReceiver {
 		return sb.toString();
 	}
 
-	// send msg to MainActivity
-	private void processCustomMessage(Context context, Bundle bundle) {
+	private void processCommonNotice(Context context, String jsonExtra) {
+		try {
+			JSONObject j = new JSONObject(jsonExtra);
+			String type = j.getString("type");
+			String content = j.getString("content");
+			JSONObject contentJ = new JSONObject(content);
+			if (type.equals(PushTypeConst.comment_to_share)) {
+				toSharePage(context, contentJ);
+			} else if (type.equals(PushTypeConst.reply_to_comment)) {
+
+			} else if (type.equals(PushTypeConst.focused_by_someone)) {
+
+			} else if (type.equals(PushTypeConst.share_introduced_to_3part)) {
+
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void toSharePage(Context context, JSONObject j) {
+		try {
+			String shareId = j.getString("shareId");
+			Intent intent = new Intent(context,
+					ShareSentenceAllDetailActivity.class);
+			intent.putExtra("share_sentence_id", shareId);
+			context.startActivity(intent);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void toUserPage(JSONObject j) {
 
 	}
 }
