@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import cn.com.hzzc.health.pro.InfoDetailActivity;
 import cn.com.hzzc.health.pro.MainActivity;
+import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.MineSpaceActivity;
 import cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity;
+import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.config.PushTypeConst;
 import cn.com.hzzc.health.pro.util.ExampleUtil;
 import cn.jpush.android.api.JPushInterface;
@@ -28,8 +30,6 @@ public class MyReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Bundle bundle = intent.getExtras();
-		System.out.println("进入接收器[MyReceiver] onReceive - "
-				+ intent.getAction() + ", extras: " + printBundle(bundle));
 		if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
 			String regId = bundle
 					.getString(JPushInterface.EXTRA_REGISTRATION_ID);
@@ -82,7 +82,7 @@ public class MyReceiver extends BroadcastReceiver {
 			} else if (type.equals(PushTypeConst.reply_to_comment)) {
 
 			} else if (type.equals(PushTypeConst.focused_by_someone)) {
-
+				toUserPage(context, contentJ);
 			} else if (type.equals(PushTypeConst.share_introduced_to_3part)) {
 
 			}
@@ -91,11 +91,22 @@ public class MyReceiver extends BroadcastReceiver {
 		}
 	}
 
+	/**
+	 * 
+	 * @param context
+	 * @param j
+	 * @user:pang
+	 * @data:2015年8月30日
+	 * @todo:查看信息详情
+	 * @return:void
+	 */
 	private void toSharePage(Context context, JSONObject j) {
 		try {
 			String shareId = j.getString("shareId");
 			Intent intent = new Intent(context,
 					ShareSentenceAllDetailActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("share_sentence_id", shareId);
 			context.startActivity(intent);
 		} catch (JSONException e) {
@@ -103,7 +114,25 @@ public class MyReceiver extends BroadcastReceiver {
 		}
 	}
 
-	private void toUserPage(JSONObject j) {
+	/**
+	 * @param context
+	 * @param j
+	 * @user:pang
+	 * @data:2015年8月30日
+	 * @todo:查看个人详情
+	 * @return:void
+	 */
+	private void toUserPage(Context context, JSONObject j) {
 
+		try {
+			String userId = j.getString("friendId");
+			Intent intent = new Intent(context, ShowUserInfoDetail.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("uuid", userId);
+			context.startActivity(intent);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }
