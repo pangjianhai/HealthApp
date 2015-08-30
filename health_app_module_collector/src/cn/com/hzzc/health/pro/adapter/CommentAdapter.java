@@ -6,12 +6,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.CommentEntity;
@@ -53,7 +54,7 @@ public class CommentAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		holder = new HolderView();
 		if (convertView != null) {
 			holder = (HolderView) convertView.getTag();
@@ -71,15 +72,22 @@ public class CommentAdapter extends BaseAdapter {
 			convertView.setTag(holder);
 		}
 		CommentEntity ce = dataSourceList.get(position);
-		holder.tag_id.setText(ce.getId());
-		holder.c_content.setText(ce.getContent());
-		Date cd = ce.getCommentDate();
-		holder.c_date.setText(getDate(cd));
 		String userId = ce.getUserId();
+		String userName = ce.getUserName();
+
+		String atSome = ce.getAtUserName();
+		String content = ce.getContent();
+		Date cd = ce.getCommentDate();
+		if (atSome != null && !"".equals(atSome)) {
+			content = "@" + atSome + " " + content;
+		}
+		holder.tag_id.setText(ce.getId());
+		holder.c_content.setText(content);
+		holder.c_date.setText(getDate(cd));
 		if (HealthApplication.getUserId().equals(userId)) {
 			holder.c_username.setText("我");
 		} else {
-			holder.c_username.setText(ce.getUserName());
+			holder.c_username.setText(userName);
 		}
 		if (userId != null && !"".equals(userId)) {
 			String pic_url = SystemConst.server_url
@@ -98,7 +106,7 @@ public class CommentAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				// position
+				((ShareSentenceAllDetailActivity) context).showInput(position);
 			}
 		});
 		return convertView;

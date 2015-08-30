@@ -35,7 +35,8 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	//public static final String server_url = "http://www.kx360.com.cn/iotapp/";
+	// public static final String server_url =
+	// "http://www.kx360.com.cn/iotapp/";
 
 	public static final String server_url = "http://192.168.0.104:8080/IotApp/";
 
@@ -301,6 +302,11 @@ public class SystemConst {
 		 * 微信分享根据分享ID获取分享内容
 		 */
 		public static final String weixin_getShareById = "appSourceController/queryShareByShareIdIndexWeixin.do";
+
+		/**
+		 * 将转发到第三方平台的信息传递到后台，让后台提醒对方
+		 */
+		public static final String share_to_3part_platform = "appSourceController/tranSpondSentenceHash.do";
 
 	}
 

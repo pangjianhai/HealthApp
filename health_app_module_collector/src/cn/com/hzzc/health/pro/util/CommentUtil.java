@@ -37,13 +37,14 @@ public class CommentUtil {
 					String userId = obj.getString("userId");
 					String content = obj.getString("content");
 					String userName = obj.getString("userName");
+					// System.out.println("userName-----"+userName);
 					String currentDate = obj.getString("currentDate");
 					Date cDate = CommonDateUtil.getTime(currentDate);
 
-					String atUserId = obj.has("atUserId") ? obj
-							.getString("atUserId") : "";
-					String atUserName = obj.has("atUserName") ? obj
-							.getString("atUserName") : "";
+					String atUserId = obj.has("repyUserId") ? obj
+							.getString("repyUserId") : "";
+					String atUserName = obj.has("repyUserName") ? obj
+							.getString("repyUserName") : "";
 
 					CommentEntity ci = new CommentEntity();
 					ci.setUserId(userId);
@@ -51,7 +52,7 @@ public class CommentUtil {
 					ci.setUserName(userName);
 					ci.setCommentDate(cDate);
 					ci.setAtUserId(atUserId);
-					ci.setUserName(atUserName);
+					ci.setAtUserName(atUserName);
 					ciList.add(ci);
 				}
 			}

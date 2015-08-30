@@ -79,6 +79,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	private LinearLayout share_bottom;
 	private EditText et_pop;
+	/**
+	 * 回复某人
+	 */
+	private String replyUserId = "";
 
 	/**
 	 * 关于评论的东西
@@ -130,7 +134,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
-
 		share_all_detail_author_photo = (CircularImage) findViewById(R.id.share_all_detail_author_photo);
 		share_all_detail_author_name = (TextView) findViewById(R.id.share_all_detail_author_name);
 		share_all_detail_author_focus = (Button) findViewById(R.id.share_all_detail_author_focus);
@@ -149,7 +152,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		share_comment_listview = (cn.com.hzzc.health.pro.part.SentenceListView) findViewById(R.id.share_comment_listview);
 		share_comment_listview.setPullLoadEnable(true);
 		share_comment_listview.setXListViewListener(this);
-		ad = new CommentAdapter(getApplicationContext(), ds);
+		ad = new CommentAdapter(ShareSentenceAllDetailActivity.this, ds);
 		share_comment_listview.setAdapter(ad);
 		loadCommentData();
 	}
@@ -626,6 +629,27 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	public void showInput() {
 		share_bottom.setVisibility(View.VISIBLE);
+		et_pop.setHint("");
+		replyUserId = "";
+		et_pop.setFocusable(true);
+		et_pop.requestFocus();
+		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+				.showSoftInput(et_pop, 0);
+	}
+
+	/**
+	 * @param position
+	 * @user:pang
+	 * @data:2015年8月30日
+	 * @todo:评论
+	 * @return:void
+	 */
+	public void showInput(int position) {
+		CommentEntity ce = ds.get(position);
+		System.out.println("----------ce:" + ce.getUserName());
+		share_bottom.setVisibility(View.VISIBLE);
+		et_pop.setHint("回复" + ce.getUserName());
+		replyUserId = ce.getUserId();
 		et_pop.setFocusable(true);
 		et_pop.requestFocus();
 		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
@@ -651,6 +675,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		intent.putExtra("userId", userId);
 		intent.putExtra("sentenceId", share_sentence_id);
 		intent.putExtra("content", comment_str);
+		intent.putExtra("repyUserId", replyUserId);
 		after_comment_share(comment_str);
 		startService(intent);
 		et_pop.setText("");

@@ -31,11 +31,14 @@ public class ShareCommentService extends IntentService {
 		String userId = intent.getStringExtra("userId");
 		String sentenceId = intent.getStringExtra("sentenceId");
 		String content = intent.getStringExtra("content");
+		String repyUserId = intent.hasExtra("repyUserId") ? intent
+				.getStringExtra("repyUserId") : "";
 		try {
 			JSONObject j = new JSONObject();
 			j.put("userId", userId);
 			j.put("sentenceId", sentenceId);
 			j.put("content", content);
+			j.put("repyUserId", repyUserId);
 			String url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.comment_share;
 			Map<String, String> map = new HashMap<String, String>();
