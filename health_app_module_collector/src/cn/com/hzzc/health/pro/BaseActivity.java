@@ -214,8 +214,25 @@ public class BaseActivity extends InstrumentedActivity {
 	 * ****************************JPush
 	 */
 
+	/**
+	 * @user:pang
+	 * @data:2015年8月30日
+	 * @todo:设置alias，现在是在登录成功之后设置，其实最终应该是在注册成功之后设置
+	 * @return:void
+	 */
 	public void initAlis() {
 		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, userId));
+	}
+
+	/**
+	 * @param tagIds
+	 * @user:pang
+	 * @data:2015年8月30日
+	 * @todo:设置系统分析的标签（集合里面应该是标签的ID），应该在每一次系统给自己自定义标签的时候调用
+	 * @return:void
+	 */
+	public void initShareTags(Set<String> tagIds) {
+		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_TAGS, tagIds));
 	}
 
 	private static final int MSG_SET_ALIAS = 1001;
