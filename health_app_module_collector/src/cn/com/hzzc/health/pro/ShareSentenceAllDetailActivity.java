@@ -815,7 +815,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		if (content.length() > 100) {
 			content = content.substring(0, 90) + "...";
 		}
-		System.out.println("content:" + content);
 		oks.setText(content);
 		// url仅在微信（包括好友和朋友圈）中使用，查看分享信息的详情
 		String info_url = SystemConst.server_url
@@ -844,6 +843,38 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 
 		// 启动分享GUI
 		oks.show(this);
+		noticeServerTo3Part(share_sentence_id);
+	}
+
+	/**
+	 * @param shareId
+	 * @user:pang
+	 * @data:2015年8月30日
+	 * @todo:分享到第三方平台成功后通知后台
+	 * @return:void
+	 */
+	private void noticeServerTo3Part(String shareId) {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("userUuid", userId);
+			d.put("shareId", shareId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.share_to_3part_platform, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
