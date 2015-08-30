@@ -7,7 +7,9 @@ import java.util.List;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -65,6 +67,7 @@ public class CommentAdapter extends BaseAdapter {
 			holder.share_c_photo = (CircularImage) convertView
 					.findViewById(R.id.share_c_photo);
 			holder.c_date = (TextView) convertView.findViewById(R.id.c_date);
+			holder.c_reply = (Button) convertView.findViewById(R.id.c_reply);
 			convertView.setTag(holder);
 		}
 		CommentEntity ce = dataSourceList.get(position);
@@ -91,12 +94,20 @@ public class CommentAdapter extends BaseAdapter {
 					holder.share_c_photo);
 		}
 
+		holder.c_reply.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// position
+			}
+		});
 		return convertView;
 	}
 
 	private class HolderView {
 		private TextView tag_id, c_content, c_username, c_date;
 		private CircularImage share_c_photo;
+		private Button c_reply;
 	}
 
 	private String getDate(Date cd) {

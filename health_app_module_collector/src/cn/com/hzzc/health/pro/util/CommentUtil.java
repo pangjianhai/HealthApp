@@ -40,11 +40,18 @@ public class CommentUtil {
 					String currentDate = obj.getString("currentDate");
 					Date cDate = CommonDateUtil.getTime(currentDate);
 
+					String atUserId = obj.has("atUserId") ? obj
+							.getString("atUserId") : "";
+					String atUserName = obj.has("atUserName") ? obj
+							.getString("atUserName") : "";
+
 					CommentEntity ci = new CommentEntity();
 					ci.setUserId(userId);
 					ci.setContent(content);
 					ci.setUserName(userName);
 					ci.setCommentDate(cDate);
+					ci.setAtUserId(atUserId);
+					ci.setUserName(atUserName);
 					ciList.add(ci);
 				}
 			}

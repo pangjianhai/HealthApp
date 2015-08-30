@@ -582,7 +582,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 			startService(intent);
 			Toast.makeText(ShareSentenceAllDetailActivity.this, "收藏成功",
 					Toast.LENGTH_SHORT).show();
-		} else if (v.getId() == R.id.single_share_bottom_ops_comment) {
+		} else if (v.getId() == R.id.single_share_bottom_ops_comment) {// 评论
 			showInput();
 		} else if (v.getId() == R.id.single_share_bottom_ops_ok) {// 好评
 			if (!ifCanClickLikeOrDislike()) {
