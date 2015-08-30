@@ -854,6 +854,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	private void noticeServerTo3Part(String shareId) {
+		System.out.println("---------------------------noticeServerTo3Part");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userUuid", userId);
