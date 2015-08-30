@@ -111,7 +111,6 @@ public class AppLoginStartActivity extends BaseActivity {
 	public void loginOver(String result) {
 		try {
 			JSONObject data = new JSONObject(result);
-			System.out.println("::::::::::::::::data:"+data);
 			String uuid = data.get("flag") + "";
 			// 登陆成功
 			if (uuid != null && !"".equals(uuid) && !"fail".equals(uuid)) {

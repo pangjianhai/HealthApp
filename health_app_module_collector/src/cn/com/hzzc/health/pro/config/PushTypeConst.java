@@ -8,13 +8,13 @@ package cn.com.hzzc.health.pro.config;
  */
 public class PushTypeConst {
 
-	// ���۷�����Ϣ
+	// 评论分享信息
 	public static final String comment_to_share = "0";
-	// �ظ�����
+	// 回复评论
 	public static final String reply_to_comment = "1";
-	// ��ĳ�˹�ע
+	// 被某人关注
 	public static final String focused_by_someone = "2";
-	// ������Ϣ�����?����ƽ̨
+	// 分享信息被分享到第三方平台
 	public static final String share_introduced_to_3part = "3";
 
 }
