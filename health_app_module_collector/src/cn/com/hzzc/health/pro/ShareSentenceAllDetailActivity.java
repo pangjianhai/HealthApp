@@ -646,7 +646,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	public void showInput(int position) {
 		CommentEntity ce = ds.get(position);
-		System.out.println("----------ce:" + ce.getUserName());
 		share_bottom.setVisibility(View.VISIBLE);
 		et_pop.setHint("回复" + ce.getUserName());
 		replyUserId = ce.getUserId();
@@ -665,6 +664,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	public void comment_share(View v) {
 		String comment_str = et_pop.getText().toString();
+
 		if (comment_str == null || "".equals(comment_str.trim())) {
 			Toast.makeText(getApplicationContext(), "评论内容不得为空",
 					Toast.LENGTH_LONG).show();
@@ -680,10 +680,12 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		startService(intent);
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
-		((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-				.hideSoftInputFromWindow(ShareSentenceAllDetailActivity.this
-						.getCurrentFocus().getWindowToken(),
-						InputMethodManager.HIDE_NOT_ALWAYS);
+		// ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+		// .hideSoftInputFromWindow(ShareSentenceAllDetailActivity.this
+		// .getCurrentFocus().getWindowToken(),
+		// InputMethodManager.HIDE_NOT_ALWAYS);
+		InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 	}
 
 	/**
@@ -854,7 +856,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	private void noticeServerTo3Part(String shareId) {
-		System.out.println("---------------------------noticeServerTo3Part");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userUuid", userId);
