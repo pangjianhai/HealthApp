@@ -195,6 +195,7 @@ public class ShowUserInfoDetail extends BaseActivity {
 					EditUserInfoDetail.class);
 			intent.putExtra("uuid", uuid);
 			startActivity(intent);
+			finish();
 		} else {// 不是同一个用户，可以进行关注的操作
 			if (!ifAdd) {// 添加关注
 				addFocus();
