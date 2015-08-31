@@ -239,7 +239,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					+ "?para={headImg:'" + imgId + "'}";
 			ImageLoader.getInstance().displayImage(pic_url, main_page_me_photo);
 		} else {
-			String imageUri = "drawable://" + R.drawable.default_head1;
+			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
 			ImageLoader.getInstance()
 					.displayImage(imageUri, main_page_me_photo);
 		}
