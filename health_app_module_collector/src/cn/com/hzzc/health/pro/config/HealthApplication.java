@@ -244,13 +244,6 @@ public class HealthApplication extends Application {
 		if (userId == null || "".equals(userId)) {
 			String id = new SharedPreInto(getContext())
 					.getSharedFieldValue("id");
-			if (id == null || "".equals(id)) {
-				try {
-					throw new Exception("本地没有保存当前登陆者的信息");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 			userId = id;
 		}
 		return userId;

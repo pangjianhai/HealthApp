@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.part.CustomDialog;
 import cn.com.hzzc.health.pro.part.LineEditText;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
@@ -139,6 +140,8 @@ public class AppLoginStartActivity extends BaseActivity {
 		 */
 		new SharedPreInto(AppLoginStartActivity.this).initAccountAfterReg(
 				saveUUID, saveID, savePWD);
+		// 登陆成功之后设置uuid
+		HealthApplication.setUserId(saveUUID);
 		Intent intent = new Intent();
 		intent.setClass(AppLoginStartActivity.this,
 				AppLoginLoadingActivity.class);

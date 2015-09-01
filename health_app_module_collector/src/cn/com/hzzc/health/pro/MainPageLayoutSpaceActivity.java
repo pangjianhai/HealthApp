@@ -633,7 +633,10 @@ public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
-					if (pb != null && pb.getLoginTimes() <=1) {
+					System.out
+							.println("=========================pb.getLoginTimes():"
+									+ pb.getLoginTimes());
+					if (pb != null && pb.getLoginTimes() <= 1) {
 						Intent intent = new Intent(
 								MainPageLayoutSpaceActivity.this,
 								FirstLoginTopUserListLayout.class);

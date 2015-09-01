@@ -49,6 +49,9 @@ public class MyLocationListener implements BDLocationListener {
 	}
 
 	public void send(Map<String, String> p) {
+	}
+
+	public void send2(Map<String, String> p) {
 		RequestParams params = new RequestParams();
 		Iterator<Map.Entry<String, String>> it = p.entrySet().iterator();
 		/**
