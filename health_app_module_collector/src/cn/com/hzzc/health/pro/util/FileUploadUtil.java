@@ -279,10 +279,13 @@ public class FileUploadUtil {
 					// Bitmap bm = thumbnailImg(filePath);
 					// saveMyBitmap("aaaa", bm);
 					// 质量压缩
-					Bitmap bm2 = scaleLoad(filePath);
+					// Bitmap bm2 = scaleLoad(filePath);
+					Bitmap bm2 = BitmapLoader.getBitmapFromFile(filePath, 720,
+							1280);
 					// 上传压缩信息
 					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					bm2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+					bm2.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+
 					InputStream is = new ByteArrayInputStream(
 							stream.toByteArray());
 					// ************处理文件结束
