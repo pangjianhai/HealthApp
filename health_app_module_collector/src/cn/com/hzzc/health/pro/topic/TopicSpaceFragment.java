@@ -12,10 +12,10 @@ import cn.com.hzzc.health.pro.adapter.TopicItemAdapter;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
-import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
+import cn.com.hzzc.health.pro.util.ITopicCallbackOperator;
 
 public class TopicSpaceFragment extends BaseFragment implements
-		IXListViewListener, IShareCallbackOperator {
+		IXListViewListener, ITopicCallbackOperator {
 	private View mMainView;
 
 	/**
@@ -39,7 +39,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 						R.id.home_fragment_parent_viewpager), false);
 		findView();
 		initListView();
-		loadData();
+		loadDataMore();
 	}
 
 	private void findView() {
@@ -62,7 +62,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 		return mMainView;
 	}
 
-	private void loadData() {
+	private void realLoadData() {
 		for (int i = 0; i < 10; i++) {
 			TopicEntity te = new TopicEntity();
 			te.setName("topic" + i);
@@ -73,53 +73,41 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 		}
 		topicItemAdapter.notifyDataSetChanged();
+		onLoadOver();
+	}
+
+	private void loadDataMore() {
+		realLoadData();
+	}
+
+	private void onLoadOver() {
+		mListView.stopRefresh();
+		mListView.stopLoadMore();
+		mListView.setRefreshTime("刚刚");
 	}
 
 	@Override
 	public void resetTitleStatus(float v) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void afterClickReply(String shareId, int index) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void afterClickContent(String shareId, int index) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void afterClickAuthor(String shareId, int index) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void afterClickOk(String shareId, int index) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void afterClickNook(String shareId, int index) {
-		// TODO Auto-generated method stub
+		if (v > 0) {
+			((HomeFrameActivity) getActivity()).showTitle();
+		} else {
+			((HomeFrameActivity) getActivity()).hideTitle();
+		}
 
 	}
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-
+		onLoadOver();
 	}
 
 	@Override
 	public void onLoadMore() {
-		// TODO Auto-generated method stub
+		loadDataMore();
+	}
+
+	@Override
+	public void afterClickTopic(String topicId, int index) {
 
 	}
 }

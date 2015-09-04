@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:divider="#dedede"
-            android:dividerHeight="5dp" >
+            android:divider="@color/deepgray"
+            android:dividerHeight="1dp" >
         </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
 

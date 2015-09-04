@@ -1,23 +1,20 @@
 package cn.com.hzzc.health.pro.adapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
-import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.part.CircularImage;
-import cn.com.hzzc.health.pro.util.CommonDateUtil;
-import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
+import cn.com.hzzc.health.pro.util.ITopicCallbackOperator;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 空间健康分享适配
@@ -26,9 +23,9 @@ public class TopicItemAdapter extends BaseAdapter {
 	private List<TopicEntity> dataSourceList = new ArrayList<TopicEntity>();
 	private HolderView holder;
 	private Context context;
-	private IShareCallbackOperator callback;
+	private ITopicCallbackOperator callback;
 
-	public TopicItemAdapter(Context context, IShareCallbackOperator callback,
+	public TopicItemAdapter(Context context, ITopicCallbackOperator callback,
 			List<TopicEntity> dataSourceList) {
 		super();
 		this.context = context;
@@ -68,6 +65,7 @@ public class TopicItemAdapter extends BaseAdapter {
 			holder = (HolderView) convertview.getTag();
 		}
 		TopicEntity te = dataSourceList.get(position);
+		final String id = te.getId();
 		holder.topic_name.setText(te.getName());
 		holder.topic_desc.setText(te.getDesc());
 		String imgId = te.getImgId();
@@ -78,6 +76,15 @@ public class TopicItemAdapter extends BaseAdapter {
 			ImageLoader.getInstance()
 					.displayImage(imageUri, holder.topic_photo);
 		}
+
+		holder.topic_name.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				callback.afterClickTopic(id, position);
+
+			}
+		});
 		return convertview;
 	}
 
