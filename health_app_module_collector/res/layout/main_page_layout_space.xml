@@ -5,39 +5,6 @@
 
     <!-- 个人信息展示页面 -->
     <!-- 匿名查看的东西 -->
-    <RelativeLayout
-        android:id="@+id/layout_space_title_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:background="@color/space_title_bar"
-        android:gravity="center_vertical" >
-
-        <ImageButton
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="#00ffffff"
-            android:onClick="add_friends"
-            android:src="@drawable/navigationbar_friendsearch" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="健康空间"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <ImageButton
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:background="#00ffffff"
-            android:onClick="showPopWin"
-            android:src="@drawable/triangle1" />
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/layout_space_content"
@@ -55,16 +22,6 @@
             android:dividerHeight="5dp" >
         </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/items_ops_rlayout"
-        android:layout_width="fill_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/common_bottom_shape" >
-
-        <include layout="@layout/main_page_layout_common_bottom" />
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/share_bottom"

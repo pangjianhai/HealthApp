@@ -275,4 +275,12 @@ public class HealthApplication extends Application {
 		}
 	}
 
+	public static boolean isLogin() {
+		if (userId == null || "".equals(userId)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 }

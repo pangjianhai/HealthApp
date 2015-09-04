@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <RelativeLayout
+        android:id="@+id/layout_space_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/space_title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="#00ffffff"
+            android:onClick="add_friends"
+            android:src="@drawable/navigationbar_friendsearch" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="康兮"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="#00ffffff"
+            android:onClick="showPopWin"
+            android:src="@drawable/triangle1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/home_ops_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_space_title_bar"
+        android:background="@color/white"
+        android:orientation="vertical" 
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/home_frame_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/home_fragment_parent_space"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="空间"
+                android:textColor="#222222" />
+
+            <TextView
+                android:id="@+id/home_fragment_parent_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="话题"
+                android:textColor="#222222" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cursor"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_frame_title"
+            android:scaleType="matrix"
+            android:src="@drawable/roller" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_space_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_ops_title" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/home_fragment_parent_viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/items_ops_rlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/common_bottom_shape" >
+
+        <include layout="@layout/main_page_layout_common_bottom" />
+    </RelativeLayout>
+
+</RelativeLayout>

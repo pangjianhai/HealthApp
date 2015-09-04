@@ -231,6 +231,11 @@
             android:name="cn.com.hzzc.health.pro.ImagePagerActivity"
             android:theme="@style/AppTheme" >
         </activity>
+        <!-- 2期 -->
+        <activity
+            android:name="cn.com.hzzc.health.pro.topic.HomeFrameActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
         <!-- 关于sharesdk  begin -->
         <activity
             android:name="com.mob.tools.MobUIShell"

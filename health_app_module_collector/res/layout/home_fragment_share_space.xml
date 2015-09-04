@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- 个人信息展示页面 -->
+    <!-- 匿名查看的东西 -->
+
+    <LinearLayout
+        android:id="@+id/layout_space_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_space_title_bar" >
+
+        <cn.com.hzzc.health.pro.part.XListView
+            android:id="@+id/space_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:divider="#dedede"
+            android:dividerHeight="5dp" >
+        </cn.com.hzzc.health.pro.part.XListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/share_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:onClick="closeInput"
+        android:paddingBottom="55dp"
+        android:visibility="gone" >
+
+        <!-- 需要回复的时候才会改变visibility属性为可见 -->
+
+        <include layout="@layout/share_reply_pop" />
+    </LinearLayout>
+
+</RelativeLayout>
