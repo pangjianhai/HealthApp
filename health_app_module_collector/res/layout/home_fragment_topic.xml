@@ -9,8 +9,7 @@
     <LinearLayout
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_space_title_bar" >
+        android:layout_height="wrap_content" >
 
         <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/space_lv"

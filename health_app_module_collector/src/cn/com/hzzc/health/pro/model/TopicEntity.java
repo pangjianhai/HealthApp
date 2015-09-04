@@ -17,6 +17,8 @@ public class TopicEntity {
 
 	private String imgId;
 
+	private String desc;
+
 	public String getId() {
 		return id;
 	}
@@ -55,5 +57,13 @@ public class TopicEntity {
 
 	public void setImgId(String imgId) {
 		this.imgId = imgId;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

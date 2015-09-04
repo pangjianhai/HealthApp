@@ -39,6 +39,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 						R.id.home_fragment_parent_viewpager), false);
 		findView();
 		initListView();
+		loadData();
 	}
 
 	private void findView() {
@@ -59,6 +60,19 @@ public class TopicSpaceFragment extends BaseFragment implements
 			Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		return mMainView;
+	}
+
+	private void loadData() {
+		for (int i = 0; i < 10; i++) {
+			TopicEntity te = new TopicEntity();
+			te.setName("topic" + i);
+			te.setPostNum(4);
+			te.setUserNum(3);
+			te.setDesc("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			dataSourceList.add(te);
+
+		}
+		topicItemAdapter.notifyDataSetChanged();
 	}
 
 	@Override
