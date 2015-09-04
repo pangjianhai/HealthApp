@@ -55,7 +55,7 @@ public class HomeFrameActivity extends BaseFragmentActivity {
 		home_fragment_parent_topic = (TextView) findViewById(R.id.home_fragment_parent_topic);
 
 		Fragment sspace = new ShareSpaceFragment();
-		Fragment tspace = new ShareSpaceFragment();
+		Fragment tspace = new TopicSpaceFragment();
 		lists.add(sspace);
 		lists.add(tspace);
 
@@ -212,7 +212,5 @@ public class HomeFrameActivity extends BaseFragmentActivity {
 	public void hideTitle() {
 		home_ops_title.setVisibility(View.GONE);
 	}
-	
-	
 
 }

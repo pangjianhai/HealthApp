@@ -135,7 +135,6 @@ public class ShareSpaceFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		Log.i("xlp", "fragment1-->onCreateView()");
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		return mMainView;
 	}
@@ -775,7 +774,6 @@ public class ShareSpaceFragment extends BaseFragment implements
 	 * @author pang
 	 */
 	public void closeInput(View v) {
-		System.out.println("===================================closeInput");
 		et_pop.setText("");
 		int vi = share_bottom.getVisibility();
 		if (vi == View.VISIBLE) {
