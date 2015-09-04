@@ -3,12 +3,15 @@ package cn.com.hzzc.health.pro.topic;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.adapter.TopicItemAdapter;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
@@ -108,6 +111,8 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 	@Override
 	public void afterClickTopic(String topicId, int index) {
-
+		System.out.println("------------------afterClickTopic");
+		Intent intent = new Intent(getActivity(), ShowTopicActivity.class);
+		getActivity().startActivity(intent);
 	}
 }
