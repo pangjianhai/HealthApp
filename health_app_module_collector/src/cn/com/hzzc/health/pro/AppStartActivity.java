@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
-import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
+import cn.com.hzzc.health.pro.topic.HomeFrameActivity;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -132,10 +132,8 @@ public class AppStartActivity extends BaseActivity {
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				// Intent intent = new Intent(AppStartActivity.this,
-				// AppLoginRegActivity.class);
 				Intent intent = new Intent(AppStartActivity.this,
-						MainPageLayoutSpaceActivity.class);
+						HomeFrameActivity.class);
 				startActivity(intent);
 				AppStartActivity.this.finish();
 			}

@@ -5,7 +5,7 @@
     android:layout_gravity="center_vertical"
     android:background="@color/white" >
 
-    <cn.com.hzzc.health.pro.part.CircularImage
+    <ImageView
         android:id="@+id/topic_photo"
         android:layout_width="30dp"
         android:layout_height="30dp"

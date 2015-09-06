@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.model.TopicEntity;
@@ -54,7 +55,7 @@ public class TopicItemAdapter extends BaseAdapter {
 		if (convertview == null) {
 			convertview = View
 					.inflate(context, R.layout.share_topic_item, null);
-			holder.topic_photo = (CircularImage) convertview
+			holder.topic_photo = (ImageView) convertview
 					.findViewById(R.id.topic_photo);
 			holder.topic_name = (TextView) convertview
 					.findViewById(R.id.topic_name);
@@ -66,11 +67,12 @@ public class TopicItemAdapter extends BaseAdapter {
 		}
 		TopicEntity te = dataSourceList.get(position);
 		final String id = te.getId();
+		String desc = te.getDesc();
 		holder.topic_name.setText(te.getName());
-		holder.topic_desc.setText(te.getDesc());
+		holder.topic_desc.setText(desc);
 		String imgId = te.getImgId();
+		System.out.println("imgId:" + imgId);
 		if (imgId != null && !"".equals(imgId)) {
-
 		} else {
 			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
 			ImageLoader.getInstance()
@@ -91,7 +93,7 @@ public class TopicItemAdapter extends BaseAdapter {
 	private class HolderView {
 		private TextView topic_name, topic_desc;
 
-		private CircularImage topic_photo;
+		private ImageView topic_photo;
 	}
 
 }

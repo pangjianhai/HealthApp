@@ -19,6 +19,8 @@ public class TopicEntity {
 
 	private String desc;
 
+	private String createDate;
+
 	public String getId() {
 		return id;
 	}
@@ -66,4 +68,13 @@ public class TopicEntity {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
 }

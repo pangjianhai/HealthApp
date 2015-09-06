@@ -35,10 +35,10 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	public static final String server_url = "http://www.kx360.com.cn/iotapp/";
-
 	// public static final String server_url =
-	// "http://192.168.0.104:8080/IotApp/";
+	// "http://www.kx360.com.cn/iotapp/";
+
+	public static final String server_url = "http://192.168.0.104:8080/IotApp/";
 
 	/**
 	 * 
@@ -308,6 +308,15 @@ public class SystemConst {
 		 */
 		public static final String share_to_3part_platform = "appSourceController/tranSpondSentenceHash.do";
 
+	}
+
+	/**
+	 * @todo 和主题相关的链接
+	 * @author pang
+	 *
+	 */
+	public class TopicUrl {
+		public static final String get_page_topic = "topicController/queryTopicPageall.do";
 	}
 
 	/**
