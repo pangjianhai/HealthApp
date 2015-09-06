@@ -31,7 +31,7 @@ public class ShowTopicActivity extends BaseActivity {
 
 	private TextView topic_name;
 	/********** 是否参与某一主题 ***********/
-	private boolean isIn = false;
+	private boolean isIn = false;// true:已经参与 false:未参与
 	private Button is_in_topic;
 
 	@Override
@@ -93,10 +93,20 @@ public class ShowTopicActivity extends BaseActivity {
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
 			d.put("picId", topicId);
+			String url = SystemConst.server_url
+					+ SystemConst.TopicUrl.isInTopic;
+			System.out.println("url:" + url);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					isIn = TopicUtil.parseFlag(data);
+					if (isIn) {
+						is_in_topic.setText("退出");
+					} else {
+						is_in_topic.setText("参与");
+					}
 
 				}
 
@@ -106,8 +116,7 @@ public class ShowTopicActivity extends BaseActivity {
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			send_normal_request(SystemConst.server_url
-					+ SystemConst.TopicUrl.isInTopic, map, rcb);
+			send_normal_request(url, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

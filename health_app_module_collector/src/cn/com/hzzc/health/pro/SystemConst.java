@@ -334,16 +334,16 @@ public class SystemConst {
 		/**
 		 * 参与主题
 		 */
-		public static final String getInTopic = "topicController/addParticipationTopicByUserId";
+		public static final String getInTopic = "topicController/addParticipationTopicByUserId.do";
 		/**
 		 * 退出主题
 		 */
-		public static final String getOutTopic = "topicController/delParticipationTopicByUserId";
+		public static final String getOutTopic = "topicController/delParticipationTopicByUserId.do";
 
 		/**
 		 * 判断某人是否参与某个主题
 		 */
-		public static final String isInTopic = "topicController/judgePicUserId";
+		public static final String isInTopic = "topicController/judgePicUserId.do";
 	}
 
 	/**

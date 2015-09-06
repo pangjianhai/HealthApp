@@ -83,4 +83,14 @@ public class TopicUtil {
 		return dataSourceList;
 	}
 
+	public static boolean parseFlag(String data) {
+		try {
+			JSONObject obj = new JSONObject(data);
+			return obj.getBoolean("flag");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }
