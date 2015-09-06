@@ -65,6 +65,7 @@ public class TopicUtil {
 				String id = obj.getString("id");
 				String name = obj.getString("name");
 				String content = obj.getString("content");
+				System.out.println("content:"+content);
 				if (content == null || "null".equals(content)) {
 					content = "";
 				}

@@ -77,17 +77,17 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 	private void realLoadData() {
 		try {
-			currentPage = currentPage + 1;
 			JSONObject d = new JSONObject();
 			d.put("page", currentPage + "");
 			d.put("rows", 10);
 			currentPage = currentPage + 1;
+			String url = SystemConst.server_url
+					+ SystemConst.TopicUrl.get_page_topic;
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("-------------------datga:" + data);
 					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
 					dataSourceList.addAll(lst);
 					topicItemAdapter.notifyDataSetChanged();
@@ -101,8 +101,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 			};
 			Map map = new HashMap();
 			map.put("para", d.toString());
-			send_normal_request(SystemConst.server_url
-					+ SystemConst.TopicUrl.get_page_topic, map, rcb);
+			send_normal_request(url, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

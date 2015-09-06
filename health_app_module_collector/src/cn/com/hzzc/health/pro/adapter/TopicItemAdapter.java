@@ -74,12 +74,14 @@ public class TopicItemAdapter extends BaseAdapter {
 		holder.topic_desc.setText(desc);
 		String imgId = te.getImgId();
 		if (imgId != null && !"".equals(imgId)) {
-			String pic_url = SystemConst.server_url
-					+ SystemConst.TopicUrl.getTopicImgByImgId
-					+ "?para={imgId:'" + imgId + "'}";
-			System.out.println("pic_url:" + pic_url);
-			ImageLoader.getInstance().displayImage(pic_url, holder.topic_photo,
-					HealthApplication.getDisplayImageOption());
+//			String pic_url = SystemConst.server_url
+//					+ SystemConst.TopicUrl.getTopicImgByImgId
+//					+ "?para={imgId:'" + imgId + "'}";
+//			ImageLoader.getInstance().displayImage(pic_url, holder.topic_photo,
+//					HealthApplication.getDisplayImageOption());
+			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
+			ImageLoader.getInstance()
+					.displayImage(imageUri, holder.topic_photo);
 		} else {
 			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
 			ImageLoader.getInstance()
