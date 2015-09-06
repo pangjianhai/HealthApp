@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.com.hzzc.health.pro.SystemConst;
@@ -18,6 +19,28 @@ import cn.com.hzzc.health.pro.model.TopicEntity;
  *
  */
 public class TopicUtil {
+
+	public static TopicEntity parseEntityByJSON(String data) {
+		try {
+			JSONObject obj = new JSONObject(data);
+			String id = obj.getString("id");
+			String name = obj.getString("name");
+			String content = obj.getString("content");
+			String createDate = obj.getString("createDate");
+			String imgId = obj.getString("imgId");
+			TopicEntity bean = new TopicEntity();
+			bean.setId(id);
+			bean.setDesc(content);
+			bean.setName(name);
+			bean.setImgId(imgId);
+			bean.setCreateDate(createDate);
+			return bean;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 	/**
 	 * 

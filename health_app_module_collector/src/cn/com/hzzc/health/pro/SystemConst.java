@@ -316,7 +316,15 @@ public class SystemConst {
 	 *
 	 */
 	public class TopicUrl {
+		/**
+		 * 获取所有健康主题的分页信息
+		 */
 		public static final String get_page_topic = "topicController/queryTopicPageall.do";
+
+		/**
+		 * 获取主题的详情信息
+		 */
+		public static final String get_topic_info_by_id = "topicController/getBaseTopicBypicId.do";
 	}
 
 	/**
