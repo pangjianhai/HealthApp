@@ -325,6 +325,11 @@ public class SystemConst {
 		 * 获取主题的详情信息
 		 */
 		public static final String get_topic_info_by_id = "topicController/getBaseTopicBypicId.do";
+
+		/**
+		 * 根据用ID获取主题图片
+		 */
+		public static final String getTopicImgByImgId = "topicController/getTopicImgByImgId.do";
 	}
 
 	/**

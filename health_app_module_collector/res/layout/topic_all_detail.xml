@@ -53,41 +53,75 @@
             android:layout_height="wrap_content"
             android:padding="10dp" >
 
-            <LinearLayout
-                android:id="@+id/share_all_detail_tag_layout"
+            <FrameLayout
+                android:id="@+id/share_total_n"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_below="@+id/share_all_detail_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
+                android:layout_height="100dp" >
 
                 <ImageView
-                    android:id="@+id/picture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:contentDescription="标签"
-                    android:src="@drawable/tag8" />
+                    android:id="@+id/friend_avatar_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/visitor_me_cover" />
 
-                <TextView
-                    android:id="@+id/share_all_detail_tag"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="10dp" >
 
-            <TextView
+                    <TextView
+                        android:id="@+id/topic_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@drawable/divider2"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:showDividers="middle" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="77人参与" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="77张发布" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:text="退出"
+                        android:textColor="@color/orange"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <View
                 android:id="@+id/share_comment_listview_notice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/share_detail_imgs_gridview"
-                android:layout_marginTop="50dp"
-                android:background="@color/gray"
-                android:gravity="left"
-                android:hint="帖子"
-                android:text="帖子"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_height="1dp"
+                android:layout_below="@+id/share_total_n"
+                android:background="#d0d0d0" />
 
             <cn.com.hzzc.health.pro.part.SentenceListView
                 android:id="@+id/share_comment_listview"
@@ -111,7 +145,5 @@
         <include layout="@layout/single_share_common_bottom" />
         <!-- 这里写你的子控件 -->
     </RelativeLayout>
-
-   
 
 </RelativeLayout>

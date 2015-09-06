@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import cn.com.hzzc.health.pro.BaseActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -27,6 +28,8 @@ public class ShowTopicActivity extends BaseActivity {
 
 	private String topicId;
 
+	private TextView topic_name;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,18 +41,21 @@ public class ShowTopicActivity extends BaseActivity {
 
 	private void initParam() {
 		topicId = getIntent().getStringExtra("topicId");
+		topic_name = (TextView) findViewById(R.id.topic_name);
 	}
 
 	private void initData() {
 		try {
 			JSONObject d = new JSONObject();
-			d.put("topicId", topicId);
+			d.put("picId", topicId);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
+					System.out.println(responseInfo.result);
 					TopicEntity te = TopicUtil
 							.parseEntityByJSON(responseInfo.result);
+					topic_name.setText(te.getName());
 				}
 
 				@Override
