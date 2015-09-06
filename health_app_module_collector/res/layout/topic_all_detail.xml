@@ -23,19 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="健康信息详情"
+            android:text="主题详情"
             android:textColor="@color/black"
             android:textSize="20sp" />
-
-        <ImageButton
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:background="#00ffffff"
-            android:onClick="detail_ops"
-            android:src="@drawable/more_action" />
     </RelativeLayout>
 
     <!-- ScrollView有规则，内部只允许有一只child，所以需要把所有控件外层包裹一个layout -->
@@ -111,8 +101,8 @@
                         android:layout_gravity="center"
                         android:background="@color/white"
                         android:gravity="center"
-                        android:text="退出"
                         android:onClick="is_in_ops"
+                        android:text="退出"
                         android:textColor="@color/orange"
                         android:textSize="12sp" />
                 </LinearLayout>

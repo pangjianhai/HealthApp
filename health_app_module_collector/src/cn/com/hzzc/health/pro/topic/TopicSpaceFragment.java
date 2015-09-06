@@ -86,8 +86,9 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					List<TopicEntity> lst = TopicUtil
-							.parseJsonAddToList(responseInfo.result);
+					String data = responseInfo.result;
+					System.out.println("-------------------datga:" + data);
+					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
 					dataSourceList.addAll(lst);
 					topicItemAdapter.notifyDataSetChanged();
 					onLoadOver();

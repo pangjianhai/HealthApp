@@ -95,7 +95,6 @@ public class ShowTopicActivity extends BaseActivity {
 			d.put("picId", topicId);
 			String url = SystemConst.server_url
 					+ SystemConst.TopicUrl.isInTopic;
-			System.out.println("url:" + url);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
@@ -158,6 +157,7 @@ public class ShowTopicActivity extends BaseActivity {
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
+					error.printStackTrace();
 				}
 			};
 			Map map = new HashMap();
@@ -190,6 +190,7 @@ public class ShowTopicActivity extends BaseActivity {
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
+					error.printStackTrace();
 				}
 			};
 			Map map = new HashMap();
