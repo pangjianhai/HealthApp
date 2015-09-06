@@ -330,6 +330,20 @@ public class SystemConst {
 		 * 根据用ID获取主题图片
 		 */
 		public static final String getTopicImgByImgId = "topicController/getTopicImgByImgId.do";
+
+		/**
+		 * 参与主题
+		 */
+		public static final String getInTopic = "topicController/addParticipationTopicByUserId";
+		/**
+		 * 退出主题
+		 */
+		public static final String getOutTopic = "topicController/delParticipationTopicByUserId";
+
+		/**
+		 * 判断某人是否参与某个主题
+		 */
+		public static final String isInTopic = "topicController/judgePicUserId";
 	}
 
 	/**

@@ -51,7 +51,7 @@
             android:id="@+id/share_all_detail_content_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" >
+            android:padding="2dp" >
 
             <FrameLayout
                 android:id="@+id/share_total_n"
@@ -105,12 +105,14 @@
                     </LinearLayout>
 
                     <Button
+                        android:id="@+id/is_in_topic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@color/white"
                         android:gravity="center"
                         android:text="退出"
+                        android:onClick="is_in_ops"
                         android:textColor="@color/orange"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -119,7 +121,7 @@
             <View
                 android:id="@+id/share_comment_listview_notice"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:layout_below="@+id/share_total_n"
                 android:background="#d0d0d0" />
 
