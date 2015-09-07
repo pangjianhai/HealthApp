@@ -115,15 +115,15 @@
                 android:layout_below="@+id/share_total_n"
                 android:background="#d0d0d0" />
 
-            <cn.com.hzzc.health.pro.part.SentenceListView
-                android:id="@+id/share_comment_listview"
+            <cn.com.hzzc.health.pro.part.XListView
+                android:id="@+id/topic_post_lv"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_below="@+id/share_comment_listview_notice"
                 android:layout_marginTop="15dp"
                 android:divider="@drawable/divider_share_comments"
                 android:showDividers="middle" >
-            </cn.com.hzzc.health.pro.part.SentenceListView>
+            </cn.com.hzzc.health.pro.part.XListView>
         </RelativeLayout>
     </ScrollView>
 

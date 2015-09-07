@@ -20,6 +20,10 @@ public class TopicEntity {
 	private String desc;
 
 	private String createDate;
+	/**
+	 * 是否已经参与
+	 */
+	private boolean isEnter;
 
 	public String getId() {
 		return id;
@@ -75,6 +79,14 @@ public class TopicEntity {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+	public boolean isEnter() {
+		return isEnter;
+	}
+
+	public void setEnter(boolean isEnter) {
+		this.isEnter = isEnter;
 	}
 
 }

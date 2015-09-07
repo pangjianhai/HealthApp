@@ -1,6 +1,8 @@
 package cn.com.hzzc.health.pro.topic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -13,7 +15,10 @@ import android.widget.TextView;
 import cn.com.hzzc.health.pro.BaseActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
+import cn.com.hzzc.health.pro.adapter.TopicPostItemAdapter;
 import cn.com.hzzc.health.pro.model.TopicEntity;
+import cn.com.hzzc.health.pro.model.TopicPostEntity;
+import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.util.TopicUtil;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -34,6 +39,13 @@ public class ShowTopicActivity extends BaseActivity {
 	private boolean isIn = false;// true:已经参与 false:未参与
 	private Button is_in_topic;
 
+	/******* 和主题相关的评论分页 ********/
+	private XListView topic_post_lv;
+	private int currentPage = 1;
+	private int rows = 20;
+	List<TopicPostEntity> ds = new ArrayList<TopicPostEntity>();
+	private TopicPostItemAdapter adpater = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,12 +54,14 @@ public class ShowTopicActivity extends BaseActivity {
 		initParam();
 		initData();
 		initInData();
+		initPostData();
 	}
 
 	private void initParam() {
 		topicId = getIntent().getStringExtra("topicId");
 		topic_name = (TextView) findViewById(R.id.topic_name);
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
+		topic_post_lv = (XListView) findViewById(R.id.topic_post_lv);
 	}
 
 	/**
@@ -200,6 +214,24 @@ public class ShowTopicActivity extends BaseActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年9月7日
+	 * @todo:初始化评论信息
+	 * @return:void
+	 */
+	public void initPostData() {
+		adpater = new TopicPostItemAdapter(this, ds);
+		for (int i = 0; i < 11; i++) {
+			TopicPostEntity tpe = new TopicPostEntity();
+			tpe.setShortMsg("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n bbbbbbbbbbbbbbbbbbb");
+			tpe.setUserName("逄建海");
+			tpe.setPostDate("2015-11-14");
+			ds.add(tpe);
+		}
+		adpater.notifyDataSetChanged();
 	}
 
 	/**

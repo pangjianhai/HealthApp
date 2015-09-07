@@ -11,10 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
-import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicEntity;
-import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.util.ITopicCallbackOperator;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
