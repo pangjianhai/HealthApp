@@ -30,101 +30,94 @@
 
     <!-- ScrollView有规则，内部只允许有一只child，所以需要把所有控件外层包裹一个layout -->
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/share_all_detail_content_layout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/layout_space_title_bar"
-        android:fadingEdge="vertical"
-        android:scrollbars="vertical" >
+        android:padding="2dp" >
 
-        <RelativeLayout
-            android:id="@+id/share_all_detail_content_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="2dp" >
+        <FrameLayout
+            android:id="@+id/share_total_n"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" >
 
-            <FrameLayout
-                android:id="@+id/share_total_n"
+            <ImageView
+                android:id="@+id/friend_avatar_bg"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" >
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/visitor_me_cover" />
 
-                <ImageView
-                    android:id="@+id/friend_avatar_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/visitor_me_cover" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/topic_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:divider="@drawable/divider2"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="10dp" >
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp"
+                    android:showDividers="middle" >
 
                     <TextView
-                        android:id="@+id/topic_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+                        android:layout_marginRight="5dp"
+                        android:text="77人参与" />
 
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:divider="@drawable/divider2"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal"
-                        android:paddingTop="5dp"
-                        android:showDividers="middle" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:text="77人参与" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="77张发布" />
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/is_in_topic"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:onClick="is_in_ops"
-                        android:text="退出"
-                        android:textColor="@color/orange"
-                        android:textSize="12sp" />
+                        android:layout_marginLeft="5dp"
+                        android:text="77张发布" />
                 </LinearLayout>
-            </FrameLayout>
 
-            <View
-                android:id="@+id/topic_post_div_notice"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_below="@+id/share_total_n"
-                android:background="#d0d0d0" />
+                <Button
+                    android:id="@+id/is_in_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:onClick="is_in_ops"
+                    android:text="退出"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
 
-            <cn.com.hzzc.health.pro.part.SentenceListView
-                android:id="@+id/topic_post_lv"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/topic_post_div_notice"
-                android:divider="@drawable/divider_share_comments"
-                android:showDividers="middle" >
-            </cn.com.hzzc.health.pro.part.SentenceListView>
-        </RelativeLayout>
-    </ScrollView>
+        <View
+            android:id="@+id/topic_post_div_notice"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/share_total_n"
+            android:background="#d0d0d0" />
+
+        <cn.com.hzzc.health.pro.part.XListView
+            android:id="@+id/topic_post_lv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/topic_post_div_notice"
+            android:divider="@drawable/divider_share_comments"
+            android:showDividers="middle" >
+        </cn.com.hzzc.health.pro.part.XListView>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/share_all_detail_bottom_layout"

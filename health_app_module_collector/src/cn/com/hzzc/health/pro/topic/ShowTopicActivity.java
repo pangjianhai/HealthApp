@@ -18,8 +18,8 @@ import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicPostItemAdapter;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.model.TopicPostEntity;
-import cn.com.hzzc.health.pro.part.SentenceListView;
-import cn.com.hzzc.health.pro.part.SentenceListView.SentenceListViewListener;
+import cn.com.hzzc.health.pro.part.XListView;
+import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
 import cn.com.hzzc.health.pro.util.TopicUtil;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -32,7 +32,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  *
  */
 public class ShowTopicActivity extends BaseActivity implements
-		SentenceListViewListener {
+		IXListViewListener {
 
 	private String topicId;
 
@@ -42,7 +42,7 @@ public class ShowTopicActivity extends BaseActivity implements
 	private Button is_in_topic;
 
 	/******* 和主题相关的评论分页 ********/
-	private SentenceListView topic_post_lv;
+	private XListView topic_post_lv;
 	private int currentPage = 1;
 	private int rows = 20;
 	List<TopicPostEntity> ds = new ArrayList<TopicPostEntity>();
@@ -63,7 +63,7 @@ public class ShowTopicActivity extends BaseActivity implements
 		topicId = getIntent().getStringExtra("topicId");
 		topic_name = (TextView) findViewById(R.id.topic_name);
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
-		topic_post_lv = (SentenceListView) findViewById(R.id.topic_post_lv);
+		topic_post_lv = (XListView) findViewById(R.id.topic_post_lv);
 	}
 
 	/**
