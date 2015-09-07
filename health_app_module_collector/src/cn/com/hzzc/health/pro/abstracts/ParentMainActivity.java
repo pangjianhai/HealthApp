@@ -220,7 +220,6 @@ public abstract class ParentMainActivity extends BaseActivity {
 
 			@Override
 			public void onDismiss() {
-				System.out.println("popWindow消失");
 
 			}
 		});

@@ -32,7 +32,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  *
  */
 public class ShowTopicActivity extends BaseActivity implements
-SentenceListViewListener {
+		SentenceListViewListener {
 
 	private String topicId;
 
@@ -240,7 +240,6 @@ SentenceListViewListener {
 			tpe.setPostDate("2015-11-14");
 			ds.add(tpe);
 		}
-		System.out.println("===========================ds:" + ds.size());
 		adpater.notifyDataSetChanged();
 	}
 

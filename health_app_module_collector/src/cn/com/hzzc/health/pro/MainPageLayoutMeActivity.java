@@ -468,7 +468,6 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 					@Override
 					public void onFailure(HttpException error, String msg) {
 						dialog.dismiss();
-						System.out.println("msg:" + msg);
 						Toast.makeText(getApplicationContext(), "下载失败",
 								Toast.LENGTH_SHORT).show();
 					}

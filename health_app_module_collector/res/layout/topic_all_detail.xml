@@ -111,7 +111,7 @@
             <View
                 android:id="@+id/topic_post_div_notice"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="2dp"
                 android:layout_below="@+id/share_total_n"
                 android:background="#d0d0d0" />
 
@@ -120,7 +120,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_below="@+id/topic_post_div_notice"
-                android:layout_marginTop="15dp"
                 android:divider="@drawable/divider_share_comments"
                 android:showDividers="middle" >
             </cn.com.hzzc.health.pro.part.SentenceListView>

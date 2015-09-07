@@ -183,10 +183,8 @@ public class AppRegActivity extends BaseActivity {
 	 * @author pang
 	 */
 	public void regOver(String result) {
-		System.out.println("regOver:" + result);
 		try {
 			JSONObject data = new JSONObject(result);
-			System.out.println("result-------------------->>>" + result);
 			/**
 			 * 解析出新的用户的ID
 			 */
@@ -204,11 +202,9 @@ public class AppRegActivity extends BaseActivity {
 			/**
 			 * 保存到本地空间
 			 */
-			System.out.println("---------------i---------------s");
 			boolean is = new SharedPreInto(AppRegActivity.this)
 					.initAccountAfterReg(flag, str_reg_username,
 							str_reg_password);
-			System.out.println("---------------is" + is);
 			/**
 			 * 保存失败
 			 */
@@ -236,7 +232,6 @@ public class AppRegActivity extends BaseActivity {
 	 * @author pang
 	 */
 	private void regSuccess() {
-		System.out.println("regSuccess::::");
 		Intent intent = new Intent(AppRegActivity.this,
 				AppLoginStartActivity.class);
 		startActivity(intent);
