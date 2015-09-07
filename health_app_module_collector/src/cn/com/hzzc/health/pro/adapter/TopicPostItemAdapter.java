@@ -5,19 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
-import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.model.TopicPostEntity;
 import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.util.CommonDateUtil;
@@ -77,6 +72,7 @@ public class TopicPostItemAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertview, ViewGroup parent) {
 		holder = new HolderView();
+		System.out.println("-----------------------------------getView");
 		if (convertview == null) {
 			convertview = View.inflate(context, R.layout.topic_post_item, null);
 			holder.share_photo = (CircularImage) convertview
@@ -163,15 +159,18 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		/**
 		 * 图片部分
 		 */
-		ShareSpacePicAdapter picAdapter = new ShareSpacePicAdapter(context,
-				entity.getImgs());
-		holder.picGridView.setAdapter(picAdapter);
-		/**
-		 * 第一个参数就是我们的图片加载对象ImageLoader,
-		 * 第二个是控制是否在滑动过程中暂停加载图片，如果需要暂停传true就行了，第三个参数控制猛的滑动界面的时候图片是否加载
-		 */
-		holder.picGridView.setOnScrollListener(new PauseOnScrollListener(
-				ImageLoader.getInstance(), true, false));
+		List<String> imgs = entity.getImgs();
+		if (imgs != null && !imgs.isEmpty()) {
+			ShareSpacePicAdapter picAdapter = new ShareSpacePicAdapter(context,
+					entity.getImgs());
+			holder.picGridView.setAdapter(picAdapter);
+			/**
+			 * 第一个参数就是我们的图片加载对象ImageLoader,
+			 * 第二个是控制是否在滑动过程中暂停加载图片，如果需要暂停传true就行了，第三个参数控制猛的滑动界面的时候图片是否加载
+			 */
+			holder.picGridView.setOnScrollListener(new PauseOnScrollListener(
+					ImageLoader.getInstance(), true, false));
+		}
 	}
 
 	private class HolderView {

@@ -18,7 +18,8 @@ import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicPostItemAdapter;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.model.TopicPostEntity;
-import cn.com.hzzc.health.pro.part.XListView;
+import cn.com.hzzc.health.pro.part.SentenceListView;
+import cn.com.hzzc.health.pro.part.SentenceListView.SentenceListViewListener;
 import cn.com.hzzc.health.pro.util.TopicUtil;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -30,7 +31,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @author pang
  *
  */
-public class ShowTopicActivity extends BaseActivity {
+public class ShowTopicActivity extends BaseActivity implements
+SentenceListViewListener {
 
 	private String topicId;
 
@@ -40,7 +42,7 @@ public class ShowTopicActivity extends BaseActivity {
 	private Button is_in_topic;
 
 	/******* 和主题相关的评论分页 ********/
-	private XListView topic_post_lv;
+	private SentenceListView topic_post_lv;
 	private int currentPage = 1;
 	private int rows = 20;
 	List<TopicPostEntity> ds = new ArrayList<TopicPostEntity>();
@@ -61,7 +63,7 @@ public class ShowTopicActivity extends BaseActivity {
 		topicId = getIntent().getStringExtra("topicId");
 		topic_name = (TextView) findViewById(R.id.topic_name);
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
-		topic_post_lv = (XListView) findViewById(R.id.topic_post_lv);
+		topic_post_lv = (SentenceListView) findViewById(R.id.topic_post_lv);
 	}
 
 	/**
@@ -223,7 +225,14 @@ public class ShowTopicActivity extends BaseActivity {
 	 * @return:void
 	 */
 	public void initPostData() {
-		adpater = new TopicPostItemAdapter(this, ds);
+		topic_post_lv.setPullLoadEnable(false);
+		topic_post_lv.setXListViewListener(this);
+		adpater = new TopicPostItemAdapter(ShowTopicActivity.this, ds);
+		topic_post_lv.setAdapter(adpater);
+		realLoadData();
+	}
+
+	private void realLoadData() {
 		for (int i = 0; i < 11; i++) {
 			TopicPostEntity tpe = new TopicPostEntity();
 			tpe.setShortMsg("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n bbbbbbbbbbbbbbbbbbb");
@@ -231,6 +240,7 @@ public class ShowTopicActivity extends BaseActivity {
 			tpe.setPostDate("2015-11-14");
 			ds.add(tpe);
 		}
+		System.out.println("===========================ds:" + ds.size());
 		adpater.notifyDataSetChanged();
 	}
 
@@ -244,4 +254,21 @@ public class ShowTopicActivity extends BaseActivity {
 	public void backoff(View v) {
 		this.finish();
 	}
+
+	@Override
+	public void onRefresh() {
+
+	}
+
+	@Override
+	public void onLoadMore() {
+		realLoadData();
+	}
+
+	private void onLoadOver() {
+		topic_post_lv.stopRefresh();
+		topic_post_lv.stopLoadMore();
+		topic_post_lv.setRefreshTime("刚刚");
+	}
+
 }
