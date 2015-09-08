@@ -48,6 +48,8 @@ public class ShowTopicActivity extends BaseActivity implements
 	List<TopicPostEntity> ds = new ArrayList<TopicPostEntity>();
 	private TopicPostItemAdapter adpater = null;
 
+	private TextView topic_post_no_post_notice;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class ShowTopicActivity extends BaseActivity implements
 		topic_name = (TextView) findViewById(R.id.topic_name);
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
 		topic_post_lv = (XListView) findViewById(R.id.topic_post_lv);
+		topic_post_no_post_notice = (TextView) findViewById(R.id.topic_post_no_post_notice);
 	}
 
 	/**
@@ -232,6 +235,12 @@ public class ShowTopicActivity extends BaseActivity implements
 		realLoadData();
 	}
 
+	/**
+	 * @user:pang
+	 * @data:2015年9月8日
+	 * @todo:真正的获取数据
+	 * @return:void
+	 */
 	private void realLoadData() {
 		try {
 			JSONObject d = new JSONObject();
@@ -248,8 +257,13 @@ public class ShowTopicActivity extends BaseActivity implements
 					String data = responseInfo.result;
 					List<TopicPostEntity> lst = TopicUtil
 							.parsePostsFromJson(data);
-					ds.addAll(lst);
-					adpater.notifyDataSetChanged();
+					if (lst == null || lst.isEmpty()) {// 没有发帖
+						topic_post_no_post_notice.setVisibility(View.VISIBLE);
+						topic_post_lv.setVisibility(View.GONE);
+					} else {
+						ds.addAll(lst);
+						adpater.notifyDataSetChanged();
+					}
 					onLoadOver();
 				}
 

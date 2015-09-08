@@ -28,6 +28,11 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+/**
+ * @todo 话题空间一览
+ * @author pang
+ *
+ */
 public class TopicSpaceFragment extends BaseFragment implements
 		IXListViewListener, ITopicCallbackOperator {
 	private View mMainView;
@@ -180,7 +185,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		System.out.println("========================onStart>>>>>>>>>>>>>>");
+		loadDataMore();
 	}
 
 }
