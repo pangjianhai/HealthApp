@@ -9,7 +9,8 @@
     <LinearLayout
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
         <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/space_lv"
@@ -21,5 +22,18 @@
             android:dividerHeight="1dp" >
         </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/single_push_bottom_ops_sc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/share_ops_info"
+        android:paddingBottom="22dp"
+        android:text="参与主题"
+        android:textColor="@color/orange" />
 
 </RelativeLayout>

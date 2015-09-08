@@ -281,7 +281,7 @@ public class ShowTopicActivity extends BaseActivity implements
 
 	@Override
 	public void onRefresh() {
-
+		onLoadOver();
 	}
 
 	@Override

@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicItemAdapter;
@@ -33,6 +35,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 	 * 适配器需要的数据结构
 	 */
 	private List<TopicEntity> dataSourceList = new ArrayList<TopicEntity>();
+	private Button single_push_bottom_ops_sc;
 
 	/**
 	 * 空间分享信息列表
@@ -50,9 +53,22 @@ public class TopicSpaceFragment extends BaseFragment implements
 				R.layout.home_fragment_topic,
 				(ViewGroup) getActivity().findViewById(
 						R.id.home_fragment_parent_viewpager), false);
+		single_push_bottom_ops_sc = (Button) mMainView.findViewById(R.id.single_push_bottom_ops_sc);
 		findView();
 		initListView();
 		loadDataMore();
+		single_push_bottom_ops_sc.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				System.out.println("======================>>>>>>>>>>>>>>>");
+			}
+		});
+	}
+
+	private Button findViewById(int singlePushBottomOpsSc) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private void findView() {
