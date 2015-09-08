@@ -23,7 +23,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:background="#FFFFFF"
                 android:orientation="horizontal" >
 
@@ -33,7 +32,7 @@
                     android:layout_height="20dp"
                     android:layout_gravity="top"
                     android:layout_margin="10dp"
-                    android:layout_marginTop="15dp" />
+                    android:layout_marginTop="2dp" />
 
                 <TextView
                     android:id="@+id/share_id"
@@ -45,7 +44,7 @@
                     android:id="@+id/share_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
                     android:text="@string/xlistview_header_hint_name"
                     android:textColor="@color/bgray"
                     android:textSize="18sp" />
@@ -54,7 +53,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:background="#FFFFFF"
                 android:orientation="vertical" >
 

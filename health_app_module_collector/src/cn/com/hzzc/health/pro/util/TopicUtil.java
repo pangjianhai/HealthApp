@@ -111,6 +111,16 @@ public class TopicUtil {
 				String img2 = obj.getString("img2");
 				String img3 = obj.getString("img3");
 				String createDate = obj.getString("createDate");
+				List imgs = new ArrayList<String>();
+				if (img0 != null && !"".equals(img0)) {
+					imgs.add(img0);
+				} else if (img1 != null && !"".equals(img1)) {
+					imgs.add(img1);
+				} else if (img2 != null && !"".equals(img2)) {
+					imgs.add(img2);
+				} else if (img3 != null && !"".equals(img3)) {
+					imgs.add(img3);
+				}
 
 				bean.setId(id);
 				bean.setPostDate(createDate);
@@ -121,6 +131,7 @@ public class TopicUtil {
 				bean.setImg2(img2);
 				bean.setImg3(img3);
 				bean.setShortMsg(comment);
+				bean.setImgs(imgs);
 				dataSourceList.add(bean);
 			}
 		} catch (Exception e) {

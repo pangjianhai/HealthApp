@@ -72,7 +72,6 @@ public class TopicPostItemAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertview, ViewGroup parent) {
 		holder = new HolderView();
-		System.out.println("-----------------------------------getView");
 		if (convertview == null) {
 			convertview = View.inflate(context, R.layout.topic_post_item, null);
 			holder.share_photo = (CircularImage) convertview
@@ -118,7 +117,10 @@ public class TopicPostItemAdapter extends BaseAdapter {
 
 		String common_content = entity.getShortMsg();
 		int goodnum = entity.getGoodNum();
-		String date = entity.getPostDate();
+		String date = entity.getPostDate();// 带有时分秒
+		if (date != null && !"".equals(date)) {
+			date = CommonDateUtil.formatDate(CommonDateUtil.getTime(date));
+		}
 		holder.share_content.setVisibility(View.VISIBLE);
 		holder.share_content.setText(common_content);
 		if (today.equals(date)) {
