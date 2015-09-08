@@ -53,7 +53,8 @@ public class TopicSpaceFragment extends BaseFragment implements
 				R.layout.home_fragment_topic,
 				(ViewGroup) getActivity().findViewById(
 						R.id.home_fragment_parent_viewpager), false);
-		single_push_bottom_ops_sc = (Button) mMainView.findViewById(R.id.single_push_bottom_ops_sc);
+		single_push_bottom_ops_sc = (Button) mMainView
+				.findViewById(R.id.single_push_bottom_ops_sc);
 		findView();
 		initListView();
 		loadDataMore();
@@ -61,7 +62,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 			@Override
 			public void onClick(View v) {
-				System.out.println("======================>>>>>>>>>>>>>>>");
+				toPage();
 			}
 		});
 	}
@@ -158,6 +159,12 @@ public class TopicSpaceFragment extends BaseFragment implements
 	public void afterClickTopic(String topicId, int index) {
 		Intent intent = new Intent(getActivity(), ShowTopicActivity.class);
 		intent.putExtra("topicId", topicId);
+		getActivity().startActivity(intent);
+	}
+
+	public void toPage() {
+		Intent intent = new Intent(getActivity(),
+				TopicListUnenteredActivity.class);
 		getActivity().startActivity(intent);
 	}
 }
