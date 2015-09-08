@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import cn.com.hzzc.health.pro.ImagePagerActivity;
+import cn.com.hzzc.health.pro.ImageTopicPagerActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
@@ -120,7 +121,7 @@ public class TopicPicAdapter extends BaseAdapter {
 
 	protected void imageBrower(Context mContext, int position,
 			ArrayList<String> urls2) {
-		Intent intent = new Intent(mContext, ImagePagerActivity.class);
+		Intent intent = new Intent(mContext, ImageTopicPagerActivity.class);
 		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
 		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
 		mContext.startActivity(intent);
