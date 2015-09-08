@@ -27,13 +27,14 @@
         android:id="@+id/single_push_bottom_ops_sc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="center_horizontal"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/share_ops_info"
         android:paddingBottom="22dp"
-        android:text="参与主题"
+        android:text="参与更多主题"
         android:textColor="@color/orange" />
 
 </RelativeLayout>
