@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicItemAdapter;
@@ -45,6 +46,8 @@ public class TopicSpaceFragment extends BaseFragment implements
 	private int currentPage = 1;
 	private int pageRows = 20;
 
+	private TextView space_notice_msg;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,6 +58,8 @@ public class TopicSpaceFragment extends BaseFragment implements
 						R.id.home_fragment_parent_viewpager), false);
 		single_push_bottom_ops_sc = (Button) mMainView
 				.findViewById(R.id.single_push_bottom_ops_sc);
+		space_notice_msg = (TextView) mMainView
+				.findViewById(R.id.space_notice_msg);
 		findView();
 		initListView();
 		loadDataMore();
@@ -75,7 +80,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 	private void findView() {
 		dataSourceList = new ArrayList<TopicEntity>();
 		mListView = (XListView) mMainView.findViewById(R.id.space_lv);
-		mListView.setPullLoadEnable(true);
+		mListView.setPullLoadEnable(false);
 		mListView.setXListViewListener(this);
 	}
 
@@ -83,6 +88,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 		topicItemAdapter = new TopicItemAdapter(getActivity(), this,
 				dataSourceList);
 		mListView.setAdapter(topicItemAdapter);
+		mListView.hideFooter();
 	}
 
 	@Override
@@ -104,8 +110,13 @@ public class TopicSpaceFragment extends BaseFragment implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
-					dataSourceList.addAll(lst);
-					topicItemAdapter.notifyDataSetChanged();
+					if (lst == null || lst.isEmpty()) {
+						space_notice_msg.setVisibility(View.VISIBLE);
+						mListView.setVisibility(View.GONE);
+					} else {
+						dataSourceList.addAll(lst);
+						topicItemAdapter.notifyDataSetChanged();
+					}
 					onLoadOver();
 				}
 

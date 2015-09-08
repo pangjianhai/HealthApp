@@ -417,6 +417,10 @@ public class XListView extends ListView implements OnScrollListener {
 		mListViewListener = l;
 	}
 
+	public void hideFooter() {
+		mFooterView.hide();
+	}
+
 	/**
 	 * you can listen ListView.OnScrollListener or this one. it will invoke
 	 * onXScrolling when header/footer scroll back.

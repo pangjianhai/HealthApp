@@ -18,6 +18,7 @@ public class SharePullUpFooter extends LinearLayout {
 	public final static int STATE_NORMAL = 0;
 	public final static int STATE_READY = 1;
 	public final static int STATE_LOADING = 2;
+	public final static int STATE_HIDE = 3;
 
 	private Context mContext;
 

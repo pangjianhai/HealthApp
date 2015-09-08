@@ -12,6 +12,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/space_notice_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="暂未关注，点击“更多主题”可以关注"
+            android:textAppearance="@android:attr/textAppearanceInverse"
+            android:textColor="@color/bgray"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
         <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/space_lv"
             android:layout_width="match_parent"
@@ -19,7 +31,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:divider="@color/deepgray"
-            android:dividerHeight="1dp" >
+            android:dividerHeight="1dp"
+            android:visibility="visible" >
         </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
 
@@ -27,14 +40,14 @@
         android:id="@+id/single_push_bottom_ops_sc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="center_horizontal"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/share_ops_info"
         android:paddingBottom="22dp"
-        android:text="参与更多主题"
+        android:paddingTop="50dp"
+        android:text="更多主题"
         android:textColor="@color/orange" />
 
 </RelativeLayout>
