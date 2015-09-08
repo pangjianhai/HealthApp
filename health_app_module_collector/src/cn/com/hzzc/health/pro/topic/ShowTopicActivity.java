@@ -233,14 +233,39 @@ public class ShowTopicActivity extends BaseActivity implements
 	}
 
 	private void realLoadData() {
-		for (int i = 0; i < 11; i++) {
-			TopicPostEntity tpe = new TopicPostEntity();
-			tpe.setShortMsg("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n bbbbbbbbbbbbbbbbbbb");
-			tpe.setUserName("逄建海");
-			tpe.setPostDate("2015-11-14");
-			ds.add(tpe);
+		try {
+			JSONObject d = new JSONObject();
+			d.put("picId", topicId);
+			d.put("page", currentPage + "");
+			d.put("rows", rows);
+			currentPage = currentPage + 1;
+			String url = SystemConst.server_url
+					+ SystemConst.TopicUrl.getCommentByTopic;
+			System.out.println("url:" + url);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					List<TopicPostEntity> lst = TopicUtil
+							.parsePostsFromJson(data);
+					ds.addAll(lst);
+					adpater.notifyDataSetChanged();
+					onLoadOver();
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					onLoadOver();
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(url, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		adpater.notifyDataSetChanged();
+
 	}
 
 	/**

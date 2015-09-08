@@ -126,7 +126,7 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent" >
 
-        <include layout="@layout/single_share_common_bottom" />
+        <include layout="@layout/topic_post_common_bottom" />
         <!-- 这里写你的子控件 -->
     </RelativeLayout>
 

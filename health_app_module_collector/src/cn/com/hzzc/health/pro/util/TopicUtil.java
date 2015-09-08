@@ -7,10 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
-import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.model.TopicEntity;
+import cn.com.hzzc.health.pro.model.TopicPostEntity;
 
 /**
  * 
@@ -91,6 +89,44 @@ public class TopicUtil {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public static List<TopicPostEntity> parsePostsFromJson(String data) {
+		List<TopicPostEntity> dataSourceList = new ArrayList<TopicPostEntity>();
+		try {
+			JSONObject or_obj = new JSONObject(data);
+			JSONArray jarray = or_obj.getJSONArray("topicPostlst");
+			if (jarray == null || jarray.length() == 0)
+				return dataSourceList;
+			for (int i = 0; i < jarray.length(); i++) {
+				JSONObject obj = jarray.getJSONObject(i);
+				TopicPostEntity bean = new TopicPostEntity();
+				// 通用字段的处理
+				String id = obj.getString("id");
+				String comment = obj.getString("comment");
+				String userId = obj.getString("userId");
+				String userName = obj.getString("userName");
+				String img0 = obj.getString("img0");
+				String img1 = obj.getString("img1");
+				String img2 = obj.getString("img2");
+				String img3 = obj.getString("img3");
+				String createDate = obj.getString("createDate");
+
+				bean.setId(id);
+				bean.setPostDate(createDate);
+				bean.setUserId(userId);
+				bean.setUserName(userName);
+				bean.setImg0(img0);
+				bean.setImg1(img1);
+				bean.setImg2(img2);
+				bean.setImg3(img3);
+				bean.setShortMsg(comment);
+				dataSourceList.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dataSourceList;
 	}
 
 }
