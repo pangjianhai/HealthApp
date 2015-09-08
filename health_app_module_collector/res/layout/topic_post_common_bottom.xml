@@ -12,6 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/share_ops_info" />
+        android:src="@drawable/tabbar_compose_weibo" />
 
 </LinearLayout>
