@@ -95,11 +95,9 @@ public class TopicSpaceFragment extends BaseFragment implements
 	private void realLoadData() {
 		try {
 			JSONObject d = new JSONObject();
-			d.put("page", currentPage + "");
-			d.put("rows", 10);
-			currentPage = currentPage + 1;
+			d.put("userId", userId + "");
 			String url = SystemConst.server_url
-					+ SystemConst.TopicUrl.get_page_topic;
+					+ SystemConst.TopicUrl.getTopicForParticipation;
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
@@ -152,7 +150,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 	@Override
 	public void onLoadMore() {
-		loadDataMore();
+		onLoadOver();
 	}
 
 	@Override
