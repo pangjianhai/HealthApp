@@ -163,7 +163,7 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		 */
 		List<String> imgs = entity.getImgs();
 		if (imgs != null && !imgs.isEmpty()) {
-			ShareSpacePicAdapter picAdapter = new ShareSpacePicAdapter(context,
+			TopicPicAdapter picAdapter = new TopicPicAdapter(context,
 					entity.getImgs());
 			holder.picGridView.setAdapter(picAdapter);
 			/**

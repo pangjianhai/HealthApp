@@ -349,6 +349,11 @@ public class SystemConst {
 		 * 根据主题获取评论
 		 */
 		public static final String getCommentByTopic = "topicController/queryTopicPostPageallByPicId.do";
+
+		/**
+		 * 根据图片ID获取主题评论图片
+		 */
+		public static final String getTopicPostImgById = "topicController/getTopicImgByImgId.do";
 	}
 
 	/**
