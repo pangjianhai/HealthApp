@@ -105,6 +105,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 	private void realLoadData() {
 		try {
+			dataSourceList.clear();
 			JSONObject d = new JSONObject();
 			d.put("userId", userId + "");
 			String url = SystemConst.server_url
