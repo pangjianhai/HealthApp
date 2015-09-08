@@ -70,12 +70,11 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	private void realLoadData() {
 		try {
 			JSONObject d = new JSONObject();
-			d.put("userId", userId);
-			d.put("begin", currentPage + "");
-			d.put("limit", pageRows);
+			d.put("page", currentPage);
+			d.put("rows", pageRows);
 			currentPage = currentPage + 1;
 			String url = SystemConst.server_url
-					+ SystemConst.TopicUrl.getTopicForUnParticipation;
+					+ SystemConst.TopicUrl.get_page_topic;
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override

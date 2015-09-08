@@ -176,4 +176,11 @@ public class TopicSpaceFragment extends BaseFragment implements
 				TopicListUnenteredActivity.class);
 		getActivity().startActivity(intent);
 	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		System.out.println("========================onStart>>>>>>>>>>>>>>");
+	}
+
 }
