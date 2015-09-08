@@ -80,7 +80,6 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
-					System.out.println("data:" + data);
 					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
 					dataSourceList.addAll(lst);
 					topicItemAdapter.notifyDataSetChanged();

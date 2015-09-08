@@ -44,7 +44,6 @@ public class MyReceiver extends BroadcastReceiver {
 
 		} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
 				.getAction())) {// 打开消息的时候进入此分支
-			System.out.println("============================通知打开");
 			String str = bundle.getString(EXTRAS_KEY);
 			processCommonNotice(context, bundle.getString(EXTRAS_KEY));
 

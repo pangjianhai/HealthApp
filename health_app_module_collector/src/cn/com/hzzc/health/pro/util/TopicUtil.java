@@ -54,7 +54,6 @@ public class TopicUtil {
 		try {
 			JSONObject or_obj = new JSONObject(data);
 			String d = or_obj.getString("topiclst");
-			System.out.println("---------------------------d:" + d);
 			JSONArray jarray = or_obj.getJSONArray("topiclst");
 			if (jarray == null || jarray.length() == 0)
 				return dataSourceList;

@@ -103,7 +103,6 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String r = responseInfo.result;
 					String data = LoginUtil.parseEmailResult(r);
-					System.out.println("data:" + data);
 					if ("notexist".equals(data)) {
 						account_msg(0);
 					} else if ("success".equals(data)) {
@@ -116,7 +115,6 @@ public class AppLoginGetPwdActivity extends BaseActivity {
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					System.out.println(error + "---" + msg);
 				}
 			};
 			Map map = new HashMap();

@@ -241,7 +241,6 @@ public class ShowTopicActivity extends BaseActivity implements
 			currentPage = currentPage + 1;
 			String url = SystemConst.server_url
 					+ SystemConst.TopicUrl.getCommentByTopic;
-			System.out.println("url:" + url);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override

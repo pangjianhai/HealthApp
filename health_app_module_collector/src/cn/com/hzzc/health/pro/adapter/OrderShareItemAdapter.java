@@ -194,8 +194,6 @@ public class OrderShareItemAdapter extends BaseAdapter {
 					HealthApplication.getDisplayImageOption());
 		} else {
 			String imageUri = "drawable://" + R.drawable.head_default;
-			// holder.share_photo.setImageResource(R.drawable.head_default);
-			System.out.println("holder.share_photo:" + holder.share_photo);
 			ImageLoader.getInstance().displayImage(imageUri,
 					holder.share_photo,
 					HealthApplication.getDisplayImageOption());
