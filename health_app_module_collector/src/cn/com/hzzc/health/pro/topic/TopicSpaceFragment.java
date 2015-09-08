@@ -67,7 +67,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 				.findViewById(R.id.space_notice_msg);
 		findView();
 		initListView();
-		//loadDataMore();
+		// loadDataMore();
 		single_push_bottom_ops_sc.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -105,8 +105,6 @@ public class TopicSpaceFragment extends BaseFragment implements
 
 	private void realLoadData() {
 		try {
-			System.out.println("----------dataSourceList:"
-					+ dataSourceList.size());
 			dataSourceList.clear();
 			JSONObject d = new JSONObject();
 			d.put("userId", userId + "");
@@ -125,8 +123,6 @@ public class TopicSpaceFragment extends BaseFragment implements
 						dataSourceList.addAll(lst);
 						topicItemAdapter.notifyDataSetChanged();
 					}
-					System.out.println("==========dataSourceList:"
-							+ dataSourceList.size());
 					onLoadOver();
 				}
 
