@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -316,7 +317,10 @@ public class ShowTopicActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	public void addTopicComment(View v) {
-		System.out.println("=================addTopicComment");
+		Intent intent = new Intent(ShowTopicActivity.this,
+				TopicCommentAddActivity.class);
+		intent.putExtra("topicId", topicId);
+		startActivity(intent);
 	}
 
 }

@@ -1,148 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/layout_space_title_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:background="@color/space_title_bar"
-        android:gravity="center_vertical" >
-
-        <ImageButton
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@color/common_title_bar_color"
-            android:onClick="backoff"
-            android:src="@drawable/close_page" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="主题详情"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-    <!-- ScrollView有规则，内部只允许有一只child，所以需要把所有控件外层包裹一个layout -->
-
-    <RelativeLayout
-        android:id="@+id/share_all_detail_content_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_space_title_bar"
-        android:padding="0dp" >
-
-        <FrameLayout
-            android:id="@+id/share_total_n"
-            android:layout_width="match_parent"
-            android:layout_height="100dp" >
-
-            <ImageView
-                android:id="@+id/friend_avatar_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/visitor_me_cover" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="0dp" >
-
-                <TextView
-                    android:id="@+id/topic_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:divider="@drawable/divider2"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:paddingTop="5dp"
-                    android:showDividers="middle" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="77人参与" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="77张发布" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/is_in_topic"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:onClick="is_in_ops"
-                    android:text="退出"
-                    android:textColor="@color/orange"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </FrameLayout>
-
-        <View
-            android:id="@+id/topic_post_div_notice"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@+id/share_total_n"
-            android:background="#d0d0d0" />
-
-        <TextView
-            android:id="@+id/topic_post_no_post_notice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/topic_post_div_notice"
-            android:gravity="center_horizontal"
-            android:text="暂无发言，抢沙发时间到了"
-            android:textAppearance="@android:attr/textAppearanceInverse"
-            android:textColor="@color/bgray"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            android:visibility="gone" />
-
-        <cn.com.hzzc.health.pro.part.XListView
-            android:id="@+id/topic_post_lv"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/topic_post_no_post_notice"
-            android:divider="@drawable/divider_share_comments"
-            android:showDividers="middle"
-            android:visibility="visible" >
-        </cn.com.hzzc.health.pro.part.XListView>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/share_all_detail_bottom_layout"
+    <include
+        android:id="@+id/share_send_sport_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent" >
+        android:layout_height="35dp"
+        layout="@layout/share_sentence_top" />
 
-        <include layout="@layout/topic_post_common_bottom" />
-        <!-- 这里写你的子控件 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" >
+
+        <!-- 图片选择的入口，选择完后图片渲染的地方 -->
+
+        <EditText
+            android:id="@+id/topic_comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/bg_share_edittext"
+            android:gravity="top"
+            android:hint="@string/share_health_input"
+            android:maxLines="6" />
+
+        <GridView
+            android:id="@+id/topic_comment_gridview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/share_send_sport_content"
+            android:layout_marginTop="10dp"
+            android:columnWidth="110dp"
+            android:gravity="center"
+            android:horizontalSpacing="4dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp" >
+
+            <!-- 内部的元素自己java代码构造出来 -->
+        </GridView>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            layout="@layout/share_sentence_bottom" />
+
+        <ProgressBar
+            android:id="@+id/topic_comment_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
