@@ -308,4 +308,15 @@ public class ShowTopicActivity extends BaseActivity implements
 		topic_post_lv.setRefreshTime("刚刚");
 	}
 
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月9日
+	 * @todo:添加主题评论
+	 * @return:void
+	 */
+	public void addTopicComment(View v) {
+		System.out.println("=================addTopicComment");
+	}
+
 }
