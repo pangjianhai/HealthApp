@@ -320,6 +320,7 @@ public class ShowTopicActivity extends BaseActivity implements
 		Intent intent = new Intent(ShowTopicActivity.this,
 				TopicCommentAddActivity.class);
 		intent.putExtra("topicId", topicId);
+		intent.putExtra("topicName", topic_name.getText().toString());
 		startActivity(intent);
 	}
 

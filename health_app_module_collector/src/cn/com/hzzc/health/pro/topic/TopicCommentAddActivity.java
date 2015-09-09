@@ -19,6 +19,8 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 	private EditText topic_comment_content;
 	private ProgressBar topic_comment_bar;
+	private String topicId;
+	private String topicName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 		adapter = new GridAdapter();
 		gridview.setAdapter(adapter);
 		initSinglePhotoShow();
+
+		topicId = getIntent().getStringExtra("topicId");
+		topicName = getIntent().getStringExtra("topicName");
+		topic_comment_content.setText("#" + topicName + "#");
 
 	}
 

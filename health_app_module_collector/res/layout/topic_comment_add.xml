@@ -20,7 +20,7 @@
         <EditText
             android:id="@+id/topic_comment_content"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_share_edittext"
             android:gravity="top"
             android:hint="@string/share_health_input"
@@ -31,7 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/share_send_sport_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="150dp"
             android:columnWidth="110dp"
             android:gravity="center"
             android:horizontalSpacing="4dp"

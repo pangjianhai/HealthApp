@@ -150,33 +150,6 @@ public abstract class ParentTopicCommentActivity extends BaseActivity {
 	}
 
 	/**
-	 * ]
-	 * 
-	 * @tags
-	 * @date 2015年5月20日
-	 * @todo 上传成功
-	 * @author pang
-	 */
-	public void sendSuccess() {
-		resetCacheNum();
-		Intent intent = new Intent(ParentTopicCommentActivity.this,
-				MainPageLayoutSpaceActivity.class);
-		startActivity(intent);
-		// finish();
-	}
-
-	/**
-	 * @user:pang
-	 * @data:2015年8月13日
-	 * @todo:分享完后将还存在本地的各种数目对象进行重置
-	 * @return:void
-	 */
-	private void resetCacheNum() {
-		SharedPreInto spi = new SharedPreInto(this);
-		spi.unvalidUserItem();
-	}
-
-	/**
 	 * 
 	 * 
 	 * @user:pang
