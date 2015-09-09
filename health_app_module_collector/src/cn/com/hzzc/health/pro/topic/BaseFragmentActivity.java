@@ -100,17 +100,14 @@ public class BaseFragmentActivity extends FragmentActivity {
 	 * @author pang
 	 */
 	public void share_btn(View v) {
-		System.out.println("===================share_btn");
 		ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 		ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
 		String curent_activity_name = cn.getClassName();
 		/**
 		 * 如果用户没有登录，则提醒用户可以登录或者注册
 		 */
-		System.out.println("HealthApplication.isLogin():"
-				+ HealthApplication.isLogin());
 		if (!HealthApplication.isLogin()) {
-			initNoLoginOption(v);
+			no_login_alter(v);
 			return;
 		}
 		/**
@@ -232,7 +229,6 @@ public class BaseFragmentActivity extends FragmentActivity {
 
 			@Override
 			public void onDismiss() {
-				System.out.println("popWindow消失");
 
 			}
 		});
@@ -256,7 +252,6 @@ public class BaseFragmentActivity extends FragmentActivity {
 	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
 
 	public void no_login_alter(View v) {
-		System.out.println("========================no_login_alter");
 		LayoutInflater inflater = (LayoutInflater) getApplicationContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
