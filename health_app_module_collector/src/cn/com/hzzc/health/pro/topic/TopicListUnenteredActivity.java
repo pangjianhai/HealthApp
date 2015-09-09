@@ -56,7 +56,7 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	private void findView() {
 		dataSourceList = new ArrayList<TopicEntity>();
 		mListView = (XListView) findViewById(R.id.topic_lv);
-		mListView.setPullLoadEnable(false);
+		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 	}
 
