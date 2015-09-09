@@ -43,8 +43,8 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 		// 文本内容
 		SpannableString ss = new SpannableString(str);
-		ss.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, ss.length(),
-				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		ss.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA500")), 0,
+				ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		topic_comment_content.setText(ss);
 		topic_comment_content.setSelection(str.length());
 	}
