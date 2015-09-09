@@ -20,7 +20,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.com.hzzc.health.pro.FriendSeachOpsActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.adapter.HomeFrameAdapter;

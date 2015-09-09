@@ -24,7 +24,7 @@ import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.MainPageLayoutTagActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SharePrepareActivity;
-import cn.com.hzzc.health.pro.persist.SharedPreInto;
+import cn.com.hzzc.health.pro.topic.HomeFrameActivity;
 
 /**
  * 
@@ -116,7 +116,7 @@ public abstract class ParentMainActivity extends BaseActivity {
 			if (!curent_activity_name.equals(MainPageLayoutSpaceActivity.class
 					.getName())) {
 				Intent intent = new Intent(ParentMainActivity.this,
-						MainPageLayoutSpaceActivity.class);
+						HomeFrameActivity.class);
 				startActivity(intent);
 			}
 		} else if (v.getId() == R.id.main_page_layout_info_btn) {// 查看标签

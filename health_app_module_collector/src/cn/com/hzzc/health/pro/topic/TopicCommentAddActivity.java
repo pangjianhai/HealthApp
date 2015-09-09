@@ -108,6 +108,7 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 		intent.putExtra("hasNew", true);
 		intent.putExtra("topicId", topicId);
 		startActivity(intent);
+		finish();
 	}
 
 }

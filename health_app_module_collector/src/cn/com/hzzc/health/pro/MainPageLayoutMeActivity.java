@@ -6,14 +6,12 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +28,7 @@ import cn.com.hzzc.health.pro.model.VersionEntity;
 import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.part.CustomDialog;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
+import cn.com.hzzc.health.pro.topic.HomeFrameActivity;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.FileUtil;
 import cn.com.hzzc.health.pro.util.UserUtils;
@@ -197,7 +196,7 @@ public class MainPageLayoutMeActivity extends ParentMainActivity {
 				ActivityCollector.finishAll();
 				/******** 返回首页 *********/
 				Intent intent = new Intent(HealthApplication.getContext(),
-						MainPageLayoutSpaceActivity.class);
+						HomeFrameActivity.class);
 				startActivity(intent);
 			}
 		});
