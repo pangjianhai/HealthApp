@@ -36,8 +36,9 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 		topicId = getIntent().getStringExtra("topicId");
 		topicName = getIntent().getStringExtra("topicName");
-		topic_comment_content.setText("#" + topicName + "#");
-
+		String str = "#" + topicName + "#";
+		topic_comment_content.setText(str);
+		topic_comment_content.setSelection(str.length());
 	}
 
 	public void backShare(View view) {
