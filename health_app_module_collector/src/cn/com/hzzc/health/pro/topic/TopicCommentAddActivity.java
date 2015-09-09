@@ -46,6 +46,7 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
+		System.out.println("=======================saveShare");
 		// String content = share_send_health_content.getText().toString();
 		// if (content == null || "".equals(content.trim())) {
 		// cntent_no_alert();

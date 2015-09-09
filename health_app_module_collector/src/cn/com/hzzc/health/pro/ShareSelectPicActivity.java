@@ -81,11 +81,11 @@ public class ShareSelectPicActivity extends BaseActivity {
 	private Button pic_folder_select, pic_select_ok;
 	private ListView listview;
 	/**
-	 * ���������
+	 * 文件夹适配器
 	 */
 	private FolderAdapter folderAdapter;
 	/**
-	 * ��ǰѡ�е����
+	 * 图片文件夹
 	 */
 	private ImageFloder imageAll, currentImageFolder;
 
