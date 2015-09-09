@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -33,8 +34,11 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 	private EditText topic_comment_content;
 	private ProgressBar topic_comment_bar;
+	/** 关联主题 ***/
 	private String topicId;
 	private String topicName;
+	/** 初始化的内容 ***/
+	String str = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 		topicId = getIntent().getStringExtra("topicId");
 		topicName = getIntent().getStringExtra("topicName");
-		String str = "#" + topicName + "#";
+		str = "#" + topicName + "#";
 
 		// 文本内容
 		SpannableString ss = new SpannableString(str);
@@ -66,7 +70,7 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
-		System.out.println("=======================saveShare");
+		sendSuccess();
 		String content = topic_comment_content.getText().toString();
 		if (content == null || "".equals(content.trim())) {
 			cntent_no_alert();
@@ -95,6 +99,15 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void sendSuccess() {
+		Intent intent = new Intent(TopicCommentAddActivity.this,
+				ShowTopicActivity.class);
+		intent.putExtra("hasNew", true);
+		intent.putExtra("topicId", topicId);
+		startActivity(intent);
 	}
 
 }

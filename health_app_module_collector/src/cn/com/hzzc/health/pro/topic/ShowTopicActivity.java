@@ -244,6 +244,7 @@ public class ShowTopicActivity extends BaseActivity implements
 	 */
 	private void realLoadData() {
 		try {
+			System.out.println("===========currentPage：" + currentPage);
 			JSONObject d = new JSONObject();
 			d.put("picId", topicId);
 			d.put("page", currentPage + "");
@@ -324,4 +325,15 @@ public class ShowTopicActivity extends BaseActivity implements
 		startActivity(intent);
 	}
 
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			boolean hasNew = getIntent().getBooleanExtra("hasNew", false);
+			if (hasNew) {
+				currentPage = 1;
+				realLoadData();
+			}
+		}
+	}
 }

@@ -20,6 +20,7 @@ import cn.com.hzzc.health.pro.BaseActivity;
 import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.ShareAddPicSingleDialog;
 import cn.com.hzzc.health.pro.ShareSelectPicActivity;
+import cn.com.hzzc.health.pro.config.GlobalUserVariable;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -218,7 +219,6 @@ public abstract class ParentTopicCommentActivity extends BaseActivity {
 				.setPositiveButton("确定", null).show();
 	}
 
-	public void sendSuccess() {
-		finish();
-	}
+	public abstract void sendSuccess();
+
 }
