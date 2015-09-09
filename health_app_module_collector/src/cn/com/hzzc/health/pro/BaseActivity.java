@@ -1,6 +1,8 @@
 package cn.com.hzzc.health.pro;
 
+import java.io.File;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.ExampleUtil;
@@ -200,6 +201,33 @@ public class BaseActivity extends InstrumentedActivity {
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
 		// Toast.makeText(this, "【测试代码】刚进行了http请求", Toast.LENGTH_SHORT).show();
+	}
+
+	public void send_normal_request_for_file(String url, Map<String, String> p,
+			List<File> files, RequestCallBack<?> rcb) {
+		if (!isNetWorkConnected()) {
+			Toast.makeText(getApplicationContext(), "没有网络咯！",
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		RequestParams params = new RequestParams();
+		if (p != null) {
+			Iterator<Map.Entry<String, String>> it = p.entrySet().iterator();
+			/**
+			 * 添加参数
+			 */
+			while (it.hasNext()) {
+				Map.Entry<String, String> entry = it.next();
+				params.addBodyParameter(entry.getKey(), entry.getValue());
+			}
+		}
+		if (files != null && !files.isEmpty()) {
+			for (File f : files) {
+				params.addBodyParameter(f.getAbsolutePath(), f);
+			}
+		}
+		HttpUtils http = new HttpUtils();
+		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
 	}
 
 	/**

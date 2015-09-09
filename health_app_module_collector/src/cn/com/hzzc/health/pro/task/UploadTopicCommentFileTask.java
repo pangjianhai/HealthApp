@@ -8,7 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
-import cn.com.hzzc.health.pro.abstracts.ParentShareInfoActivity;
+import cn.com.hzzc.health.pro.abstracts.ParentTopicCommentActivity;
 import cn.com.hzzc.health.pro.model.FormFile;
 import cn.com.hzzc.health.pro.util.FileUploadUtil;
 import cn.com.hzzc.health.pro.util.UploadUtils;
@@ -96,7 +96,7 @@ public class UploadTopicCommentFileTask extends
 		pdialog.dismiss();
 		if (UploadUtils.SUCCESS.equalsIgnoreCase(result)) {
 			Toast.makeText(context, "上传成功!", Toast.LENGTH_LONG).show();
-			((ParentShareInfoActivity) context).sendSuccess();
+			((ParentTopicCommentActivity) context).sendSuccess();
 		} else {
 			Toast.makeText(context, "上传失败，请重新上传一次", Toast.LENGTH_LONG).show();
 		}
