@@ -1,6 +1,10 @@
 package cn.com.hzzc.health.pro.topic;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -8,7 +12,6 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.abstracts.ParentTopicCommentActivity;
-import cn.com.hzzc.health.pro.abstracts.ParentTopicCommentActivity.GridAdapter;
 
 /**
  * @todo 添加主题评论
@@ -37,7 +40,12 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 		topicId = getIntent().getStringExtra("topicId");
 		topicName = getIntent().getStringExtra("topicName");
 		String str = "#" + topicName + "#";
-		topic_comment_content.setText(str);
+
+		// 文本内容
+		SpannableString ss = new SpannableString(str);
+		ss.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, ss.length(),
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		topic_comment_content.setText(ss);
 		topic_comment_content.setSelection(str.length());
 	}
 

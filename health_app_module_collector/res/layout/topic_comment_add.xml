@@ -7,7 +7,7 @@
     <include
         android:id="@+id/share_send_sport_layout"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         layout="@layout/share_sentence_top" />
 
     <RelativeLayout
