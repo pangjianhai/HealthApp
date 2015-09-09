@@ -217,4 +217,8 @@ public abstract class ParentTopicCommentActivity extends BaseActivity {
 				.setTitle("保存提示").setMessage("内容不得为空  ")
 				.setPositiveButton("确定", null).show();
 	}
+
+	public void sendSuccess() {
+		finish();
+	}
 }

@@ -1,5 +1,13 @@
 package cn.com.hzzc.health.pro.topic;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONObject;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -11,7 +19,10 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.abstracts.ParentTopicCommentActivity;
+import cn.com.hzzc.health.pro.task.UploadFileTask;
+import cn.com.hzzc.health.pro.task.UploadTopicCommentFileTask;
 
 /**
  * @todo 添加主题评论
@@ -56,36 +67,33 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
 		System.out.println("=======================saveShare");
-		// String content = share_send_health_content.getText().toString();
-		// if (content == null || "".equals(content.trim())) {
-		// cntent_no_alert();
-		// return;
-		// }
-		// // if (tags_selected == null || tags_selected.isEmpty()) {
-		// // select_no_tag_alert();
-		// // return;
-		// // }
-		// try {
-		// Map map = new HashMap();
-		//
-		// Map textPram = new HashMap();
-		// List<File> files = new ArrayList<File>();
-		// JSONObject obj = new JSONObject();
-		// obj.put("content", share_send_health_content.getText().toString());
-		// obj.put("type", SystemConst.ShareInfoType.SHARE_TYPE_HEALTH);
-		// obj.put("userId", userId);
-		// obj.put("tagId", getSelectedTagIds());
-		// textPram.put(SystemConst.json_param_name, obj.toString());
-		// for (int i = 0; i < selectedPicture.size(); i++) {
-		// files.add(new File(selectedPicture.get(i)));
-		// }
-		// map.put(UploadFileTask.text_param, textPram);
-		// map.put(UploadFileTask.file_param, files);
-		// new UploadFileTask(ShareHealthActivity.this, SystemConst.server_url
-		// + SystemConst.FunctionUrl.uploadHealthShare).execute(map);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+		String content = topic_comment_content.getText().toString();
+		if (content == null || "".equals(content.trim())) {
+			cntent_no_alert();
+			return;
+		}
+		try {
+			Map map = new HashMap();
+
+			Map textPram = new HashMap();
+			List<File> files = new ArrayList<File>();
+			JSONObject obj = new JSONObject();
+			obj.put("content", content);
+			obj.put("topicId", topicId);
+			obj.put("userId", userId);
+			textPram.put(SystemConst.json_param_name, obj.toString());
+			for (int i = 0; i < selectedPicture.size(); i++) {
+				files.add(new File(selectedPicture.get(i)));
+			}
+			map.put(UploadFileTask.text_param, textPram);
+			map.put(UploadFileTask.file_param, files);
+			new UploadTopicCommentFileTask(TopicCommentAddActivity.this,
+					SystemConst.server_url
+							+ SystemConst.FunctionUrl.uploadHealthShare)
+					.execute(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
