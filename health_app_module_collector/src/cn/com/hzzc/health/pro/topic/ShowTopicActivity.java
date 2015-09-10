@@ -22,6 +22,7 @@ import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.model.TopicPostEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
+import cn.com.hzzc.health.pro.util.ITopicCommentListener;
 import cn.com.hzzc.health.pro.util.TopicUtil;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -34,7 +35,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  *
  */
 public class ShowTopicActivity extends BaseActivity implements
-		IXListViewListener {
+		IXListViewListener, ITopicCommentListener {
 
 	private String topicId;
 
@@ -275,7 +276,8 @@ public class ShowTopicActivity extends BaseActivity implements
 	public void initPostData() {
 		topic_post_lv.setPullLoadEnable(false);
 		topic_post_lv.setXListViewListener(this);
-		adpater = new TopicPostItemAdapter(ShowTopicActivity.this, ds);
+		adpater = new TopicPostItemAdapter(ShowTopicActivity.this,
+				ShowTopicActivity.this, ds);
 		topic_post_lv.setAdapter(adpater);
 		realLoadData();
 	}
@@ -379,5 +381,53 @@ public class ShowTopicActivity extends BaseActivity implements
 				realLoadData();
 			}
 		}
+	}
+
+	@Override
+	public void addGood(int index, TopicPostEntity tpe) {
+		ds.get(index).setIsGood(TopicPostEntity.GOOD_ALREADY);// 改变状态
+		ds.get(index).setGoodNum(ds.get(index).getGoodNum() + 1);// 改变点赞书目
+		adpater.notifyDataSetChanged();
+		try {
+			JSONObject d = new JSONObject();
+			d.put("picPostId", tpe.getId());
+			d.put("userId", userId);
+			String url = SystemConst.server_url
+					+ SystemConst.TopicUrl.clickPostCommentGoodNum;
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(url, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void detailShow(int index, TopicPostEntity tpe) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void userShow(int index, TopicPostEntity tpe) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void to3Platform(int index, TopicPostEntity tpe) {
+		// TODO Auto-generated method stub
+
 	}
 }

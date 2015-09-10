@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class TopicPostEntity {
 
+	public static int GOOD_ALREADY = 1;
+	public static int GOOD_NO = 0;
+
 	private String id;
 	/* 内容简介 */
 	private String shortMsg;
@@ -25,6 +28,7 @@ public class TopicPostEntity {
 	private String img2;
 	private String img3;
 	private List<String> imgs;
+	private int isGood;// 是否点赞 没有：0 赞过：1
 
 	public String getId() {
 		return id;
@@ -112,6 +116,14 @@ public class TopicPostEntity {
 
 	public void setImgs(List<String> imgs) {
 		this.imgs = imgs;
+	}
+
+	public int getIsGood() {
+		return isGood;
+	}
+
+	public void setIsGood(int isGood) {
+		this.isGood = isGood;
 	}
 
 }

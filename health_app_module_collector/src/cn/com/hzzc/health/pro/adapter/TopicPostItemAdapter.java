@@ -10,16 +10,19 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicPostEntity;
 import cn.com.hzzc.health.pro.part.CircularImage;
 import cn.com.hzzc.health.pro.util.CommonDateUtil;
+import cn.com.hzzc.health.pro.util.ITopicCommentListener;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
@@ -31,14 +34,16 @@ public class TopicPostItemAdapter extends BaseAdapter {
 	private List<TopicPostEntity> dataSourceList = new ArrayList<TopicPostEntity>();
 	private HolderView holder;
 	private Context context;
+	private ITopicCommentListener l;
 
 	private String today = "";
 	private String yesteday = "";
 	private int this_year;
 
-	public TopicPostItemAdapter(Context context,
+	public TopicPostItemAdapter(Context context, ITopicCommentListener l,
 			List<TopicPostEntity> dataSourceList) {
 		super();
+		this.l = l;
 		this.context = context;
 		this.dataSourceList = dataSourceList;
 		initDate();
@@ -92,6 +97,8 @@ public class TopicPostItemAdapter extends BaseAdapter {
 					.findViewById(R.id.share_time);
 			holder.share_good_num = (TextView) convertview
 					.findViewById(R.id.share_good_num);
+			holder.share_trans = (TextView) convertview
+					.findViewById(R.id.share_trans);
 			convertview.setTag(holder);
 		} else {
 			holder = (HolderView) convertview.getTag();
@@ -101,9 +108,18 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		 * 渲染页面
 		 */
 		rendAll(position);
+		addListener(position);
 		return convertview;
 	}
 
+	/**
+	 * 
+	 * @param position
+	 * @user:pang
+	 * @data:2015年9月10日
+	 * @todo:渲染界面
+	 * @return:void
+	 */
 	private void rendAll(int position) {
 		TopicPostEntity entity = dataSourceList.get(position);
 		/**
@@ -114,6 +130,7 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		String author = entity.getUserName();
 		String common_content = entity.getShortMsg();
 		int goodnum = entity.getGoodNum();
+		int isGood = entity.getIsGood();
 		String date = entity.getPostDate();// 带有时分秒
 		List<String> imgs = entity.getImgs();
 		holder.share_id.setText(id);
@@ -150,6 +167,9 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		// holder.share_content.setText(common_content);
 		setCommentText(common_content, holder.share_content);
 		holder.share_good_num.setText(goodnum + "");
+		if (isGood == TopicPostEntity.GOOD_ALREADY) {
+			holder.share_good_num.setTextColor(Color.parseColor("#FFA500"));
+		}
 		/**
 		 * 头像部分
 		 */
@@ -196,9 +216,33 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		}
 	}
 
+	/**
+	 * @param position
+	 * @user:pang
+	 * @data:2015年9月10日
+	 * @todo:添加监听
+	 * @return:void
+	 */
+	private void addListener(final int position) {
+		final TopicPostEntity entity = dataSourceList.get(position);
+		holder.share_good_num.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int isGood = entity.getIsGood();
+				if (isGood == TopicPostEntity.GOOD_ALREADY) {
+					Toast.makeText(context, "您已经赞过了哦", Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					l.addGood(position, entity);
+				}
+			}
+		});
+	}
+
 	private class HolderView {
 		private TextView share_id, share_name, share_content, share_time,
-				share_good_num;
+				share_good_num, share_trans;
 		private GridView picGridView;
 
 		private CircularImage share_photo;
