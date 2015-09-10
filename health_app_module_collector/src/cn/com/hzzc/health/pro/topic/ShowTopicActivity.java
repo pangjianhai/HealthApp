@@ -244,7 +244,6 @@ public class ShowTopicActivity extends BaseActivity implements
 	 */
 	private void realLoadData() {
 		try {
-			System.out.println("===========currentPage：" + currentPage);
 			JSONObject d = new JSONObject();
 			d.put("picId", topicId);
 			d.put("page", currentPage + "");
@@ -259,6 +258,7 @@ public class ShowTopicActivity extends BaseActivity implements
 					String data = responseInfo.result;
 					List<TopicPostEntity> lst = TopicUtil
 							.parsePostsFromJson(data);
+					System.out.println("data:" + data);
 					if (lst == null || lst.isEmpty()) {// 没有发帖
 						topic_post_no_post_notice.setVisibility(View.VISIBLE);
 						topic_post_lv.setVisibility(View.GONE);

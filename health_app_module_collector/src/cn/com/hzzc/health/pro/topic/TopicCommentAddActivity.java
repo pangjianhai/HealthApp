@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -84,46 +85,20 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 		for (int i = 0; i < selectedPicture.size(); i++) {
 			files.add(new File(selectedPicture.get(i)));
 		}
-		// try {
-		// Map map = new HashMap();
-		//
-		// Map textPram = new HashMap();
-		// JSONObject obj = new JSONObject();
-		// obj.put("content", content);
-		// obj.put("topicId", topicId);
-		// obj.put("userId", userId);
-		// textPram.put(SystemConst.json_param_name, obj.toString());
-		// map.put(UploadFileTask.text_param, textPram);
-		// map.put(UploadFileTask.file_param, files);
-		// new UploadTopicCommentFileTask(TopicCommentAddActivity.this,
-		// SystemConst.server_url
-		// + SystemConst.FunctionUrl.uploadHealthShare)
-		// .execute(map);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-
 		try {
-			JSONObject pJ = new JSONObject();
-			Map<String, String> pM = new HashMap<String, String>();
-			pJ.put("topicId", topicId);
-			pJ.put("userId", userId);
-			pJ.put("comment", content);
-			pJ.put("replyUserId", "");
-			pM.put("para", pJ.toString());
-			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+			Map map = new HashMap();
 
-				@Override
-				public void onSuccess(ResponseInfo responseInfo) {
-					System.out.println("=========================<><>");
-				}
-
-				@Override
-				public void onFailure(HttpException error, String msg) {
-					System.out.println("----------------<><>");
-				}
-			};
-			send_normal_request_for_file(url, pM, files, rcb);
+			Map textPram = new HashMap();
+			JSONObject obj = new JSONObject();
+			obj.put("topicId", topicId);
+			obj.put("userId", userId);
+			obj.put("comment", content);
+			obj.put("replyUserId", "");
+			textPram.put(SystemConst.json_param_name, obj.toString());
+			map.put(UploadFileTask.text_param, textPram);
+			map.put(UploadFileTask.file_param, files);
+			new UploadTopicCommentFileTask(TopicCommentAddActivity.this, url)
+					.execute(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

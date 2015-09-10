@@ -223,6 +223,8 @@ public class BaseActivity extends InstrumentedActivity {
 		}
 		if (files != null && !files.isEmpty()) {
 			for (File f : files) {
+				System.out
+						.println("f.getAbsolutePath():" + f.getAbsolutePath());
 				params.addBodyParameter(f.getAbsolutePath(), f);
 			}
 		}
