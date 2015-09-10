@@ -121,7 +121,6 @@ public class TopicPicAdapter extends BaseAdapter {
 
 	protected void imageBrower(Context mContext, int position,
 			ArrayList<String> urls2) {
-		System.out.println("----------------imageBrower");
 		Intent intent = new Intent(mContext, ImageTopicPagerActivity.class);
 		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
 		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);

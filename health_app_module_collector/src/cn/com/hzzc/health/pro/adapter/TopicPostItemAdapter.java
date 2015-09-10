@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -142,8 +146,9 @@ public class TopicPostItemAdapter extends BaseAdapter {
 			}
 			holder.share_time.setText(d_str);
 		}
-		holder.share_content.setVisibility(View.VISIBLE);
-		holder.share_content.setText(common_content);
+		// holder.share_content.setVisibility(View.VISIBLE);
+		// holder.share_content.setText(common_content);
+		setCommentText(common_content, holder.share_content);
 		holder.share_good_num.setText(goodnum + "");
 		/**
 		 * 头像部分
@@ -164,7 +169,6 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		 * 图片部分
 		 */
 		if (imgs != null && !imgs.isEmpty()) {
-			System.out.println(context + "=============imgs:" + imgs.size());
 			TopicPicAdapter picAdapter = new TopicPicAdapter(context,
 					entity.getImgs());
 			holder.picGridView.setAdapter(picAdapter);
@@ -174,6 +178,20 @@ public class TopicPostItemAdapter extends BaseAdapter {
 			 */
 			holder.picGridView.setOnScrollListener(new PauseOnScrollListener(
 					ImageLoader.getInstance(), true, false));
+		}
+	}
+
+	private void setCommentText(String text, TextView tv) {
+		int begin = text.indexOf("#");
+		int end = text.lastIndexOf("#");
+		if (begin == 0 && end > begin) {
+			SpannableString ss = new SpannableString(text);
+			ss.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA500")), 0,
+					end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			tv.setText(ss);
+		} else {
+			tv.setVisibility(View.VISIBLE);
+			tv.setText(text);
 		}
 	}
 
