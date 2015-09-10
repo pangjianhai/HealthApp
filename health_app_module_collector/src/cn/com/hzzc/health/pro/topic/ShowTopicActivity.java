@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -37,7 +38,7 @@ public class ShowTopicActivity extends BaseActivity implements
 
 	private String topicId;
 
-	private TextView topic_name;
+	private TextView topic_name, topic_uer_num, topic_comment_num;
 	/********** 是否参与某一主题 ***********/
 	private boolean isIn = false;// true:已经参与 false:未参与
 	private Button is_in_topic;
@@ -59,6 +60,7 @@ public class ShowTopicActivity extends BaseActivity implements
 		initParam();
 		initData();
 		initInData();
+		initNumData();
 		initPostData();
 	}
 
@@ -68,6 +70,9 @@ public class ShowTopicActivity extends BaseActivity implements
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
 		topic_post_lv = (XListView) findViewById(R.id.topic_post_lv);
 		topic_post_no_post_notice = (TextView) findViewById(R.id.topic_post_no_post_notice);
+
+		topic_uer_num = (TextView) findViewById(R.id.topic_uer_num);
+		topic_comment_num = (TextView) findViewById(R.id.topic_comment_num);
 	}
 
 	/**
@@ -97,6 +102,45 @@ public class ShowTopicActivity extends BaseActivity implements
 			map.put("para", d.toString());
 			send_normal_request(SystemConst.server_url
 					+ SystemConst.TopicUrl.get_topic_info_by_id, map, rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void initNumData() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("picId", topicId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					String participationNum = "0";
+					String commentsNum = "0";
+					try {
+						JSONObject job = new JSONObject(data);
+						participationNum = job.getString("participationNum");
+						commentsNum = job.getString("commentsNum");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+					topic_uer_num.setText(participationNum + "人参与");
+					topic_comment_num.setText(commentsNum + "条发布");
+					topic_uer_num.setVisibility(View.VISIBLE);
+					topic_comment_num.setVisibility(View.VISIBLE);
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(
+					SystemConst.server_url
+							+ SystemConst.TopicUrl.querypicPostParticipationNumAndCommentNum,
+					map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -258,7 +302,6 @@ public class ShowTopicActivity extends BaseActivity implements
 					String data = responseInfo.result;
 					List<TopicPostEntity> lst = TopicUtil
 							.parsePostsFromJson(data);
-					System.out.println("data:" + data);
 					if (lst == null || lst.isEmpty()) {// 没有发帖
 						topic_post_no_post_notice.setVisibility(View.VISIBLE);
 						topic_post_lv.setVisibility(View.GONE);
@@ -323,6 +366,7 @@ public class ShowTopicActivity extends BaseActivity implements
 		intent.putExtra("topicId", topicId);
 		intent.putExtra("topicName", topic_name.getText().toString());
 		startActivity(intent);
+		finish();
 	}
 
 	@Override

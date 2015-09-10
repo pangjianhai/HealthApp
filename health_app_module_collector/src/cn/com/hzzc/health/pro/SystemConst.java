@@ -369,6 +369,11 @@ public class SystemConst {
 		 * 添加主题评论
 		 */
 		public static final String addTopicPost = "topicController/addTopicPost.do";
+
+		/**
+		 * 获取主题参与人数以及评论总是
+		 */
+		public static final String querypicPostParticipationNumAndCommentNum = "topicController/querypicPostParticipationNumAndCommentNum.do";
 	}
 
 	/**

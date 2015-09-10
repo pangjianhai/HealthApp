@@ -188,6 +188,7 @@ public class TopicPostItemAdapter extends BaseAdapter {
 			SpannableString ss = new SpannableString(text);
 			ss.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA500")), 0,
 					end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			tv.setVisibility(View.VISIBLE);
 			tv.setText(ss);
 		} else {
 			tv.setVisibility(View.VISIBLE);
