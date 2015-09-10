@@ -44,7 +44,7 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="center_horizontal"
         android:background="@android:color/transparent"
-        android:drawableTop="@drawable/share_ops_info"
+        android:drawableTop="@drawable/topic_more"
         android:paddingBottom="22dp"
         android:paddingTop="50dp"
         android:text="更多主题"
