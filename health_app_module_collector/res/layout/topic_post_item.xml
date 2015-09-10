@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="3"
+                    android:layout_weight="6"
                     android:drawableLeft="@drawable/bbs_time"
                     android:textColor="@color/bgray"
                     android:textSize="14sp" />
@@ -107,7 +107,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ok4"
-                    android:padding="5dp"
                     android:text="0"
                     android:textColor="@color/bgray" />
 
@@ -119,7 +118,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/topiclink"
-                    android:padding="5dp"
                     android:text="转"
                     android:textColor="@color/bgray" />
             </LinearLayout>
