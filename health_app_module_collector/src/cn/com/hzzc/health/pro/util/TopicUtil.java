@@ -117,6 +117,7 @@ public class TopicUtil {
 				String img7 = obj.getString("img7");
 				String createDate = obj.getString("createDate");
 				String goodNum = obj.getString("goodNum");
+				boolean flag = obj.getBoolean("goodNumFlag");
 				if (goodNum == null || "".equals(goodNum)
 						|| "null".equals(goodNum)) {
 					goodNum = "0";
@@ -158,6 +159,11 @@ public class TopicUtil {
 				bean.setShortMsg(comment);
 				bean.setImgs(imgs);
 				bean.setGoodNum(Integer.parseInt(goodNum));
+				if (flag) {
+					bean.setIsGood(TopicPostEntity.GOOD_ALREADY);
+				} else {
+					bean.setIsGood(TopicPostEntity.GOOD_NO);
+				}
 				dataSourceList.add(bean);
 			}
 		} catch (Exception e) {

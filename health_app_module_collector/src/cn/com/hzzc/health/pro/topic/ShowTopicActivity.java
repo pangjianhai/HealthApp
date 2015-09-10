@@ -49,7 +49,7 @@ public class ShowTopicActivity extends BaseActivity implements
 	/******* 和主题相关的评论分页 ********/
 	private XListView topic_post_lv;
 	private int currentPage = 1;
-	private int rows = 20;
+	private int rows = 10;
 	List<TopicPostEntity> ds = new ArrayList<TopicPostEntity>();
 	private TopicPostItemAdapter adpater = null;
 
@@ -296,6 +296,7 @@ public class ShowTopicActivity extends BaseActivity implements
 			d.put("picId", topicId);
 			d.put("page", currentPage + "");
 			d.put("rows", rows);
+			d.put("userId", userId);
 			currentPage = currentPage + 1;
 			String url = SystemConst.server_url
 					+ SystemConst.TopicUrl.getCommentByTopic;
