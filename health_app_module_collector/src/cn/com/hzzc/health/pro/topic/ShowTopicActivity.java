@@ -276,7 +276,7 @@ public class ShowTopicActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	public void initPostData() {
-		topic_post_lv.setPullLoadEnable(false);
+		topic_post_lv.setPullLoadEnable(true);
 		topic_post_lv.setXListViewListener(this);
 		adpater = new TopicPostItemAdapter(ShowTopicActivity.this,
 				ShowTopicActivity.this, ds);
