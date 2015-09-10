@@ -162,6 +162,7 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		 */
 		List<String> imgs = entity.getImgs();
 		if (imgs != null && !imgs.isEmpty()) {
+			System.out.println(context + "=============imgs:" + imgs.size());
 			TopicPicAdapter picAdapter = new TopicPicAdapter(context,
 					entity.getImgs());
 			holder.picGridView.setAdapter(picAdapter);

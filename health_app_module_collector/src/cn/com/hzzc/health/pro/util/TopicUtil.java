@@ -111,16 +111,35 @@ public class TopicUtil {
 				String img1 = obj.getString("img1");
 				String img2 = obj.getString("img2");
 				String img3 = obj.getString("img3");
+				String img4 = obj.getString("img4");
+				String img5 = obj.getString("img5");
+				String img6 = obj.getString("img6");
+				String img7 = obj.getString("img7");
 				String createDate = obj.getString("createDate");
-				List imgs = new ArrayList<String>();
-				if (img0 != null && !"".equals(img0)) {
+				List<String> imgs = new ArrayList<String>();
+				if (isImgId(img0)) {
 					imgs.add(img0);
-				} else if (img1 != null && !"".equals(img1)) {
+				}
+				if (isImgId(img1)) {
 					imgs.add(img1);
-				} else if (img2 != null && !"".equals(img2)) {
+				}
+				if (isImgId(img2)) {
 					imgs.add(img2);
-				} else if (img3 != null && !"".equals(img3)) {
+				}
+				if (isImgId(img3)) {
 					imgs.add(img3);
+				}
+				if (isImgId(img4)) {
+					imgs.add(img4);
+				}
+				if (isImgId(img5)) {
+					imgs.add(img5);
+				}
+				if (isImgId(img6)) {
+					imgs.add(img6);
+				}
+				if (isImgId(img7)) {
+					imgs.add(img7);
 				}
 
 				bean.setId(id);
@@ -139,6 +158,18 @@ public class TopicUtil {
 			e.printStackTrace();
 		}
 		return dataSourceList;
+	}
+
+	/**
+	 * @param img
+	 * @return
+	 * @user:pang
+	 * @data:2015年9月10日
+	 * @todo:判断解析出来的图片ID是否是空还是真正的ID
+	 * @return:boolean
+	 */
+	public static boolean isImgId(String img) {
+		return (img != null && !"".equals(img) && !"null".equals(img));
 	}
 
 }
