@@ -86,6 +86,8 @@ public class TopicPostItemAdapter extends BaseAdapter {
 					.findViewById(R.id.share_space_gridview);
 			holder.share_time = (TextView) convertview
 					.findViewById(R.id.share_time);
+			holder.share_good_num = (TextView) convertview
+					.findViewById(R.id.share_good_num);
 			convertview.setTag(holder);
 		} else {
 			holder = (HolderView) convertview.getTag();
@@ -103,9 +105,14 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		/**
 		 * 挨个属性赋值
 		 */
+		String id = entity.getId();
 		String userId = entity.getUserId();
 		String author = entity.getUserName();
-		holder.share_id.setText(entity.getId());
+		String common_content = entity.getShortMsg();
+		int goodnum = entity.getGoodNum();
+		String date = entity.getPostDate();// 带有时分秒
+		List<String> imgs = entity.getImgs();
+		holder.share_id.setText(id);
 		if (userId != null && userId.equals(HealthApplication.getUserId())) {
 			holder.share_name.setText("我");
 		} else {
@@ -115,14 +122,9 @@ public class TopicPostItemAdapter extends BaseAdapter {
 			holder.share_name.setText(author);
 		}
 
-		String common_content = entity.getShortMsg();
-		int goodnum = entity.getGoodNum();
-		String date = entity.getPostDate();// 带有时分秒
 		if (date != null && !"".equals(date)) {
 			date = CommonDateUtil.formatDate(CommonDateUtil.getTime(date));
 		}
-		holder.share_content.setVisibility(View.VISIBLE);
-		holder.share_content.setText(common_content);
 		if (today.equals(date)) {
 			holder.share_time.setText("今天");
 		} else if (yesteday.equals(date)) {
@@ -140,11 +142,12 @@ public class TopicPostItemAdapter extends BaseAdapter {
 			}
 			holder.share_time.setText(d_str);
 		}
-
+		holder.share_content.setVisibility(View.VISIBLE);
+		holder.share_content.setText(common_content);
+		holder.share_good_num.setText(goodnum + "");
 		/**
 		 * 头像部分
 		 */
-		userId = entity.getUserId();
 		if (userId != null && !"".equals(userId)) {
 			String pic_url = SystemConst.server_url
 					+ SystemConst.FunctionUrl.getHeadImgByUserId
@@ -160,7 +163,6 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		/**
 		 * 图片部分
 		 */
-		List<String> imgs = entity.getImgs();
 		if (imgs != null && !imgs.isEmpty()) {
 			System.out.println(context + "=============imgs:" + imgs.size());
 			TopicPicAdapter picAdapter = new TopicPicAdapter(context,
@@ -176,7 +178,8 @@ public class TopicPostItemAdapter extends BaseAdapter {
 	}
 
 	private class HolderView {
-		private TextView share_id, share_name, share_content, share_time;
+		private TextView share_id, share_name, share_content, share_time,
+				share_good_num;
 		private GridView picGridView;
 
 		private CircularImage share_photo;

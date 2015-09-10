@@ -116,6 +116,11 @@ public class TopicUtil {
 				String img6 = obj.getString("img6");
 				String img7 = obj.getString("img7");
 				String createDate = obj.getString("createDate");
+				String goodNum = obj.getString("goodNum");
+				if (goodNum == null || "".equals(goodNum)
+						|| "null".equals(goodNum)) {
+					goodNum = "0";
+				}
 				List<String> imgs = new ArrayList<String>();
 				if (isImgId(img0)) {
 					imgs.add(img0);
@@ -152,6 +157,7 @@ public class TopicUtil {
 				bean.setImg3(img3);
 				bean.setShortMsg(comment);
 				bean.setImgs(imgs);
+				bean.setGoodNum(Integer.parseInt(goodNum));
 				dataSourceList.add(bean);
 			}
 		} catch (Exception e) {
