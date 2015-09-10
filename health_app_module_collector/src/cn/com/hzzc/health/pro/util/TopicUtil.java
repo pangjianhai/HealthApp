@@ -178,4 +178,10 @@ public class TopicUtil {
 		return (img != null && !"".equals(img) && !"null".equals(img));
 	}
 
+	public static void main(String[] args) {
+		String str = "#XXXXXXXXXXXXXXXXXXAA#";
+		System.out.println(str.indexOf("#"));
+		System.out.println(str.indexOf("#"));
+	}
+
 }
