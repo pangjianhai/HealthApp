@@ -38,7 +38,7 @@ public class SystemConst {
 	// public static final String server_url =
 	// "http://www.kx360.com.cn/iotapp/";
 
-	public static final String server_url = "http://192.168.0.104:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
 
 	/**
 	 * 
@@ -364,6 +364,11 @@ public class SystemConst {
 		 * 获取用户已经未参与的主题的活动
 		 */
 		public static final String getTopicForUnParticipation = "topicController/queryTopicallByUserIdNoneParticipation.do";
+
+		/**
+		 * 添加主题评论
+		 */
+		public static final String addTopicPost = "topicController/addTopicPost.do";
 	}
 
 	/**

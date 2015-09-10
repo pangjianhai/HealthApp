@@ -25,6 +25,10 @@ import cn.com.hzzc.health.pro.abstracts.ParentTopicCommentActivity;
 import cn.com.hzzc.health.pro.task.UploadFileTask;
 import cn.com.hzzc.health.pro.task.UploadTopicCommentFileTask;
 
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+
 /**
  * @todo 添加主题评论
  * @author pang
@@ -70,31 +74,56 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 
 	@SuppressWarnings("unchecked")
 	public void saveShare(View view) {
-		sendSuccess();
 		String content = topic_comment_content.getText().toString();
 		if (content == null || "".equals(content.trim())) {
 			cntent_no_alert();
 			return;
 		}
-		try {
-			Map map = new HashMap();
+		String url = SystemConst.server_url + SystemConst.TopicUrl.addTopicPost;
+		List<File> files = new ArrayList<File>();
+		for (int i = 0; i < selectedPicture.size(); i++) {
+			files.add(new File(selectedPicture.get(i)));
+		}
+		// try {
+		// Map map = new HashMap();
+		//
+		// Map textPram = new HashMap();
+		// JSONObject obj = new JSONObject();
+		// obj.put("content", content);
+		// obj.put("topicId", topicId);
+		// obj.put("userId", userId);
+		// textPram.put(SystemConst.json_param_name, obj.toString());
+		// map.put(UploadFileTask.text_param, textPram);
+		// map.put(UploadFileTask.file_param, files);
+		// new UploadTopicCommentFileTask(TopicCommentAddActivity.this,
+		// SystemConst.server_url
+		// + SystemConst.FunctionUrl.uploadHealthShare)
+		// .execute(map);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 
-			Map textPram = new HashMap();
-			List<File> files = new ArrayList<File>();
-			JSONObject obj = new JSONObject();
-			obj.put("content", content);
-			obj.put("topicId", topicId);
-			obj.put("userId", userId);
-			textPram.put(SystemConst.json_param_name, obj.toString());
-			for (int i = 0; i < selectedPicture.size(); i++) {
-				files.add(new File(selectedPicture.get(i)));
-			}
-			map.put(UploadFileTask.text_param, textPram);
-			map.put(UploadFileTask.file_param, files);
-			new UploadTopicCommentFileTask(TopicCommentAddActivity.this,
-					SystemConst.server_url
-							+ SystemConst.FunctionUrl.uploadHealthShare)
-					.execute(map);
+		try {
+			JSONObject pJ = new JSONObject();
+			Map<String, String> pM = new HashMap<String, String>();
+			pJ.put("topicId", topicId);
+			pJ.put("userId", userId);
+			pJ.put("comment", content);
+			pJ.put("replyUserId", "");
+			pM.put("para", pJ.toString());
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo responseInfo) {
+					System.out.println("=========================<><>");
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					System.out.println("----------------<><>");
+				}
+			};
+			send_normal_request_for_file(url, pM, files, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
