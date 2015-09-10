@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:drawableLeft="@drawable/bbs_time"
                     android:textColor="@color/bgray"
                     android:textSize="14sp" />

@@ -15,7 +15,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.BaseActivity;
+import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicPostItemAdapter;
 import cn.com.hzzc.health.pro.model.TopicEntity;
@@ -415,14 +417,15 @@ public class ShowTopicActivity extends BaseActivity implements
 
 	@Override
 	public void detailShow(int index, TopicPostEntity tpe) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void userShow(int index, TopicPostEntity tpe) {
-		// TODO Auto-generated method stub
-
+		Intent intent = new Intent(ShowTopicActivity.this,
+				ShowUserInfoDetail.class);
+		intent.putExtra("uuid", tpe.getUserId());
+		startActivity(intent);
 	}
 
 	@Override
