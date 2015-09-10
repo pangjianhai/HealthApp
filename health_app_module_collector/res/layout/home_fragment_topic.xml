@@ -43,11 +43,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/topic_more"
         android:paddingBottom="22dp"
         android:paddingTop="50dp"
         android:text="更多主题"
-        android:textColor="@color/orange" />
+        android:textColor="@color/orange"
+        android:textSize="15sp" />
 
 </RelativeLayout>
