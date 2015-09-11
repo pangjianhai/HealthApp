@@ -67,7 +67,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="话题"
+                android:text="主题"
                 android:textColor="#222222" />
         </LinearLayout>
 

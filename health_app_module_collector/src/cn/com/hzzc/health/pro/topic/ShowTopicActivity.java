@@ -416,9 +416,15 @@ public class ShowTopicActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * 查看评论详情
+	 */
 	@Override
 	public void detailShow(int index, TopicPostEntity tpe) {
-
+		Intent intent = new Intent(ShowTopicActivity.this,
+				TopicCommentDetailActivity.class);
+		intent.putExtra("postId", tpe.getUserId());
+		startActivity(intent);
 	}
 
 	@Override
