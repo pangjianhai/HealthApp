@@ -60,7 +60,8 @@ public class PicUtil {
 		List<String> imgs = new ArrayList<String>();
 		if (lst != null && !lst.isEmpty()) {
 			for (String id : lst) {
-				if (id == null || "".equals(id.trim())) {
+				if (id == null || "".equals(id.trim())
+						|| "null".equals(id.trim())) {
 					break;
 				} else {
 					imgs.add(id);

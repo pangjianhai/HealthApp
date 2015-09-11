@@ -115,6 +115,7 @@ public class TopicCommentDetailActivity extends BaseActivity {
 			 */
 			List<String> imgs = entity.getImgs();
 			imgs = PicUtil.pureImgList(imgs);
+			System.out.println("-----------------imgs:"+imgs.size());
 			if (imgs != null && !imgs.isEmpty()) {
 				TopicPicAdapter adapter = new TopicPicAdapter(
 						TopicCommentDetailActivity.this, imgs);
