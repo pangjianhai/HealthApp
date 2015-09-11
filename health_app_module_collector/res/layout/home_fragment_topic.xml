@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/comment_gray" >
+    android:background="@color/white" >
 
     <!-- 个人信息展示页面 -->
     <!-- 匿名查看的东西 -->
@@ -11,8 +11,16 @@
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="5dp" >
+        android:orientation="vertical" >
+
+        <cn.com.hzzc.health.pro.part.XListView
+            android:id="@+id/space_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/comment_gray"
+            android:dividerHeight="3dp"
+            android:visibility="visible" >
+        </cn.com.hzzc.health.pro.part.XListView>
 
         <TextView
             android:id="@+id/space_notice_msg"
@@ -25,17 +33,6 @@
             android:textSize="18sp"
             android:textStyle="italic"
             android:visibility="gone" />
-
-        <cn.com.hzzc.health.pro.part.XListView
-            android:id="@+id/space_lv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:divider="@color/deepgray"
-            android:dividerHeight="1dp"
-            android:visibility="visible" >
-        </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
 
     <Button
