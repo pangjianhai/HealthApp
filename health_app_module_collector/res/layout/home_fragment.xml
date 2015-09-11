@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/home_frame_title"
             android:scaleType="matrix"
-            android:src="@drawable/roller" />
+            android:src="@drawable/roller3" />
     </LinearLayout>
 
     <LinearLayout
