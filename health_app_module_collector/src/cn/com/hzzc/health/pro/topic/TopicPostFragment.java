@@ -26,6 +26,11 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+/**
+ * @todo 主题下面的帖子列表
+ * @author pang
+ *
+ */
 public class TopicPostFragment extends BaseTopicFragment implements
 		IXListViewListener, ITopicCommentListener {
 
