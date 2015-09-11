@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <cn.com.hzzc.health.pro.part.XListView
+        android:id="@+id/space_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@color/comment_gray"
+        android:dividerHeight="3dp" >
+    </cn.com.hzzc.health.pro.part.XListView>
+
+</LinearLayout>

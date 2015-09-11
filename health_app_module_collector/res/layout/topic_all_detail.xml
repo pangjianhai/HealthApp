@@ -127,15 +127,17 @@
             android:textStyle="italic"
             android:visibility="gone" />
 
-        <cn.com.hzzc.health.pro.part.XListView
-            android:id="@+id/topic_post_lv"
+        <LinearLayout
+            android:id="@+id/layout_space_content"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/topic_post_no_post_notice"
-            android:divider="@drawable/divider_share_comments"
-            android:showDividers="middle"
-            android:visibility="visible" >
-        </cn.com.hzzc.health.pro.part.XListView>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topic_post_no_post_notice" >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/topic_fragment_parent_viewpager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

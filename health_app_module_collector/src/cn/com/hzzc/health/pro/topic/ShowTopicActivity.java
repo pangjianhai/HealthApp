@@ -2,6 +2,7 @@ package cn.com.hzzc.health.pro.topic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,70 +11,80 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import cn.com.hzzc.health.pro.BaseActivity;
-import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
+import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
-import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.adapter.TopicPostItemAdapter;
+import cn.com.hzzc.health.pro.adapter.HomeFrameAdapter;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicEntity;
-import cn.com.hzzc.health.pro.model.TopicPostEntity;
-import cn.com.hzzc.health.pro.part.XListView;
-import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
-import cn.com.hzzc.health.pro.util.ITopicCommentListener;
 import cn.com.hzzc.health.pro.util.TopicUtil;
 
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * @todo 查看健康主题详情
  * @author pang
  *
  */
-public class ShowTopicActivity extends BaseActivity implements
-		IXListViewListener, ITopicCommentListener {
+public class ShowTopicActivity extends FragmentActivity {
 
-	private String topicId;
-
-	private TextView topic_name, topic_uer_num, topic_comment_num;
+	private TextView topic_name, topic_uer_num, topic_comment_num,
+			topic_post_no_post_notice;
 	/********** 是否参与某一主题 ***********/
 	private boolean isIn = false;// true:已经参与 false:未参与
 	private Button is_in_topic;
 
-	/******* 和主题相关的评论分页 ********/
-	private XListView topic_post_lv;
-	private int currentPage = 1;
-	private int rows = 10;
-	List<TopicPostEntity> ds = new ArrayList<TopicPostEntity>();
-	private TopicPostItemAdapter adpater = null;
-
-	private TextView topic_post_no_post_notice;
+	/****** 分页有关 *******/
+	private ViewPager viewPager;
+	private List<Fragment> lists = new ArrayList<Fragment>();
+	private HomeFrameAdapter myAdapter;
+	private String topicId;
+	String userId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.topic_all_detail);
+		userId = HealthApplication.getUserId();
+		topicId = getIntent().getStringExtra("topicId");
+		Fragment sspace = new TopicPostFragment();
+		Fragment tspace = new TopicUserFragment();
+		lists.add(sspace);
+		lists.add(tspace);
+
+		myAdapter = new HomeFrameAdapter(getSupportFragmentManager(), lists);
+		/**
+		 * 初始化viewpaper
+		 */
+		viewPager = (ViewPager) findViewById(R.id.topic_fragment_parent_viewpager);
+		viewPager.setAdapter(myAdapter);
+		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+
 		initParam();
 		initData();
 		initInData();
 		initNumData();
-		initPostData();
 	}
 
 	private void initParam() {
-		topicId = getIntent().getStringExtra("topicId");
 		topic_name = (TextView) findViewById(R.id.topic_name);
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
-		topic_post_lv = (XListView) findViewById(R.id.topic_post_lv);
 		topic_post_no_post_notice = (TextView) findViewById(R.id.topic_post_no_post_notice);
-
 		topic_uer_num = (TextView) findViewById(R.id.topic_uer_num);
 		topic_comment_num = (TextView) findViewById(R.id.topic_comment_num);
 	}
@@ -269,93 +280,23 @@ public class ShowTopicActivity extends BaseActivity implements
 		}
 	}
 
-	/**
-	 * @user:pang
-	 * @data:2015年9月7日
-	 * @todo:初始化评论信息
-	 * @return:void
-	 */
-	public void initPostData() {
-		topic_post_lv.setPullLoadEnable(true);
-		topic_post_lv.setXListViewListener(this);
-		adpater = new TopicPostItemAdapter(ShowTopicActivity.this,
-				ShowTopicActivity.this, ds);
-		topic_post_lv.setAdapter(adpater);
-		realLoadData();
-	}
+	public class MyOnPageChangeListener implements OnPageChangeListener {
 
-	/**
-	 * @user:pang
-	 * @data:2015年9月8日
-	 * @todo:真正的获取数据
-	 * @return:void
-	 */
-	private void realLoadData() {
-		try {
-			JSONObject d = new JSONObject();
-			d.put("picId", topicId);
-			d.put("page", currentPage + "");
-			d.put("rows", rows);
-			d.put("userId", userId);
-			currentPage = currentPage + 1;
-			String url = SystemConst.server_url
-					+ SystemConst.TopicUrl.getCommentByTopic;
-			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+		@Override
+		public void onPageSelected(int index) { // arg0:点击的第几页
 
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo) {
-					String data = responseInfo.result;
-					List<TopicPostEntity> lst = TopicUtil
-							.parsePostsFromJson(data);
-					if (lst == null || lst.isEmpty()) {// 没有发帖
-						topic_post_no_post_notice.setVisibility(View.VISIBLE);
-						topic_post_lv.setVisibility(View.GONE);
-					} else {
-						ds.addAll(lst);
-						adpater.notifyDataSetChanged();
-					}
-					onLoadOver();
-				}
-
-				@Override
-				public void onFailure(HttpException error, String msg) {
-					onLoadOver();
-				}
-			};
-			Map map = new HashMap();
-			map.put("para", d.toString());
-			send_normal_request(url, map, rcb);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
-	}
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
 
-	/**
-	 * @param v
-	 * @user:pang
-	 * @data:2015年9月6日
-	 * @todo:回退
-	 * @return:void
-	 */
-	public void backoff(View v) {
-		this.finish();
-	}
+		}
 
-	@Override
-	public void onRefresh() {
-		onLoadOver();
-	}
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
 
-	@Override
-	public void onLoadMore() {
-		realLoadData();
-	}
+		}
 
-	private void onLoadOver() {
-		topic_post_lv.stopRefresh();
-		topic_post_lv.stopLoadMore();
-		topic_post_lv.setRefreshTime("刚刚");
 	}
 
 	/**
@@ -374,70 +315,75 @@ public class ShowTopicActivity extends BaseActivity implements
 		finish();
 	}
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			boolean hasNew = getIntent().getBooleanExtra("hasNew", false);
-			if (hasNew) {
-				currentPage = 1;
-				realLoadData();
-			}
-		}
+	/********************* 页面 **************************/
+	/**
+	 * 回调接口
+	 */
+	public interface MyTouchListener {
+		public void onTouchEvent(MotionEvent event);
 	}
 
-	@Override
-	public void addGood(int index, TopicPostEntity tpe) {
-		ds.get(index).setIsGood(TopicPostEntity.GOOD_ALREADY);// 改变状态
-		ds.get(index).setGoodNum(ds.get(index).getGoodNum() + 1);// 改变点赞书目
-		adpater.notifyDataSetChanged();
-		try {
-			JSONObject d = new JSONObject();
-			d.put("picPostId", tpe.getId());
-			d.put("userId", userId);
-			String url = SystemConst.server_url
-					+ SystemConst.TopicUrl.clickPostCommentGoodNum;
-			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+	/*
+	 * 保存MyTouchListener接口的列表
+	 */
+	private ArrayList<MyTouchListener> myTouchListeners = new ArrayList<ShowTopicActivity.MyTouchListener>();
 
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo) {
-				}
-
-				@Override
-				public void onFailure(HttpException error, String msg) {
-				}
-			};
-			Map map = new HashMap();
-			map.put("para", d.toString());
-			send_normal_request(url, map, rcb);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	/**
+	 * 提供给Fragment通过getActivity()方法来注册自己的触摸事件的方法
+	 * 
+	 * @param listener
+	 */
+	public void registerMyTouchListener(MyTouchListener listener) {
+		myTouchListeners.add(listener);
 	}
 
 	/**
-	 * 查看评论详情
+	 * 提供给Fragment通过getActivity()方法来取消注册自己的触摸事件的方法
+	 * 
+	 * @param listener
+	 */
+	public void unRegisterMyTouchListener(MyTouchListener listener) {
+		myTouchListeners.remove(listener);
+	}
+
+	/**
+	 * 分发触摸事件给所有注册了MyTouchListener的接口
 	 */
 	@Override
-	public void detailShow(int index, TopicPostEntity tpe) {
-		Intent intent = new Intent(ShowTopicActivity.this,
-				TopicCommentDetailActivity.class);
-		intent.putExtra("postId", tpe.getId());
-		startActivity(intent);
-	}
-
-	@Override
-	public void userShow(int index, TopicPostEntity tpe) {
-		Intent intent = new Intent(ShowTopicActivity.this,
-				ShowUserInfoDetail.class);
-		intent.putExtra("uuid", tpe.getUserId());
-		startActivity(intent);
-	}
-
-	@Override
-	public void to3Platform(int index, TopicPostEntity tpe) {
+	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
+		for (MyTouchListener listener : myTouchListeners) {
+			listener.onTouchEvent(ev);
+		}
+		return super.dispatchTouchEvent(ev);
+	}
 
+	public void send_normal_request(String url, Map<String, String> p,
+			RequestCallBack<?> rcb) {
+		RequestParams params = new RequestParams();
+		if (p != null) {
+			Iterator<Map.Entry<String, String>> it = p.entrySet().iterator();
+			/**
+			 * 添加参数
+			 */
+			while (it.hasNext()) {
+				Map.Entry<String, String> entry = it.next();
+				params.addBodyParameter(entry.getKey(), entry.getValue());
+			}
+		}
+		HttpUtils http = new HttpUtils();
+		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
+		// Toast.makeText(this, "【测试代码】刚进行了http请求", Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月6日
+	 * @todo:回退
+	 * @return:void
+	 */
+	public void backoff(View v) {
+		this.finish();
 	}
 }
