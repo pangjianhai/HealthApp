@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/comment_gray" >
 
     <!-- 个人信息展示页面 -->
     <!-- 匿名查看的东西 -->
@@ -10,7 +11,8 @@
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingTop="5dp" >
 
         <TextView
             android:id="@+id/space_notice_msg"

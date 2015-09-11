@@ -9,8 +9,7 @@
     <LinearLayout
         android:id="@+id/layout_space_content"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_space_title_bar" >
+        android:layout_height="wrap_content" >
 
         <cn.com.hzzc.health.pro.part.XListView
             android:id="@+id/space_lv"
@@ -18,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:divider="#dedede"
+            android:divider="@color/comment_gray"
             android:dividerHeight="5dp" >
         </cn.com.hzzc.health.pro.part.XListView>
     </LinearLayout>
