@@ -85,6 +85,7 @@ public class TopicSpaceFragment extends BaseFragment implements
 	private void findView() {
 		dataSourceList = new ArrayList<TopicEntity>();
 		mListView = (XListView) mMainView.findViewById(R.id.space_lv);
+		mListView.setPullRefreshEnable(false);
 		mListView.setPullLoadEnable(false);
 		mListView.setXListViewListener(this);
 	}

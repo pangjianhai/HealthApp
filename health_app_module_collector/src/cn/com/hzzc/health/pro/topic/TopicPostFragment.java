@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -34,6 +35,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 public class TopicPostFragment extends BaseTopicFragment implements
 		IXListViewListener, ITopicCommentListener {
 
+	private TextView topic_post_no_post_notice;
 	private View mMainView;
 	private XListView topic_post_lv;
 	private int currentPage = 1;
@@ -62,7 +64,10 @@ public class TopicPostFragment extends BaseTopicFragment implements
 	}
 
 	private void findView() {
+		topic_post_no_post_notice = (TextView) mMainView
+				.findViewById(R.id.topic_post_no_post_notice);
 		topic_post_lv = (XListView) mMainView.findViewById(R.id.space_lv);
+		topic_post_lv.setPullRefreshEnable(false);
 		topic_post_lv.setPullLoadEnable(true);
 		topic_post_lv.setXListViewListener(this);
 		adpater = new TopicPostItemAdapter(getActivity(),
@@ -95,8 +100,8 @@ public class TopicPostFragment extends BaseTopicFragment implements
 					List<TopicPostEntity> lst = TopicUtil
 							.parsePostsFromJson(data);
 					if (lst == null || lst.isEmpty()) {// 没有发帖
-						// topic_post_no_post_notice.setVisibility(View.VISIBLE);
-						// topic_post_lv.setVisibility(View.GONE);
+						topic_post_no_post_notice.setVisibility(View.VISIBLE);
+						topic_post_lv.setVisibility(View.GONE);
 					} else {
 						System.out.println(lst.size());
 						ds.addAll(lst);

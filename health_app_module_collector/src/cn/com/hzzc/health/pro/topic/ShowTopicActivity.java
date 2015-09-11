@@ -43,8 +43,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
  */
 public class ShowTopicActivity extends FragmentActivity {
 
-	private TextView topic_name, topic_uer_num, topic_comment_num,
-			topic_post_no_post_notice;
+	private TextView topic_name, topic_uer_num, topic_comment_num;
 	/********** 是否参与某一主题 ***********/
 	private boolean isIn = false;// true:已经参与 false:未参与
 	private Button is_in_topic;
@@ -87,7 +86,7 @@ public class ShowTopicActivity extends FragmentActivity {
 	private void initParam() {
 		topic_name = (TextView) findViewById(R.id.topic_name);
 		is_in_topic = (Button) findViewById(R.id.is_in_topic);
-		topic_post_no_post_notice = (TextView) findViewById(R.id.topic_post_no_post_notice);
+
 		topic_uer_num = (TextView) findViewById(R.id.topic_uer_num);
 		topic_comment_num = (TextView) findViewById(R.id.topic_comment_num);
 

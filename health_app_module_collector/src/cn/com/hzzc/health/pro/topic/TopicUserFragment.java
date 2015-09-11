@@ -62,6 +62,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 
 	private void findView() {
 		topic_post_lv = (XListView) mMainView.findViewById(R.id.space_lv);
+		topic_post_lv.setPullRefreshEnable(false);
 		topic_post_lv.setPullLoadEnable(false);
 		topic_post_lv.setXListViewListener(this);
 		adpater = new UserItemAdapter(getActivity(), ds);

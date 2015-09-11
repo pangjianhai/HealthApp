@@ -40,7 +40,7 @@
         <FrameLayout
             android:id="@+id/share_total_n"
             android:layout_width="match_parent"
-            android:layout_height="100dp" >
+            android:layout_height="90dp" >
 
             <ImageView
                 android:id="@+id/friend_avatar_bg"
@@ -76,19 +76,19 @@
                     android:showDividers="middle" >
 
                     <TextView
-                        android:id="@+id/topic_uer_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="0人参与"
-                        android:visibility="gone" />
-
-                    <TextView
                         android:id="@+id/topic_comment_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="0条发布"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/topic_uer_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="0人参与"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -110,43 +110,29 @@
         <LinearLayout
             android:id="@+id/topic_post_div_notice"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="4dp"
             android:layout_below="@+id/share_total_n"
             android:orientation="horizontal" >
 
             <View
                 android:id="@+id/left_arrow"
                 android:layout_width="wrap_content"
-                android:layout_height="2dp"
+                android:layout_height="4dp"
                 android:layout_weight="1"
                 android:background="#FFA500" />
 
             <View
                 android:id="@+id/right_arrow"
                 android:layout_width="wrap_content"
-                android:layout_height="2dp"
+                android:layout_height="4dp"
                 android:layout_weight="1"
                 android:background="#dedede" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/topic_post_no_post_notice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/topic_post_div_notice"
-            android:gravity="center_horizontal"
-            android:text="暂无发言，抢沙发时间到了"
-            android:textAppearance="@android:attr/textAppearanceInverse"
-            android:textColor="@color/bgray"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            android:visibility="gone" />
-
-        <LinearLayout
+        <LinearLayout
             android:id="@+id/layout_space_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/topic_post_no_post_notice" >
+            android:layout_below="@+id/topic_post_div_notice" >
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/topic_fragment_parent_viewpager"
