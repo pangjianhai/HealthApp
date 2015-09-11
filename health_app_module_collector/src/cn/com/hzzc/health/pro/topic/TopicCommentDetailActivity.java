@@ -416,7 +416,6 @@ public class TopicCommentDetailActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					isGood = TopicUtil.parseBooleanFlag(data);
-					System.out.println(isGood + "==============data:" + data);
 					if (isGood) {
 						int orange_color = Color.parseColor("#FFA500");
 						single_topic_post_bottom_ops_good
@@ -451,8 +450,15 @@ public class TopicCommentDetailActivity extends BaseActivity {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年9月11日
+	 * @todo:点赞操作
+	 * @return:void
+	 */
 	public void favorate() {
-		System.out.println("---------------------favorate");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("picPostId", tpe.getId());
@@ -463,14 +469,16 @@ public class TopicCommentDetailActivity extends BaseActivity {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
-					isGood = true;
+					isGood = true;// 设置不能再点赞了
+					int orange_color = Color.parseColor("#FFA500");
+					single_topic_post_bottom_ops_good
+							.setTextColor(orange_color);// 改变颜色以示提醒
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
 					Toast.makeText(getApplicationContext(), "点赞失败，请重试",
 							Toast.LENGTH_SHORT).show();
-					;
 				}
 			};
 			Map map = new HashMap();
