@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -104,6 +105,10 @@ public class HomeFrameActivity extends BaseFragmentActivity {
 					@Override
 					public void onClick(View arg0) {
 						viewPager.setCurrentItem(0);
+						int orange_color = Color.parseColor("#FFA500");
+						int black_color = Color.parseColor("#000000");
+						home_fragment_parent_space.setTextColor(orange_color);
+						home_fragment_parent_topic.setTextColor(black_color);
 					}
 				});
 
@@ -113,6 +118,10 @@ public class HomeFrameActivity extends BaseFragmentActivity {
 					@Override
 					public void onClick(View arg0) {
 						viewPager.setCurrentItem(1);
+						int orange_color = Color.parseColor("#FFA500");
+						int black_color = Color.parseColor("#000000");
+						home_fragment_parent_topic.setTextColor(orange_color);
+						home_fragment_parent_space.setTextColor(black_color);
 					}
 				});
 	}
@@ -122,14 +131,25 @@ public class HomeFrameActivity extends BaseFragmentActivity {
 		int two = one * 2;// 页卡1 -> 页卡3 偏移量
 
 		@Override
-		public void onPageSelected(int arg0) { // arg0:点击的第几页
+		public void onPageSelected(int index) { // arg0:点击的第几页
 			Animation animation = new TranslateAnimation(one * currentItem, one
-					* arg0, 0, 0);// 显然这个比较简洁，只有一行代码。
-			currentItem = arg0;
+					* index, 0, 0);// 显然这个比较简洁，只有一行代码。
+			currentItem = index;
 
 			animation.setDuration(500);
 			animation.setFillAfter(true);
 			imageView.startAnimation(animation);
+			if (index == 0) {
+				int orange_color = Color.parseColor("#FFA500");
+				int black_color = Color.parseColor("#000000");
+				home_fragment_parent_space.setTextColor(orange_color);
+				home_fragment_parent_topic.setTextColor(black_color);
+			} else if (index == 1) {
+				int orange_color = Color.parseColor("#FFA500");
+				int black_color = Color.parseColor("#000000");
+				home_fragment_parent_topic.setTextColor(orange_color);
+				home_fragment_parent_space.setTextColor(black_color);
+			}
 
 		}
 
