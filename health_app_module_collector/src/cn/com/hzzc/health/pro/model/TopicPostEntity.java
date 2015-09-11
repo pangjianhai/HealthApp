@@ -15,6 +15,7 @@ public class TopicPostEntity {
 	private String id;
 	/* 内容简介 */
 	private String shortMsg;
+	private String rddComment;
 	/* 发布人 */
 	private String userId;
 	private String userName;
@@ -124,6 +125,14 @@ public class TopicPostEntity {
 
 	public void setIsGood(int isGood) {
 		this.isGood = isGood;
+	}
+
+	public String getRddComment() {
+		return rddComment;
+	}
+
+	public void setRddComment(String rddComment) {
+		this.rddComment = rddComment;
 	}
 
 }

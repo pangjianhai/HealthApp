@@ -184,4 +184,67 @@ public class TopicUtil {
 		return (img != null && !"".equals(img) && !"null".equals(img));
 	}
 
+	public static TopicPostEntity parseEntity(String data) {
+		TopicPostEntity bean = null;
+		try {
+			JSONObject j = new JSONObject(data);
+			JSONObject obj = j.getJSONObject("topicPost");
+			bean = new TopicPostEntity();
+			// 通用字段的处理
+			String id = obj.getString("id");
+			String comment = obj.getString("comment");
+			String rddComment = obj.getString("rddComment");
+			String userId = obj.getString("userId");
+			String userName = obj.getString("userName");
+			String img0 = obj.getString("img0");
+			String img1 = obj.getString("img1");
+			String img2 = obj.getString("img2");
+			String img3 = obj.getString("img3");
+			String img4 = obj.getString("img4");
+			String img5 = obj.getString("img5");
+			String img6 = obj.getString("img6");
+			String img7 = obj.getString("img7");
+			String createDate = obj.getString("createDate");
+			List<String> imgs = new ArrayList<String>();
+			if (isImgId(img0)) {
+				imgs.add(img0);
+			}
+			if (isImgId(img1)) {
+				imgs.add(img1);
+			}
+			if (isImgId(img2)) {
+				imgs.add(img2);
+			}
+			if (isImgId(img3)) {
+				imgs.add(img3);
+			}
+			if (isImgId(img4)) {
+				imgs.add(img4);
+			}
+			if (isImgId(img5)) {
+				imgs.add(img5);
+			}
+			if (isImgId(img6)) {
+				imgs.add(img6);
+			}
+			if (isImgId(img7)) {
+				imgs.add(img7);
+			}
+
+			bean.setId(id);
+			bean.setPostDate(createDate);
+			bean.setUserId(userId);
+			bean.setUserName(userName);
+			bean.setImg0(img0);
+			bean.setImg1(img1);
+			bean.setImg2(img2);
+			bean.setImg3(img3);
+			bean.setShortMsg(comment);
+			bean.setImgs(imgs);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return bean;
+	}
+
 }
