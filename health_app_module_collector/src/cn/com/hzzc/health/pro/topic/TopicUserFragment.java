@@ -34,7 +34,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 
 	private View mMainView;
 	private XListView topic_post_lv;
-	private int currentPage = 1;
+	private int currentPage = 0;
 	private int rows = 10;
 	List<UserItem> ds = new ArrayList<UserItem>();
 	private UserItemAdapter adpater;
