@@ -416,9 +416,12 @@ public class TopicCommentDetailActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					isGood = TopicUtil.parseBooleanFlag(data);
-					int orange_color = Color.parseColor("#FFA500");
-					single_topic_post_bottom_ops_good
-							.setTextColor(orange_color);
+					System.out.println(isGood + "==============data:" + data);
+					if (isGood) {
+						int orange_color = Color.parseColor("#FFA500");
+						single_topic_post_bottom_ops_good
+								.setTextColor(orange_color);
+					}
 					single_topic_post_bottom_ops_good
 							.setOnClickListener(new OnClickListener() {
 								@Override
@@ -449,6 +452,7 @@ public class TopicCommentDetailActivity extends BaseActivity {
 	}
 
 	public void favorate() {
+		System.out.println("---------------------favorate");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("picPostId", tpe.getId());
