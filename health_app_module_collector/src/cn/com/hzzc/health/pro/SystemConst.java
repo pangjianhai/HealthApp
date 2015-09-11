@@ -385,6 +385,11 @@ public class SystemConst {
 		 */
 		public static final String getTopicPostBytopicPostId = "topicController/getTopicPostBytopicPostId.do";
 
+		/**
+		 * 判断用户是否点赞评论
+		 */
+		public static final String judgeFavoritePicByUserId = "topicController/judgePicByUserId.do";
+
 	}
 
 	/**

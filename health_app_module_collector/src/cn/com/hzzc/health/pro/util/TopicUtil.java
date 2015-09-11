@@ -247,4 +247,23 @@ public class TopicUtil {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @user:pang
+	 * @data:2015年9月11日
+	 * @todo:解析Boolean类型返回值
+	 * @return:boolean
+	 */
+	public static boolean parseBooleanFlag(String data) {
+		try {
+			JSONObject d = new JSONObject(data);
+			return d.getBoolean("flag");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="主题评详情 "
+            android:text="主题评论详情 "
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -123,7 +123,7 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent" >
 
-        <include layout="@layout/single_share_common_bottom" />
+        <include layout="@layout/single_topic_common_bottom" />
         <!-- 这里写你的子控件 -->
     </RelativeLayout>
 
