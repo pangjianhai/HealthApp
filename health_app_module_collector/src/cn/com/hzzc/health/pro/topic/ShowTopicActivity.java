@@ -423,7 +423,7 @@ public class ShowTopicActivity extends BaseActivity implements
 	public void detailShow(int index, TopicPostEntity tpe) {
 		Intent intent = new Intent(ShowTopicActivity.this,
 				TopicCommentDetailActivity.class);
-		intent.putExtra("postId", tpe.getUserId());
+		intent.putExtra("postId", tpe.getId());
 		startActivity(intent);
 	}
 

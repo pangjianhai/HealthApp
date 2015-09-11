@@ -38,7 +38,7 @@ public class SystemConst {
 	// public static final String server_url =
 	// "http://www.kx360.com.cn/iotapp/";
 
-	public static final String server_url = "http://192.168.0.11:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.8:8080/IotApp/";
 
 	/**
 	 * 
@@ -379,6 +379,12 @@ public class SystemConst {
 		 * 点赞主题评论
 		 */
 		public static final String clickPostCommentGoodNum = "topicController/clickGoodNum.do";
+
+		/**
+		 * 获取具体的主题评论的信息
+		 */
+		public static final String getTopicPostBytopicPostId = "topicController/getTopicPostBytopicPostId.do";
+
 	}
 
 	/**

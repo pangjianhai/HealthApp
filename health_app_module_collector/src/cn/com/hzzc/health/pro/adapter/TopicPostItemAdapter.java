@@ -238,6 +238,22 @@ public class TopicPostItemAdapter extends BaseAdapter {
 				}
 			}
 		});
+
+		holder.share_content.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				l.detailShow(position, entity);
+			}
+		});
+
+		holder.share_name.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				l.userShow(position, entity);
+			}
+		});
 	}
 
 	private class HolderView {
