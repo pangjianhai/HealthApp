@@ -107,12 +107,27 @@
             </LinearLayout>
         </FrameLayout>
 
-        <View
+        <LinearLayout
             android:id="@+id/topic_post_div_notice"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@+id/share_total_n"
-            android:background="#d0d0d0" />
+            android:orientation="horizontal" >
+
+            <View
+                android:id="@+id/left_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="#FFA500" />
+
+            <View
+                android:id="@+id/right_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="#dedede" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/topic_post_no_post_notice"

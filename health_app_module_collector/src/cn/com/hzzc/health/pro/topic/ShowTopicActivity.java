@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -54,6 +55,8 @@ public class ShowTopicActivity extends FragmentActivity {
 	private HomeFrameAdapter myAdapter;
 	private String topicId;
 	String userId;
+	/**** 指示 ****/
+	private View left_arrow, right_arrow;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,9 @@ public class ShowTopicActivity extends FragmentActivity {
 		topic_post_no_post_notice = (TextView) findViewById(R.id.topic_post_no_post_notice);
 		topic_uer_num = (TextView) findViewById(R.id.topic_uer_num);
 		topic_comment_num = (TextView) findViewById(R.id.topic_comment_num);
+
+		left_arrow = findViewById(R.id.left_arrow);
+		right_arrow = findViewById(R.id.right_arrow);
 	}
 
 	/**
@@ -284,7 +290,17 @@ public class ShowTopicActivity extends FragmentActivity {
 
 		@Override
 		public void onPageSelected(int index) { // arg0:点击的第几页
+			System.out.println("************index:" + index);
+			int orange_color = Color.parseColor("#FFA500");
+			int white_color = Color.parseColor("#dedede");
+			if (index == 0) {
 
+				left_arrow.setBackgroundColor(orange_color);
+				right_arrow.setBackgroundColor(white_color);
+			} else if (index == 1) {
+				left_arrow.setBackgroundColor(white_color);
+				right_arrow.setBackgroundColor(orange_color);
+			}
 		}
 
 		@Override
@@ -373,7 +389,6 @@ public class ShowTopicActivity extends FragmentActivity {
 		}
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
-		// Toast.makeText(this, "【测试代码】刚进行了http请求", Toast.LENGTH_SHORT).show();
 	}
 
 	/**
