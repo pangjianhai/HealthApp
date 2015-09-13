@@ -289,7 +289,6 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 
 		@Override
 		public void onPageSelected(int index) { // arg0:点击的第几页
-			System.out.println("************index:" + index);
 			int orange_color = Color.parseColor("#FFA500");
 			int white_color = Color.parseColor("#dedede");
 			if (index == 0) {

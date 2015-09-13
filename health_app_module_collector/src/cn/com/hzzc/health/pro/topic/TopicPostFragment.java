@@ -103,7 +103,6 @@ public class TopicPostFragment extends BaseTopicFragment implements
 						topic_post_no_post_notice.setVisibility(View.VISIBLE);
 						topic_post_lv.setVisibility(View.GONE);
 					} else {
-						System.out.println(lst.size());
 						ds.addAll(lst);
 						adpater.notifyDataSetChanged();
 					}
