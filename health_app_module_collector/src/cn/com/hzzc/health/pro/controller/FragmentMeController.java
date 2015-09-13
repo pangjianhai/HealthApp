@@ -20,8 +20,6 @@ public class FragmentMeController implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		System.out
-				.println("************************************>>" + v.getId());
 		fragment.show_me_about(v);
 
 	}

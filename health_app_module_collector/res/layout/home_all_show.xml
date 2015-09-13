@@ -26,6 +26,19 @@
             android:textSize="20sp" />
 
         <ImageButton
+            android:id="@+id/home_ops_home"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="#00ffffff"
+            android:onClick="addShare"
+            android:src="@drawable/ic_publish"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/home_ops_tag"
             android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -33,7 +46,8 @@
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
             android:onClick="showPopWin"
-            android:src="@drawable/triangle1" />
+            android:src="@drawable/triangle1"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <FrameLayout

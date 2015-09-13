@@ -53,8 +53,6 @@ public abstract class ParentFragment extends Fragment {
 			case MotionEvent.ACTION_UP:
 				vt.addMovement(event);
 				vt.computeCurrentVelocity(1000, Float.MAX_VALUE);
-				System.out.println("-------------------------------->"
-						+ (vt.getYVelocity()));
 				screenScroll(vt.getYVelocity());
 				vt.recycle();
 				vt = null;
@@ -78,7 +76,6 @@ public abstract class ParentFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		System.out.println("************注册监听事件");
 		((HomeAllShowActivity) this.getActivity())
 				.registerMyTouchListener(mTouchListener);
 		return super.onCreateView(inflater, container, savedInstanceState);

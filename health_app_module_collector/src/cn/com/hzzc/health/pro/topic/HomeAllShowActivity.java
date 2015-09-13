@@ -8,13 +8,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import cn.com.hzzc.health.pro.R;
-import cn.com.hzzc.health.pro.topic.HomeFrameActivity.MyTouchListener;
 
 public class HomeAllShowActivity extends ParentFragmentActivity implements
 		OnCheckedChangeListener {
@@ -36,6 +37,9 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 	private RadioButton radio2;
 	private RadioButton radio3;
 
+	//
+	ImageButton home_ops_home, home_ops_tag;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +58,9 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		radio3.setOnCheckedChangeListener(this);
 
 		radio0.performClick();// 此处设置默认第三个选项卡对应的fragment显示
+
+		home_ops_home = ((ImageButton) findViewById(R.id.home_ops_home));
+		home_ops_tag = ((ImageButton) findViewById(R.id.home_ops_tag));
 	}
 
 	@Override
@@ -85,11 +92,10 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 	 * @param checkedRadioBtnId
 	 */
 	private void showFragment(int checkedRadioBtnId) {
+		changeYButton(checkedRadioBtnId);
 		String tag = getTagById(checkedRadioBtnId);
-		System.out.println("tag:" + tag);
 		Fragment mainFragment = (Fragment) getSupportFragmentManager()
 				.findFragmentByTag(tag);
-		System.out.println("mainFragment:" + mainFragment);
 		if (mainFragment == null) {
 			// 如果没有找到对应的fragment则生成一个新的fragment，并添加到容器中
 			Fragment newFragment = getFragmentByViewId(checkedRadioBtnId);
@@ -130,6 +136,22 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 			return "order";
 		} else {
 			return "me";
+		}
+	}
+
+	private void changeYButton(int checkedWidgetId) {
+		if (checkedWidgetId == R.id.radio0) {
+			home_ops_home.setVisibility(View.VISIBLE);
+			home_ops_tag.setVisibility(View.GONE);
+		} else if (checkedWidgetId == R.id.radio1) {
+			home_ops_home.setVisibility(View.GONE);
+			home_ops_tag.setVisibility(View.VISIBLE);
+		} else if (checkedWidgetId == R.id.radio2) {
+			home_ops_home.setVisibility(View.VISIBLE);
+			home_ops_tag.setVisibility(View.GONE);
+		} else if (checkedWidgetId == R.id.radio3) {
+			home_ops_home.setVisibility(View.VISIBLE);
+			home_ops_tag.setVisibility(View.GONE);
 		}
 	}
 

@@ -68,6 +68,7 @@ public class HomeMainMeFragment extends ParentFragment {
 		initPart();
 		initUserData();
 		initMyNum();
+		initListener();
 	}
 
 	@Override
@@ -75,8 +76,6 @@ public class HomeMainMeFragment extends ParentFragment {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		ViewGroup viewGroup = (ViewGroup) view.getParent();
-		System.out.println("<><><>view" + view);
-		initListener();
 		return view;
 	}
 
