@@ -44,6 +44,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @todo 首页我的空间
  *
  */
+@Deprecated
 public class MainPageLayoutSpaceActivity extends ParentMainActivity implements
 		IXListViewListener, IShareCallbackOperator {
 

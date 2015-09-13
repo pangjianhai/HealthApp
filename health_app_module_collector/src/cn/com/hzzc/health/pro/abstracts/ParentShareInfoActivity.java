@@ -16,11 +16,11 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.ShareAddPicSingleDialog;
 import cn.com.hzzc.health.pro.ShareSelectPicActivity;
 import cn.com.hzzc.health.pro.model.Tag;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
+import cn.com.hzzc.health.pro.topic.HomeAllShowActivity;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -161,7 +161,7 @@ public abstract class ParentShareInfoActivity extends
 	public void sendSuccess() {
 		resetCacheNum();
 		Intent intent = new Intent(ParentShareInfoActivity.this,
-				MainPageLayoutSpaceActivity.class);
+				HomeAllShowActivity.class);
 		startActivity(intent);
 		// finish();
 	}

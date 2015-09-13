@@ -33,6 +33,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @author pang
  *
  */
+@Deprecated
 public class TopicSpaceFragment extends BaseFragment implements
 		IXListViewListener, ITopicCallbackOperator {
 	private View mMainView;

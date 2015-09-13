@@ -25,6 +25,7 @@ import cn.com.hzzc.health.pro.FriendSeachOpsActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.adapter.HomeFrameAdapter;
 
+@Deprecated
 public class HomeFrameActivity extends BaseFragmentActivity {
 
 	private ViewPager viewPager;

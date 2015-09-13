@@ -54,6 +54,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+@Deprecated
 public class ShareSpaceFragment extends BaseFragment implements
 		IXListViewListener, IShareCallbackOperator {
 	/**

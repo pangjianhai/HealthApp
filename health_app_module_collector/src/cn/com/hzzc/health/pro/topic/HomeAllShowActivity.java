@@ -2,6 +2,7 @@ package cn.com.hzzc.health.pro.topic;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.SharePrepareActivity;
 
 public class HomeAllShowActivity extends ParentFragmentActivity implements
 		OnCheckedChangeListener {
@@ -57,10 +59,10 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		radio2.setOnCheckedChangeListener(this);
 		radio3.setOnCheckedChangeListener(this);
 
-		radio0.performClick();// 此处设置默认第三个选项卡对应的fragment显示
-
 		home_ops_home = ((ImageButton) findViewById(R.id.home_ops_home));
 		home_ops_tag = ((ImageButton) findViewById(R.id.home_ops_tag));
+
+		radio0.performClick();// 此处设置默认第三个选项卡对应的fragment显示
 	}
 
 	@Override
@@ -162,6 +164,12 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		return true;
 	}
 
+	public void addShare(View v) {
+		Intent intent = new Intent(this, SharePrepareActivity.class);
+		startActivity(intent);
+	}
+
+	/*********************************************************************************************/
 	/**
 	 * 回调接口
 	 */
