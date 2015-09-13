@@ -118,6 +118,7 @@ public class MineSpaceActivity extends BaseActivity implements
 		share_bottom = (LinearLayout) findViewById(R.id.share_bottom);
 		rl = (RelativeLayout) findViewById(R.id.rl);
 		et_pop = (EditText) findViewById(R.id.tv_pop);
+		mListView.setPullRefreshEnable(true);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 

@@ -118,8 +118,13 @@ public class HomeMainMeFragment extends ParentFragment {
 				|| R.id.main_page_me_name == v.getId()
 				|| R.id.main_page_me_sentence == v.getId()) {// 查看个人信息
 			showUserDetail(userId);
-		} else if (R.id.me_my_focus == v.getId()) {
+		} else if (R.id.me_my_dangan == v.getId()) {
 			Intent intent = new Intent(getActivity(), MineSpaceActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
+		} else if (R.id.me_my_focus == v.getId()) {
+			Intent intent = new Intent(getActivity(),
+					MainPageLayoutMeMyFocusActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
 		} else if (R.id.me_my_focus == v.getId()) {// 我的关注

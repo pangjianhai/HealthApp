@@ -150,6 +150,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	private void initListView() {
 		share_comment_listview = (cn.com.hzzc.health.pro.part.SentenceListView) findViewById(R.id.share_comment_listview);
+		share_comment_listview.setPullRefreshEnable(false);
 		share_comment_listview.setPullLoadEnable(true);
 		share_comment_listview.setXListViewListener(this);
 		ad = new CommentAdapter(ShareSentenceAllDetailActivity.this, ds);

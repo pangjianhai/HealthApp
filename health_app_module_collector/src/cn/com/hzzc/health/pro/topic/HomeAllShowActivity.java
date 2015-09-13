@@ -2,22 +2,33 @@ package cn.com.hzzc.health.pro.topic;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.PopupWindow.OnDismissListener;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import cn.com.hzzc.health.pro.FriendSeachOpsActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SharePrepareActivity;
+import cn.com.hzzc.health.pro.TagsForUserActivity;
+import cn.com.hzzc.health.pro.TagsForUserDefActivity;
 
 public class HomeAllShowActivity extends ParentFragmentActivity implements
 		OnCheckedChangeListener {
@@ -141,6 +152,14 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		}
 	}
 
+	/**
+	 * 
+	 * @param checkedWidgetId
+	 * @user:pang
+	 * @data:2015年9月13日
+	 * @todo:不同的页签显示不同的按钮
+	 * @return:void
+	 */
 	private void changeYButton(int checkedWidgetId) {
 		if (checkedWidgetId == R.id.radio0) {
 			home_ops_home.setVisibility(View.VISIBLE);
@@ -164,9 +183,105 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		return true;
 	}
 
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月13日
+	 * @todo:分享信息
+	 * @return:void
+	 */
 	public void addShare(View v) {
 		Intent intent = new Intent(this, SharePrepareActivity.class);
 		startActivity(intent);
+	}
+
+	public void showPopWin(View v) {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.tag_space_ops_window, null);
+
+		PopupWindow window = new PopupWindow(view,
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.WRAP_CONTENT);
+
+		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+		window.setFocusable(true);
+		// 实例化一个ColorDrawable颜色为半透明
+		ColorDrawable dw = new ColorDrawable(0xb0000000);
+		window.setBackgroundDrawable(dw);
+		// 设置popWindow的显示和消失动画
+		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
+		// 在底部显示
+		window.showAsDropDown(v);
+		/**
+		 * popwindow按钮地方法
+		 */
+		Button tag_space_ops_share_tag = (Button) view
+				.findViewById(R.id.tag_space_ops_share_tag);
+		tag_space_ops_share_tag.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				to_self_def(v);
+			}
+
+		});
+		Button tag_space_ops_self_def = (Button) view
+				.findViewById(R.id.tag_space_ops_self_def);
+		tag_space_ops_self_def.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				add_my_tag(v);
+			}
+
+		});
+		/**
+		 * 让popwindow消失
+		 */
+		window.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				System.out.println("popWindow消失");
+
+			}
+		});
+	}
+
+	public void to_self_def(View v) {
+		Intent it = new Intent(getApplicationContext(),
+				TagsForUserDefActivity.class);
+		startActivity(it);
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年6月23日
+	 * @todo:添加自定义标签
+	 * @return:void
+	 */
+	public void add_my_tag(View v) {
+		Intent it = new Intent(getApplicationContext(),
+				TagsForUserActivity.class);
+		startActivity(it);
+	}
+
+	/**
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月13日
+	 * @todo:添加好友
+	 * @return:void
+	 */
+	public void add_friends(View v) {
+		if (isLogin()) {// 只有登陆用户才能由此操作
+			Intent intent = new Intent(this, FriendSeachOpsActivity.class);
+			startActivity(intent);
+		} else {
+			no_login_alter(v);
+		}
 	}
 
 	/*********************************************************************************************/
