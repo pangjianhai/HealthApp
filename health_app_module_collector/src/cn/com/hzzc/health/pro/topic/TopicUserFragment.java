@@ -34,7 +34,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 
 	private View mMainView;
 	private XListView topic_post_lv;
-	private int currentPage = 0;
+	private int currentPage = 1;
 	private int rows = 10;
 	List<UserItem> ds = new ArrayList<UserItem>();
 	private UserItemAdapter adpater;
@@ -72,7 +72,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 	public void loadMoreData() {
 		try {
 			JSONObject d = new JSONObject();
-			d.put("currentId", HealthApplication.getUserId());
+			d.put("picId", topicId);
 			d.put("begin", currentPage);
 			d.put("limit", rows);
 			currentPage = currentPage + 1;
@@ -95,7 +95,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 			Map map = new HashMap();
 			map.put("para", d.toString());
 			send_normal_request(SystemConst.server_url
-					+ SystemConst.FunctionUrl.getFocusMeUser, map, rcb);
+					+ SystemConst.TopicUrl.queryTopicUserByTopicId, map, rcb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -108,7 +108,7 @@ public class TopicCommentAddActivity extends ParentTopicCommentActivity {
 	@Override
 	public void sendSuccess() {
 		Intent intent = new Intent(TopicCommentAddActivity.this,
-				ShowTopicActivity.class);
+				ShowTopicDetailActivity.class);
 		intent.putExtra("hasNew", true);
 		intent.putExtra("topicId", topicId);
 		startActivity(intent);

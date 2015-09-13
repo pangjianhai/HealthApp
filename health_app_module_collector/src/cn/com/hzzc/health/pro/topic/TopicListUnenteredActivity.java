@@ -125,7 +125,7 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	@Override
 	public void afterClickTopic(String topicId, int index) {
 		Intent intent = new Intent(TopicListUnenteredActivity.this,
-				ShowTopicActivity.class);
+				ShowTopicDetailActivity.class);
 		intent.putExtra("topicId", topicId);
 		startActivity(intent);
 	}

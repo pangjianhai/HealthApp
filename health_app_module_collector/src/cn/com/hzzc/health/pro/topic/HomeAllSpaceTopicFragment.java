@@ -167,7 +167,7 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 
 	@Override
 	public void afterClickTopic(String topicId, int index) {
-		Intent intent = new Intent(getActivity(), ShowTopicActivity.class);
+		Intent intent = new Intent(getActivity(), ShowTopicDetailActivity.class);
 		intent.putExtra("topicId", topicId);
 		getActivity().startActivity(intent);
 	}

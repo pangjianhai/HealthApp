@@ -28,7 +28,7 @@ public abstract class BaseTopicFragment extends Fragment {
 	 * Fragment中，注册 接收MainActivity的Touch回调的对象
 	 * 重写其中的onTouchEvent函数，并进行该Fragment的逻辑处理
 	 */
-	private ShowTopicActivity.MyTouchListener mTouchListener = new ShowTopicActivity.MyTouchListener() {
+	private ShowTopicDetailActivity.MyTouchListener mTouchListener = new ShowTopicDetailActivity.MyTouchListener() {
 		@Override
 		public void onTouchEvent(MotionEvent event) {
 			int action = event.getAction();
@@ -74,7 +74,7 @@ public abstract class BaseTopicFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		((ShowTopicActivity) this.getActivity())
+		((ShowTopicDetailActivity) this.getActivity())
 				.registerMyTouchListener(mTouchListener);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}

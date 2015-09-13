@@ -41,7 +41,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
  * @author pang
  *
  */
-public class ShowTopicActivity extends FragmentActivity {
+public class ShowTopicDetailActivity extends FragmentActivity {
 
 	private TextView topic_name, topic_uer_num, topic_comment_num;
 	/********** 是否参与某一主题 ***********/
@@ -322,7 +322,7 @@ public class ShowTopicActivity extends FragmentActivity {
 	 * @return:void
 	 */
 	public void addTopicComment(View v) {
-		Intent intent = new Intent(ShowTopicActivity.this,
+		Intent intent = new Intent(ShowTopicDetailActivity.this,
 				TopicCommentAddActivity.class);
 		intent.putExtra("topicId", topicId);
 		intent.putExtra("topicName", topic_name.getText().toString());
@@ -341,7 +341,7 @@ public class ShowTopicActivity extends FragmentActivity {
 	/*
 	 * 保存MyTouchListener接口的列表
 	 */
-	private ArrayList<MyTouchListener> myTouchListeners = new ArrayList<ShowTopicActivity.MyTouchListener>();
+	private ArrayList<MyTouchListener> myTouchListeners = new ArrayList<ShowTopicDetailActivity.MyTouchListener>();
 
 	/**
 	 * 提供给Fragment通过getActivity()方法来注册自己的触摸事件的方法
