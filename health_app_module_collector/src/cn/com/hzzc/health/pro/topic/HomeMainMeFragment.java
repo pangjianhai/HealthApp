@@ -114,6 +114,11 @@ public class HomeMainMeFragment extends ParentFragment {
 	}
 
 	public void show_me_about(View v) {
+		HomeAllShowActivity ac = (HomeAllShowActivity) getActivity();
+		if (!ac.isLogin()) {
+			ac.no_login_alter(v);
+			return;
+		}
 		if (R.id.main_page_me_photo == v.getId()
 				|| R.id.main_page_me_name == v.getId()
 				|| R.id.main_page_me_sentence == v.getId()) {// 查看个人信息
@@ -270,7 +275,7 @@ public class HomeMainMeFragment extends ParentFragment {
 				ActivityCollector.finishAll();
 				/******** 返回首页 *********/
 				Intent intent = new Intent(HealthApplication.getContext(),
-						HomeFrameActivity.class);
+						HomeAllShowActivity.class);
 				startActivity(intent);
 			}
 		});

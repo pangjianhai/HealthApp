@@ -191,11 +191,22 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 	 * @return:void
 	 */
 	public void addShare(View v) {
+		if (!isLogin()) {
+			no_login_alter(v);
+			return;
+		}
 		Intent intent = new Intent(this, SharePrepareActivity.class);
 		startActivity(intent);
 	}
 
+	/**
+	 * 标签也签选择按钮
+	 */
 	public void showPopWin(View v) {
+		if (!isLogin()) {
+			no_login_alter(v);
+			return;
+		}
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.tag_space_ops_window, null);
 

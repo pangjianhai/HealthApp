@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
-import cn.com.hzzc.health.pro.topic.HomeFrameActivity;
+import cn.com.hzzc.health.pro.topic.HomeAllShowActivity;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -133,7 +133,7 @@ public class AppStartActivity extends BaseActivity {
 			@Override
 			public void run() {
 				Intent intent = new Intent(AppStartActivity.this,
-						HomeFrameActivity.class);
+						HomeAllShowActivity.class);
 				startActivity(intent);
 				AppStartActivity.this.finish();
 			}
