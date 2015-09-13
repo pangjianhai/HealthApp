@@ -19,6 +19,7 @@ import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.AppFeedbackActivity;
@@ -54,7 +55,9 @@ public class HomeMainMeFragment extends ParentFragment {
 	private View view;
 	private CircularImage main_page_me_photo;
 	private TextView main_page_me_name, main_page_me_sentence, me_my_dangan,
-			me_my_focus, me_my_focusme, me_my_msg, me_my_shoucang;
+			me_my_focus, me_my_focusme, me_my_msg, me_my_shoucang, me_my_tucao,
+			me_my_version;
+	private Button me_my_logout;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,6 @@ public class HomeMainMeFragment extends ParentFragment {
 		initPart();
 		initUserData();
 		initMyNum();
-		initListener();
 	}
 
 	@Override
@@ -73,6 +75,8 @@ public class HomeMainMeFragment extends ParentFragment {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		ViewGroup viewGroup = (ViewGroup) view.getParent();
+		System.out.println("<><><>view" + view);
+		initListener();
 		return view;
 	}
 
@@ -88,11 +92,15 @@ public class HomeMainMeFragment extends ParentFragment {
 		me_my_focusme = (TextView) view.findViewById(R.id.me_my_focusme);
 		me_my_msg = (TextView) view.findViewById(R.id.me_my_msg);
 		me_my_shoucang = (TextView) view.findViewById(R.id.me_my_shoucang);
+		me_my_version = (TextView) view.findViewById(R.id.me_my_version);
+		me_my_tucao = (TextView) view.findViewById(R.id.me_my_tucao);
+		me_my_logout = (Button) view.findViewById(R.id.me_my_logout);
 	}
 
 	private void initListener() {
 		FragmentMeController fsc = new FragmentMeController(this);
 
+		main_page_me_photo.setOnClickListener(fsc);
 		main_page_me_name.setOnClickListener(fsc);
 		main_page_me_sentence.setOnClickListener(fsc);
 		me_my_dangan.setOnClickListener(fsc);
@@ -100,6 +108,45 @@ public class HomeMainMeFragment extends ParentFragment {
 		me_my_focusme.setOnClickListener(fsc);
 		me_my_msg.setOnClickListener(fsc);
 		me_my_shoucang.setOnClickListener(fsc);
+		me_my_tucao.setOnClickListener(fsc);
+		me_my_version.setOnClickListener(fsc);
+		me_my_logout.setOnClickListener(fsc);
+
+	}
+
+	public void show_me_about(View v) {
+		if (R.id.main_page_me_photo == v.getId()
+				|| R.id.main_page_me_name == v.getId()
+				|| R.id.main_page_me_sentence == v.getId()) {// 查看个人信息
+			showUserDetail(userId);
+		} else if (R.id.me_my_focus == v.getId()) {
+			Intent intent = new Intent(getActivity(), MineSpaceActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
+		} else if (R.id.me_my_focus == v.getId()) {// 我的关注
+			Intent intent = new Intent(getActivity(),
+					MainPageLayoutMeMyFocusActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
+		} else if (R.id.me_my_focusme == v.getId()) {// 关注我的
+			Intent intent = new Intent(getActivity(),
+					MainPageLayoutMeFocusMeActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
+		} else if (R.id.me_my_shoucang == v.getId()) {// 我的收藏
+			Intent intent = new Intent(getActivity(),
+					MainPageLayoutMeCollectionActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
+		} else if (R.id.me_my_tucao == v.getId()) {// 吐槽产品
+			Intent intent = new Intent(getActivity(), AppFeedbackActivity.class);
+			intent.putExtra("uuid", userId);
+			startActivity(intent);
+		} else if (R.id.me_my_version == v.getId()) {// 版本检测
+			versionScan();
+		} else if (R.id.me_my_logout == v.getId()) {// 退出
+			logout(null);
+		}
 	}
 
 	/**
@@ -282,37 +329,6 @@ public class HomeMainMeFragment extends ParentFragment {
 				+ ")");
 		me_my_focusme.setText(me_my_focusme.getText() + "(" + n.getFocusMyNum()
 				+ ")");
-	}
-
-	public void show_me_about(View v) {
-		if (R.id.userdetail == v.getId()) {// 查看个人信息
-			showUserDetail(userId);
-		} else if (R.id.main_page_me_dangan == v.getId()) {
-			Intent intent = new Intent(getActivity(), MineSpaceActivity.class);
-			intent.putExtra("uuid", userId);
-			startActivity(intent);
-		} else if (R.id.main_page_me_myfocus == v.getId()) {// 我的关注
-			Intent intent = new Intent(getActivity(),
-					MainPageLayoutMeMyFocusActivity.class);
-			intent.putExtra("uuid", userId);
-			startActivity(intent);
-		} else if (R.id.main_page_me_focuseme == v.getId()) {// 关注我的
-			Intent intent = new Intent(getActivity(),
-					MainPageLayoutMeFocusMeActivity.class);
-			intent.putExtra("uuid", userId);
-			startActivity(intent);
-		} else if (R.id.main_page_me_shoucang == v.getId()) {// 我的收藏
-			Intent intent = new Intent(getActivity(),
-					MainPageLayoutMeCollectionActivity.class);
-			intent.putExtra("uuid", userId);
-			startActivity(intent);
-		} else if (R.id.main_page_me_tucao == v.getId()) {// 吐槽产品
-			Intent intent = new Intent(getActivity(), AppFeedbackActivity.class);
-			intent.putExtra("uuid", userId);
-			startActivity(intent);
-		} else if (R.id.main_page_me_versionscan == v.getId()) {// 版本检测
-			versionScan();
-		}
 	}
 
 	/************************************ 和版本检测和下载有关的代码 *****************************************/

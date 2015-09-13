@@ -18,8 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="90dp"
             android:background="@drawable/preference_single_item"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <cn.com.hzzc.health.pro.part.CircularImage
                 android:id="@+id/main_page_me_photo"
@@ -69,8 +68,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/preference_first_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/me_my_dangan"
@@ -96,8 +94,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/me_my_focus"
@@ -123,8 +120,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/me_my_focusme"
@@ -150,8 +146,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/me_my_msg"
@@ -177,8 +172,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/me_my_shoucang"
@@ -204,8 +198,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/me_my_version"
@@ -231,13 +224,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/preference_last_item"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="show_me_about" >
+            android:gravity="center_vertical" >
 
             <TextView
+                android:id="@+id/me_my_tucao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="show_me_about"
                 android:padding="8dp"
                 android:text="@string/page_layout_me_feedback"
                 android:textColor="#000"
@@ -253,6 +245,7 @@
         </RelativeLayout>
 
         <Button
+            android:id="@+id/me_my_logout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
@@ -261,7 +254,6 @@
             android:layout_marginTop="14dp"
             android:background="@drawable/btn_style_red"
             android:gravity="center"
-            android:onClick="logout"
             android:padding="4dp"
             android:text="退出登录"
             android:textColor="#fff"
