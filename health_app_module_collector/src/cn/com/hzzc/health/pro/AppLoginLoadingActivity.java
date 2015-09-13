@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.widget.Toast;
-import cn.com.hzzc.health.pro.topic.HomeFrameActivity;
+import cn.com.hzzc.health.pro.topic.HomeAllShowActivity;
 
 /**
  * 
@@ -27,7 +27,7 @@ public class AppLoginLoadingActivity extends BaseActivity {
 			@Override
 			public void run() {
 				Intent intent = new Intent(AppLoginLoadingActivity.this,
-						HomeFrameActivity.class);
+						HomeAllShowActivity.class);
 				startActivity(intent);
 				AppLoginLoadingActivity.this.finish();
 				Toast.makeText(getApplicationContext(), "登录成功",

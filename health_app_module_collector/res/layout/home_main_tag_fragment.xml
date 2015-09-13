@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/layout_space_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_space_title_bar"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/selected_tag_input_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/share_send_commont_tags_input"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/tag_input_search"
+                android:gravity="left"
+                android:hint="@string/tag_input_search"
+                android:paddingTop="4dp"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selected_tag_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:divider="@drawable/divider2"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:visibility="gone" >
+        </LinearLayout>
+    </LinearLayout>
+
+    <cn.com.hzzc.health.pro.part.MyScrollView
+        android:id="@+id/my_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_space_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/first_column"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/second_column"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/third_column"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </LinearLayout>
+    </cn.com.hzzc.health.pro.part.MyScrollView>
+
+</RelativeLayout>

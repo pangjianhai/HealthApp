@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/layout_space_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/space_title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="#00ffffff"
+            android:onClick="add_friends"
+            android:src="@drawable/navigationbar_friendsearch" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="康兮"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="#00ffffff"
+            android:onClick="showPopWin"
+            android:src="@drawable/triangle1" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_space_title_bar"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="1dp" >
+
+        <RadioButton
+            android:id="@+id/radio0"
+            style="@style/tab_style"
+            android:drawableTop="@drawable/tab_first_background"
+            android:text="首页"
+            android:textColor="@color/radio_colors" />
+
+        <RadioButton
+            android:id="@+id/radio1"
+            style="@style/tab_style"
+            android:drawableTop="@drawable/tab_second_background"
+            android:text="标签"
+            android:textColor="@color/radio_colors" />
+
+        <RadioButton
+            android:id="@+id/radio2"
+            style="@style/tab_style"
+            android:drawableTop="@drawable/tab_third_background"
+            android:text="排行榜"
+            android:textColor="@color/radio_colors" />
+
+        <RadioButton
+            android:id="@+id/radio3"
+            style="@style/tab_style"
+            android:drawableTop="@drawable/tab_four_background"
+            android:text="我"
+            android:textColor="@color/radio_colors" />
+    </RadioGroup>
+
+</RelativeLayout>

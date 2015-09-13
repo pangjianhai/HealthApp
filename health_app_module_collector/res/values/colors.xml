@@ -32,4 +32,5 @@
     <color name="sliver">#C0C0C0</color>
     <color name="bottomgray">#F5F5F5</color>
     <color name="comment_gray">#dedede</color>
-	<color name="half_trans">#e0000000</color></resources>
+	<color name="half_trans">#e0000000</color>
+	<color name="orange_color">#FF6600</color></resources>

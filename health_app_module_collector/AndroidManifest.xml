@@ -256,7 +256,10 @@
             android:name="cn.com.hzzc.health.pro.topic.TopicCommentDetailActivity"
             android:theme="@style/AppTheme" >
         </activity>
-        
+        <activity
+            android:name="cn.com.hzzc.health.pro.topic.HomeAllShowActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
 
         <!-- 关于sharesdk  begin -->
         <activity
