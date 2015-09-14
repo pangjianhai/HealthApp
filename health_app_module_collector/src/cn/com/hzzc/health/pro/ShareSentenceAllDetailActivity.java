@@ -91,7 +91,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	private CommentAdapter ad = null;
 	List<CommentEntity> ds = new ArrayList<CommentEntity>();
 	private int page = 0;
-	private int size = 7;
+	private int size = 10;
 
 	/**
 	 * 作者信息
@@ -150,8 +150,8 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	private void initListView() {
 		share_comment_listview = (cn.com.hzzc.health.pro.part.SentenceListView) findViewById(R.id.share_comment_listview);
-		share_comment_listview.setPullRefreshEnable(false);
-		share_comment_listview.setPullLoadEnable(true);
+		share_comment_listview.setPullRefreshEnable(false);// 不允许更新
+		share_comment_listview.setPullLoadEnable(false);// 不允许加载（是否允许load的时候会有判断）
 		share_comment_listview.setXListViewListener(this);
 		ad = new CommentAdapter(ShareSentenceAllDetailActivity.this, ds);
 		share_comment_listview.setAdapter(ad);
@@ -752,6 +752,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 						ad.notifyDataSetChanged();
 					}
 					onLoadOver();
+					if (list != null && list.size() >= size) {
+						share_comment_listview.setPullLoadEnable(true);
+					}
 				}
 
 				@Override

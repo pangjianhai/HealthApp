@@ -46,7 +46,7 @@
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
             android:onClick="showPopWin"
-            android:src="@drawable/triangle1"
+            android:src="@drawable/toolbar_more_icon_nor"
             android:visibility="gone" />
     </RelativeLayout>
 
