@@ -34,7 +34,7 @@
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
             android:onClick="addShare"
-            android:src="@drawable/ic_publish"
+            android:src="@drawable/ic_share"
             android:visibility="visible" />
 
         <ImageButton
