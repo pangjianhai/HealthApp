@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:divider="@color/comment_gray"
-        android:dividerHeight="3dp" >
+        android:dividerHeight="1dp" >
     </cn.com.hzzc.health.pro.part.XListView>
 
 </LinearLayout>
