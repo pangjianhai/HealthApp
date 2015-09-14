@@ -326,7 +326,6 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 		intent.putExtra("topicId", topicId);
 		intent.putExtra("topicName", topic_name.getText().toString());
 		startActivity(intent);
-		finish();
 	}
 
 	/********************* 页面 **************************/
