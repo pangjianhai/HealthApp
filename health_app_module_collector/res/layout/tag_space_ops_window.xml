@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_default"
         android:text="我的标签"
-        android:textColor="@color/orange"
+        android:textColor="@color/orange_color"
         android:textSize="13dp" />
 
     <Button
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_default"
         android:text="贡献标签"
-        android:textColor="@color/orange"
+        android:textColor="@color/orange_color"
         android:textSize="13dp" />
 
 </LinearLayout>

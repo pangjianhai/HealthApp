@@ -136,7 +136,6 @@ public class HomeAllSpaceShareFragment extends ParentFragment implements
 	}
 
 	public void afterListerner(View v) {
-		System.out.println("************************");
 		if (v.getId() == R.id.share_comment_input_btn) {
 			comment_share(v);
 		}
