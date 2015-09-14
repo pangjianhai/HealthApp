@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="14dp"
-                android:background="@drawable/btn_style_green"
+                android:background="@drawable/btn_ok_selector"
                 android:onClick="showUserBtu_click"
                 android:text="添加好友"
                 android:textColor="#fff"
