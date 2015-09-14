@@ -24,7 +24,8 @@
             android:background="@drawable/bg_share_edittext"
             android:gravity="top"
             android:hint="@string/share_health_input"
-            android:maxLines="6" />
+            android:maxLines="6"
+            android:textColor="@color/black" />
 
         <GridView
             android:id="@+id/topic_comment_gridview"

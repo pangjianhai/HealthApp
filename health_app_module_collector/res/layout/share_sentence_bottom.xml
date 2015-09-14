@@ -20,6 +20,7 @@
         android:drawableLeft="@drawable/compose_photo_photograph_highlighted"
         android:onClick="selectPicture"
         android:text="上图片"
+        android:textColor="@color/black"
         android:textSize="15sp" />
 
 </LinearLayout>

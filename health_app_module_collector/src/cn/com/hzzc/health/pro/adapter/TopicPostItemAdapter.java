@@ -169,6 +169,8 @@ public class TopicPostItemAdapter extends BaseAdapter {
 		holder.share_good_num.setText(goodnum + "");
 		if (isGood == TopicPostEntity.GOOD_ALREADY) {
 			holder.share_good_num.setTextColor(Color.parseColor("#FFA500"));
+		} else {
+			holder.share_good_num.setTextColor(Color.parseColor("#999999"));
 		}
 		/**
 		 * 头像部分
