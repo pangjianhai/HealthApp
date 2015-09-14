@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -36,6 +37,7 @@ import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.adapter.ShareItemAdapter;
 import cn.com.hzzc.health.pro.config.HealthApplication;
+import cn.com.hzzc.health.pro.controller.FragmentShareController;
 import cn.com.hzzc.health.pro.model.PushBean;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.part.XListView;
@@ -58,7 +60,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  */
 public class HomeAllSpaceShareFragment extends ParentFragment implements
 		IXListViewListener, IShareCallbackOperator {
-	/***所属fragment****/
+	/*** 所属fragment ****/
 	private HomeMainPageFragment parent;
 	/**
 	 * 最新ID
@@ -85,6 +87,7 @@ public class HomeAllSpaceShareFragment extends ParentFragment implements
 	private LinearLayout share_bottom;
 	private EditText et_pop;
 	private String commentShareId;
+	private ImageButton share_comment_input_btn;
 	/**
 	 * 空间分享信息列表
 	 */
@@ -128,13 +131,15 @@ public class HomeAllSpaceShareFragment extends ParentFragment implements
 	}
 
 	private void initListener() {
-		// FragmentShareController fsc = new FragmentShareController(this);
-		// LinearLayout l = (LinearLayout) mMainView
-		// .findViewById(R.id.share_bottom);
-		// ImageButton shareBtn = (ImageButton) mMainView
-		// .findViewById(R.id.share_comment_input_btn);
-		// l.setOnClickListener(fsc);
-		// shareBtn.setOnClickListener(fsc);
+		FragmentShareController fsc = new FragmentShareController(this);
+		share_comment_input_btn.setOnClickListener(fsc);
+	}
+
+	public void afterListerner(View v) {
+		System.out.println("************************");
+		if (v.getId() == R.id.share_comment_input_btn) {
+			comment_share(v);
+		}
 	}
 
 	@Override
@@ -152,6 +157,8 @@ public class HomeAllSpaceShareFragment extends ParentFragment implements
 		mListView.setXListViewListener(this);
 		share_bottom = (LinearLayout) mMainView.findViewById(R.id.share_bottom);
 		et_pop = (EditText) mMainView.findViewById(R.id.tv_pop);
+		share_comment_input_btn = (ImageButton) mMainView
+				.findViewById(R.id.share_comment_input_btn);
 	}
 
 	private void initListView() {

@@ -35,7 +35,7 @@
 
         <!-- 需要回复的时候才会改变visibility属性为可见 -->
 
-        <include layout="@layout/share_reply_pop" />
+        <include layout="@layout/share_reply_pop_for_home" />
     </LinearLayout>
 
 </RelativeLayout>

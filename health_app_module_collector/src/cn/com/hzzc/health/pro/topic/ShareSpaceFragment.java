@@ -123,13 +123,13 @@ public class ShareSpaceFragment extends BaseFragment implements
 	}
 
 	private void initListener() {
-		FragmentShareController fsc = new FragmentShareController(this);
-		LinearLayout l = (LinearLayout) mMainView
-				.findViewById(R.id.share_bottom);
-		ImageButton shareBtn = (ImageButton) mMainView
-				.findViewById(R.id.share_comment_input_btn);
-		l.setOnClickListener(fsc);
-		shareBtn.setOnClickListener(fsc);
+		// FragmentShareController fsc = new FragmentShareController(this);
+		// LinearLayout l = (LinearLayout) mMainView
+		// .findViewById(R.id.share_bottom);
+		// ImageButton shareBtn = (ImageButton) mMainView
+		// .findViewById(R.id.share_comment_input_btn);
+		// l.setOnClickListener(fsc);
+		// shareBtn.setOnClickListener(fsc);
 	}
 
 	@Override
