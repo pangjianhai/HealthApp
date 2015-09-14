@@ -33,7 +33,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 /**
  * 
  * @author pang
- * @todo 用户分享标签activity
+ * @todo 用户贡献标签activity
  *
  */
 public class TagsForUserDefActivity extends BaseActivity {

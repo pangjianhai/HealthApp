@@ -259,6 +259,14 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		});
 	}
 
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月14日
+	 * @todo:用户贡献标签
+	 * @return:void
+	 */
 	public void to_self_def(View v) {
 		Intent it = new Intent(getApplicationContext(),
 				TagsForUserDefActivity.class);

@@ -10,11 +10,7 @@
     <!-- 圆角 -->
     <corners android:radius="1dp" />
     <!-- 边距 -->
-    <padding
-        android:bottom="1dp"
-        android:left="1dp"
-        android:right="1dp"
-        android:top="1dp" />
+   
     <!-- 渐变 -->
 
 </shape>
