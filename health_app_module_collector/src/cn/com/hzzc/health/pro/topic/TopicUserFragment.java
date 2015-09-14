@@ -7,22 +7,21 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.adapter.UserItemAdapter;
-import cn.com.hzzc.health.pro.config.HealthApplication;
+import cn.com.hzzc.health.pro.adapter.UserItemFragmentAdapter;
 import cn.com.hzzc.health.pro.model.UserItem;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
 import cn.com.hzzc.health.pro.util.UserUtils;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 /**
  * @todo 主题下面的用户列表
@@ -37,7 +36,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 	private int currentPage = 1;
 	private int rows = 10;
 	List<UserItem> ds = new ArrayList<UserItem>();
-	private UserItemAdapter adpater;
+	private UserItemFragmentAdapter adpater;
 	private String topicId;
 
 	@Override
@@ -65,7 +64,7 @@ public class TopicUserFragment extends BaseTopicFragment implements
 		topic_post_lv.setPullRefreshEnable(false);
 		topic_post_lv.setPullLoadEnable(false);
 		topic_post_lv.setXListViewListener(this);
-		adpater = new UserItemAdapter(getActivity(), ds);
+		adpater = new UserItemFragmentAdapter(getActivity(), ds);
 		topic_post_lv.setAdapter(adpater);
 	}
 

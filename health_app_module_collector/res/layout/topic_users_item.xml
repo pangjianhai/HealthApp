@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:background="@color/white"
+    android:clickable="true"
+    android:gravity="center_vertical" >
+
+    <cn.com.hzzc.health.pro.part.CircularImage
+        android:id="@+id/find_search_result_header"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:id="@+id/find_search_result_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/find_search_result_header"
+        android:padding="7dp"
+        android:text="姓名"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/find_search_result_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/find_search_result_header"
+        android:padding="7dp"
+        android:text="个人标签：爱吃，爱玩，爱打炮"
+        android:textColor="#666" />
+
+    <ImageView
+        android:id="@+id/check_someone"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dp"
+        android:src="@drawable/widget_right_highlighted" />
+
+</RelativeLayout>

@@ -21,8 +21,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.HomeFrameAdapter;
 import cn.com.hzzc.health.pro.config.HealthApplication;
@@ -399,4 +399,12 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 	public void backoff(View v) {
 		this.finish();
 	}
+
+	public void checkSomeOne(String id) {
+		Intent intent = new Intent(ShowTopicDetailActivity.this,
+				ShowUserInfoDetail.class);
+		intent.putExtra("uuid", id);
+		startActivity(intent);
+	}
+
 }
