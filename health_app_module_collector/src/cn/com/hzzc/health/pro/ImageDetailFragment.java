@@ -17,7 +17,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
- * 单张图片显示Fragment
+ * 单张图片显示Fragment 唯一改动的地方就是和对应的布局文件imageview类型的改变，其余的没有改动
  */
 public class ImageDetailFragment extends Fragment {
 	private String mImageUrl;
@@ -40,7 +40,8 @@ public class ImageDetailFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		mImageUrl = getArguments() != null ? getArguments().getString("url")
 				: null;
-		mImageUrl = "http://ww4.sinaimg.cn/mw690/60d02b59jw1ew25ckxostg20cc06y4qs.gif";
+		// mImageUrl =
+		// "http://ww4.sinaimg.cn/mw690/60d02b59jw1ew25ckxostg20cc06y4qs.gif";
 	}
 
 	@Override
