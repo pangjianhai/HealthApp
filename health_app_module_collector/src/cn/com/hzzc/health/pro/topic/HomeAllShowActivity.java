@@ -388,7 +388,7 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
-					if (pb != null) {
+					if (pb != null && pb.getLoginTimes() <= 1) {
 						Intent intent = new Intent(HomeAllShowActivity.this,
 								FirstLoginTopUserListLayout.class);
 						startActivity(intent);
