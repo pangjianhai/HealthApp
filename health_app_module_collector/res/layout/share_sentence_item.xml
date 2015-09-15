@@ -92,7 +92,7 @@
                     android:horizontalSpacing="5dip"
                     android:numColumns="3"
                     android:stretchMode="columnWidth"
-                    android:verticalSpacing="3dip" />
+                    android:verticalSpacing="1dip" />
             </LinearLayout>
 
             <LinearLayout

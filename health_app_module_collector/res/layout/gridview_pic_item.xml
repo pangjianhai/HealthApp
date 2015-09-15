@@ -8,8 +8,8 @@
         android:id="@+id/gridview_pic_item_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:scaleType="matrix"
-        android:background="@drawable/share_img_border" />
+        android:layout_margin="1dp"
+        android:background="@drawable/share_img_border"
+        android:scaleType="centerCrop" />
 
 </RelativeLayout>

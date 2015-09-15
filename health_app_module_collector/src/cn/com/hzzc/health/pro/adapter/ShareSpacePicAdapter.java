@@ -45,11 +45,6 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 		this.imgIdList = imgIdList;
 	}
 
-	/**
-	 * 每张图片默认的尺寸
-	 */
-	LayoutParams params = new AbsListView.LayoutParams(130, 250);
-
 	@Override
 	public int getCount() {
 		return imgIdList.size();
@@ -82,8 +77,16 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 		inner_image = (ImageView) convertView
 				.findViewById(R.id.gridview_pic_item_iv);
 		LayoutParams params = inner_image.getLayoutParams();
-		params.height = 250;
-		params.width = 250;
+		if (imgIdList.size() >= 3) {
+			params.height = 250;
+			params.width = 250;
+		} else if (imgIdList.size() == 2) {
+			params.height = 450;
+			params.width = 450;
+		} else if (imgIdList.size() == 1) {
+			params.height = 600;
+			params.width = 600;
+		}
 		inner_image.setLayoutParams(params);
 		/**
 		 * 构造连接加载图片
