@@ -100,8 +100,11 @@ public class TopicPostFragment extends BaseTopicFragment implements
 					List<TopicPostEntity> lst = TopicUtil
 							.parsePostsFromJson(data);
 					if (lst == null || lst.isEmpty()) {// 没有发帖
-						topic_post_no_post_notice.setVisibility(View.VISIBLE);
-						topic_post_lv.setVisibility(View.GONE);
+						if (ds == null || ds.isEmpty()) {
+							topic_post_no_post_notice
+									.setVisibility(View.VISIBLE);
+							topic_post_lv.setVisibility(View.GONE);
+						}
 					} else {
 						ds.addAll(lst);
 						adpater.notifyDataSetChanged();

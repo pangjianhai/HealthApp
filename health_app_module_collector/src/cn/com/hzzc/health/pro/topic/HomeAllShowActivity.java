@@ -1,6 +1,14 @@
 package cn.com.hzzc.health.pro.topic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +32,17 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import cn.com.hzzc.health.pro.FirstLoginTopUserListLayout;
 import cn.com.hzzc.health.pro.FriendSeachOpsActivity;
+import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SharePrepareActivity;
+import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.TagsForUserActivity;
 import cn.com.hzzc.health.pro.TagsForUserDefActivity;
+import cn.com.hzzc.health.pro.config.GlobalUserVariable;
+import cn.com.hzzc.health.pro.model.PushBean;
+import cn.com.hzzc.health.pro.util.UserUtils;
 
 public class HomeAllShowActivity extends ParentFragmentActivity implements
 		OnCheckedChangeListener {
@@ -344,6 +358,56 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 			listener.onTouchEvent(ev);
 		}
 		return super.dispatchTouchEvent(ev);
+	}
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (isLogin() && GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
+			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
+			if_need_to_push_top_user();
+		}
+
+	}
+
+	/**
+	 * 
+	 * 
+	 * @user:pang
+	 * @data:2015年7月13日
+	 * @todo:判断有没有必要推荐用户
+	 * @return:void
+	 */
+	private void if_need_to_push_top_user() {
+		try {
+			JSONObject d = new JSONObject();
+			d.put("userUuid", userId);
+			RequestCallBack<String> rcb = new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String data = responseInfo.result;
+					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
+					if (pb != null) {
+						Intent intent = new Intent(HomeAllShowActivity.this,
+								FirstLoginTopUserListLayout.class);
+						startActivity(intent);
+					}
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+
+				}
+			};
+			Map map = new HashMap();
+			map.put("para", d.toString());
+			send_normal_request(SystemConst.server_url
+					+ SystemConst.FunctionUrl.if_need_to_push_top_user, map,
+					rcb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

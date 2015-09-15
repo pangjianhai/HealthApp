@@ -35,10 +35,10 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	// public static final String server_url =
-	// "http://www.kx360.com.cn/iotapp/";
+	public static final String server_url = "http://www.kx360.com.cn/iotapp/";
 
-	public static final String server_url = "http://192.168.0.106:8080/IotApp/";
+	// public static final String server_url =
+	// "http://192.168.0.106:8080/IotApp/";
 
 	/**
 	 * 
@@ -330,6 +330,11 @@ public class SystemConst {
 		 * 根据用ID获取主题图片
 		 */
 		public static final String getTopicImgByImgId = "topicController/getTopicImgByImgId.do";
+
+		/**
+		 * 根据用ID获取主题图片
+		 */
+		public static final String getTopicImgByPicId = "topicController/getTopicImgByPicId.do";
 
 		/**
 		 * 参与主题

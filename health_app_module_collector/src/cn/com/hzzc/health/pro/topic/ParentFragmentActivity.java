@@ -1,5 +1,13 @@
 package cn.com.hzzc.health.pro.topic;
 
+import java.util.Iterator;
+import java.util.Map;
+
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 import android.widget.PopupWindow.OnDismissListener;
 import cn.com.hzzc.health.pro.AppLoginStartActivity;
 import cn.com.hzzc.health.pro.AppRegActivity;
@@ -203,10 +212,25 @@ public class ParentFragmentActivity extends FragmentActivity {
 		return true;
 	}
 
-	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
-
 	public void no_login_alter(View v) {
 		LoginUtil.no_login_alter(v, this);
+	}
+
+	public void send_normal_request(String url, Map<String, String> p,
+			RequestCallBack<?> rcb) {
+		RequestParams params = new RequestParams();
+		if (p != null) {
+			Iterator<Map.Entry<String, String>> it = p.entrySet().iterator();
+			/**
+			 * 添加参数
+			 */
+			while (it.hasNext()) {
+				Map.Entry<String, String> entry = it.next();
+				params.addBodyParameter(entry.getKey(), entry.getValue());
+			}
+		}
+		HttpUtils http = new HttpUtils();
+		http.send(HttpRequest.HttpMethod.POST, url, params, rcb);
 	}
 
 }

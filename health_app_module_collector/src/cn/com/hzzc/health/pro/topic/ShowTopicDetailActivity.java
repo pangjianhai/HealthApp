@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.ShowUserInfoDetail;
@@ -35,6 +36,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * @todo 查看健康主题详情
@@ -57,6 +59,8 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 	/**** 指示 ****/
 	private View left_arrow, right_arrow;
 
+	private ImageView img_topic;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,7 +80,7 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 		viewPager = (ViewPager) findViewById(R.id.topic_fragment_parent_viewpager);
 		viewPager.setAdapter(myAdapter);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-
+		initImage();
 		initParam();
 		initData();
 		initInData();
@@ -92,6 +96,21 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 
 		left_arrow = findViewById(R.id.left_arrow);
 		right_arrow = findViewById(R.id.right_arrow);
+		img_topic = (ImageView) findViewById(R.id.img_topic);
+	}
+
+	/**
+	 * @user:pang
+	 * @data:2015年9月6日
+	 * @todo:初始化主题名称以及相关数据
+	 * @return:void
+	 */
+	private void initImage() {
+		String pic_url = SystemConst.server_url
+				+ SystemConst.TopicUrl.getTopicImgByPicId + "?para={imgId:'"
+				+ topicId + "'}";
+		ImageLoader.getInstance().displayImage(pic_url, img_topic,
+				HealthApplication.getDisplayImageOption());
 	}
 
 	/**

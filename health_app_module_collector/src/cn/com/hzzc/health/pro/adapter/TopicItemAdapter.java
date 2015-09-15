@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.SystemConst;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.util.ITopicCallbackOperator;
 
@@ -71,14 +73,14 @@ public class TopicItemAdapter extends BaseAdapter {
 		holder.topic_desc.setText(desc);
 		String imgId = te.getImgId();
 		if (imgId != null && !"".equals(imgId)) {
-//			String pic_url = SystemConst.server_url
-//					+ SystemConst.TopicUrl.getTopicImgByImgId
-//					+ "?para={imgId:'" + imgId + "'}";
-//			ImageLoader.getInstance().displayImage(pic_url, holder.topic_photo,
-//					HealthApplication.getDisplayImageOption());
-			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
-			ImageLoader.getInstance()
-					.displayImage(imageUri, holder.topic_photo);
+			String pic_url = SystemConst.server_url
+					+ SystemConst.TopicUrl.getTopicImgByImgId
+					+ "?para={imgId:'" + imgId + "'}";
+			ImageLoader.getInstance().displayImage(pic_url, holder.topic_photo,
+					HealthApplication.getDisplayImageOption());
+			// String imageUri = "drawable://" + R.drawable.visitor_me_cover;
+			// ImageLoader.getInstance()
+			// .displayImage(imageUri, holder.topic_photo);
 		} else {
 			String imageUri = "drawable://" + R.drawable.visitor_me_cover;
 			ImageLoader.getInstance()

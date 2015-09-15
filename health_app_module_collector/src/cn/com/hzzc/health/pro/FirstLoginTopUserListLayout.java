@@ -41,6 +41,7 @@ public class FirstLoginTopUserListLayout extends BaseActivity {
 		search_friends_listview = (XListView) findViewById(R.id.notice_user_lv);
 		adapter = new TopUserItemAdapter(FirstLoginTopUserListLayout.this,
 				userList);
+		search_friends_listview.setPullRefreshEnable(false);
 		search_friends_listview.setPullLoadEnable(false);
 		search_friends_listview.setAdapter(adapter);
 		initData();
