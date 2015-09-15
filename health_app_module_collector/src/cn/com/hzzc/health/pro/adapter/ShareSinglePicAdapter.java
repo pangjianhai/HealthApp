@@ -24,7 +24,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * 
  * @author pang
- * @todo 图片展示
+ * @todo 查看分享具体详情的时候图片展示
  *
  */
 public class ShareSinglePicAdapter extends BaseAdapter {
@@ -69,7 +69,7 @@ public class ShareSinglePicAdapter extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = new ImageView(context);
-			((ImageView) convertView).setScaleType(ScaleType.MATRIX);
+			((ImageView) convertView).setScaleType(ScaleType.CENTER_CROP);
 			convertView.setLayoutParams(params);
 		}
 		if (imgIdList.get(position) != null

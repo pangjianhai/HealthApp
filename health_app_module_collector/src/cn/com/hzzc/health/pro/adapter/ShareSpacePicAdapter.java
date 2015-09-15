@@ -84,8 +84,8 @@ public class ShareSpacePicAdapter extends BaseAdapter {
 			params.height = 450;
 			params.width = 450;
 		} else if (imgIdList.size() == 1) {
-			params.height = 600;
-			params.width = 600;
+			params.height = 550;
+			params.width = 550;
 		}
 		inner_image.setLayoutParams(params);
 		/**

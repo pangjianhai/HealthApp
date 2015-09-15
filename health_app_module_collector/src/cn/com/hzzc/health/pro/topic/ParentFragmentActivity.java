@@ -1,21 +1,17 @@
 package cn.com.hzzc.health.pro.topic;
 
 import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import cn.com.hzzc.health.pro.AppLoginStartActivity;
@@ -28,6 +24,7 @@ import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SharePrepareActivity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
+import cn.com.hzzc.health.pro.util.LoginUtil;
 
 public class ParentFragmentActivity extends FragmentActivity {
 
@@ -209,67 +206,7 @@ public class ParentFragmentActivity extends FragmentActivity {
 	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
 
 	public void no_login_alter(View v) {
-		LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
-				null, false);
-		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 400,
-				WindowManager.LayoutParams.WRAP_CONTENT, true);
-		ImageView close_nologin_alert_image = (ImageView) noLoginAlter
-				.findViewById(R.id.close_nologin_alert_image);
-		close_nologin_alert_image.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				popWindow.dismiss();
-			}
-		});
-
-		Button alert_login = (Button) noLoginAlter
-				.findViewById(R.id.alert_login);
-		alert_login.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				popWindow.dismiss();
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(),
-						AppLoginStartActivity.class);
-				startActivity(intent);
-			}
-
-		});
-		Button alert_reg = (Button) noLoginAlter.findViewById(R.id.alert_reg);
-		alert_reg.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				popWindow.dismiss();
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(), AppRegActivity.class);
-				startActivity(intent);
-			}
-
-		});
-		popWindow.setFocusable(true);
-		backgroundAlpha(0.7f);
-		popWindow.setOnDismissListener(new PoponDismissListener());
-		popWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-	}
-
-	public void backgroundAlpha(float bgAlpha) {
-		WindowManager.LayoutParams lp = getWindow().getAttributes();
-		lp.alpha = bgAlpha; // 0.0-1.0
-		getWindow().setAttributes(lp);
-	}
-
-	class PoponDismissListener implements PopupWindow.OnDismissListener {
-
-		@Override
-		public void onDismiss() {
-			backgroundAlpha(1f);
-		}
-
+		LoginUtil.no_login_alter(v, this);
 	}
 
 }

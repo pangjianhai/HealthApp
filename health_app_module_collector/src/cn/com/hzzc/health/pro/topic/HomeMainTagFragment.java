@@ -225,12 +225,30 @@ public class HomeMainTagFragment extends ParentFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent it = new Intent(getActivity(), ShareByTagActivity.class);
-				it.putExtra("tagId", tId);
-				startActivity(it);
+				toTagSentence(tId, v);
 			}
 		});
 		return btn2;
+	}
+
+	/**
+	 * 
+	 * @param tId
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月15日
+	 * @todo:查看标签搜索详情
+	 * @return:void
+	 */
+	private void toTagSentence(String tId, View v) {
+		HomeAllShowActivity ac = (HomeAllShowActivity) getActivity();
+		if (!ac.isLogin()) {
+			ac.no_login_alter(v);
+			return;
+		}
+		Intent it = new Intent(getActivity(), ShareByTagActivity.class);
+		it.putExtra("tagId", tId);
+		startActivity(it);
 	}
 
 	/**

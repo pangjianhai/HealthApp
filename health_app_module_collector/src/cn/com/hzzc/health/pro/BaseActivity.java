@@ -24,6 +24,7 @@ import android.widget.Toast;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.ExampleUtil;
+import cn.com.hzzc.health.pro.util.LoginUtil;
 import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
@@ -104,67 +105,7 @@ public class BaseActivity extends InstrumentedActivity {
 	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
 
 	public void no_login_alter(View v) {
-		LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final View noLoginAlter = inflater.inflate(R.layout.app_nologin_alter,
-				null, false);
-		final PopupWindow popWindow = new PopupWindow(noLoginAlter, 400,
-				WindowManager.LayoutParams.WRAP_CONTENT, true);
-		ImageView close_nologin_alert_image = (ImageView) noLoginAlter
-				.findViewById(R.id.close_nologin_alert_image);
-		close_nologin_alert_image.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				popWindow.dismiss();
-			}
-		});
-
-		Button alert_login = (Button) noLoginAlter
-				.findViewById(R.id.alert_login);
-		alert_login.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				popWindow.dismiss();
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(),
-						AppLoginStartActivity.class);
-				startActivity(intent);
-			}
-
-		});
-		Button alert_reg = (Button) noLoginAlter.findViewById(R.id.alert_reg);
-		alert_reg.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				popWindow.dismiss();
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(), AppRegActivity.class);
-				startActivity(intent);
-			}
-
-		});
-		popWindow.setFocusable(true);
-		backgroundAlpha(0.7f);
-		popWindow.setOnDismissListener(new PoponDismissListener());
-		popWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-	}
-
-	public void backgroundAlpha(float bgAlpha) {
-		WindowManager.LayoutParams lp = getWindow().getAttributes();
-		lp.alpha = bgAlpha; // 0.0-1.0
-		getWindow().setAttributes(lp);
-	}
-
-	class PoponDismissListener implements PopupWindow.OnDismissListener {
-
-		@Override
-		public void onDismiss() {
-			backgroundAlpha(1f);
-		}
-
+		LoginUtil.no_login_alter(v, this);
 	}
 
 	/**
