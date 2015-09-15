@@ -80,9 +80,9 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 		viewPager = (ViewPager) findViewById(R.id.topic_fragment_parent_viewpager);
 		viewPager.setAdapter(myAdapter);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-		initImage();
 		initParam();
 		initData();
+		initImage();
 		initInData();
 		initNumData();
 	}
@@ -107,7 +107,7 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 	 */
 	private void initImage() {
 		String pic_url = SystemConst.server_url
-				+ SystemConst.TopicUrl.getTopicImgByPicId + "?para={imgId:'"
+				+ SystemConst.TopicUrl.getTopicImgByPicId + "?para={picId:'"
 				+ topicId + "'}";
 		ImageLoader.getInstance().displayImage(pic_url, img_topic,
 				HealthApplication.getDisplayImageOption());
