@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import cn.com.hzzc.health.pro.BaseActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -43,6 +44,8 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	private int currentPage = 1;
 	private int pageRows = 10;
 
+	private EditText search_key;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,6 +62,7 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 		mListView.setPullRefreshEnable(false);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
+		search_key = (EditText) findViewById(R.id.search_key);
 	}
 
 	private void initListView() {
@@ -68,10 +72,29 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 		mListView.setAdapter(topicItemAdapter);
 	}
 
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年9月16日
+	 * @todo:搜索主题
+	 * @return:void
+	 */
+	public void searchTopic(View v) {
+		System.out.println("---searchTopic");
+		currentPage = 1;
+		dataSourceList.clear();
+		mListView.setPullLoadEnable(true);
+		realLoadData();
+
+	}
+
 	private void realLoadData() {
 		try {
+			String sk = search_key.getEditableText().toString();
+			System.out.println("sk:" + sk);
 			JSONObject d = new JSONObject();
-			d.put("name", "测试");
+			d.put("name", sk);
 			d.put("page", currentPage);
 			d.put("rows", pageRows);
 			currentPage = currentPage + 1;
@@ -86,7 +109,7 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
 					dataSourceList.addAll(lst);
 					topicItemAdapter.notifyDataSetChanged();
-					/****** 如果返回的集合为空或者数目小鱼需要取得行数则不需要再加载******/
+					/****** 如果返回的集合为空或者数目小鱼需要取得行数则不需要再加载 ******/
 					if (lst == null || lst.size() < pageRows) {
 						mListView.setPullLoadEnable(false);
 					}

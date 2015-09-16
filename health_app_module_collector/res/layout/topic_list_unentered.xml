@@ -29,13 +29,14 @@
             android:id="@+id/search_btn"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toEndOf="@id/search_key"
             android:layout_toRightOf="@id/search_key"
             android:background="@android:color/transparent"
+            android:onClick="searchTopic"
             android:src="@drawable/search_normal" />
     </RelativeLayout>
     <!-- 分页查看我的所有分享 -->
