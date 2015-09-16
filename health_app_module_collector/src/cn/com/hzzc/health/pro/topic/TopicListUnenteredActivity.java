@@ -92,7 +92,6 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	private void realLoadData() {
 		try {
 			String sk = search_key.getEditableText().toString();
-			System.out.println("sk:" + sk);
 			JSONObject d = new JSONObject();
 			d.put("name", sk);
 			d.put("page", currentPage);
