@@ -10,6 +10,7 @@ package cn.smssdk.gui.layout;
 import com.mob.tools.utils.R;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -50,8 +51,8 @@ public class RegisterPageLayout extends BasePageLayout {
 				SizeHelper.fromPxWidth(14), 0);
 		int resid = R.getStringRes(context, "smssdk_country");
 		tv.setText(resid);
-		 tv.setTextColor(Res.color.smssdk_black);// #FF6600
-		tv.setTextColor(0xff000000);// #FF6600
+		tv.setTextColor(Res.color.smssdk_black);//
+		// tv.setTextColor(0xff000000);// #FF6600
 		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
 		rlCountry.addView(tv);
 
@@ -67,7 +68,9 @@ public class RegisterPageLayout extends BasePageLayout {
 		tvCountry.setGravity(Gravity.RIGHT);
 		tvCountry.setPadding(SizeHelper.fromPxWidth(14), 0,
 				SizeHelper.fromPxWidth(14), 0);
-		tvCountry.setTextColor(0xff45c01a);
+		int c = Color.parseColor("#FF6600");
+		// tvCountry.setTextColor(0xff45c01a);
+		tvCountry.setTextColor(c);
 		tvCountry.setTextSize(TypedValue.COMPLEX_UNIT_PX,
 				SizeHelper.fromPxWidth(25));
 		rlCountry.addView(tvCountry);

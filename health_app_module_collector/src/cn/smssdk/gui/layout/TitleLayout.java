@@ -10,6 +10,7 @@ package cn.smssdk.gui.layout;
 import com.mob.tools.utils.R;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 /**
  * TitleLayout
+ * 
  * @author xusq
  *
  */
@@ -29,31 +31,36 @@ public class TitleLayout {
 	static final int inHeight = 74;
 	static final int lineHeight = 2;
 
-	/**根据是否带搜索功能，创建头部标题布局*/
-	static LinearLayout create(Context context,boolean isSearch) {
+	/** 根据是否带搜索功能，创建头部标题布局 */
+	static LinearLayout create(Context context, boolean isSearch) {
 		SizeHelper.prepare(context);
 
-		//init base LinearLayout
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+		// init base LinearLayout
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
 		LinearLayout titleLayout = new LinearLayout(context);
 		titleLayout.setLayoutParams(params);
 		titleLayout.setOrientation(LinearLayout.VERTICAL);
 
 		View topLine = new View(context);
-		LinearLayout.LayoutParams topLineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,SizeHelper.fromPxWidth(1));
+		LinearLayout.LayoutParams topLineParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				SizeHelper.fromPxWidth(1));
 		topLine.setLayoutParams(topLineParams);
 		topLine.setBackgroundColor(0xff454a4b);
 		titleLayout.addView(topLine);
 
-		if(isSearch) {
-			createSearch(titleLayout,context);
-		}
-		else {
-			createNormal(titleLayout,context);
+		if (isSearch) {
+			createSearch(titleLayout, context);
+		} else {
+			createNormal(titleLayout, context);
 		}
 
 		View bottomLine = new View(context);
-		LinearLayout.LayoutParams bottomLineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,SizeHelper.fromPxWidth(2));
+		LinearLayout.LayoutParams bottomLineParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				SizeHelper.fromPxWidth(2));
 		bottomLine.setLayoutParams(bottomLineParams);
 		bottomLine.setBackgroundColor(0xff1a1c1d);
 		titleLayout.addView(bottomLine);
@@ -61,71 +68,85 @@ public class TitleLayout {
 		return titleLayout;
 	}
 
-	private static void createNormal(LinearLayout titleLayout,Context context) {
+	private static void createNormal(LinearLayout titleLayout, Context context) {
 
-		//build the inside linearLayout
+		// build the inside linearLayout
 		int height = SizeHelper.fromPx(inHeight);
 
-		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
+		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT, height);
 		LinearLayout inLayout = new LinearLayout(context);
 		inLayout.setLayoutParams(inParams);
+		//inLayout.setBackgroundColor(Color.parseColor("#f2eada"));
 		inLayout.setBackgroundColor(0xff303537);
 
-				LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT);
-				LinearLayout backLayout = new LinearLayout(context);
-				backLayout.setLayoutParams(backParams);
-				backLayout.setId(Res.id.ll_back);
-				backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26), 0);
+		LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.MATCH_PARENT);
+		LinearLayout backLayout = new LinearLayout(context);
+		backLayout.setLayoutParams(backParams);
+		backLayout.setId(Res.id.ll_back);
+		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26),
+				0);
 
-				LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(15),SizeHelper.fromPx(25));
-				arrowParams.gravity = Gravity.CENTER_VERTICAL;
-				arrowParams.rightMargin = SizeHelper.fromPx(14);
-				ImageView backArrow = new ImageView(context);
-				backArrow.setLayoutParams(arrowParams);
-				int res = R.getBitmapRes(context, "smssdk_back_arrow");
-				backArrow.setBackgroundResource(res);
+		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(15), SizeHelper.fromPx(25));
+		arrowParams.gravity = Gravity.CENTER_VERTICAL;
+		arrowParams.rightMargin = SizeHelper.fromPx(14);
+		ImageView backArrow = new ImageView(context);
+		backArrow.setLayoutParams(arrowParams);
+		int res = R.getBitmapRes(context, "smssdk_back_arrow");
+		backArrow.setBackgroundResource(res);
 
-				LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(30),SizeHelper.fromPx(44));
-				logoParams.gravity = Gravity.CENTER_VERTICAL;
-				logoParams.rightMargin = SizeHelper.fromPx(14);
-				ImageView backLogo = new ImageView(context);
-				backLogo.setLayoutParams(logoParams);
-				res = R.getBitmapRes(context, "smssdk_sharesdk_icon");
-				backLogo.setBackgroundResource(res);
+		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(44), SizeHelper.fromPx(44));
+		logoParams.gravity = Gravity.CENTER_VERTICAL;
+		logoParams.rightMargin = SizeHelper.fromPx(14);
+		ImageView backLogo = new ImageView(context);
+		backLogo.setLayoutParams(logoParams);
+		res = R.getBitmapRes(context, "smssdk_sharesdk_icon");
+		backLogo.setBackgroundResource(cn.com.hzzc.health.pro.R.drawable.icon2);
 
-				backLayout.addView(backArrow);
-				backLayout.addView(backLogo);
+		backLayout.addView(backArrow);
+		backLayout.addView(backLogo);
 
-				inLayout.addView(backLayout);
+		inLayout.addView(backLayout);
 
-				LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-				titleParams.gravity = Gravity.CENTER_VERTICAL;
-				TextView title = new TextView(context);
-				title.setLayoutParams(titleParams);
-				title.setId(Res.id.tv_title);
-				title.setTextColor(0xffcfcfcf);
-				title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
-				inLayout.addView(title);
+		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+		titleParams.gravity = Gravity.CENTER_VERTICAL;
+		TextView title = new TextView(context);
+		title.setLayoutParams(titleParams);
+		title.setId(Res.id.tv_title);
+		title.setTextColor(0xffcfcfcf);
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
+		inLayout.addView(title);
 
-				titleLayout.addView(inLayout);
+		titleLayout.addView(inLayout);
 	}
 
-	private static void createSearch(LinearLayout titleLayout,Context context) {
-		//build the inside linearLayout
+	private static void createSearch(LinearLayout titleLayout, Context context) {
+		// build the inside linearLayout
 		int height = SizeHelper.fromPx(inHeight);
-		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
+		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT, height);
 		LinearLayout inLayout = new LinearLayout(context);
 		inLayout.setLayoutParams(inParams);
 		inLayout.setBackgroundColor(0xff303537);
 		inLayout.setBaselineAligned(false);
 
-		LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT);
+		LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.MATCH_PARENT);
 		LinearLayout backLayout = new LinearLayout(context);
 		backLayout.setLayoutParams(backParams);
 		backLayout.setId(Res.id.ll_back);
-		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26), 0);
+		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26),
+				0);
 
-		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(15),SizeHelper.fromPx(25));
+		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(15), SizeHelper.fromPx(25));
 		arrowParams.gravity = Gravity.CENTER_VERTICAL;
 		arrowParams.rightMargin = SizeHelper.fromPxWidth(14);
 		ImageView backArrow = new ImageView(context);
@@ -133,7 +154,8 @@ public class TitleLayout {
 		int res = R.getBitmapRes(context, "smssdk_back_arrow");
 		backArrow.setBackgroundResource(res);
 
-		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(30),SizeHelper.fromPx(44));
+		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(30), SizeHelper.fromPx(44));
 		logoParams.gravity = Gravity.CENTER_VERTICAL;
 		logoParams.rightMargin = SizeHelper.fromPx(14);
 		ImageView backLogo = new ImageView(context);
@@ -146,13 +168,16 @@ public class TitleLayout {
 
 		inLayout.addView(backLayout);
 
-		LinearLayout.LayoutParams innerTitleParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT,1);
+		LinearLayout.LayoutParams innerTitleParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.MATCH_PARENT, 1);
 		LinearLayout innerTitleLayout = new LinearLayout(context);
 		innerTitleLayout.setLayoutParams(innerTitleParams);
 		innerTitleLayout.setId(Res.id.llTitle);
 		inLayout.addView(innerTitleLayout);
 
-		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1);
+		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
+				0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 		titleParams.gravity = Gravity.CENTER_VERTICAL;
 		TextView title = new TextView(context);
 		title.setLayoutParams(titleParams);
@@ -163,7 +188,8 @@ public class TitleLayout {
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
 		innerTitleLayout.addView(title);
 
-		LinearLayout.LayoutParams searchImageParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(70),LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams searchImageParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(70), LinearLayout.LayoutParams.WRAP_CONTENT);
 		searchImageParams.gravity = Gravity.CENTER_VERTICAL;
 		ImageView searchImage = new ImageView(context);
 		searchImage.setLayoutParams(searchImageParams);
@@ -171,10 +197,13 @@ public class TitleLayout {
 		res = R.getBitmapRes(context, "smssdk_search_icon");
 		searchImage.setImageResource(res);
 		searchImage.setScaleType(ScaleType.CENTER_INSIDE);
-		searchImage.setPadding(SizeHelper.fromPx(15), 0, SizeHelper.fromPx(15), 0);
+		searchImage.setPadding(SizeHelper.fromPx(15), 0, SizeHelper.fromPx(15),
+				0);
 		innerTitleLayout.addView(searchImage);
 
-		LinearLayout.LayoutParams innerSearchParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,1);
+		LinearLayout.LayoutParams innerSearchParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 		innerSearchParams.gravity = Gravity.CENTER_VERTICAL;
 		innerSearchParams.rightMargin = SizeHelper.fromPx(18);
 		LinearLayout innerSearchLayout = new LinearLayout(context);
@@ -182,11 +211,13 @@ public class TitleLayout {
 		innerSearchLayout.setId(Res.id.llSearch);
 		res = R.getBitmapRes(context, "smssdk_input_bg_focus");
 		innerSearchLayout.setBackgroundResource(res);
-		innerSearchLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(14), 0);
+		innerSearchLayout.setPadding(SizeHelper.fromPx(14), 0,
+				SizeHelper.fromPx(14), 0);
 		innerSearchLayout.setVisibility(View.GONE);
 		inLayout.addView(innerSearchLayout);
 
-		LinearLayout.LayoutParams searchIconParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(36),SizeHelper.fromPx(36));
+		LinearLayout.LayoutParams searchIconParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(36), SizeHelper.fromPx(36));
 		searchIconParams.gravity = Gravity.CENTER_VERTICAL;
 		searchIconParams.rightMargin = SizeHelper.fromPx(8);
 		ImageView searchIcon = new ImageView(context);
@@ -196,7 +227,8 @@ public class TitleLayout {
 		searchIcon.setScaleType(ScaleType.CENTER_INSIDE);
 		innerSearchLayout.addView(searchIcon);
 
-		LinearLayout.LayoutParams identifyParams = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1);
+		LinearLayout.LayoutParams identifyParams = new LinearLayout.LayoutParams(
+				0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 		identifyParams.gravity = Gravity.CENTER_VERTICAL;
 		EditText identify = new EditText(context);
 		identify.setLayoutParams(identifyParams);
@@ -208,7 +240,8 @@ public class TitleLayout {
 		identify.setSingleLine(true);
 		innerSearchLayout.addView(identify);
 
-		LinearLayout.LayoutParams clearParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(30),SizeHelper.fromPx(30));
+		LinearLayout.LayoutParams clearParams = new LinearLayout.LayoutParams(
+				SizeHelper.fromPx(30), SizeHelper.fromPx(30));
 		clearParams.gravity = Gravity.CENTER_VERTICAL;
 		clearParams.rightMargin = SizeHelper.fromPxWidth(5);
 		ImageView clear = new ImageView(context);
