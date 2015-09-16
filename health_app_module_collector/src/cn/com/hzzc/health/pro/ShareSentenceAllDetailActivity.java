@@ -17,7 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -103,10 +103,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	private String like_or_dis_state = "more";
 
-	private RadioButton radio0_fav;
-	private RadioButton radio1_com;
-	private RadioButton radio2_good;
-	private RadioButton radio3_nogood;
+	private CheckBox radio0_fav;
+	private CheckBox radio1_com;
+	private CheckBox radio2_good;
+	private CheckBox radio3_nogood;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		init();
 		initListView();
 		initGoodState(userId, share_sentence_id);
+
 	}
 
 	/**
@@ -140,10 +141,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		share_all_detail_author_name = (TextView) findViewById(R.id.share_all_detail_author_name);
 		share_all_detail_author_focus = (Button) findViewById(R.id.share_all_detail_author_focus);
 		/********** 底部操作按钮初始化 ***********/
-		radio0_fav = ((RadioButton) findViewById(R.id.radio0_fav));
-		radio1_com = ((RadioButton) findViewById(R.id.radio1_com));
-		radio2_good = ((RadioButton) findViewById(R.id.radio2_good));
-		radio3_nogood = ((RadioButton) findViewById(R.id.radio3_nogood));
+		radio0_fav = ((CheckBox) findViewById(R.id.single_sentence_radio0_fav));
+		radio1_com = ((CheckBox) findViewById(R.id.single_sentence_radio1_com));
+		radio2_good = ((CheckBox) findViewById(R.id.single_sentence_radio2_good));
+		radio3_nogood = ((CheckBox) findViewById(R.id.single_sentence_radio3_nogood));
 		radio0_fav.setOnClickListener(this);
 		radio1_com.setOnClickListener(this);
 		radio2_good.setOnClickListener(this);
@@ -494,9 +495,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 					like_or_dis_state = ShareSentenceUtil
 							.paseLikeShareOrDis(data);
 					if ("like".equals(like_or_dis_state)) {
-						changeColorAfterClickLikeOr(R.id.radio2_good);
+						changeColorAfterClickLikeOr(R.id.single_sentence_radio2_good);
 					} else if ("dislike".equals(like_or_dis_state)) {
-						changeColorAfterClickLikeOr(R.id.radio3_nogood);
+						changeColorAfterClickLikeOr(R.id.single_sentence_radio3_nogood);
 					}
 				}
 
@@ -523,9 +524,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	private void changeColorAfterClickLikeOr(int id) {
-		if (id == R.id.radio2_good) {
+		if (id == R.id.single_sentence_radio2_good) {
 			radio2_good.setChecked(true);
-		} else if (id == R.id.radio3_nogood) {
+		} else if (id == R.id.single_sentence_radio3_nogood) {
 			radio3_nogood.setChecked(true);
 		}
 	}
@@ -538,7 +539,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	public void showInput() {
-		System.out.println("******************showInput");
 		share_bottom.setVisibility(View.VISIBLE);
 		et_pop.setHint("");
 		replyUserId = "";
@@ -699,7 +699,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		loadCommentData();
 	}
 
-	/*******************************************************/
 	/**
 	 * 
 	 * @param v
@@ -789,27 +788,38 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * 由于checkbox只要点击布局文件就会触发oncheck时间，所以在“点赞”“差评”的时候手动设置check=false的情况
+	 */
 	@Override
 	public void onClick(View buttonView) {
-		System.out.println(buttonView.getTag() + "---" + buttonView.getId()
-				+ "---------------------onClick");
 		// 用户当前浏览的选项卡
 		int checkedWidgetId = buttonView.getId();
-		if (checkedWidgetId == R.id.radio0_fav) {
+		if (checkedWidgetId == R.id.single_sentence_radio0_fav) {
 			if (radio0_fav.isChecked()) {
 				Toast.makeText(getApplicationContext(), "您已经收藏",
 						Toast.LENGTH_SHORT).show();
 				return;
 			}
 			radio0_fav.setChecked(true);
-		} else if (checkedWidgetId == R.id.radio1_com) {
+		} else if (checkedWidgetId == R.id.single_sentence_radio1_com) {
 			radio1_com.setChecked(true);
-		} else if (checkedWidgetId == R.id.radio2_good) {
+		} else if (checkedWidgetId == R.id.single_sentence_radio2_good) {
+			if ("like".equals(like_or_dis_state)) {
+				radio2_good.setChecked(true);
+			} else {
+				radio2_good.setChecked(false);
+			}
 			if (!ifCanClickLikeOrDislike()) {
 				return;
 			}
 			radio2_good.setChecked(true);
-		} else if (checkedWidgetId == R.id.radio3_nogood) {
+		} else if (checkedWidgetId == R.id.single_sentence_radio3_nogood) {
+			if ("dislike".equals(like_or_dis_state)) {
+				radio3_nogood.setChecked(true);
+			} else {
+				radio3_nogood.setChecked(false);
+			}
 			if (!ifCanClickLikeOrDislike()) {
 				return;
 			}
@@ -854,8 +864,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 			return;
 		}
 		// 点击收藏
-		if (v.getId() == R.id.radio0_fav) {
-			System.out.println("收藏");
+		if (v.getId() == R.id.single_sentence_radio0_fav) {
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
 					CollectionForInfoService.class);
 			intent.putExtra("userId", userId);
@@ -865,10 +874,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 			startService(intent);
 			Toast.makeText(ShareSentenceAllDetailActivity.this, "收藏成功",
 					Toast.LENGTH_SHORT).show();
-		} else if (v.getId() == R.id.radio1_com) {// 评论
-			System.out.println("评论");
+		} else if (v.getId() == R.id.single_sentence_radio1_com) {// 评论
 			showInput();
-		} else if (v.getId() == R.id.radio2_good) {// 好评
+		} else if (v.getId() == R.id.single_sentence_radio2_good) {// 好评
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
 					ViewForInfoService.class);
 			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
@@ -879,7 +887,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 					Toast.LENGTH_SHORT).show();
 
 			like_or_dis_state = "like";
-		} else if (v.getId() == R.id.radio3_nogood) {// 差评
+		} else if (v.getId() == R.id.single_sentence_radio3_nogood) {// 差评
 			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
 					ViewForInfoService.class);
 			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);

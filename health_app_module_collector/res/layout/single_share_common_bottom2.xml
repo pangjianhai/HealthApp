@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/radioGroup1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_alignParentBottom="true"
-    android:gravity="bottom"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_shape"
     android:orientation="horizontal" >
 
-    <RadioButton
-        android:id="@+id/radio0_fav"
+    <CheckBox
+        android:id="@+id/single_sentence_radio0_fav"
         style="@style/tab_style"
         android:drawableTop="@drawable/share_first_background"
         android:text="收藏"
         android:textColor="@color/radio_colors" />
 
-    <RadioButton
-        android:id="@+id/radio1_com"
+    <CheckBox
+        android:id="@+id/single_sentence_radio1_com"
         style="@style/tab_style"
         android:drawableTop="@drawable/share_second_background"
         android:text="评论"
         android:textColor="@color/radio_colors" />
 
-    <RadioButton
-        android:id="@+id/radio2_good"
+    <CheckBox
+        android:id="@+id/single_sentence_radio2_good"
         style="@style/tab_style"
         android:drawableTop="@drawable/share_third_background"
         android:text="我顶"
         android:textColor="@color/radio_colors" />
 
-    <RadioButton
-        android:id="@+id/radio3_nogood"
+    <CheckBox
+        android:id="@+id/single_sentence_radio3_nogood"
         style="@style/tab_style"
         android:drawableTop="@drawable/share_four_background"
         android:text="我踩"
         android:textColor="@color/radio_colors" />
 
-</RadioGroup>
+</LinearLayout>
