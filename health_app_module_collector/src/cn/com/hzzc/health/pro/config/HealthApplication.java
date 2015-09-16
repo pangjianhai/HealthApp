@@ -111,7 +111,7 @@ public class HealthApplication extends Application {
 		startMap();
 		initJPush();
 		initTable();
-		//intSMS();
+		intSMS();
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class HealthApplication extends Application {
 	}
 
 	private void intSMS() {
-		SMSSDK.initSDK(this, "96737f67f550", "c3a2818ac935269986f64d867b1e0fa3");
+		SMSSDK.initSDK(this, "a70cd9e2cb85", "24953e2fbb58b37a7b0f3f8f049d871a");
 	}
 
 	public static boolean isLogin() {

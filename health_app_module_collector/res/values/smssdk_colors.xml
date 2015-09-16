@@ -12,4 +12,5 @@
 	<color name="smssdk_lv_item_divider">#ffd9d9da</color>
 	<color name="smssdk_black">#ff000000</color>
 	<color name="smssdk_gray">#ff898989</color>
+	<color name="smssdk_orange">#FF6600</color>
 </resources>
