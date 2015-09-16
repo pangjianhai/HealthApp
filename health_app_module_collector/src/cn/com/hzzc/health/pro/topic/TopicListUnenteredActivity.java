@@ -41,7 +41,7 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	private XListView mListView;
 	private TopicItemAdapter topicItemAdapter;
 	private int currentPage = 1;
-	private int pageRows = 20;
+	private int pageRows = 10;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,11 +71,13 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 	private void realLoadData() {
 		try {
 			JSONObject d = new JSONObject();
+			d.put("name", "测试");
 			d.put("page", currentPage);
 			d.put("rows", pageRows);
 			currentPage = currentPage + 1;
 			String url = SystemConst.server_url
 					+ SystemConst.TopicUrl.get_page_topic;
+			System.out.println("url:" + url);
 			RequestCallBack<String> rcb = new RequestCallBack<String>() {
 
 				@Override
@@ -84,6 +86,10 @@ public class TopicListUnenteredActivity extends BaseActivity implements
 					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
 					dataSourceList.addAll(lst);
 					topicItemAdapter.notifyDataSetChanged();
+					/****** 如果返回的集合为空或者数目小鱼需要取得行数则不需要再加载******/
+					if (lst == null || lst.size() < pageRows) {
+						mListView.setPullLoadEnable(false);
+					}
 					onLoadOver();
 				}
 

@@ -18,14 +18,25 @@
             android:onClick="backoff"
             android:src="@drawable/close_page" />
 
-        <TextView
-            android:id="@+id/share_space_mine_title"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/search_key"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="健康主题一览"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:hint="@string/can_input_search_key" />
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@id/search_key"
+            android:layout_toRightOf="@id/search_key"
+            android:background="@android:color/transparent"
+            android:src="@drawable/search_normal" />
     </RelativeLayout>
     <!-- 分页查看我的所有分享 -->
 
