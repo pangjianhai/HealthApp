@@ -9,12 +9,12 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
-import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.listener.MyLocationListener;
 import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import cn.jpush.android.api.JPushInterface;
+import cn.smssdk.SMSSDK;
 
 import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
@@ -111,6 +111,7 @@ public class HealthApplication extends Application {
 		startMap();
 		initJPush();
 		initTable();
+		intSMS();
 	}
 
 	/**
@@ -273,6 +274,10 @@ public class HealthApplication extends Application {
 		} catch (DbException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	private void intSMS() {
+		SMSSDK.initSDK(this, "96737f67f550", "c3a2818ac935269986f64d867b1e0fa3");
 	}
 
 	public static boolean isLogin() {
