@@ -6,10 +6,6 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -17,24 +13,26 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.PopupWindow.OnDismissListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import cn.com.hzzc.health.pro.FirstLoginTopUserListLayout;
 import cn.com.hzzc.health.pro.FriendSeachOpsActivity;
-import cn.com.hzzc.health.pro.MainPageLayoutSpaceActivity;
+import cn.com.hzzc.health.pro.MainActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SharePrepareActivity;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -43,6 +41,10 @@ import cn.com.hzzc.health.pro.TagsForUserDefActivity;
 import cn.com.hzzc.health.pro.config.GlobalUserVariable;
 import cn.com.hzzc.health.pro.model.PushBean;
 import cn.com.hzzc.health.pro.util.UserUtils;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 public class HomeAllShowActivity extends ParentFragmentActivity implements
 		OnCheckedChangeListener {
@@ -408,6 +410,26 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/****************/
+	long waitTime = 2000;
+	long touchTime = 0;
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (event.getAction() == KeyEvent.ACTION_DOWN
+				&& KeyEvent.KEYCODE_BACK == keyCode) {
+			long currentTime = System.currentTimeMillis();
+			if ((currentTime - touchTime) >= waitTime) {
+				Toast.makeText(HomeAllShowActivity.this, "再按一次退出",
+						Toast.LENGTH_SHORT).show();
+				touchTime = currentTime;
+			} else {
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }
