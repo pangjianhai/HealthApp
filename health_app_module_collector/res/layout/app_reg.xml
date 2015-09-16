@@ -33,76 +33,31 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <cn.com.hzzc.health.pro.part.LineEditText
-        android:id="@+id/reg_username"
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_top_layout"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        android:hint="@string/login_reg_logininput_account"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15sp" />
-
-    <cn.com.hzzc.health.pro.part.LineEditText
-        android:id="@+id/reg_password"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reg_username"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        android:hint="@string/login_reg_logininput_password"
-        android:inputType="textPassword"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15sp" />
-
-    <cn.com.hzzc.health.pro.part.LineEditText
-        android:id="@+id/reg_password_again"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reg_password"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        android:hint="@string/login_reg_logininput_password_again"
-        android:inputType="textPassword"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15sp" />
-
-    <cn.com.hzzc.health.pro.part.LineEditText
-        android:id="@+id/reg_password_email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reg_password_again"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        android:hint="@string/login_reg_logininput_email"
-        android:inputType="textEmailAddress"
-        android:singleLine="true"
-        android:textColor="#000"
-        android:textSize="15sp" />
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reg_password_email"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="25dp" >
 
         <Button
-            android:id="@+id/reg_save"
+            android:id="@+id/app_email_reg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_ok_selector"
-            android:onClick="regAccount"
-            android:text="@string/login_reg_logininput_reg"
+            android:text="@string/login_reg_email_logininput_reg"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/app_iphone_reg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_email_reg"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/btn_ok_selector"
+            android:text="@string/login_reg_iphone_logininput_reg"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </RelativeLayout>

@@ -3,7 +3,7 @@ package cn.com.hzzc.health.pro.task;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import cn.com.hzzc.health.pro.AppRegActivity;
+import cn.com.hzzc.health.pro.AppEmailRegActivity;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.util.CommonHttpUtil;
 
@@ -42,7 +42,7 @@ public class RegisterAccountTask extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
 		pdialog.dismiss();
-		((AppRegActivity) context).regOver(result);
+		((AppEmailRegActivity) context).regOver(result);
 	}
 
 }

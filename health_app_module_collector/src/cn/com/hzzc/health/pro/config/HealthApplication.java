@@ -111,7 +111,7 @@ public class HealthApplication extends Application {
 		startMap();
 		initJPush();
 		initTable();
-		intSMS();
+		//intSMS();
 	}
 
 	/**

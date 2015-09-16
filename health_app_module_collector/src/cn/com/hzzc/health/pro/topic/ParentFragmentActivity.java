@@ -3,11 +3,6 @@ package cn.com.hzzc.health.pro.topic;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
-
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,7 +16,6 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 import android.widget.PopupWindow.OnDismissListener;
 import cn.com.hzzc.health.pro.AppLoginStartActivity;
 import cn.com.hzzc.health.pro.AppRegActivity;
@@ -34,6 +28,11 @@ import cn.com.hzzc.health.pro.SharePrepareActivity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 import cn.com.hzzc.health.pro.util.LoginUtil;
+
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 public class ParentFragmentActivity extends FragmentActivity {
 
