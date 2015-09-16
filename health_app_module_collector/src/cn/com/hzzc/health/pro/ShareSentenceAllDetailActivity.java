@@ -11,20 +11,17 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.PopupWindow.OnDismissListener;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.adapter.CommentAdapter;
@@ -58,7 +55,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  *
  */
 public class ShareSentenceAllDetailActivity extends BaseActivity implements
-		SentenceListViewListener {
+		SentenceListViewListener, OnClickListener {
 
 	private TextView share_all_detail_content, share_all_detail_tag;
 
@@ -106,6 +103,11 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 */
 	private String like_or_dis_state = "more";
 
+	private RadioButton radio0_fav;
+	private RadioButton radio1_com;
+	private RadioButton radio2_good;
+	private RadioButton radio3_nogood;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -137,6 +139,15 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		share_all_detail_author_photo = (CircularImage) findViewById(R.id.share_all_detail_author_photo);
 		share_all_detail_author_name = (TextView) findViewById(R.id.share_all_detail_author_name);
 		share_all_detail_author_focus = (Button) findViewById(R.id.share_all_detail_author_focus);
+		/********** 底部操作按钮初始化 ***********/
+		radio0_fav = ((RadioButton) findViewById(R.id.radio0_fav));
+		radio1_com = ((RadioButton) findViewById(R.id.radio1_com));
+		radio2_good = ((RadioButton) findViewById(R.id.radio2_good));
+		radio3_nogood = ((RadioButton) findViewById(R.id.radio3_nogood));
+		radio0_fav.setOnClickListener(this);
+		radio1_com.setOnClickListener(this);
+		radio2_good.setOnClickListener(this);
+		radio3_nogood.setOnClickListener(this);
 
 	}
 
@@ -158,6 +169,12 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		loadCommentData();
 	}
 
+	/**
+	 * @user:pang
+	 * @data:2015年9月16日
+	 * @todo:加载数据
+	 * @return:void
+	 */
 	private void loadData() {
 		try {
 			JSONObject d = new JSONObject();
@@ -449,36 +466,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 
 	/**
 	 * 
-	 * @param v
-	 * @user:pang
-	 * @data:2015年7月21日
-	 * @todo:右上角点击展开分享按钮
-	 * @return:void
-	 */
-	@Deprecated
-	public void showPopWin(View v) {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.share_pop_window, null);
-		// 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
-
-		PopupWindow window = new PopupWindow(view, 300,
-				WindowManager.LayoutParams.WRAP_CONTENT);
-
-		window.setFocusable(true);
-		ColorDrawable dw = new ColorDrawable(0xb0000000);
-		window.setBackgroundDrawable(dw);
-		window.showAsDropDown(v);
-		window.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss() {
-				System.out.println("popWindow消失");
-
-			}
-		});
-	}
-
-	/**
-	 * 
 	 * @tags @param v
 	 * @date 2015年5月19日
 	 * @todo 关闭当前页
@@ -507,9 +494,9 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 					like_or_dis_state = ShareSentenceUtil
 							.paseLikeShareOrDis(data);
 					if ("like".equals(like_or_dis_state)) {
-						changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_ok);
+						changeColorAfterClickLikeOr(R.id.radio2_good);
 					} else if ("dislike".equals(like_or_dis_state)) {
-						changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_nook);
+						changeColorAfterClickLikeOr(R.id.radio3_nogood);
 					}
 				}
 
@@ -536,88 +523,10 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @return:void
 	 */
 	private void changeColorAfterClickLikeOr(int id) {
-		int gray_color = Color.parseColor("#FFA500");
-		share_all_detail_author_focus.setTextColor(gray_color);
-		((Button) findViewById(id)).setTextColor(gray_color);
-	}
-
-	/**
-	 * @return
-	 * @user:pang
-	 * @data:2015年8月16日
-	 * @todo:是否可以点赞或者差评，因为之前可能已经操作过了
-	 * @return:boolean
-	 */
-	public boolean ifCanClickLikeOrDislike() {
-		if (like_or_dis_state == null || "more".equals(like_or_dis_state)) {
-			return true;
-		} else {
-			if ("like".equals(like_or_dis_state)) {
-				Toast.makeText(getApplicationContext(), "您已经顶过",
-						Toast.LENGTH_SHORT).show();
-			} else if ("dislike".equals(like_or_dis_state)) {
-				Toast.makeText(getApplicationContext(), "您已经踩过",
-						Toast.LENGTH_SHORT).show();
-			}
-
-			return false;
-		}
-	}
-
-	/**
-	 * @tags @param v
-	 * @date 2015年5月26日
-	 * @todo 点击操作栏
-	 * @author pang
-	 */
-	public void share_ops_bar(View v) {
-		if (!isLogin()) {
-			no_login_alter(v);
-			return;
-		}
-		// 点击收藏
-		if (v.getId() == R.id.single_share_bottom_ops_sc) {
-			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
-					CollectionForInfoService.class);
-			intent.putExtra("userId", userId);
-			intent.putExtra("sentenceordocId", share_sentence_id);
-			intent.putExtra("type",
-					CollectionForInfoService.VIEW_ITEM_TYPE_SHARE);
-			startService(intent);
-			Toast.makeText(ShareSentenceAllDetailActivity.this, "收藏成功",
-					Toast.LENGTH_SHORT).show();
-		} else if (v.getId() == R.id.single_share_bottom_ops_comment) {// 评论
-			showInput();
-		} else if (v.getId() == R.id.single_share_bottom_ops_ok) {// 好评
-			if (!ifCanClickLikeOrDislike()) {
-				return;
-			}
-			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
-					ViewForInfoService.class);
-			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
-			intent.putExtra("id", share_sentence_id);
-			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_OK);
-			startService(intent);
-			Toast.makeText(ShareSentenceAllDetailActivity.this, "操作成功",
-					Toast.LENGTH_SHORT).show();
-
-			like_or_dis_state = "like";
-			changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_ok);
-		} else if (v.getId() == R.id.single_share_bottom_ops_nook) {// 差评
-			if (!ifCanClickLikeOrDislike()) {
-				return;
-			}
-			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
-					ViewForInfoService.class);
-			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
-			intent.putExtra("id", share_sentence_id);
-			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_NO);
-			startService(intent);
-			Toast.makeText(ShareSentenceAllDetailActivity.this, "操作成功",
-					Toast.LENGTH_SHORT).show();
-
-			like_or_dis_state = "dislike";
-			changeColorAfterClickLikeOr(R.id.single_share_bottom_ops_nook);
+		if (id == R.id.radio2_good) {
+			radio2_good.setChecked(true);
+		} else if (id == R.id.radio3_nogood) {
+			radio3_nogood.setChecked(true);
 		}
 	}
 
@@ -629,6 +538,7 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 	 * @author pang
 	 */
 	public void showInput() {
+		System.out.println("******************showInput");
 		share_bottom.setVisibility(View.VISIBLE);
 		et_pop.setHint("");
 		replyUserId = "";
@@ -681,10 +591,6 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		startService(intent);
 		et_pop.setText("");
 		share_bottom.setVisibility(View.GONE);
-		// ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-		// .hideSoftInputFromWindow(ShareSentenceAllDetailActivity.this
-		// .getCurrentFocus().getWindowToken(),
-		// InputMethodManager.HIDE_NOT_ALWAYS);
 		InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 	}
@@ -883,45 +789,108 @@ public class ShareSentenceAllDetailActivity extends BaseActivity implements
 		}
 	}
 
-	/**
-	 * 
-	 * @param v
-	 * @user:pang
-	 * @data:2015年8月6日
-	 * @todo:TODO
-	 * @return:void
-	 */
-	public void show_ops(View v) {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.share_detail_ops_window, null);
-
-		PopupWindow window = new PopupWindow(view,
-				WindowManager.LayoutParams.WRAP_CONTENT,
-				WindowManager.LayoutParams.WRAP_CONTENT);
-
-		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
-		window.setFocusable(true);
-		// 实例化一个ColorDrawable颜色为半透明
-		ColorDrawable dw = new ColorDrawable(0xb0000000);
-		window.setBackgroundDrawable(dw);
-		// 设置popWindow的显示和消失动画
-		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
-		// 在底部显示
-		window.showAsDropDown(v);
-		/**
-		 * popwindow按钮地方法
-		 */
-		/**
-		 * 让popwindow消失
-		 */
-		window.setOnDismissListener(new OnDismissListener() {
-
-			@Override
-			public void onDismiss() {
-				System.out.println("popWindow消失");
-
+	@Override
+	public void onClick(View buttonView) {
+		System.out.println(buttonView.getTag() + "---" + buttonView.getId()
+				+ "---------------------onClick");
+		// 用户当前浏览的选项卡
+		int checkedWidgetId = buttonView.getId();
+		if (checkedWidgetId == R.id.radio0_fav) {
+			if (radio0_fav.isChecked()) {
+				Toast.makeText(getApplicationContext(), "您已经收藏",
+						Toast.LENGTH_SHORT).show();
+				return;
 			}
-		});
+			radio0_fav.setChecked(true);
+		} else if (checkedWidgetId == R.id.radio1_com) {
+			radio1_com.setChecked(true);
+		} else if (checkedWidgetId == R.id.radio2_good) {
+			if (!ifCanClickLikeOrDislike()) {
+				return;
+			}
+			radio2_good.setChecked(true);
+		} else if (checkedWidgetId == R.id.radio3_nogood) {
+			if (!ifCanClickLikeOrDislike()) {
+				return;
+			}
+			radio3_nogood.setChecked(true);
+		}
+		share_ops_bar(buttonView);
+
+	}
+
+	/**
+	 * @return
+	 * @user:pang
+	 * @data:2015年8月16日
+	 * @todo:是否可以点赞或者差评，因为之前可能已经操作过了
+	 * @return:boolean
+	 */
+	public boolean ifCanClickLikeOrDislike() {
+		if (like_or_dis_state == null || "more".equals(like_or_dis_state)) {
+			return true;
+		} else {
+			if ("like".equals(like_or_dis_state)) {
+				Toast.makeText(getApplicationContext(), "您已经顶过",
+						Toast.LENGTH_SHORT).show();
+			} else if ("dislike".equals(like_or_dis_state)) {
+				Toast.makeText(getApplicationContext(), "您已经踩过",
+						Toast.LENGTH_SHORT).show();
+			}
+
+			return false;
+		}
+	}
+
+	/**
+	 * @tags @param v
+	 * @date 2015年5月26日
+	 * @todo 点击操作栏
+	 * @author pang
+	 */
+	public void share_ops_bar(View v) {
+		if (!isLogin()) {
+			no_login_alter(v);
+			return;
+		}
+		// 点击收藏
+		if (v.getId() == R.id.radio0_fav) {
+			System.out.println("收藏");
+			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
+					CollectionForInfoService.class);
+			intent.putExtra("userId", userId);
+			intent.putExtra("sentenceordocId", share_sentence_id);
+			intent.putExtra("type",
+					CollectionForInfoService.VIEW_ITEM_TYPE_SHARE);
+			startService(intent);
+			Toast.makeText(ShareSentenceAllDetailActivity.this, "收藏成功",
+					Toast.LENGTH_SHORT).show();
+		} else if (v.getId() == R.id.radio1_com) {// 评论
+			System.out.println("评论");
+			showInput();
+		} else if (v.getId() == R.id.radio2_good) {// 好评
+			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
+					ViewForInfoService.class);
+			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+			intent.putExtra("id", share_sentence_id);
+			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_OK);
+			startService(intent);
+			Toast.makeText(ShareSentenceAllDetailActivity.this, "操作成功",
+					Toast.LENGTH_SHORT).show();
+
+			like_or_dis_state = "like";
+		} else if (v.getId() == R.id.radio3_nogood) {// 差评
+			Intent intent = new Intent(ShareSentenceAllDetailActivity.this,
+					ViewForInfoService.class);
+			intent.putExtra("type", ViewForInfoService.VIEW_ITEM_TYPE_SHARE);
+			intent.putExtra("id", share_sentence_id);
+			intent.putExtra("view", ViewForInfoService.VIEW_VIEW_TYPE_NO);
+			startService(intent);
+			Toast.makeText(ShareSentenceAllDetailActivity.this, "操作成功",
+					Toast.LENGTH_SHORT).show();
+
+			like_or_dis_state = "dislike";
+		}
 	}
 
 }

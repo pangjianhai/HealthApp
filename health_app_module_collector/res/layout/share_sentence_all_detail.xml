@@ -166,9 +166,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent" >
+        android:background="@color/deepgray" >
 
-        <include layout="@layout/single_share_common_bottom" />
+        <include layout="@layout/single_share_common_bottom2" />
         <!-- 这里写你的子控件 -->
     </RelativeLayout>
 
