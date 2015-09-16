@@ -35,7 +35,7 @@
             android:layout_marginRight="5dp"
             android:background="#00ffffff"
             android:onClick="detail_ops"
-            android:src="@drawable/abc_ic_menu_share_holo_light" />
+            android:src="@drawable/share_all" />
     </RelativeLayout>
 
     <!-- ScrollView有规则，内部只允许有一只child，所以需要把所有控件外层包裹一个layout -->
