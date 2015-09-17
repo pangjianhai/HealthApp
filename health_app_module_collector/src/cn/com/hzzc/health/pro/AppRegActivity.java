@@ -86,7 +86,9 @@ public class AppRegActivity extends BaseActivity implements OnClickListener {
 	}
 
 	// 提交用户信息
+	//country:86-----phone:18001179714
 	private void registerUser(String country, String phone) {
+		System.out.println("country:" + country + "-----phone:" + phone);
 		Random rnd = new Random();
 		int id = Math.abs(rnd.nextInt());
 		String uid = String.valueOf(id);
