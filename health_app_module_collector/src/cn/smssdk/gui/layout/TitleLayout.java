@@ -95,13 +95,14 @@ public class TitleLayout {
 				0);
 
 		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(
-				SizeHelper.fromPx(15), SizeHelper.fromPx(25));
+				SizeHelper.fromPx(15), SizeHelper.fromPx(25));//15 25
 		arrowParams.gravity = Gravity.CENTER_VERTICAL;
 		arrowParams.rightMargin = SizeHelper.fromPx(14);
 		ImageView backArrow = new ImageView(context);
 		backArrow.setLayoutParams(arrowParams);
 		int res = R.getBitmapRes(context, "smssdk_back_arrow");
-		backArrow.setBackgroundResource(res);
+		//backArrow.setBackgroundResource(res);
+		backArrow.setBackgroundResource(cn.com.hzzc.health.pro.R.drawable.close_page);
 
 		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(
 				SizeHelper.fromPx(44), SizeHelper.fromPx(44));

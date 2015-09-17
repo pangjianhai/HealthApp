@@ -8,6 +8,7 @@
 package cn.smssdk.gui.layout;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import com.mob.tools.utils.R;
 public class SendMsgDialogLayout {
 
 	public static LinearLayout create(Context context) {
+		int c = Color.parseColor("#f2eada");
 		SizeHelper.prepare(context);
 		LinearLayout root = new LinearLayout(context);
 		ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -34,9 +36,10 @@ public class SendMsgDialogLayout {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,SizeHelper.fromPxWidth(92));
 		dialogTitle.setLayoutParams(titleParams);
 		dialogTitle.setPadding(SizeHelper.fromPxWidth(20), SizeHelper.fromPxWidth(20),SizeHelper.fromPxWidth(20), SizeHelper.fromPxWidth(20));
-		int resid = R.getStringRes(context, "smssdk_make_sure_mobile_num");
+		int resid = R.getStringRes(context, "smssdk_make_sure_mobile_num");//
 		dialogTitle.setText(resid);
-		dialogTitle.setTextColor(0xff3cac17);
+		dialogTitle.setTextColor(c);
+		//dialogTitle.setTextColor(0xff3cac17);
 		dialogTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(32));
 		dialogTitle.setGravity(Gravity.CENTER_VERTICAL);
 		dialogTitle.setTypeface(Typeface.DEFAULT_BOLD);
@@ -45,7 +48,7 @@ public class SendMsgDialogLayout {
 		View line1 = new View(context);
 		LinearLayout.LayoutParams line1Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,SizeHelper.fromPxWidth(1));
 		line1.setLayoutParams(line1Params);
-		line1.setBackgroundColor(0xff3cac17);
+		line1.setBackgroundColor(c);
 		root.addView(line1);
 
 		TextView dialogHint = new TextView(context);
@@ -54,7 +57,7 @@ public class SendMsgDialogLayout {
 		hintParams.topMargin = SizeHelper.fromPxWidth(28);
 		dialogHint.setLayoutParams(hintParams);
 		dialogHint.setPadding(SizeHelper.fromPxWidth(18), 0, SizeHelper.fromPxWidth(18), 0);
-		resid = R.getStringRes(context, "smssdk_make_sure_mobile_detail");
+		resid = R.getStringRes(context, "smssdk_make_sure_mobile_detail");//
 		dialogHint.setText(resid);
 		dialogHint.setTextColor(0xffffffff);
 		dialogHint.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(24));
