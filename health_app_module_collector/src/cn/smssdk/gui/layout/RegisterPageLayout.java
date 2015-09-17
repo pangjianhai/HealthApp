@@ -68,7 +68,7 @@ public class RegisterPageLayout extends BasePageLayout {
 		tvCountry.setGravity(Gravity.RIGHT);
 		tvCountry.setPadding(SizeHelper.fromPxWidth(14), 0,
 				SizeHelper.fromPxWidth(14), 0);
-		int c = Color.parseColor("#FF6600");
+		int c = Color.parseColor("#FF6600");// 选择的国家的颜色
 		// tvCountry.setTextColor(0xff45c01a);
 		tvCountry.setTextColor(c);
 		tvCountry.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -84,8 +84,7 @@ public class RegisterPageLayout extends BasePageLayout {
 		lineParams.leftMargin = SizeHelper.fromPxWidth(26);
 		lineParams.rightMargin = SizeHelper.fromPxWidth(26);
 		line.setLayoutParams(lineParams);
-		 int cc = Color.parseColor("#f2eada");
-		line.setBackgroundColor(cc);
+		line.setBackgroundColor(Res.color.smssdk_gray_press);
 		parent.addView(line);
 
 		LinearLayout phoneLayout = new LinearLayout(context);

@@ -65,7 +65,8 @@ public class TitleLayout {
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				SizeHelper.fromPxWidth(2));
 		bottomLine.setLayoutParams(bottomLineParams);
-		bottomLine.setBackgroundColor(0xff1a1c1d);
+		// bottomLine.setBackgroundColor(0xff1a1c1d);
+		bottomLine.setBackgroundColor(c);// 这是title图标以及文字下面的下划线，原来是黑色，现在与系统保持一致
 		titleLayout.addView(bottomLine);
 
 		return titleLayout;
