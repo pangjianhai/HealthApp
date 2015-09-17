@@ -55,6 +55,7 @@
     <string name="login_reg_logininput_login_get_pwd_btn">找回</string>
     <string name="login_reg_logininput_get_pwd">找回密码</string>
     <string name="login_reg_logininput_reg">注册</string>
+    <string name="login_reg_logininput_reg_login">注册/登录</string>
     <string name="login_reg_email_logininput_reg">邮箱注册</string>
      <string name="login_reg_phone_perfect_reginfo">完善登录信息</string>
     <string name="login_reg_iphone_logininput_reg">手机注册</string>

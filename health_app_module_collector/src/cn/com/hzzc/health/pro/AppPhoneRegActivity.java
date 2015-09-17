@@ -94,7 +94,7 @@ public class AppPhoneRegActivity extends BaseActivity {
 			phone_reg_password_again.setError("密码不能为空", dr);
 			return false;
 		}
-		if (!pwd2.trim().equals(pwd2.trim())) {
+		if (!pwd1.trim().equals(pwd2.trim())) {
 			phone_reg_password_again.setError("两次输入不一致", dr);
 			return false;
 		}

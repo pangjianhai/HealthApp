@@ -29,8 +29,7 @@
             android:layout_centerInParent="true"
             android:text="@string/login_reg_phone_perfect_reginfo"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <cn.com.hzzc.health.pro.part.LineEditText
@@ -75,7 +74,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/btn_ok_selector"
             android:onClick="regAccount"
-            android:text="@string/login_reg_logininput_reg"
+            android:text="@string/login_reg_logininput_reg_login"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </RelativeLayout>
