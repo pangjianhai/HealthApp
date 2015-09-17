@@ -23,6 +23,7 @@ import android.widget.TextView;
 /**
  * TitleLayout
  * 
+ * @todo 验证短息的title
  * @author xusq
  *
  */
@@ -48,7 +49,9 @@ public class TitleLayout {
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				SizeHelper.fromPxWidth(1));
 		topLine.setLayoutParams(topLineParams);
-		topLine.setBackgroundColor(0xff454a4b);
+		int c = Color.parseColor("#f2eada");
+		// topLine.setBackgroundColor(0xff454a4b);
+		topLine.setBackgroundColor(c);
 		titleLayout.addView(topLine);
 
 		if (isSearch) {
@@ -77,8 +80,9 @@ public class TitleLayout {
 				LinearLayout.LayoutParams.MATCH_PARENT, height);
 		LinearLayout inLayout = new LinearLayout(context);
 		inLayout.setLayoutParams(inParams);
-		//inLayout.setBackgroundColor(Color.parseColor("#f2eada"));
-		inLayout.setBackgroundColor(0xff303537);
+		int c = Color.parseColor("#f2eada");
+		// inLayout.setBackgroundColor(0xff303537);
+		inLayout.setBackgroundColor(c);
 
 		LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -119,8 +123,11 @@ public class TitleLayout {
 		TextView title = new TextView(context);
 		title.setLayoutParams(titleParams);
 		title.setId(Res.id.tv_title);
-		title.setTextColor(0xffcfcfcf);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
+		int cc = Color.parseColor("#000000");
+		// title.setTextColor(0xffcfcfcf);
+		title.setTextColor(cc);
+		title.setTextSize(20);
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(20));
 		inLayout.addView(title);
 
 		titleLayout.addView(inLayout);

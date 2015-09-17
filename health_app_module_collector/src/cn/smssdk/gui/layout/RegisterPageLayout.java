@@ -84,7 +84,8 @@ public class RegisterPageLayout extends BasePageLayout {
 		lineParams.leftMargin = SizeHelper.fromPxWidth(26);
 		lineParams.rightMargin = SizeHelper.fromPxWidth(26);
 		line.setLayoutParams(lineParams);
-		line.setBackgroundColor(Res.color.smssdk_gray_press);
+		 int cc = Color.parseColor("#f2eada");
+		line.setBackgroundColor(cc);
 		parent.addView(line);
 
 		LinearLayout phoneLayout = new LinearLayout(context);
