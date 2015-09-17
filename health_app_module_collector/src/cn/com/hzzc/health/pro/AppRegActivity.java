@@ -86,13 +86,13 @@ public class AppRegActivity extends BaseActivity implements OnClickListener {
 	}
 
 	// 提交用户信息
-	//country:86-----phone:18001179714
+	// country:86-----phone:18001179714
 	private void registerUser(String country, String phone) {
-		System.out.println("country:" + country + "-----phone:" + phone);
-		Random rnd = new Random();
-		int id = Math.abs(rnd.nextInt());
-		String uid = String.valueOf(id);
-		String nickName = "SmsSDK_User_" + uid;
-		SMSSDK.submitUserInfo(uid, "默认", null, country, phone);
+		// System.out.println("country:" + country + "-----phone:" + phone);
+		Intent it = new Intent(getApplicationContext(),
+				AppPhoneRegActivity.class);
+		it.putExtra("country", country);
+		it.putExtra("phone", phone);
+		startActivity(it);
 	}
 }

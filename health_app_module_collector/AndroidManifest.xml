@@ -142,6 +142,8 @@
         </activity>
         <activity android:name="cn.com.hzzc.health.pro.AppEmailRegActivity" >
         </activity>
+        <activity android:name="cn.com.hzzc.health.pro.AppPhoneRegActivity" >
+        </activity>
         <!-- 关于搜索添加好友 -->
         <activity
             android:name="cn.com.hzzc.health.pro.FriendSearchResultActivity"
