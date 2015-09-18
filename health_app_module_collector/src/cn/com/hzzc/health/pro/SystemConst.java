@@ -35,10 +35,10 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	 public static final String server_url =
-	 "http://www.kx360.com.cn/iotapp/";
+	// public static final String server_url =
+	// "http://www.kx360.com.cn/iotapp/";
 
-	//public static final String server_url = "http://192.168.0.106:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
 
 	/**
 	 * 
@@ -83,6 +83,11 @@ public class SystemConst {
 		 * 添加新的用戶
 		 */
 		public static final String addUser = "appSourceController/addUser.do";
+
+		/**
+		 * 添加新的手机用戶
+		 */
+		public static final String addPhoneUser = "appSourceController/addPhoneUser.do";
 
 		/**
 		 * 用户登录

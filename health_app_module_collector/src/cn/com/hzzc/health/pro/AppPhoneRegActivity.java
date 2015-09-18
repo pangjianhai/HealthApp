@@ -117,14 +117,14 @@ public class AppPhoneRegActivity extends BaseActivity {
 				j.put("phone", phone);
 				j.put("password", pwd);
 				String url = SystemConst.server_url
-						+ SystemConst.FunctionUrl.addUser;
+						+ SystemConst.FunctionUrl.addPhoneUser;
 				Map map = new HashMap();
 				map.put("para", j.toString());
 				RequestCallBack<String> rcb = new RequestCallBack<String>() {
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
 						/**
-						 * 四种返回值 成功：userId，失败：fail，或者提示用户名邮箱重复
+						 * 四种返回值 成功：userId，失败：fail，手机重复：phone
 						 */
 						regOver(responseInfo.result);
 					}
@@ -156,15 +156,13 @@ public class AppPhoneRegActivity extends BaseActivity {
 			/**
 			 * 解析出新的用户的ID
 			 */
+			// 三种返回值 成功：userId，失败：fail，手机重复：phone
 			String flag = data.get("flag") + "";// 成功的话flag返回是的用户的ID，否则则是其他三种提示
 			if (flag == null || "".equals(flag) || "fail".equals(flag)) {
 				regFail();
 				return;
-			} else if ("user".equals(flag)) {
-				error("账号已被注册\n请重新填写");
-				return;
-			} else if ("email".equals(flag)) {
-				error("邮箱已被注册\n请重新填写");
+			} else if ("phone".equals(flag)) {
+				error("该手机已被注册\n请重新填写");
 				return;
 			}
 			/**
