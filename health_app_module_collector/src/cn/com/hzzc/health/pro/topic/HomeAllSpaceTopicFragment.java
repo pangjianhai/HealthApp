@@ -72,7 +72,7 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 				.findViewById(R.id.space_notice_msg);
 		findView();
 		initListView();
-		// loadDataMore();
+		loadDataMore();
 		single_push_bottom_ops_sc.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -112,6 +112,8 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 	private void realLoadData() {
 		try {
 			dataSourceList.clear();
+			System.out.println("------------dataSourceList.size:"
+					+ dataSourceList.size());
 			JSONObject d = new JSONObject();
 			d.put("userId", userId + "");
 			String url = SystemConst.server_url
@@ -129,6 +131,9 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 						dataSourceList.addAll(lst);
 						topicItemAdapter.notifyDataSetChanged();
 					}
+					System.out
+							.println("------------》》》》》》》》》》》dataSourceList.size:"
+									+ dataSourceList.size());
 					onLoadOver();
 				}
 
@@ -180,12 +185,6 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		loadDataMore();
-	}
-
-	@Override
 	public void screenScroll(float y) {
 		parent.screenScroll(y);
 	}
@@ -195,6 +194,7 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 		super.onResume();
 		/********** 如果用户已经对某个主题参与或者退出了，需要重新加载自己参与的主题列表 **********/
 		if (HealthApplication.isNeedRefreshMyTopic()) {
+			HealthApplication.setNeedRefreshMyTopic(false);
 			realLoadData();
 		}
 	}
