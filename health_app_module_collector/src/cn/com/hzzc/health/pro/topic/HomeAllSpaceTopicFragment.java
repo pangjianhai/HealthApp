@@ -18,6 +18,7 @@ import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicItemAdapter;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.TopicEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
@@ -190,8 +191,11 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 	}
 
 	@Override
-	public void onResume(){
+	public void onResume() {
 		super.onResume();
-		System.out.println("******************<>");
+		/********** 如果用户已经对某个主题参与或者退出了，需要重新加载自己参与的主题列表 **********/
+		if (HealthApplication.isNeedRefreshMyTopic()) {
+			realLoadData();
+		}
 	}
 }

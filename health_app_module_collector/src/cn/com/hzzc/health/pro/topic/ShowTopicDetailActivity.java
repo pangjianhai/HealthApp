@@ -255,6 +255,7 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					isIn = true;
 					is_in_topic.setText("退出");
+					HealthApplication.setNeedRefreshMyTopic(true);// 需要用户重新加载已经参与的主题信息
 				}
 
 				@Override
@@ -288,6 +289,7 @@ public class ShowTopicDetailActivity extends FragmentActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					isIn = false;
 					is_in_topic.setText("加入");
+					HealthApplication.setNeedRefreshMyTopic(true);
 				}
 
 				@Override

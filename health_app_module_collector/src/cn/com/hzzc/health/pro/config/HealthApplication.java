@@ -59,6 +59,11 @@ public class HealthApplication extends Application {
 	 */
 	private static String userId;
 
+	/**
+	 * 是否需要刷新我的主题列表（因为用户可能已经参与或者退出某个主题了）
+	 */
+	private static boolean isNeedRefreshMyTopic = false;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -286,6 +291,14 @@ public class HealthApplication extends Application {
 		} else {
 			return true;
 		}
+	}
+
+	public static boolean isNeedRefreshMyTopic() {
+		return isNeedRefreshMyTopic;
+	}
+
+	public static void setNeedRefreshMyTopic(boolean isNeedRefreshMyTopic) {
+		HealthApplication.isNeedRefreshMyTopic = isNeedRefreshMyTopic;
 	}
 
 }
