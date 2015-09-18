@@ -189,4 +189,9 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 		parent.screenScroll(y);
 	}
 
+	@Override
+	public void onResume(){
+		super.onResume();
+		System.out.println("******************<>");
+	}
 }
