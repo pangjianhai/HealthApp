@@ -167,7 +167,7 @@ public class HomeMainTagFragment extends ParentFragment {
 					if (list != null && !list.isEmpty()) {
 						repaintUI(list);
 					} else {
-						Toast.makeText(getActivity(), "点击右上角可以为自己设置标签",
+						Toast.makeText(getActivity(), "点击右上角\"我的标签\"可以为自己设置标签",
 								Toast.LENGTH_LONG).show();
 					}
 				}
