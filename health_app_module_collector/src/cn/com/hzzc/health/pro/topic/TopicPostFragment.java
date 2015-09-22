@@ -182,6 +182,7 @@ public class TopicPostFragment extends BaseTopicFragment implements
 
 	@Override
 	public void detailShow(int index, TopicPostEntity tpe) {
+		System.out.println(" tpe.getId():"+ tpe.getId());
 		Intent intent = new Intent(getActivity(),
 				TopicCommentDetailActivity.class);
 		intent.putExtra("postId", tpe.getId());
