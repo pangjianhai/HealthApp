@@ -225,7 +225,6 @@ public class TopicPostFragment extends BaseTopicFragment implements
 		String pic_url = SystemConst.server_url
 				+ SystemConst.TopicUrl.getTopicImgByPicIdWeixin + "?picId="
 				+ topicId;
-		System.out.println("pic_url:" + pic_url);
 		oks.setImageUrl(pic_url);
 
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
