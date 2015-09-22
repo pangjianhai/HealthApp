@@ -256,6 +256,14 @@ public class TopicPostItemAdapter extends BaseAdapter {
 				l.userShow(position, entity);
 			}
 		});
+
+		holder.share_trans.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				l.to3Platform(position, entity);
+			}
+		});
 	}
 
 	private class HolderView {

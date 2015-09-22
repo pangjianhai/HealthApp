@@ -35,9 +35,10 @@ public class SystemConst {
 	 */
 	public static final String json_param_name = "para";
 
-	//public static final String server_url = "http://www.kx360.com.cn/iotapp/";
+	// public static final String server_url =
+	// "http://www.kx360.com.cn/iotapp/";
 
-	public static final String server_url = "http://192.168.0.106:8080/IotApp/";
+	public static final String server_url = "http://192.168.0.105:8080/IotApp/";
 
 	/**
 	 * 
@@ -403,6 +404,16 @@ public class SystemConst {
 		 * 获取主题下的参与人分页
 		 */
 		public static final String queryTopicUserByTopicId = "topicController/queryTopicUserByTopicId.do";
+
+		/**
+		 * 将主题评论转发到第三方平台
+		 */
+		public static final String transferTopicCommentTo3part = "topicController/queryTopicPostWeixin.do";
+
+		/**
+		 * 根据主题ID获取主题图片
+		 */
+		public static final String getTopicImgByPicIdWeixin = "topicController/getTopicImgByPicIdWeixin.do";
 
 	}
 

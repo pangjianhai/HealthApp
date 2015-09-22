@@ -17,11 +17,14 @@ import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.adapter.TopicPostItemAdapter;
+import cn.com.hzzc.health.pro.config.ShareConst;
 import cn.com.hzzc.health.pro.model.TopicPostEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
 import cn.com.hzzc.health.pro.util.ITopicCommentListener;
 import cn.com.hzzc.health.pro.util.TopicUtil;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -195,8 +198,43 @@ public class TopicPostFragment extends BaseTopicFragment implements
 
 	@Override
 	public void to3Platform(int index, TopicPostEntity tpe) {
-		// TODO Auto-generated method stub
+		// entity
+		ShareSDK.initSDK(getActivity());
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		oks.setTitle(ShareConst.share_title);
+		// text是分享文本，所有平台都需要这个字段
+		String content = tpe.getShortMsg();
+		if (content.length() > 100) {
+			content = content.substring(0, 90) + "...";
+		}
+		oks.setText(content);
+		// url仅在微信（包括好友和朋友圈）中使用，查看分享信息的详情
+		String info_url = SystemConst.server_url
+				+ SystemConst.TopicUrl.transferTopicCommentTo3part + "?id="
+				+ tpe.getId();
+		// 朋友圈、微信好友打开的链接
+		oks.setUrl(info_url);
+		// 人人网和QQ空间点击打开的链接
+		oks.setTitleUrl(info_url);
+		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+		oks.setSiteUrl(info_url);
+		String image = tpe.getImg0();
+		String pic_url = SystemConst.server_url
+				+ SystemConst.TopicUrl.getTopicImgByPicIdWeixin + "?picId="
+				+ topicId;
+		System.out.println("pic_url:" + pic_url);
+		oks.setImageUrl(pic_url);
 
+		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+		// oks.setComment("我是测试评论文本");
+		// site是分享此内容的网站名称，仅在QQ空间使用
+		oks.setSite(getString(R.string.app_name));
+
+		// 启动分享GUI
+		oks.show(getActivity());
 	}
 
 }

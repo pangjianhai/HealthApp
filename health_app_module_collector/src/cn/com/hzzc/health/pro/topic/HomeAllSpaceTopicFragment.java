@@ -112,8 +112,6 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 	private void realLoadData() {
 		try {
 			dataSourceList.clear();
-			System.out.println("------------dataSourceList.size:"
-					+ dataSourceList.size());
 			JSONObject d = new JSONObject();
 			d.put("userId", userId + "");
 			String url = SystemConst.server_url
@@ -131,9 +129,6 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 						dataSourceList.addAll(lst);
 						topicItemAdapter.notifyDataSetChanged();
 					}
-					System.out
-							.println("------------》》》》》》》》》》》dataSourceList.size:"
-									+ dataSourceList.size());
 					onLoadOver();
 				}
 
