@@ -29,6 +29,11 @@ import cn.com.hzzc.health.pro.SharePrepareActivity;
 import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.util.ActivityCollector;
 
+/**
+ * @todo FragmentActivity的通用父类
+ * @author pang
+ *
+ */
 public class BaseFragmentActivity extends FragmentActivity {
 
 	/**
