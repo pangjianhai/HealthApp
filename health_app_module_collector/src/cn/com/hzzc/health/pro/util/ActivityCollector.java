@@ -8,7 +8,7 @@ import cn.com.hzzc.health.pro.persist.SharedPreInto;
 import android.app.Activity;
 
 /**
- * @todo activity管理器
+ * @todo activity管理器，所有的activity都需要加入此List
  * @author pang
  *
  */

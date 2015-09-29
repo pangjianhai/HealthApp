@@ -13,6 +13,11 @@ import android.media.ExifInterface;
 import android.util.Base64;
 import android.util.Log;
 
+/**
+ * @todo  图片工具类
+ * @author pang
+ *
+ */
 public class BitmapUtil {
 	/**
 	 * bitmap转为base64
