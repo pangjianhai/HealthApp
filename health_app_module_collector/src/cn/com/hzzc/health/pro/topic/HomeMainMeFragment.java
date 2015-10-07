@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.AppFeedbackActivity;
@@ -61,8 +62,10 @@ public class HomeMainMeFragment extends ParentFragment {
 	private View view;
 	private CircularImage main_page_me_photo;
 	private TextView main_page_me_name, main_page_me_sentence, me_my_dangan,
-			me_my_focus, me_my_focusme, me_my_msg, me_my_shoucang, me_my_tucao,
-			me_my_version;
+			me_my_focus, me_my_focusme;
+	private RelativeLayout main_page_me_dangan, main_page_me_myfocus,
+			main_page_me_focuseme, main_page_me_msg, main_page_me_shoucang,
+			main_page_me_tucao, main_page_me_versionscan;
 	private Button me_my_logout;
 
 	@Override
@@ -92,14 +95,26 @@ public class HomeMainMeFragment extends ParentFragment {
 				.findViewById(R.id.main_page_me_name);
 		main_page_me_sentence = (TextView) view
 				.findViewById(R.id.main_page_me_sentence);
+		main_page_me_dangan = (RelativeLayout) view
+				.findViewById(R.id.main_page_me_dangan);
+		main_page_me_myfocus = (RelativeLayout) view
+				.findViewById(R.id.main_page_me_myfocus);
+		main_page_me_focuseme = (RelativeLayout) view
+				.findViewById(R.id.main_page_me_focuseme);
+		main_page_me_msg = (RelativeLayout) view
+				.findViewById(R.id.main_page_me_msg);
+		main_page_me_shoucang = (RelativeLayout) view
+				.findViewById(R.id.main_page_me_shoucang);
+		main_page_me_versionscan = (RelativeLayout) view
+				.findViewById(R.id.main_page_me_versionscan);
+		main_page_me_tucao = (RelativeLayout) view
+				.findViewById(R.id.me_my_tucao);
+		me_my_logout = (Button) view.findViewById(R.id.me_my_logout);
+
+		/************/
 		me_my_dangan = (TextView) view.findViewById(R.id.me_my_dangan);
 		me_my_focus = (TextView) view.findViewById(R.id.me_my_focus);
 		me_my_focusme = (TextView) view.findViewById(R.id.me_my_focusme);
-		me_my_msg = (TextView) view.findViewById(R.id.me_my_msg);
-		me_my_shoucang = (TextView) view.findViewById(R.id.me_my_shoucang);
-		me_my_version = (TextView) view.findViewById(R.id.me_my_version);
-		me_my_tucao = (TextView) view.findViewById(R.id.me_my_tucao);
-		me_my_logout = (Button) view.findViewById(R.id.me_my_logout);
 	}
 
 	private void initListener() {
@@ -108,13 +123,13 @@ public class HomeMainMeFragment extends ParentFragment {
 		main_page_me_photo.setOnClickListener(fsc);
 		main_page_me_name.setOnClickListener(fsc);
 		main_page_me_sentence.setOnClickListener(fsc);
-		me_my_dangan.setOnClickListener(fsc);
-		me_my_focus.setOnClickListener(fsc);
-		me_my_focusme.setOnClickListener(fsc);
-		me_my_msg.setOnClickListener(fsc);
-		me_my_shoucang.setOnClickListener(fsc);
-		me_my_tucao.setOnClickListener(fsc);
-		me_my_version.setOnClickListener(fsc);
+		main_page_me_dangan.setOnClickListener(fsc);
+		main_page_me_myfocus.setOnClickListener(fsc);
+		main_page_me_focuseme.setOnClickListener(fsc);
+		main_page_me_msg.setOnClickListener(fsc);
+		main_page_me_shoucang.setOnClickListener(fsc);
+		main_page_me_tucao.setOnClickListener(fsc);
+		main_page_me_versionscan.setOnClickListener(fsc);
 		me_my_logout.setOnClickListener(fsc);
 
 	}
@@ -129,16 +144,16 @@ public class HomeMainMeFragment extends ParentFragment {
 				|| R.id.main_page_me_name == v.getId()
 				|| R.id.main_page_me_sentence == v.getId()) {// 查看个人信息
 			showUserDetail(userId);
-		} else if (R.id.me_my_dangan == v.getId()) {
+		} else if (R.id.main_page_me_dangan == v.getId()) {
 			Intent intent = new Intent(getActivity(), MineSpaceActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
-		} else if (R.id.me_my_focus == v.getId()) {
+		} else if (R.id.main_page_me_myfocus == v.getId()) {
 			Intent intent = new Intent(getActivity(),
 					MainPageLayoutMeMyFocusActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
-		} else if (R.id.me_my_focus == v.getId()) {// 我的关注
+		} else if (R.id.main_page_me_focuseme == v.getId()) {// 我的关注
 			Intent intent = new Intent(getActivity(),
 					MainPageLayoutMeMyFocusActivity.class);
 			intent.putExtra("uuid", userId);
@@ -148,16 +163,16 @@ public class HomeMainMeFragment extends ParentFragment {
 					MainPageLayoutMeFocusMeActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
-		} else if (R.id.me_my_shoucang == v.getId()) {// 我的收藏
+		} else if (R.id.main_page_me_shoucang == v.getId()) {// 我的收藏
 			Intent intent = new Intent(getActivity(),
 					MainPageLayoutMeCollectionActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
-		} else if (R.id.me_my_tucao == v.getId()) {// 吐槽产品
+		} else if (R.id.main_page_me_tucao == v.getId()) {// 吐槽产品
 			Intent intent = new Intent(getActivity(), AppFeedbackActivity.class);
 			intent.putExtra("uuid", userId);
 			startActivity(intent);
-		} else if (R.id.me_my_version == v.getId()) {// 版本检测
+		} else if (R.id.main_page_me_versionscan == v.getId()) {// 版本检测
 			versionScan();
 		} else if (R.id.me_my_logout == v.getId()) {// 退出
 			logout(null);
