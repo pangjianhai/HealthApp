@@ -216,7 +216,6 @@ public class HomeMainTagFragment extends ParentFragment {
 	 * @return:void
 	 */
 	private void repaintUI(List<Tag> list) {
-		System.out.println("00000000000000000list:" + list.size());
 		for (Tag tag : list) {
 			View tagBtn = createMyButtonTag(tag);
 			selected_tag_linearlayout.addView(tagBtn);
