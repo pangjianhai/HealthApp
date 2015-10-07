@@ -41,6 +41,10 @@ public class ParentFragmentActivity extends FragmentActivity {
 	 */
 	public String userId;
 
+	public ParentFragmentActivity() {
+		super();
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
