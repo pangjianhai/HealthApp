@@ -108,7 +108,7 @@ public class HomeMainMeFragment extends ParentFragment {
 		main_page_me_versionscan = (RelativeLayout) view
 				.findViewById(R.id.main_page_me_versionscan);
 		main_page_me_tucao = (RelativeLayout) view
-				.findViewById(R.id.me_my_tucao);
+				.findViewById(R.id.main_page_me_tucao);
 		me_my_logout = (Button) view.findViewById(R.id.me_my_logout);
 
 		/************/
