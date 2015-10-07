@@ -1,6 +1,5 @@
 package cn.com.hzzc.health.pro.topic;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +29,6 @@ import cn.com.hzzc.health.pro.ShareByTagActivity;
 import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.TagsForUserActivity;
 import cn.com.hzzc.health.pro.TagsForUserDefActivity;
-import cn.com.hzzc.health.pro.adapter.TagAdapter;
-import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.Tag;
 import cn.com.hzzc.health.pro.part.MyScrollView;
 import cn.com.hzzc.health.pro.part.MyScrollView.BtnOps;
@@ -68,6 +65,7 @@ public class HomeMainTagFragment extends ParentFragment {
 		view = inflater.inflate(R.layout.home_main_tag_fragment, null);
 		initTagInput();
 		initListView();
+		/****** 我的标签的初始化在resume中进行 *******/
 		// initSelfTag();
 
 	}
@@ -212,10 +210,7 @@ public class HomeMainTagFragment extends ParentFragment {
 	 * @return:void
 	 */
 	private void repaintUI(List<Tag> list) {
-		System.out.println("______list:" + list.size());
 		for (Tag tag : list) {
-			System.out.println("tag:" + tag.getId() + "---"
-					+ tag.getDisplayName());
 			View tagBtn = createMyButtonTag(tag);
 			selected_tag_linearlayout.addView(tagBtn);
 		}
@@ -289,14 +284,9 @@ public class HomeMainTagFragment extends ParentFragment {
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 
-		// 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
 		window.setFocusable(true);
-		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0xb0000000);
 		window.setBackgroundDrawable(dw);
-		// 设置popWindow的显示和消失动画
-		// window.setAnimationStyle(R.style.mypopwindow_anim_style);
-		// 在底部显示
 		window.showAsDropDown(v);
 		/**
 		 * popwindow按钮地方法
@@ -362,7 +352,6 @@ public class HomeMainTagFragment extends ParentFragment {
 
 	@Override
 	public void screenScroll(float y) {
-		// TODO Auto-generated method stub
 
 	}
 
