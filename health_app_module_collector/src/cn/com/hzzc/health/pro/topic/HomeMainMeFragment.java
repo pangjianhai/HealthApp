@@ -50,6 +50,12 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+/**
+ * TODO 首页“我”页签
+ * 
+ * @author pang
+ *
+ */
 public class HomeMainMeFragment extends ParentFragment {
 
 	private View view;

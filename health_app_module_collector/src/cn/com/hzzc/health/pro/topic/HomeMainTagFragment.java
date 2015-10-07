@@ -181,6 +181,7 @@ public class HomeMainTagFragment extends ParentFragment {
 
 				@Override
 				public void onSuccess(ResponseInfo<String> responseInfo) {
+					System.out.println("responseInfo.result:"+responseInfo.result);
 					List<Tag> list = TagUtils
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
@@ -216,6 +217,7 @@ public class HomeMainTagFragment extends ParentFragment {
 	 * @return:void
 	 */
 	private void repaintUI(List<Tag> list) {
+		System.out.println("00000000000000000list:" + list.size());
 		for (Tag tag : list) {
 			View tagBtn = createMyButtonTag(tag);
 			selected_tag_linearlayout.addView(tagBtn);
@@ -236,6 +238,7 @@ public class HomeMainTagFragment extends ParentFragment {
 		final String tId = tag.getId();
 		String tName = tag.getDisplayName();
 		TextView btn2 = new TextView(getActivity());
+		System.out.println(tId + "------tName:" + tName);
 		btn2.setText(tName);
 		btn2.setTextSize(14);
 		btn2.setPadding(0, 0, 2, 0);
