@@ -68,7 +68,7 @@ public class HomeMainTagFragment extends ParentFragment {
 		view = inflater.inflate(R.layout.home_main_tag_fragment, null);
 		initTagInput();
 		initListView();
-		initSelfTag();
+		// initSelfTag();
 
 	}
 
@@ -169,6 +169,7 @@ public class HomeMainTagFragment extends ParentFragment {
 	 */
 	public void initSelfTag() {
 		try {
+			selected_tag_linearlayout.removeAllViews();
 			JSONObject d = new JSONObject();
 			d.put("userId", userId);
 
@@ -211,7 +212,10 @@ public class HomeMainTagFragment extends ParentFragment {
 	 * @return:void
 	 */
 	private void repaintUI(List<Tag> list) {
+		System.out.println("______list:" + list.size());
 		for (Tag tag : list) {
+			System.out.println("tag:" + tag.getId() + "---"
+					+ tag.getDisplayName());
 			View tagBtn = createMyButtonTag(tag);
 			selected_tag_linearlayout.addView(tagBtn);
 		}
@@ -369,7 +373,6 @@ public class HomeMainTagFragment extends ParentFragment {
 	public void onResume() {
 		super.onResume();
 		/********** 如果用户已经对某个主题参与或者退出了，需要重新加载自己参与的主题列表 **********/
-		selected_tag_linearlayout.removeAllViews();
 		initSelfTag();
 	}
 }
