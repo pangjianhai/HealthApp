@@ -46,7 +46,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
-public class HomeMainOrderFragment extends ParentFragment implements
+public class HomeMainOrderFragment extends ParentHomeFragment implements
 		IXListViewListener, IShareCallbackOperator {
 
 	/**

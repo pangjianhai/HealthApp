@@ -43,7 +43,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @author pang
  *
  */
-public class HomeMainTagFragment extends ParentFragment {
+public class HomeMainTagFragment extends ParentHomeFragment {
 
 	private View view;
 	/**

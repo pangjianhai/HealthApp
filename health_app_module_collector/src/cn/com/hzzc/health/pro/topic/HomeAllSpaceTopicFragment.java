@@ -34,7 +34,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
  * @author pang
  *
  */
-public class HomeAllSpaceTopicFragment extends ParentFragment implements
+public class HomeAllSpaceTopicFragment extends ParentHomeFragment implements
 		IXListViewListener, ITopicCallbackOperator {
 	/*** 所属fragment ****/
 	private HomeMainPageFragment parent;

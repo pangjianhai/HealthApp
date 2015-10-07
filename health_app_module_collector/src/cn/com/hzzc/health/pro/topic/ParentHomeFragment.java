@@ -21,7 +21,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
-public abstract class ParentFragment extends Fragment {
+public abstract class ParentHomeFragment extends Fragment {
 
 	/**
 	 * 用户ID
@@ -62,7 +62,7 @@ public abstract class ParentFragment extends Fragment {
 
 	};
 
-	public ParentFragment() {
+	public ParentHomeFragment() {
 		super();
 	}
 
@@ -156,4 +156,12 @@ public abstract class ParentFragment extends Fragment {
 
 	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
 
+	/**
+	 * XXXXXXXXXX
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		userId = HealthApplication.getUserId();
+	}
 }

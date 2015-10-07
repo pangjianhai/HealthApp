@@ -57,7 +57,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * @author pang
  *
  */
-public class HomeMainMeFragment extends ParentFragment {
+public class HomeMainMeFragment extends ParentHomeFragment {
 
 	private View view;
 	private CircularImage main_page_me_photo;
@@ -641,6 +641,12 @@ public class HomeMainMeFragment extends ParentFragment {
 	public void screenScroll(float y) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		System.out.println("------------>>>onResume");
 	}
 
 }

@@ -18,8 +18,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.hzzc.health.pro.R;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 
-public class HomeMainPageFragment extends ParentFragment {
+public class HomeMainPageFragment extends ParentHomeFragment {
 	Resources resources;
 	private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
