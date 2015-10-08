@@ -353,6 +353,9 @@ public class ShareSpaceFragment extends BaseFragment implements
 		/**
 		 * 如果登陆了则继续
 		 */
+		if (lastestShareId == null || "".equals(lastestShareId)) {
+			return;
+		}
 		try {
 			JSONObject d = new JSONObject();
 			d.put("currentId", userId);

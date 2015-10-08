@@ -113,7 +113,7 @@ public class HomeMainTagFragment extends ParentFragment {
 			public void onClick(View v) {
 				// 先判断是否处于显示状态
 				if (selected_tag_notice.getVisibility() == View.VISIBLE) {
-					to_self_def(v);
+					add_my_tag(v);
 				}
 			}
 
@@ -184,8 +184,10 @@ public class HomeMainTagFragment extends ParentFragment {
 					List<Tag> list = TagUtils
 							.parseJsonAddToList(responseInfo.result);
 					if (list != null && !list.isEmpty()) {
+						selected_tag_notice.setVisibility(View.GONE);
 						repaintUI(list);
 					} else {
+						selected_tag_linearlayout.setVisibility(View.GONE);
 						selected_tag_notice.setVisibility(View.VISIBLE);
 						Toast.makeText(getActivity(), "点击右上角\"我的标签\"可以为自己设置标签",
 								Toast.LENGTH_LONG).show();
@@ -365,12 +367,14 @@ public class HomeMainTagFragment extends ParentFragment {
 
 	}
 
+	/**
+	 * @todo 重新展示页面的时候移除之前的子元素，重新加载刷新
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
 		/********** 如果用户已经对某个主题参与或者退出了，需要重新加载自己参与的主题列表 **********/
-		if (HealthApplication.isNeedRefreshMyTopic()) {
-			HealthApplication.setNeedRefreshMyTopic(false);
-		}
+		selected_tag_linearlayout.removeAllViews();
+		initSelfTag();
 	}
 }

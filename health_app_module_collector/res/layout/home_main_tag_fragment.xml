@@ -44,6 +44,8 @@
             android:gravity="center_horizontal"
             android:padding="1dp"
             android:text="@string/tag_will_share_to_def_notice"
+            android:textColor="@color/deepgreen"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="gone" />
     </LinearLayout>
