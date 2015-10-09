@@ -37,6 +37,7 @@ import cn.com.hzzc.health.pro.SystemConst;
 import cn.com.hzzc.health.pro.TagsForUserActivity;
 import cn.com.hzzc.health.pro.TagsForUserDefActivity;
 import cn.com.hzzc.health.pro.adapter.TagAdapter;
+import cn.com.hzzc.health.pro.config.HealthApplication;
 import cn.com.hzzc.health.pro.model.Tag;
 import cn.com.hzzc.health.pro.part.MyScrollView;
 import cn.com.hzzc.health.pro.part.MyScrollView.BtnOps;
@@ -326,6 +327,14 @@ public class HomeMainTagFragment extends ParentFragment {
 		startActivity(it);
 	}
 
+	/**
+	 * 
+	 * @param v
+	 * @user:pang
+	 * @data:2015年10月9日
+	 * @todo:贡献标签
+	 * @return:void
+	 */
 	public void to_self_def(View v) {
 		Intent it = new Intent(getActivity(), TagsForUserDefActivity.class);
 		startActivity(it);
@@ -337,4 +346,12 @@ public class HomeMainTagFragment extends ParentFragment {
 
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		/********** 如果用户已经对某个主题参与或者退出了，需要重新加载自己参与的主题列表 **********/
+		if (HealthApplication.isNeedRefreshMyTopic()) {
+			HealthApplication.setNeedRefreshMyTopic(false);
+		}
+	}
 }
