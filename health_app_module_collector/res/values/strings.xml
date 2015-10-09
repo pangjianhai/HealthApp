@@ -57,7 +57,7 @@
     <string name="login_reg_logininput_reg">注册</string>
     <string name="login_reg_logininput_reg_login">注册/登录</string>
     <string name="login_reg_email_logininput_reg">邮箱注册</string>
-     <string name="login_reg_phone_perfect_reginfo">完善登录信息</string>
+    <string name="login_reg_phone_perfect_reginfo">完善登录信息</string>
     <string name="login_reg_iphone_logininput_reg">手机注册</string>
     <string name="login_reg_logininput_forget">忘记密码？</string>
 
@@ -89,6 +89,7 @@
     <!-- 关于标签 -->
     <string name="tag_share_exist">标签库已经存在的标签：</string>
     <string name="tag_will_share_to_prove">贡献标签</string>
+    <string name="tag_will_share_to_def_notice">点击给自己自定义标签</string>
     <string name="viewpager_indicator">%1$d/%2$d</string>
 
 </resources>

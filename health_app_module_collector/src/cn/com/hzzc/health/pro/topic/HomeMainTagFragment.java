@@ -7,10 +7,6 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -19,18 +15,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.PopupWindow.OnDismissListener;
-import cn.com.hzzc.health.pro.MainPageLayoutTagActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.ShareByTagActivity;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -43,6 +37,15 @@ import cn.com.hzzc.health.pro.part.MyScrollView;
 import cn.com.hzzc.health.pro.part.MyScrollView.BtnOps;
 import cn.com.hzzc.health.pro.util.TagUtils;
 
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+
+/**
+ * @todo 主页的标签碎片
+ * @author pang
+ *
+ */
 public class HomeMainTagFragment extends ParentFragment {
 
 	private View view;
@@ -55,6 +58,7 @@ public class HomeMainTagFragment extends ParentFragment {
 
 	private MyScrollView my_scroll_view = null;
 	private LinearLayout selected_tag_linearlayout = null;
+	private TextView selected_tag_notice;
 
 	private View footer;
 
@@ -100,6 +104,20 @@ public class HomeMainTagFragment extends ParentFragment {
 		};
 		my_scroll_view = (MyScrollView) view.findViewById(R.id.my_scroll_view);
 		my_scroll_view.setBtnOps(bo);
+		selected_tag_notice = (TextView) view
+				.findViewById(R.id.selected_tag_notice);
+		/*** 如果没有自定义标签，则点击提示文字可以进入添加页面 ***/
+		selected_tag_notice.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// 先判断是否处于显示状态
+				if (selected_tag_notice.getVisibility() == View.VISIBLE) {
+					to_self_def(v);
+				}
+			}
+
+		});
 	}
 
 	/**
@@ -168,6 +186,7 @@ public class HomeMainTagFragment extends ParentFragment {
 					if (list != null && !list.isEmpty()) {
 						repaintUI(list);
 					} else {
+						selected_tag_notice.setVisibility(View.VISIBLE);
 						Toast.makeText(getActivity(), "点击右上角\"我的标签\"可以为自己设置标签",
 								Toast.LENGTH_LONG).show();
 					}

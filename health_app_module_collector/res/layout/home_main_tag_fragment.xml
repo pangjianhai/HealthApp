@@ -30,12 +30,22 @@
         <LinearLayout
             android:id="@+id/selected_tag_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:divider="@drawable/divider2"
             android:orientation="horizontal"
             android:showDividers="middle"
             android:visibility="gone" >
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/selected_tag_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="1dp"
+            android:text="@string/tag_will_share_to_def_notice"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 
     <cn.com.hzzc.health.pro.part.MyScrollView
