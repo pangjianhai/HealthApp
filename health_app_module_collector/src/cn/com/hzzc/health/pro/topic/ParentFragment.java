@@ -62,6 +62,10 @@ public abstract class ParentFragment extends Fragment {
 
 	};
 
+	public ParentFragment() {
+		super();
+	}
+
 	public abstract void screenScroll(float y);
 
 	@Override
