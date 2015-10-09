@@ -122,18 +122,24 @@ public class HomeAllSpaceTopicFragment extends ParentFragment implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					List<TopicEntity> lst = TopicUtil.parseJsonAddToList(data);
+					System.out.println(lst.size());
 					if (lst == null || lst.isEmpty()) {
 						space_notice_msg.setVisibility(View.VISIBLE);
 						mListView.setVisibility(View.GONE);
 					} else {
 						dataSourceList.addAll(lst);
 						topicItemAdapter.notifyDataSetChanged();
+
+						space_notice_msg.setVisibility(View.GONE);
+						mListView.setVisibility(View.VISIBLE);
 					}
 					onLoadOver();
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
+					System.out.println("msg:" + msg);
+					error.printStackTrace();
 					onLoadOver();
 				}
 			};

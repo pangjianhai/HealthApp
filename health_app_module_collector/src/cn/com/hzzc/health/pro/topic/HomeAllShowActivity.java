@@ -32,7 +32,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import cn.com.hzzc.health.pro.FirstLoginTopUserListLayout;
 import cn.com.hzzc.health.pro.FriendSeachOpsActivity;
-import cn.com.hzzc.health.pro.MainActivity;
 import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.SharePrepareActivity;
 import cn.com.hzzc.health.pro.SystemConst;
@@ -46,6 +45,11 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+/**
+ * @TODO 整体界面布局
+ * @author pang
+ *
+ */
 public class HomeAllShowActivity extends ParentFragmentActivity implements
 		OnCheckedChangeListener {
 
