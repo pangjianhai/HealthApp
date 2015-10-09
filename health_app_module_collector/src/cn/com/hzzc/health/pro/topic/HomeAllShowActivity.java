@@ -368,10 +368,9 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		System.out.println("))))))))))))))))))onWindowFocusChanged");
 		super.onWindowFocusChanged(hasFocus);
-		if (isLogin() && GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
-			System.out.println("will do");
+		if (hasFocus && isLogin()
+				&& GlobalUserVariable.if_need_to_push_top_user) {// 说明起码在一次登录周期内没有推荐过
 			GlobalUserVariable.setIf_need_to_push_top_user(false);// 置为不需要推荐
 			if_need_to_push_top_user();
 		}
@@ -387,7 +386,6 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 	 * @return:void
 	 */
 	private void if_need_to_push_top_user() {
-		System.out.println("doing now");
 		try {
 			JSONObject d = new JSONObject();
 			d.put("userUuid", userId);
@@ -397,10 +395,7 @@ public class HomeAllShowActivity extends ParentFragmentActivity implements
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					String data = responseInfo.result;
 					PushBean pb = UserUtils.parseJsonAddToPushBean(data);
-					System.out.println(pb);
 					if (pb != null && pb.getLoginTimes() <= 1) {
-						System.out.println("pb.getLoginTimes:"
-								+ pb.getLoginTimes());
 						Intent intent = new Intent(HomeAllShowActivity.this,
 								FirstLoginTopUserListLayout.class);
 						startActivity(intent);

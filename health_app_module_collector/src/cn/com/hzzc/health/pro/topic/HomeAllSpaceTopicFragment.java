@@ -110,6 +110,10 @@ public class HomeAllSpaceTopicFragment extends ParentHomeFragment implements
 	}
 
 	private void realLoadData() {
+		if (userId == null || "".equals(userId)) {
+			onLoadOver();
+			return;
+		}
 		try {
 			dataSourceList.clear();
 			JSONObject d = new JSONObject();
@@ -138,7 +142,6 @@ public class HomeAllSpaceTopicFragment extends ParentHomeFragment implements
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					System.out.println("msg:" + msg);
 					error.printStackTrace();
 					onLoadOver();
 				}
