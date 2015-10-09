@@ -358,9 +358,10 @@ public class TagsForUserActivity extends BaseActivity {
 				public void onSuccess(ResponseInfo<String> responseInfo) {
 					Toast.makeText(getApplicationContext(), "添加成功",
 							Toast.LENGTH_SHORT).show();
-					Intent it = new Intent(getApplicationContext(),
-							MainPageLayoutTagActivity.class);
-					startActivity(it);
+					// 老版本中跳转到新页面显示刚添加的标签
+					// Intent it = new Intent(getApplicationContext(),
+					// MainPageLayoutTagActivity.class);
+					// startActivity(it);
 					finish();
 				}
 
