@@ -666,9 +666,13 @@ public class HomeAllSpaceShareFragment extends ParentFragment implements
 		super.onDestroy();
 	}
 
+	/**
+	 * 重新显示当前fragment就进行刷新操作，而非加载
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
+		freshData();
 	}
 
 	/**
