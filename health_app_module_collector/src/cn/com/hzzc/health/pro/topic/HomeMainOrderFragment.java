@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -25,15 +24,12 @@ import cn.com.hzzc.health.pro.R;
 import cn.com.hzzc.health.pro.ShareSentenceAllDetailActivity;
 import cn.com.hzzc.health.pro.ShowUserInfoDetail;
 import cn.com.hzzc.health.pro.SystemConst;
-import cn.com.hzzc.health.pro.abstracts.ParentShareSentenceEntity;
 import cn.com.hzzc.health.pro.adapter.OrderShareItemAdapter;
 import cn.com.hzzc.health.pro.config.ShareConst;
 import cn.com.hzzc.health.pro.model.ShareInOrderEntity;
 import cn.com.hzzc.health.pro.model.ShareSentenceEntity;
 import cn.com.hzzc.health.pro.part.XListView;
 import cn.com.hzzc.health.pro.part.XListView.IXListViewListener;
-import cn.com.hzzc.health.pro.service.ShareCommentService;
-import cn.com.hzzc.health.pro.service.ViewForInfoService;
 import cn.com.hzzc.health.pro.util.CommonDateUtil;
 import cn.com.hzzc.health.pro.util.IShareCallbackOperator;
 import cn.com.hzzc.health.pro.util.ShareSentenceUtil;
@@ -396,7 +392,12 @@ public class HomeMainOrderFragment extends ParentHomeFragment implements
 	@Override
 	public void screenScroll(float y) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 	}
 
 }

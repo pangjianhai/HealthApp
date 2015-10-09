@@ -364,4 +364,5 @@ public class HomeMainTagFragment extends ParentHomeFragment {
 		/********** 如果用户已经对某个主题参与或者退出了，需要重新加载自己参与的主题列表 **********/
 		initSelfTag();
 	}
+
 }

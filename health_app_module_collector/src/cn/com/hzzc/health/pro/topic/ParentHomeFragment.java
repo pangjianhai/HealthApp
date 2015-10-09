@@ -156,12 +156,4 @@ public abstract class ParentHomeFragment extends Fragment {
 
 	/**************************************** 关于非登录用户需要提示的popwindow ********************************************/
 
-	/**
-	 * XXXXXXXXXX
-	 */
-	@Override
-	public void onResume() {
-		super.onResume();
-		userId = HealthApplication.getUserId();
-	}
 }

@@ -71,6 +71,7 @@ public class LoginUtil {
 				Intent intent = new Intent();
 				intent.setClass(ctx, AppLoginStartActivity.class);
 				ctx.startActivity(intent);
+				ctx.finish();// 必须删除当前singleTask的activity
 			}
 
 		});
@@ -83,6 +84,7 @@ public class LoginUtil {
 				Intent intent = new Intent();
 				intent.setClass(ctx, AppRegActivity.class);
 				ctx.startActivity(intent);
+				ctx.finish();// 必须删除当前singleTask的activity
 			}
 
 		});
